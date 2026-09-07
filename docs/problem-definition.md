@@ -86,9 +86,20 @@ observable. La versión entregada de esta semana (tag `week-01-final`) cumple:
 - **AC-W1-4**: el registro `reports/week-01/baseline.json` contiene al menos una
   observación `fail` (falla controlada) y una `pass` (corrección verificada),
   con comandos reproducibles.
-- <COMPLETAR: osbaldoXxC>
-- <COMPLETAR: osbaldoXxC>
-- <COMPLETAR: osbaldoXxC>
+- **AC-W1-5**: si `docs/problem-definition.md` no contiene las palabras `actor` o
+  `usuario`, la prueba pública de la semana falla con error de coincidencia de patrón;
+  al incluir la descripción de los tres actores del sistema, la prueba pasa sin
+  modificar los archivos de prueba — verificable con
+  `npm test -- --ci --runInBand course-tests/public/week-01.test.ts`.
+- **AC-W1-6**: si el texto `CampusOps` se elimina del componente raíz (`App.tsx`),
+  el smoke test falla indicando que el elemento no fue encontrado; al restaurarlo,
+  el test vuelve a pasar sin cambios en los archivos de prueba — verificable con
+  `npm run test:smoke`.
+- **AC-W1-7**: si `getBackendHealth()` falla (por ejemplo, el servidor no está en
+  ejecución), la app muestra el estado `offline` en el elemento `backend-status`
+  en lugar de `available`, sin lanzar una excepción no manejada; verificable
+  mockeando el rechazo de `getBackendHealth` en el smoke test y comprobando que el
+  componente renderiza `offline`.
 
 Criterio de ejemplo que puedes usar de guía (ya está lleno):
 
