@@ -1,0 +1,12 @@
+
+> dmi-react-native-starter@1.0.0 test:smoke
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx
+
+PASS course-tests/smoke.test.tsx (18.296 s)
+  √ renders the reproducible baseline and resolves backend state (2358 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        42.678 s
+Ran all test suites matching /course-tests\\smoke.test.tsx/i.
