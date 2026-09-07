@@ -1,0 +1,11 @@
+{
+  "studentId": "3522110437",
+  "commitShas": ["PEGA_AQUI_EL_RESULTADO_DE_git_rev-parse_HEAD"],
+  "files": ["docs/risk-register.md"],
+  "tests": ["npm run test:smoke"],
+  "reviews": ["PEGA_AQUI_LA_URL_DEL_PR_DE_OSBALDO"],
+  "prediction": "ESCRIBE_QUE_ESPERABAS_OBSERVAR_Y_POR_QUE",
+  "command": "npm run test:smoke",
+  "observedResult": "PEGA_EN_UNA_SOLA_LINEA_LA_ULTIMA_PARTE_DE_LA_SALIDA_DEL_TEST",
+  "explanation": "ESCRIBE_POR_QUE_OCURRIO_ESO_Y_QUE_DEMUESTRA_TU_CAMBIO"
+}
