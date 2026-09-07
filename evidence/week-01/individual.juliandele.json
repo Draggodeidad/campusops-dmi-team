@@ -1,11 +1,10 @@
 {
   "studentId": "3522110437",
-  "commitShas": ["PEGA_AQUI_EL_RESULTADO_DE_git_rev-parse_HEAD"],
+  "commitShas": ["29517dc75ab7c18343b3f3e005d55ced5d5ad901"],
   "files": ["docs/risk-register.md"],
   "tests": ["npm run test:smoke"],
-  "reviews": ["PEGA_AQUI_LA_URL_DEL_PR_DE_OSBALDO"],
-  "prediction": "ESCRIBE_QUE_ESPERABAS_OBSERVAR_Y_POR_QUE",
+  "reviews": ["https://github.com/Draggodeidad/campusops-dmi-team/pull/3"],
+  "prediction": "Esperaba que al ejecutar el smoke test todas las pruebas básicas pasaran sin errores, porque mi cambio en docs/risk-register.md solo afecta documentación y no modifica código ni configuración.",
   "command": "npm run test:smoke",
-  "observedResult": "PEGA_EN_UNA_SOLA_LINEA_LA_ULTIMA_PARTE_DE_LA_SALIDA_DEL_TEST",
-  "explanation": "ESCRIBE_POR_QUE_OCURRIO_ESO_Y_QUE_DEMUESTRA_TU_CAMBIO"
-}
+  "observedResult": "Ran all test suites matching /course-tests\\smoke.test.tsx/i.",
+"explanation": "El resultado muestra que se ejecutaron todas las pruebas de humo definidas en el proyecto y no se interrumpieron, lo que confirma que mi modificación en docs/risk-register.md no afectó el código ni la configuración. Esto demuestra que el sistema sigue funcionando correctamente y que mi aportación fue únicamente documental y verificable sin romper el entorno."}

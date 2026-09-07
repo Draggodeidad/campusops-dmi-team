@@ -35,9 +35,48 @@ Ejemplo ya lleno (sirve de guía de formato):
   intentar enviarla al servidor, asignarle un `operationId` estable y marcarla
   como confirmada sólo cuando el servicio responde; al reiniciar, la cola se
   recarga desde SQLite y reintenta con la misma clave de idempotencia.
-- **R2**: <COMPLETAR: JulianDele>
-- **R2**: <COMPLETAR: JulianDele>
-- **R3**: <COMPLETAR: JulianDele>
+- **R2 mitigación completa (conflicto de asignación)**: implementar un protocolo de 
+  control de versiones por incidencia que combine un assignmentVersion y un registro 
+  de intención. Cuando el técnico modifica una incidencia offline, la app guarda 
+  localmente la intención (campos cambiados, timestamp, localChangeId) y al sincronizar 
+  envía la versión local junto con la assignmentVersion que tenía al editar. 
+  El servidor aplica una política de resolución que:
+
+   - si la assignmentVersion del servidor coincide con la enviada, aplica el cambio y aumenta la versión;
+
+   - si difiere, crea un registro de conflicto que conserva ambas versiones y devuelve al 
+   cliente un estado conflict con las dos intenciones; la app muestra al técnico una 
+   pantalla de resolución que sugiere mantener su cambio, aceptar la reasignación o 
+   combinar campos (según tipo de cambio). Además, registrar el conflicto en logs/conflicts.log 
+   y notificar al coordinador por un evento de auditoría.
+   Esta mitigación evita sobrescribir trabajo, permite auditoría y da control al usuario final.
+
+- **R2  acciones operativas y comprobación**: 
+  1. Añadir pruebas automáticas que simulen: (a) reasignación en servidor mientras el técnico edita 
+  offline; (b) sincronización posterior con assignmentVersion distinto.
+
+  2. Implementar un endpoint de prueba /test/conflict-scenario que devuelva respuestas controladas 
+  para validar la UI de resolución.
+
+  3. Registrar métricas de conflictos en Prometheus/Logs para alertas (umbral: >3 conflictos/día).
+
+
+- **R3 - mitigación completa (divergencia del entorno)**: fijar y documentar el entorno de desarrollo y ejecución:
+
+  - mantener .nvmrc con 22.22.0 y añadir engines en package.json;
+
+  - forzar instalación reproducible con package-lock.json y recomendar npm ci en CI;
+
+  - exponer Makefile como única interfaz para tareas comunes (make setup, make test, make feedback) 
+  y documentar en README el flujo obligatorio;
+
+  - añadir un workflow de GitHub Actions que ejecute make setup y make feedback en cada push y que bloquee merges si falla.
+Además, incluir una política de cambios al stack: cualquier propuesta de cambio de versión o framework debe pasar por PR con etiqueta infra y aprobación de al menos dos integrantes.
+
+**R3 - acciones operativas y comprobación**: 
+  - Añadir un job en CI que valide node --version y que ejecute npm ci && make feedback.
+
+  - Documentar en docs/ENVIRONMENT.md los pasos para reproducir el entorno local y la versión requerida de herramientas.
 
 ## Cómo comprobaremos que lo propuesto funciona
 
