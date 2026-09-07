@@ -1,0 +1,24 @@
+﻿{
+  "schemaVersion": 1,
+  "week": 1,
+  "teamId": "campusops-dmi-team",
+  "members": [
+    {
+      "studentId": "osbaldoXxC",
+      "commitShas": [
+        "de9535d4f8e3404c286d83653221832dc29a3cca"
+      ],
+      "files": [
+        "docs/problem-definition.md"
+      ],
+      "tests": [
+        "npm test -- --ci --runInBand course-tests/public/week-01.test.ts"
+      ],
+      "reviews": [],
+      "prediction": "Al completar la seccion 5 con los tres criterios verificables (AC-W1-5, AC-W1-6, AC-W1-7), la prueba publica de la semana debe pasar porque el documento ahora contiene las palabras actor y usuario, y describe comportamientos observables y reproducibles.",
+      "command": "npm test -- --ci --runInBand course-tests/public/week-01.test.ts",
+      "observedResult": "La prueba publica week-01.test.ts pasa sin modificar archivos de prueba. Los tres placeholders COMPLETAR osbaldoXxC fueron reemplazados por AC-W1-5, AC-W1-6 y AC-W1-7 con criterios observables.",
+      "explanation": "Mi aportacion tecnica fue completar los tres criterios verificables de aceptacion de la seccion 5 de docs/problem-definition.md. Cada criterio describe un comportamiento concreto que puede comprobarse con un comando: AC-W1-5 valida que el documento contiene las palabras clave requeridas por la prueba publica; AC-W1-6 verifica que el smoke test detecta la ausencia del texto CampusOps en App.tsx; AC-W1-7 describe el comportamiento offline cuando getBackendHealth() falla sin lanzar una excepcion no manejada."
+    }
+  ]
+}
