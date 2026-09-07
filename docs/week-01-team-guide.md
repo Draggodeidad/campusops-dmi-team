@@ -61,20 +61,21 @@ git checkout -b feat/week-01-juliandele
 
 ## 4. Configura tu identidad (una sola vez)
 
-Usa el correo que registraste con el docente.
+Usa EXACTAMENTE estas líneas (el correo noreply vincula tus commits a tu
+cuenta de GitHub):
 
 osbaldoXxC:
 
 ```bash
 git config user.name "osbaldoXxC"
-git config user.email "CORREO_QUE_REGISTRASTE"
+git config user.email "159576324+osbaldoXxC@users.noreply.github.com"
 ```
 
 JulianDele:
 
 ```bash
 git config user.name "JulianDele"
-git config user.email "CORREO_QUE_REGISTRASTE"
+git config user.email "136717997+JulianDele@users.noreply.github.com"
 ```
 
 ## 5. Edita SOLO tu archivo
@@ -154,35 +155,24 @@ osbaldoXxC revisa el PR de JulianDele y JulianDele el de osbaldoXxC:
 4. **Copia la URL de la página del PR** (ej.
    `https://github.com/Draggodeidad/campusops-dmi-team/pull/2`) y guárdala.
 
-## 10. Crea tu evidencia individual
+## 10. Rellena tu evidencia individual (el archivo YA existe)
 
-Crea el archivo de TU usuario y pega esta plantilla (reemplaza todo lo que
-está entre llaves angulares):
+**NO crees ningún archivo.** Abre el tuyo y reemplaza SOLO los textos en
+MAYÚSCULAS:
 
-- osbaldoXxC → archivo `evidence/week-01/individual.osbaldoxxc.json`
-- JulianDele  → archivo `evidence/week-01/individual.juliandele.json`
+- osbaldoXxC → edita `evidence/week-01/individual.osbaldoxxc.json`
+- JulianDele  → edita `evidence/week-01/individual.juliandele.json`
 
-```json
-{
-  "studentId": "<TU_USUARIO_GITHUB>",
-  "commitShas": ["<PEGA_AQUI_EL_RESULTADO_DE_git_rev-parse_HEAD>"],
-  "files": ["<TU_ARCHIVO: docs/problem-definition.md o docs/risk-register.md>"],
-  "tests": [],
-  "reviews": ["<URL_DEL_PR_DEL_OTRO_DEL_PASO_9>"],
-  "prediction": "<Qué esperabas que pasara con tu cambio. 1-2 frases.>",
-  "command": "npm run test:smoke",
-  "observedResult": "<EN UNA SOLA LÍNEA: la última parte de la salida del test, ej. Tests: 1 passed, 1 total>",
-  "explanation": "<Por qué hiciste este cambio y qué demostró. 1-2 frases.>"
-}
-```
+Reemplazos:
 
-Para el `commitShas`, ejecuta en la terminal:
+- `PEGA_AQUI_EL_RESULTADO_DE_git_rev-parse_HEAD` → corre
+  `git rev-parse HEAD` y copia las 40 letras/números exactas.
+- `PEGA_AQUI_LA_URL_DEL_PR_DE_...` → pega la URL del PR del otro (paso 9).
+- `ESCRIBE_...` y `PEGA_EN_UNA_SOLA_LINEA...` → escribe tus frases; para la
+  salida del test pega en UNA SOLA línea la última parte (ej.
+  `Test Suites: 1 passed, 1 total. Tests: 1 passed, 1 total`).
 
-```bash
-git rev-parse HEAD
-```
-
-y copia las 40 letras/números exactas dentro de los corchetes.
+No borres comillas, comas ni llaves.
 
 ## 11. Sube tu evidencia
 
@@ -206,6 +196,9 @@ git push
 
 Envía al grupo: captura de `git remote -v`, captura de la salida del smoke
 test y la URL de tu PR. Draggodeidad revisa y mergea.
+
+**Recuerda responder también el Quiz semanal 1 en Classroom** (3 preguntas,
+3 puntos, individual).
 
 ---
 
