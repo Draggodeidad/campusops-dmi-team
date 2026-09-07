@@ -1,13 +1,13 @@
-
-﻿{
+{
   "schemaVersion": 1,
   "week": 1,
   "teamId": "campusops-dmi-team",
   "members": [
     {
-      "studentId": "osbaldoXxC",
+      "studentId": "3523110279",
       "commitShas": [
-        "de9535d4f8e3404c286d83653221832dc29a3cca"
+        "de9535d4f8e3404c286d83653221832dc29a3cca",
+        "2d2257ac59c216735d4b003f58694480f8954a1f"
       ],
       "files": [
         "docs/problem-definition.md"
@@ -22,5 +22,4 @@
       "explanation": "Mi aportacion tecnica fue completar los tres criterios verificables de aceptacion de la seccion 5 de docs/problem-definition.md. Cada criterio describe un comportamiento concreto que puede comprobarse con un comando: AC-W1-5 valida que el documento contiene las palabras clave requeridas por la prueba publica; AC-W1-6 verifica que el smoke test detecta la ausencia del texto CampusOps en App.tsx; AC-W1-7 describe el comportamiento offline cuando getBackendHealth() falla sin lanzar una excepcion no manejada."
     }
   ]
-
 }

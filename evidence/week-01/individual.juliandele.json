@@ -1,10 +1,20 @@
 {
   "studentId": "3522110437",
-  "commitShas": ["29517dc75ab7c18343b3f3e005d55ced5d5ad901"],
-  "files": ["docs/risk-register.md"],
-  "tests": ["npm run test:smoke"],
-  "reviews": ["https://github.com/Draggodeidad/campusops-dmi-team/pull/3"],
+  "commitShas": [
+    "9daec6a15531e045e5226f29f418530caf2b401e",
+    "36aabeb63d52f292c354cf0e9ede3f8b9e377aac",
+    "ef5dce36383e1cd364dc47188329161ae3948690"
+  ],
+  "files": [
+    "docs/risk-register.md",
+    "reports/week-01/smoke-juliandele.txt"
+  ],
+  "tests": [
+    "npm run test:smoke"
+  ],
+  "reviews": [],
   "prediction": "Esperaba que al ejecutar el smoke test todas las pruebas básicas pasaran sin errores, porque mi cambio en docs/risk-register.md solo afecta documentación y no modifica código ni configuración.",
   "command": "npm run test:smoke",
-  "observedResult": "Ran all test suites matching /course-tests\\smoke.test.tsx/i.",
-"explanation": "El resultado muestra que se ejecutaron todas las pruebas de humo definidas en el proyecto y no se interrumpieron, lo que confirma que mi modificación en docs/risk-register.md no afectó el código ni la configuración. Esto demuestra que el sistema sigue funcionando correctamente y que mi aportación fue únicamente documental y verificable sin romper el entorno."}
+  "observedResult": "PASS course-tests/smoke.test.tsx: renders the reproducible baseline and resolves backend state. Test Suites: 1 passed, 1 total (salida completa en reports/week-01/smoke-juliandele.txt).",
+  "explanation": "El resultado muestra que se ejecutaron todas las pruebas de humo definidas en el proyecto y no se interrumpieron, lo que confirma que mi modificación en docs/risk-register.md no afectó el código ni la configuración. Esto demuestra que el sistema sigue funcionando correctamente y que mi aportación fue únicamente documental y verificable sin romper el entorno."
+}
