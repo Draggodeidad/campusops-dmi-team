@@ -1,25 +1,28 @@
-{
-  "schemaVersion": 1,
-  "week": 1,
-  "commitSha": "45bb7b6cc4c2d008e7ba7648160076338df58ab5",
-  "decision": "Limitar la semana 01 a una base reproducible y a la definicion tecnica del caso (actores, alcance, riesgos y criterios), sin implementar pantallas, login ni flujos, para poder verificar el entorno y el diagnostico de la falla con evidencia ejecutable antes de acumular superficie de codigo.",
-  "alternatives": [
-    "Adelantar pantallas y flujo de inicio de sesion en la semana 01 aunque el entorno y el diagnostico de fallas aun no estuvieran verificados de forma reproducible",
-    "Entregar unicamente el starter sin documentar actores, alcance, riesgos ni criterios de aceptacion",
-    "Documentar el diagnostico solo con capturas de pantalla, sin comandos ni reportes que otra persona pueda repetir"
-  ],
-  "tradeoff": "Beneficio: cada comprobacion de la semana (smoke test, make feedback, CI y evidencias JSON) cubre una base pequena y totalmente reproducible, y la falla controlada queda diagnosticada con sintoma y causa distinguibles. Costo: se pospone la funcionalidad visible del producto a las semanas posteriores, por lo que el valor entregado esta semana es documental y de verificacion, no funcional.",
-  "requirementIds": ["AC-02", "AC-04"],
-  "verification": [
-    {
-      "command": "make feedback",
-      "result": "typecheck, lint, smoke test, auditoria critica y bundle Android de Expo terminaron con exit 0",
-      "evidence": "Job public-feedback verde en GitHub Actions sobre el commit de cierre; salida local guardada durante el diagnostico"
-    },
-    {
-      "command": "npm run test:smoke",
-      "result": "Test Suites: 1 passed, 1 total tras restaurar el testID original",
-      "evidence": "reports/week-01/baseline.json, check correccion-verificada-testID"
-    }
-  ]
+﻿{
+    "schemaVersion":  1,
+    "week":  1,
+    "commitSha":  "e13d6f7ccda0b9fe2e4ce84972acf6147855aac0",
+    "decision":  "Limitar la semana 01 a una base reproducible y a la definicion tecnica del caso (actores, alcance, riesgos y criterios), sin implementar pantallas, login ni flujos, para poder verificar el entorno y el diagnostico de la falla con evidencia ejecutable antes de acumular superficie de codigo.",
+    "alternatives":  [
+                         "Adelantar pantallas y flujo de inicio de sesion en la semana 01 aunque el entorno y el diagnostico de fallas aun no estuvieran verificados de forma reproducible",
+                         "Entregar unicamente el starter sin documentar actores, alcance, riesgos ni criterios de aceptacion",
+                         "Documentar el diagnostico solo con capturas de pantalla, sin comandos ni reportes que otra persona pueda repetir"
+                     ],
+    "tradeoff":  "Beneficio: cada comprobacion de la semana (smoke test, make feedback, CI y evidencias JSON) cubre una base pequena y totalmente reproducible, y la falla controlada queda diagnosticada con sintoma y causa distinguibles. Costo: se pospone la funcionalidad visible del producto a las semanas posteriores, por lo que el valor entregado esta semana es documental y de verificacion, no funcional.",
+    "requirementIds":  [
+                           "AC-02",
+                           "AC-04"
+                       ],
+    "verification":  [
+                         {
+                             "command":  "make feedback",
+                             "result":  "typecheck, lint, smoke test, auditoria critica y bundle Android de Expo terminaron con exit 0",
+                             "evidence":  "Job public-feedback verde en GitHub Actions sobre el commit de cierre; salida local guardada durante el diagnostico"
+                         },
+                         {
+                             "command":  "npm run test:smoke",
+                             "result":  "Test Suites: 1 passed, 1 total tras restaurar el testID original",
+                             "evidence":  "reports/week-01/baseline.json, check correccion-verificada-testID"
+                         }
+                     ]
 }

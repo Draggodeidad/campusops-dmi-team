@@ -1,29 +1,29 @@
-{
-  "schemaVersion": 1,
-  "week": 1,
-  "commitSha": "45bb7b6cc4c2d008e7ba7648160076338df58ab5",
-  "generatedAt": "2026-09-06T23:40:13-06:00",
-  "checks": [
-    {
-      "id": "falla-controlada-testID",
-      "status": "fail",
-      "scenarioType": "failure",
-      "command": "npm run test:smoke",
-      "evidence": "Sintoma: FAIL course-tests/smoke.test.tsx - Unable to find an element with testID: backend-status (el arbol renderizado mostraba testID=\"backend-state\"). Test Suites: 1 failed, 1 total. Causa: typo en el atributo testID del componente de estado del backend en App.tsx (backend-state en lugar de backend-status), que rompio el contrato entre la vista y el smoke test; los archivos de prueba no se modificaron."
-    },
-    {
-      "id": "correccion-verificada-testID",
-      "status": "pass",
-      "scenarioType": "nominal",
-      "command": "npm run test:smoke",
-      "evidence": "Tras restaurar testID=\"backend-status\" en App.tsx: PASS course-tests/smoke.test.tsx - renders the reproducible baseline and resolves backend state. Test Suites: 1 passed, 1 total. El smoke test vuelve a pasar sin cambios en los archivos de prueba."
-    },
-    {
-      "id": "reproducibilidad-feedback",
-      "status": "pass",
-      "scenarioType": "nominal",
-      "command": "make feedback",
-      "evidence": "typecheck, lint, smoke test, auditoria critica (npm audit --omit=dev --audit-level=critical) y bundle Android de Expo terminaron con exit 0; el job public-feedback de GitHub Actions quedo verde sobre el mismo commit."
-    }
-  ]
+﻿{
+    "schemaVersion":  1,
+    "week":  1,
+    "commitSha":  "e13d6f7ccda0b9fe2e4ce84972acf6147855aac0",
+    "generatedAt":  "2026-09-06T23:40:13-06:00",
+    "checks":  [
+                   {
+                       "id":  "falla-controlada-testID",
+                       "status":  "fail",
+                       "scenarioType":  "failure",
+                       "command":  "npm run test:smoke",
+                       "evidence":  "Sintoma: FAIL course-tests/smoke.test.tsx - Unable to find an element with testID: backend-status (el arbol renderizado mostraba testID=\"backend-state\"). Test Suites: 1 failed, 1 total. Causa: typo en el atributo testID del componente de estado del backend en App.tsx (backend-state en lugar de backend-status), que rompio el contrato entre la vista y el smoke test; los archivos de prueba no se modificaron."
+                   },
+                   {
+                       "id":  "correccion-verificada-testID",
+                       "status":  "pass",
+                       "scenarioType":  "nominal",
+                       "command":  "npm run test:smoke",
+                       "evidence":  "Tras restaurar testID=\"backend-status\" en App.tsx: PASS course-tests/smoke.test.tsx - renders the reproducible baseline and resolves backend state. Test Suites: 1 passed, 1 total. El smoke test vuelve a pasar sin cambios en los archivos de prueba."
+                   },
+                   {
+                       "id":  "reproducibilidad-feedback",
+                       "status":  "pass",
+                       "scenarioType":  "nominal",
+                       "command":  "make feedback",
+                       "evidence":  "typecheck, lint, smoke test, auditoria critica (npm audit --omit=dev --audit-level=critical) y bundle Android de Expo terminaron con exit 0; el job public-feedback de GitHub Actions quedo verde sobre el mismo commit."
+                   }
+               ]
 }
