@@ -6,9 +6,11 @@
     {
       "studentId": "3523110651",
       "commitShas": [
-        "79d36445d2dbe4931a41716fbd711d69d9075286"
+        "79d36445d2dbe4931a41716fbd711d69d9075286",
+        "c59ce182660211f3de2567c80641435ef621cc08"
       ],
       "files": [
+        "AGENTS.md",
         "App.tsx",
         "src/domain/incidents/IncidentRepository.ts",
         "src/application/incidents/GetIncidents.ts",
@@ -30,7 +32,7 @@
       "prediction": "Esperaba que la lista permitiera abrir y cerrar el detalle con datos in-memory, que los casos de uso aceptaran otro IncidentRepository y que el control de arquitectura rechazara un import directo desde UI hacia Infrastructure sin reportar violaciones en el código final.",
       "command": "npm run test:incidents && npm run test:architecture && make verify-week-02",
       "observedResult": "Las pruebas de incidencias pasaron 2/2, las pruebas arquitectónicas pasaron 2/2 y make verify-week-02 produjo status pass sobre el commit técnico 79d36445d2dbe4931a41716fbd711d69d9075286.",
-      "explanation": "Analicé las alternativas, registré la decisión en el ADR, implementé los cuatro límites con composición manual, preservé el estado de backend de Week 01 mediante un puerto/adaptador, construí lista y detalle, documenté el diagrama real y convertí la dependencia directa inicial App.tsx → courseBackend en una relación inyectada y verificable."
+      "explanation": "Analicé las alternativas, registré la decisión en el ADR, implementé los cuatro límites con composición manual, preservé el estado de backend de Week 01 mediante un puerto/adaptador, construí lista y detalle, documenté el diagrama real, convertí la dependencia directa inicial App.tsx → courseBackend en una relación inyectada y añadí AGENTS.md para que futuras modificaciones conserven estas reglas."
     },
     {
       "studentId": "3522110437",

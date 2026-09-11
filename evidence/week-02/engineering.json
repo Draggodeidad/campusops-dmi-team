@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": 2,
-  "commitSha": "79d36445d2dbe4931a41716fbd711d69d9075286",
+  "commitSha": "c59ce182660211f3de2567c80641435ef621cc08",
   "decision": "Adoptar una arquitectura por capas sencilla con Ports and Adapters e inyección manual: UI consume casos de uso, Application depende del dominio, Infrastructure implementa contratos internos y App.tsx se limita a construir el grafo. La elección elimina el acceso directo de la presentación al helper HTTP y permite sustituir el repositorio fake sin cambiar las pantallas.",
   "alternatives": [
     "Capas sencillas UI/Application/Domain/Infrastructure con IncidentRepository, adaptadores concretos y composición manual en App.tsx",
