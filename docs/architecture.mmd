@@ -1,0 +1,66 @@
+flowchart TB
+  Reporter["Reportante"]
+  Technician["Técnico"]
+  Coordinator["Coordinador"]
+
+  subgraph Composition["Composition Root — App.tsx"]
+    Root["Construcción e inyección manual"]
+  end
+
+  subgraph UI["UI — src/ui"]
+    CampusApp["CampusOpsApp"]
+    ListScreen["IncidentListScreen"]
+    DetailScreen["IncidentDetailScreen"]
+  end
+
+  subgraph Application["Application — src/application"]
+    GetAll["GetIncidents"]
+    GetOne["GetIncidentById"]
+    GetHealth["GetBackendStatus"]
+    HealthPort["BackendHealthPort"]
+  end
+
+  subgraph Domain["Domain — src/domain + vocabulario src/campusops"]
+    Incident["Incident"]
+    IncidentPort["IncidentRepository"]
+  end
+
+  subgraph Infrastructure["Infrastructure — src/infrastructure"]
+    FakeRepo["FakeIncidentRepository (in-memory)"]
+    HealthAdapter["CourseBackendHealthAdapter"]
+    BackendHelper["courseBackend / fetch"]
+  end
+
+  Reporter --> CampusApp
+  Technician --> CampusApp
+  Coordinator --> CampusApp
+  CampusApp --> ListScreen
+  CampusApp --> DetailScreen
+  CampusApp --> GetAll
+  CampusApp --> GetOne
+  CampusApp --> GetHealth
+  ListScreen --> Incident
+  DetailScreen --> Incident
+  GetAll --> IncidentPort
+  GetOne --> IncidentPort
+  IncidentPort --> Incident
+  GetHealth --> HealthPort
+  FakeRepo --> IncidentPort
+  HealthAdapter --> HealthPort
+  HealthAdapter --> BackendHelper
+  Root --> CampusApp
+  Root --> GetAll
+  Root --> GetOne
+  Root --> GetHealth
+  Root --> FakeRepo
+  Root --> HealthAdapter
+
+  subgraph Planned["Límites previstos — no implementados en Week 02"]
+    Session["Sesión"]
+    Persistence["Persistencia"]
+    Location["Ubicación / proveedor externo"]
+  end
+
+  Session -. "adaptador futuro dependerá de contrato interno" .-> Domain
+  Persistence -. "adaptador futuro dependerá de contrato interno" .-> Domain
+  Location -. "adaptador futuro dependerá de contrato interno" .-> Domain
