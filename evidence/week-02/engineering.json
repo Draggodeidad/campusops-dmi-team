@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "week": 2,
+  "commitSha": "79d36445d2dbe4931a41716fbd711d69d9075286",
+  "decision": "Adoptar una arquitectura por capas sencilla con Ports and Adapters e inyección manual: UI consume casos de uso, Application depende del dominio, Infrastructure implementa contratos internos y App.tsx se limita a construir el grafo. La elección elimina el acceso directo de la presentación al helper HTTP y permite sustituir el repositorio fake sin cambiar las pantallas.",
+  "alternatives": [
+    "Capas sencillas UI/Application/Domain/Infrastructure con IncidentRepository, adaptadores concretos y composición manual en App.tsx",
+    "Clean/Hexagonal completa con puertos de entrada y salida, interactores, DTO, mappers y un contenedor de inyección de dependencias"
+  ],
+  "tradeoff": "Beneficio: los casos de uso y la UI se prueban sin backend, los imports se verifican automáticamente y cambiar de fake a API queda localizado en Infrastructure y Composition Root. Costo: aparecen más contratos y archivos que en una pantalla monolítica, la composición manual crecerá con nuevas dependencias y la UI todavía comparte tipos de dominio; se evita por ahora el costo adicional de DTO, mappers y un contenedor porque no existe una divergencia real que los justifique.",
+  "requirementIds": ["AC-01", "AC-02", "AC-03", "AC-04", "AC-05"],
+  "verification": [
+    {
+      "command": "make feedback",
+      "result": "exit 0: TypeScript, lint, smoke, auditoría con umbral critical y bundle Android de Expo completados",
+      "evidence": "Metro generó el bundle Android en dist/export; npm audit informó dos dependencias transitivas con severidad high, visibles pero por debajo del umbral critical fijado por el curso."
+    },
+    {
+      "command": "make verify-week-02",
+      "result": "status pass para archivos base, perfil React Native, scripts, integridad del workflow, secretos, TypeScript, lint, auditoría y smoke",
+      "evidence": "reports/week-02/verify.json, generado sobre 79d36445d2dbe4931a41716fbd711d69d9075286."
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "2 pruebas exitosas: estado real permitido y detección del límite UI → Infrastructure",
+      "evidence": "course-tests/architecture.test.ts y tools/check-architecture.cjs."
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "2 pruebas exitosas: navegación lista/detalle y sustitución de IncidentRepository",
+      "evidence": "course-tests/incidents.test.tsx verifica el flujo visible y ejecuta los casos de uso con un repositorio alternativo."
+    },
+    {
+      "command": "npm test -- --ci --runInBand course-tests/public/week-02.test.ts",
+      "result": "Test Suites: 1 passed, 1 total; Tests: 1 passed, 1 total",
+      "evidence": "La prueba pública encontró UI, Application, Domain e Infrastructure en docs/architecture.mmd, no encontró una flecha directa UI → Infrastructure y validó alternativas/consecuencias en el ADR."
+    }
+  ]
+}
