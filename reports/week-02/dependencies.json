@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "week": 2,
+  "commitSha": "c59ce182660211f3de2567c80641435ef621cc08",
+  "generatedAt": "2026-09-10T22:34:35-06:00",
+  "checks": [
+    {
+      "id": "ac03-dependencia-directa-inicial",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "git show fcc8a61430027abfbdca2ad938bc7c99093bd03f:App.tsx | rg -n \"src/api/courseBackend\"",
+      "evidence": "Situación inicial reproducida: la salida muestra en la línea 5 `import { getBackendHealth } from './src/api/courseBackend';`. App.tsx concentraba la presentación y conocía directamente el helper HTTP, de modo que cambiar el transporte alcanzaba la vista raíz y contradecía el límite UI sin detalles de infraestructura."
+    },
+    {
+      "id": "ac03-limites-finales",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "El comprobador inspeccionó los imports reales bajo src y devolvió `{ status: 'pass', root: 'src', violations: [] }`. La UI ya no importa Infrastructure; el acceso al backend quedó encapsulado en CourseBackendHealthAdapter y se inyecta mediante GetBackendStatus."
+    },
+    {
+      "id": "ac03-detector-import-prohibido",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:architecture",
+      "evidence": "PASS course-tests/architecture.test.ts: 2 pruebas exitosas. Una valida el árbol real sin violaciones y la otra construye un caso controlado UI → Infrastructure y comprueba que el analizador devuelve esa dependencia prohibida."
+    },
+    {
+      "id": "sustitucion-repositorio-y-flujo",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "PASS course-tests/incidents.test.tsx: 2 pruebas exitosas. Se abrió INC-001 desde la lista, se verificó su detalle y se regresó; además GetIncidents/GetIncidentById funcionaron con un repositorio sustituto que implementa IncidentRepository."
+    }
+  ]
+}
