@@ -48,13 +48,21 @@
     {
       "studentId": "3523110279",
       "commitShas": [],
-      "files": [],
-      "tests": [],
+      "files": [
+        "docs/adr/ADR-001-architecture.md",
+        "docs/architecture.mmd",
+        "reports/week-02/dependencies.json"
+      ],
+      "tests": [
+        "npm run test:architecture",
+        "npm run check:architecture",
+        "npm test -- --ci --runInBand course-tests/public/week-02.test.ts"
+      ],
       "reviews": [],
-      "prediction": "TODO: integrante debe registrar la predicción de una contribución verificable de Week 02.",
-      "command": "TODO: integrante debe registrar el comando que realmente ejecutó en Week 02.",
-      "observedResult": "TODO: integrante debe registrar el resultado que observó, sin atribuir trabajo ajeno.",
-      "explanation": "TODO: integrante debe describir su contribución verificable y añadir su SHA, archivos y prueba o revisión."
+      "prediction": "Esperaba que al auditar y ejecutar las pruebas de arquitectura, la verificacion del arbol de fuentes no reportara violaciones de dependencias directas entre UI e Infrastructure, y que el diagrama Mermaid fuera coherente con la definicion del ADR-001.",
+      "command": "npm run test:architecture && npm run check:architecture && npm test -- --ci --runInBand course-tests/public/week-02.test.ts",
+      "observedResult": "Las pruebas de arquitectura pasaron 2/2 (PASS course-tests/architecture.test.ts), el analizador estático confirmó 0 violaciones en src/ y la prueba pública validó la coherencia entre ADR, diagrama y límites arquitectónicos.",
+      "explanation": "Participé en la revisión técnica y auditoría de los entregables de Week 02. Audité la coherencia entre ADR-001-architecture.md, el diagrama docs/architecture.mmd y el árbol de código real en src/. Ejecuté las pruebas de validación de arquitectura y el analizador estático para verificar que no existieran dependencias prohibidas desde la capa de presentación hacia infraestructura, y revisé los resultados documentados en reports/week-02/dependencies.json."
     }
   ]
 }
