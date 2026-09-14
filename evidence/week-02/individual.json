@@ -36,14 +36,19 @@
     },
     {
       "studentId": "3522110437",
-      "commitShas": [],
-      "files": [],
-      "tests": [],
+      "commitShas": ["0801c8a5e68bfd60aabe5f146c10ac98bbb36a55"],
+      "files": [
+        "src/ui/incidents/IncidentDetailScreen.tsx",
+        "course-tests/incidents.test.tsx"
+      ],
+      "tests": [
+        "npm run test:incidents"
+      ],
       "reviews": [],
-      "prediction": "TODO: integrante debe registrar la predicción de una contribución verificable de Week 02.",
-      "command": "TODO: integrante debe registrar el comando que realmente ejecutó en Week 02.",
-      "observedResult": "TODO: integrante debe registrar el resultado que observó, sin atribuir trabajo ajeno.",
-      "explanation": "TODO: integrante debe describir su contribución verificable y añadir su SHA, archivos y prueba o revisión."
+      "prediction": "Esperaba que al no haber una incidencia seleccionada, la pantalla de detalle mostrara un mensaje útil y que la prueba de incidencias validara ese comportamiento sin alterar la arquitectura ni el flujo de lista/detalle.",
+      "command": "npm run test:incidents",
+      "observedResult": "PASS course-tests/incidents.test.tsx. Test Suites: 1 passed, 1 total; Tests: 3 passed, 3 total.",
+      "explanation": "En esta semana aporté una mejora de UX segura para la pantalla de detalle: cuando no hay una incidencia seleccionada, ahora se muestra un mensaje claro indicando que primero debe elegirse una incidencia. Además añadí una prueba de regresión en course-tests/incidents.test.tsx para verificar ese caso sin tocar la capa de aplicación ni la infraestructura, manteniendo el diseño por capas ya definido."
     },
     {
       "studentId": "3523110279",

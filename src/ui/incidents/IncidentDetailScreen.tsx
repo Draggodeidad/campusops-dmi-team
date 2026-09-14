@@ -28,7 +28,11 @@ export function IncidentDetailScreen({ incident, loading, error, onBack }: Props
           <Text>Estado: {incident.status}</Text>
           <Text>{incident.description}</Text>
         </View>
-      ) : null}
+      ) : (
+        <View style={styles.emptyState}>
+          <Text style={styles.emptyTitle}>Selecciona una incidencia para ver sus detalles.</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -38,4 +42,12 @@ const styles = StyleSheet.create({
   back: { color: '#1d4ed8', fontWeight: '600' },
   card: { gap: 8, borderWidth: 1, borderColor: '#cbd5e1', borderRadius: 10, padding: 16 },
   title: { fontSize: 20, fontWeight: '700' },
+  emptyState: {
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    borderRadius: 10,
+    padding: 16,
+    backgroundColor: '#f8fafc',
+  },
+  emptyTitle: { color: '#334155', fontSize: 16 },
 });

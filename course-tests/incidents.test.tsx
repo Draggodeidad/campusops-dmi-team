@@ -5,6 +5,7 @@ import { GetIncidentById } from '../src/application/incidents/GetIncidentById';
 import { GetIncidents } from '../src/application/incidents/GetIncidents';
 import type { Incident } from '../src/domain/incidents/Incident';
 import type { IncidentRepository } from '../src/domain/incidents/IncidentRepository';
+import { IncidentDetailScreen } from '../src/ui/incidents/IncidentDetailScreen';
 
 jest.mock('../src/api/courseBackend', () => ({
   getBackendHealth: jest.fn().mockResolvedValue({
@@ -46,4 +47,17 @@ test('application use cases accept a substitute repository', async () => {
   await expect(new GetIncidentById(substitute).execute('SUB-001')).resolves.toEqual(
     substituteIncident,
   );
+});
+
+test('shows a helpful placeholder when no incident is selected', async () => {
+  const view = await render(
+    <IncidentDetailScreen
+      error={null}
+      incident={null}
+      loading={false}
+      onBack={jest.fn()}
+    />,
+  );
+
+  expect(view.getByText('Selecciona una incidencia para ver sus detalles.')).toBeTruthy();
 });
