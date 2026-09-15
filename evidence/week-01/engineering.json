@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": 1,
-  "commitSha": "196d01a3b6bb6dec335796ca12c57bc451041639",
+  "commitSha": "19e3a62e6d7124f02bdeeee9c47df793f097549f",
   "decision": "Limitar la semana 01 a una base reproducible y a la definicion tecnica del caso (actores, alcance, riesgos y criterios), sin implementar pantallas, login ni flujos, para poder verificar el entorno y el diagnostico de la falla con evidencia ejecutable antes de acumular superficie de codigo.",
   "alternatives": [
     "Adelantar pantallas y flujo de inicio de sesion en la semana 01 aunque el entorno y el diagnostico de fallas aun no estuvieran verificados de forma reproducible",
