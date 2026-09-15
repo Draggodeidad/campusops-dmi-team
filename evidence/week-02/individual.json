@@ -36,7 +36,7 @@
     },
     {
       "studentId": "3522110437",
-      "commitShas": ["0801c8a5e68bfd60aabe5f146c10ac98bbb36a55"],
+      "commitShas": ["22ca1d644923a90286f5582131761827921916e1"],
       "files": [
         "src/ui/incidents/IncidentDetailScreen.tsx",
         "course-tests/incidents.test.tsx"
@@ -52,7 +52,7 @@
     },
     {
       "studentId": "3523110279",
-      "commitShas": [],
+      "commitShas": ["0801c8a5e68bfd60aabe5f146c10ac98bbb36a55"],
       "files": [
         "docs/adr/ADR-001-architecture.md",
         "docs/architecture.mmd",
