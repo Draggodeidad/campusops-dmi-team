@@ -1,7 +1,7 @@
 PYTHON ?= python3
 NPM ?= npm
 
-.PHONY: setup verify feedback run run-backend package
+.PHONY: setup verify feedback scan-secrets run run-backend package
 
 setup:
 	$(NPM) ci
@@ -10,6 +10,12 @@ verify:
 	$(NPM) run typecheck
 	$(NPM) run lint
 	$(NPM) run test:smoke
+	$(NPM) run test:incidents
+	$(NPM) run test:architecture
+	$(NPM) run scan:secrets
+
+scan-secrets:
+	$(NPM) run scan:secrets
 
 feedback: verify
 	$(NPM) run audit:ci
