@@ -1,0 +1,19 @@
+test_failing_control_does_not_relabel_evidence (test_evidence_revalidation.RevalidationTests.test_failing_control_does_not_relabel_evidence) ... [week-01] /usr/bin/python3 -c print("synthetic executed check"); raise SystemExit(7)
+synthetic executed check
+
+ok
+test_final_tag_cannot_refresh_evidence (test_evidence_revalidation.RevalidationTests.test_final_tag_cannot_refresh_evidence) ... ok
+test_invalid_historical_schema_is_not_repaired_silently (test_evidence_revalidation.RevalidationTests.test_invalid_historical_schema_is_not_repaired_silently) ... ok
+test_merge_revalidates_with_original_provenance_and_strict_schema (test_evidence_revalidation.RevalidationTests.test_merge_revalidates_with_original_provenance_and_strict_schema) ... [week-01] /usr/bin/python3 -c print("synthetic executed check"); raise SystemExit(0)
+synthetic executed check
+
+ok
+test_official_evaluator_still_rejects_stale_sha (test_evidence_revalidation.RevalidationTests.test_official_evaluator_still_rejects_stale_sha) ... ok
+test_uncommitted_code_cannot_be_recorded_as_head (test_evidence_revalidation.RevalidationTests.test_uncommitted_code_cannot_be_recorded_as_head) ... ok
+test_unrelated_sha_is_rejected (test_evidence_revalidation.RevalidationTests.test_unrelated_sha_is_rejected) ... fatal: Not a valid commit name aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.310s
+
+OK

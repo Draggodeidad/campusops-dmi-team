@@ -1,0 +1,17 @@
+
+> dmi-react-native-starter@1.0.0 test
+> jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts --ci --runInBand
+
+PASS course-tests/incidents.test.tsx
+PASS course-tests/smoke.test.tsx
+PASS course-tests/week-03-ci.test.ts
+PASS course-tests/architecture.test.ts
+PASS course-tests/public/week-03.test.ts
+PASS course-tests/public/week-01.test.ts
+PASS course-tests/public/week-02.test.ts
+
+Test Suites: 7 passed, 7 total
+Tests:       12 passed, 12 total
+Snapshots:   0 total
+Time:        0.607 s, estimated 2 s
+Ran all test suites matching /course-tests\/smoke.test.tsx|course-tests\/incidents.test.tsx|course-tests\/architecture.test.ts|course-tests\/week-03-ci.test.ts|course-tests\/public\/week-01.test.ts|course-tests\/public\/week-02.test.ts|course-tests\/public\/week-03.test.ts/i.

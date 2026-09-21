@@ -1,0 +1,13 @@
+
+> dmi-react-native-starter@1.0.0 test:architecture
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/architecture.test.ts
+
+PASS course-tests/architecture.test.ts
+  ✓ the current source tree respects the declared dependency boundaries (2 ms)
+  ✓ the architecture check detects a direct UI-to-infrastructure import (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.247 s, estimated 1 s
+Ran all test suites matching /course-tests\/architecture.test.ts/i.

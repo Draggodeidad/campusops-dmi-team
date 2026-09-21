@@ -1,36 +1,68 @@
 {
   "schemaVersion": 1,
   "week": 3,
-  "commitSha": "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb",
-  "generatedAt": "2026-09-19T17:53:15-06:00",
+  "commitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7",
+  "generatedAt": "2026-09-21T23:49:10.379341+00:00",
   "checks": [
     {
       "id": "ac03-secret-scan-failure-path",
       "status": "fail",
       "scenarioType": "failure",
       "command": "python tools/scan-secrets.py (local) / make feedback (CI)",
-      "evidence": "Fallo verificado tanto localmente (exit code 1) como en GitHub Actions (run https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477270399, job 105988563052, exit code 2 en 'Baseline checks and secret scanning') sobre el commit 815f153575756b0b73d841f6aab44d7540944b31. El analizador detuvo la ejecucion e identifico la regla activada: 'Potential secrets found: - course-tests/fixtures/synthetic_secret_failure_fixture.txt:public_secret_name'. El dato utilizado fue estrictamente sintetico y ficticio."
+      "evidence": "Fallo verificado tanto localmente (exit code 1) como en GitHub Actions (run https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477270399, job 105988563052, exit code 2 en 'Baseline checks and secret scanning') sobre el commit 815f153575756b0b73d841f6aab44d7540944b31. El analizador detuvo la ejecucion e identifico la regla activada: 'Potential secrets found: - course-tests/fixtures/synthetic_secret_failure_fixture.txt:public_secret_name'. El dato utilizado fue estrictamente sintetico y ficticio.",
+      "source": "Declaración original de osbaldoXxC en c06e18d5939a19dc6f5caf049cce5f4811f7df82; no reatribuida como ejecución actual.",
+      "evaluatedCommitSha": "815f153575756b0b73d841f6aab44d7540944b31"
     },
     {
       "id": "ac03-secret-scan-correction-state",
       "status": "pass",
       "scenarioType": "nominal",
       "command": "python tools/scan-secrets.py (local) / make feedback (CI)",
-      "evidence": "Exito verificado localmente (exit code 0) y en GitHub Actions (run https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477226598, job 105988447348, status success) sobre la rama feat/week-03-failure-path tras retirar la fixture sintetica sin modificar las reglas de deteccion. Salida confirmada: 'Secret scan passed: no high-confidence secrets found.'."
+      "evidence": "Exito verificado localmente (exit code 0) y en GitHub Actions (run https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477226598, job 105988447348, status success) sobre la rama feat/week-03-failure-path tras retirar la fixture sintetica sin modificar las reglas de deteccion. Salida confirmada: 'Secret scan passed: no high-confidence secrets found.'.",
+      "source": "Declaración original de osbaldoXxC en c06e18d5939a19dc6f5caf049cce5f4811f7df82; no reatribuida como ejecución actual.",
+      "evaluatedCommitSha": "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb"
     },
     {
       "id": "ac02-public-behavior-preserved",
       "status": "pass",
       "scenarioType": "boundary",
       "command": "npm test -- --ci --runInBand course-tests/public/week-03.test.ts",
-      "evidence": "PASS course-tests/public/week-03.test.ts: 2 pruebas exitosas. Confirma que el workflow preserva minimos privilegios y verificacion obligatoria, y que el modelo de amenazas enlaza activos, amenazas, controles y verificacion."
+      "evidence": "PASS course-tests/public/week-03.test.ts: 2 pruebas exitosas. Confirma que el workflow preserva minimos privilegios y verificacion obligatoria, y que el modelo de amenazas enlaza activos, amenazas, controles y verificacion.",
+      "source": "Declaración original de osbaldoXxC en c06e18d5939a19dc6f5caf049cce5f4811f7df82; no reatribuida como ejecución actual.",
+      "evaluatedCommitSha": "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb"
     },
     {
       "id": "toolchain-integrity-checks",
       "status": "pass",
       "scenarioType": "nominal",
       "command": "npm run typecheck && npm run lint",
-      "evidence": "Exit code 0: TypeScript y ESLint validaron el estado del proyecto sin errores tras la correccion."
+      "evidence": "Exit code 0: TypeScript y ESLint validaron el estado del proyecto sin errores tras la correccion.",
+      "source": "Declaración original de osbaldoXxC en c06e18d5939a19dc6f5caf049cce5f4811f7df82; no reatribuida como ejecución actual.",
+      "evaluatedCommitSha": "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb"
+    },
+    {
+      "id": "integration-accumulated-controls",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-03/integration-logs/01.log: exit 0; 7 suites/12 tests, límites, secretos sin hallazgos, auditoría critical aprobada y bundle generado. npm audit informa 2 vulnerabilidades high; no se presentan como ausentes.",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "id": "integration-sha-regression",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "evidence": "reports/week-03/integration-logs/06.log: 7 pruebas aprobadas; merge real, fallo exit 7 conservado como fallo sin modificar índices, tag estricto, schema inválido, SHA ajeno y código sin commit rechazados.",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "id": "verified-subsequent-ci-correction",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "gh run view 35477319355; gh run download 35477319355 --name academic-evidence-week-03-ci-amenazas",
+      "evidence": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477319355: Baseline checks and secret scanning success; artefacto descargado, reports/week-03/verify.json status pass y SHA c06e18d5939a19dc6f5caf049cce5f4811f7df82. Ocurrió después del fallo 35477270399.",
+      "evaluatedCommitSha": "c06e18d5939a19dc6f5caf049cce5f4811f7df82"
     }
   ],
   "securityAnalysis": {
@@ -38,6 +70,11 @@
     "failureRunUrl": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477270399",
     "successRunUrl": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477226598",
     "syntheticDataNotice": "Todos los datos y patrones evaluados en el failure path son estrictamente sinteticos, generados con fines de prueba y no corresponden a credenciales ni secretos autenticos.",
-    "knownLimitations": "El escaneo por expresiones regulares basado en patrones conocidos detecta secretos de alta confianza (tokens de proveedores, claves privadas o variables publicas sensibles), pero no sustituye el uso de proveedores de secretos (Secrets Manager / Vault) ni detecta credenciales arbitrarias sin un formato distintivo."
-  }
+    "knownLimitations": "El escaneo por expresiones regulares basado en patrones conocidos detecta secretos de alta confianza (tokens de proveedores, claves privadas o variables publicas sensibles), pero no sustituye el uso de proveedores de secretos (Secrets Manager / Vault) ni detecta credenciales arbitrarias sin un formato distintivo.",
+    "originalSuccessRunSha": "dfd3d892c20eec72258ea3709ea2c87770fa0581",
+    "chronologyNote": "El éxito original 35477226598 ocurrió antes del run fallido 35477270399. La corrección está en b038cfb; el run posterior verificado 35477319355 comprueba c06e18d, descendiente de la corrección, sin cambiar el detector.",
+    "subsequentSuccessRunUrl": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477319355",
+    "subsequentSuccessRunSha": "c06e18d5939a19dc6f5caf049cce5f4811f7df82"
+  },
+  "historicalCommitSha": "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb"
 }

@@ -5,17 +5,60 @@
   "members": [
     {
       "studentId": "3523110651",
+      "githubLogin": "Draggodeidad",
       "commitShas": [
-        "815f153575756b0b73d841f6aab44d7540944b31",
-        "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb",
-        "dfd3d892c20eec72258ea3709ea2c87770fa0581",
-        "c06e18d5939a19dc6f5caf049cce5f4811f7df82"
+        "5775d080c7dea79c2df50fe7008abca25b8befcd",
+        "506b83d2c7165d77ba0a6a79fb58265e02084556",
+        "960976c484fe5aad5d955c631f729a445bf9f5e7"
+      ],
+      "files": [
+        ".github/workflows/week-03-ci-amenazas-feedback.yml",
+        "tools/scan-secrets.py",
+        "course-tests/week-03-ci.test.ts",
+        ".github/workflows/week-01-feedback.yml",
+        ".github/workflows/week-02-arquitectura-justificable-feedback.yml",
+        "tools/revalidate-prior-evidence.py",
+        "tools/tests/test_evidence_revalidation.py",
+        "docs/SUBMISSION.md",
+        "docs/week-03-integration.md"
+      ],
+      "tests": [
+        "npm ci",
+        "make feedback",
+        "npm test -- --ci --runInBand",
+        "npm run test:incidents",
+        "npm run test:architecture",
+        "npm run check:architecture",
+        "python3 -m unittest discover -s tools/tests -v",
+        "make verify-week-01",
+        "make verify-week-02",
+        "make verify-week-03",
+        "python3 tools/revalidate-prior-evidence.py --week 1",
+        "make public-test-week-01",
+        "python3 tools/revalidate-prior-evidence.py --week 2",
+        "make public-test-week-02"
+      ],
+      "reviews": [
+        "Revisión de integración de PR #21 y commit 4b5cb401d1a37d7723435d3fe313a866c2d9ca7e documentada en docs/week-03-integration.md; no es una aprobación formal de GitHub."
+      ],
+      "prediction": "Antes de ejecutar la suite se esperaba que los controles reales pasaran sobre el merge y que una falla de revalidación mantuviera intactos los índices originales; el tag debía conservar la validación estricta HEAD/padre exclusivo de evidencia.",
+      "command": "npm ci; make feedback; python3 -m unittest discover -s tools/tests -v; make verify-week-03; revalidación y pruebas públicas Week 01/02",
+      "observedResult": "Checkout limpio en 960976c484fe5aad5d955c631f729a445bf9f5e7: instalación exit 0, 7 suites y 12 pruebas Jest aprobadas, 7 pruebas Python aprobadas, bundle Android generado, escáner sin hallazgos y verificación Week 01/02/03 en pass. Revalidación y pruebas públicas Week 01/02: exit 0. Logs completos en reports/week-03/integration-logs/.",
+      "explanation": "La contribución técnica principal de #16 implementa el pipeline y secret scanning. La integración de #19 corrige la validación posterior a merges sin cambiar el evaluador, conserva el failure path de osbaldoXxC y el modelo de JulianDele, normaliza el schema y repara atribución con evidencia verificable. No se atribuye a esta integración la autoría técnica de los otros integrantes.",
+      "pullRequests": [
+        "https://github.com/Draggodeidad/campusops-dmi-team/pull/20"
+      ],
+      "aiAssistance": "Implementación, revisión y ejecución de comandos asistidas por Codex por instrucción de Draggodeidad. Los logs identifican observaciones automáticas reales; no sustituyen una defensa ni afirman validación manual personal."
+    },
+    {
+      "studentId": "3522110437",
+      "commitShas": [
+        "4b5cb401d1a37d7723435d3fe313a866c2d9ca7e"
       ],
       "files": [
         "docs/threat-model.md",
-        "reports/week-03/security.json",
-        "tools/scan-secrets.py",
-        ".github/workflows/week-03-ci-amenazas-feedback.yml"
+        "evidence/week-03/engineering.json",
+        "evidence/week-03/individual.json"
       ],
       "tests": [
         "npm run typecheck",
@@ -28,41 +71,41 @@
       "command": "npm run typecheck && npm run lint && npm run test:architecture && npm test -- --ci --runInBand course-tests/public/week-03.test.ts",
       "observedResult": "Los cuatro checks locales terminaron correctamente. La prueba pública de Week 03 confirmó el workflow con mínimo privilegio y el vínculo entre activos, amenazas, controles y verificación. El reporte reports/week-03/security.json conserva además el fallo sintético del escaneo y el estado corregido observado en CI.",
       "explanation": "Analicé la arquitectura real, el contrato público, el workflow y el escáner de secretos; completé docs/threat-model.md con activos, fronteras, flujo de datos, amenazas, prioridades, controles y riesgos residuales. El control prioritario fue la exposición de credenciales porque un secreto reutilizable puede comprometer recursos fuera de CampusOps. Todos los datos del failure path fueron sintéticos. El escaneo local no pudo ejecutarse en este entorno porque no está disponible Python, por lo que no lo atribuyo como PASS local.",
-      "aiAssistance": "Se utilizó asistencia de IA para organizar y redactar el análisis; la evidencia se contrastó con los archivos del repositorio y los comandos indicados."
+      "aiAssistance": "Se utilizó asistencia de IA para organizar y redactar el análisis; la evidencia se contrastó con los archivos del repositorio y los comandos indicados.",
+      "githubLogin": "JulianDele",
+      "pullRequests": [],
+      "integrationNote": "Registro personal conservado del commit 4b5cb401d1a37d7723435d3fe313a866c2d9ca7e; corregidos studentId según Week 02 y commits/archivos según git show. El failure path es de osbaldoXxC y aquí sólo se referencia. No se encontró PR independiente para #18; el aporte está directamente en la rama del PR #20."
     },
     {
-      "studentId": "PENDIENTE_DE_COMPLETAR_MIEMBRO_2",
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
       "commitShas": [
-        "PENDIENTE_DE_COMPLETAR"
+        "815f153575756b0b73d841f6aab44d7540944b31",
+        "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb",
+        "dfd3d892c20eec72258ea3709ea2c87770fa0581",
+        "c06e18d5939a19dc6f5caf049cce5f4811f7df82"
       ],
       "files": [
-        "PENDIENTE_DE_COMPLETAR"
+        "course-tests/fixtures/synthetic_secret_failure_fixture.txt (temporal, eliminado por el commit de corrección)",
+        "reports/week-03/security.json"
       ],
       "tests": [
-        "PENDIENTE_DE_COMPLETAR"
+        "python tools/scan-secrets.py (declarado localmente por el autor en security.json)",
+        "Baseline checks and secret scanning (GitHub Actions, verificado durante la integración)"
       ],
       "reviews": [],
-      "prediction": "PENDIENTE: el integrante debe registrar su predicción antes o junto con su comprobación.",
-      "command": "PENDIENTE_DE_COMPLETAR",
-      "observedResult": "PENDIENTE: registrar únicamente el resultado realmente observado.",
-      "explanation": "PENDIENTE: completar con la aportación técnica verificable, sin atribuir cambios no realizados."
-    },
-    {
-      "studentId": "PENDIENTE_DE_COMPLETAR_MIEMBRO_3",
-      "commitShas": [
-        "PENDIENTE_DE_COMPLETAR"
+      "prediction": "El PR #21 declara como objetivo que la fixture sintética haga fallar el control obligatorio y retirarla permita que el mismo control pase sin modificar el detector.",
+      "command": "python tools/scan-secrets.py (declaración local del autor); make feedback (CI)",
+      "observedResult": "El autor registra exit 1 local y exit 0 tras la corrección en security.json. La integración comprobó independientemente exit 2 de Make y public_secret_name en el run 35477270399 sobre 815f153575756b0b73d841f6aab44d7540944b31, y el mismo step exitoso en el run posterior 35477319355 sobre c06e18d5939a19dc6f5caf049cce5f4811f7df82.",
+      "explanation": "El PR #21 y los cuatro commits muestran la introducción/retiro de la fixture sintética y la creación del reporte. No se atribuyen al autor el escáner, el workflow ni el modelo de amenazas. Este registro consolida las declaraciones existentes del autor y las verificaciones de CI; no afirma una nueva validación personal.",
+      "pullRequests": [
+        "https://github.com/Draggodeidad/campusops-dmi-team/pull/21"
       ],
-      "files": [
-        "PENDIENTE_DE_COMPLETAR"
+      "sources": [
+        "https://github.com/Draggodeidad/campusops-dmi-team/issues/17",
+        "reports/week-03/security.json en c06e18d5939a19dc6f5caf049cce5f4811f7df82"
       ],
-      "tests": [
-        "PENDIENTE_DE_COMPLETAR"
-      ],
-      "reviews": [],
-      "prediction": "PENDIENTE: el integrante debe registrar su predicción antes o junto con su comprobación.",
-      "command": "PENDIENTE_DE_COMPLETAR",
-      "observedResult": "PENDIENTE: registrar únicamente el resultado realmente observado.",
-      "explanation": "PENDIENTE: completar con la aportación técnica verificable, sin atribuir cambios no realizados."
+      "aiAssistance": "Registro consolidado con asistencia de IA a partir de commits, PR y reporte del autor; resultados CI corroborados por API."
     }
   ]
 }
