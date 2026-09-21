@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "week": 3,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110651",
+      "commitShas": [
+        "815f153575756b0b73d841f6aab44d7540944b31",
+        "b038cfbc0a6c5e65e42e3253561c80aa840d2ccb",
+        "dfd3d892c20eec72258ea3709ea2c87770fa0581",
+        "c06e18d5939a19dc6f5caf049cce5f4811f7df82"
+      ],
+      "files": [
+        "docs/threat-model.md",
+        "reports/week-03/security.json",
+        "tools/scan-secrets.py",
+        ".github/workflows/week-03-ci-amenazas-feedback.yml"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm run test:architecture",
+        "npm test -- --ci --runInBand course-tests/public/week-03.test.ts"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba que el modelo distinguiera los controles existentes, los implementados esta semana y los futuros, y que las pruebas de arquitectura y del workflow conservaran el comportamiento obligatorio sin bypasses. También esperaba que el failure path sintético de secret scanning fallara antes de retirar la fixture y pasara después, sin usar credenciales reales.",
+      "command": "npm run typecheck && npm run lint && npm run test:architecture && npm test -- --ci --runInBand course-tests/public/week-03.test.ts",
+      "observedResult": "Los cuatro checks locales terminaron correctamente. La prueba pública de Week 03 confirmó el workflow con mínimo privilegio y el vínculo entre activos, amenazas, controles y verificación. El reporte reports/week-03/security.json conserva además el fallo sintético del escaneo y el estado corregido observado en CI.",
+      "explanation": "Analicé la arquitectura real, el contrato público, el workflow y el escáner de secretos; completé docs/threat-model.md con activos, fronteras, flujo de datos, amenazas, prioridades, controles y riesgos residuales. El control prioritario fue la exposición de credenciales porque un secreto reutilizable puede comprometer recursos fuera de CampusOps. Todos los datos del failure path fueron sintéticos. El escaneo local no pudo ejecutarse en este entorno porque no está disponible Python, por lo que no lo atribuyo como PASS local.",
+      "aiAssistance": "Se utilizó asistencia de IA para organizar y redactar el análisis; la evidencia se contrastó con los archivos del repositorio y los comandos indicados."
+    },
+    {
+      "studentId": "PENDIENTE_DE_COMPLETAR_MIEMBRO_2",
+      "commitShas": [
+        "PENDIENTE_DE_COMPLETAR"
+      ],
+      "files": [
+        "PENDIENTE_DE_COMPLETAR"
+      ],
+      "tests": [
+        "PENDIENTE_DE_COMPLETAR"
+      ],
+      "reviews": [],
+      "prediction": "PENDIENTE: el integrante debe registrar su predicción antes o junto con su comprobación.",
+      "command": "PENDIENTE_DE_COMPLETAR",
+      "observedResult": "PENDIENTE: registrar únicamente el resultado realmente observado.",
+      "explanation": "PENDIENTE: completar con la aportación técnica verificable, sin atribuir cambios no realizados."
+    },
+    {
+      "studentId": "PENDIENTE_DE_COMPLETAR_MIEMBRO_3",
+      "commitShas": [
+        "PENDIENTE_DE_COMPLETAR"
+      ],
+      "files": [
+        "PENDIENTE_DE_COMPLETAR"
+      ],
+      "tests": [
+        "PENDIENTE_DE_COMPLETAR"
+      ],
+      "reviews": [],
+      "prediction": "PENDIENTE: el integrante debe registrar su predicción antes o junto con su comprobación.",
+      "command": "PENDIENTE_DE_COMPLETAR",
+      "observedResult": "PENDIENTE: registrar únicamente el resultado realmente observado.",
+      "explanation": "PENDIENTE: completar con la aportación técnica verificable, sin atribuir cambios no realizados."
+    }
+  ]
+}

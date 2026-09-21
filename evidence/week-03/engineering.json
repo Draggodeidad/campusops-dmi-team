@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "week": 3,
+  "commitSha": "c06e18d5939a19dc6f5caf049cce5f4811f7df82",
+  "decision": "Priorizamos la exposición de credenciales y adoptamos un control de integración continua con mínimo privilegio, instalación reproducible, typecheck, lint, pruebas, auditoría crítica y secret scanning. El workflow usa permissions: contents: read, no permite bypasses como continue-on-error, || true o --passWithNoTests, conserva los reportes aunque falle un paso y ejecuta el escaneo mediante make feedback. Complementamos este control con un modelo de amenazas que distingue controles existentes, controles implementados esta semana y controles futuros. Elegimos esta amenaza como primera prioridad porque una credencial reutilizable puede comprometer recursos fuera de CampusOps, mientras que todos los datos usados para demostrar la falla son sintéticos.",
+  "alternatives": [
+    {
+      "name": "Escaneo local únicamente antes de entregar",
+      "description": "Ejecutar tools/scan-secrets.py y las pruebas sólo en la máquina de desarrollo, conservando el resultado en un reporte manual.",
+      "rejectedBecause": "No protege la integración frente a nuevos commits o pull requests, depende del entorno local y no asegura que el workflow detenga una entrega insegura."
+    },
+    {
+      "name": "Workflow CI con permisos amplios y comprobaciones no bloqueantes",
+      "description": "Ejecutar las comprobaciones en GitHub Actions con permisos por defecto y permitir que el job continúe después de fallos para publicar un resultado final.",
+      "rejectedBecause": "Aumenta el impacto de una acción comprometida y podría convertir un incumplimiento de seguridad en un falso éxito; contradice el requisito de mínimo privilegio y de conservar el código de salida del fallo."
+    },
+    {
+      "name": "Workflow CI con permisos mínimos y failure path reproducible",
+      "description": "Usar permissions: contents: read, npm ci, los checks obligatorios y una fixture sintética temporal que active secret scanning; retirar la fixture sin modificar las reglas y conservar ambos resultados.",
+      "selected": true,
+      "reason": "Permite demostrar que el control detecta una condición insegura y que el estado corregido pasa, sin usar credenciales reales ni ocultar errores."
+    }
+  ],
+  "tradeoff": {
+    "benefits": [
+      "La detección ocurre en CI y no sólo en una estación local.",
+      "El failure path produce evidencia útil y verificable, y el estado corregido conserva el mismo detector.",
+      "La arquitectura por capas limita el acoplamiento entre UI, Application, Domain e Infrastructure y facilita revisar controles.",
+      "El uso exclusivo de datos sintéticos evita exponer credenciales o datos personales reales."
+    ],
+    "costs": [
+      "El workflow tarda más porque instala dependencias, ejecuta varias comprobaciones y genera el bundle.",
+      "El escaneo regex sólo detecta patrones de alta confianza y no sustituye gestión de secretos, rotación ni revisión humana.",
+      "La separación arquitectónica no proporciona autenticación ni autorización: sesiones, asignaciones, fotos, ubicación y persistencia permanecen como trabajo futuro.",
+      "La ejecución local del escaneo requiere Python; en el entorno de validación usado para esta evidencia no estaba disponible."
+    ]
+  },
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "npm test -- --ci --runInBand course-tests/public/week-03.test.ts",
+      "result": "pass",
+      "evidence": "La suite pública terminó con 1 suite aprobada y 2 pruebas aprobadas. Verificó que el workflow conserva Node 22, instalación reproducible, mínimo privilegio y comprobaciones obligatorias, y que docs/threat-model.md relaciona activos, amenazas, controles y verificación."
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass",
+      "evidence": "TypeScript terminó con código 0 y sin errores."
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass",
+      "evidence": "ESLint terminó con código 0 y sin errores reportados."
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass",
+      "evidence": "La suite de arquitectura pasó las comprobaciones del árbol actual y el caso controlado que detecta un import UI -> Infrastructure."
+    },
+    {
+      "command": "python tools/scan-secrets.py (failure path) / make feedback (CI)",
+      "result": "pass",
+      "evidence": "reports/week-03/security.json conserva el failure path sintético con exit code 1 sobre 815f153 y la ejecución corregida con status success tras retirar la fixture, sin cambiar las reglas. GitHub Actions registró ambos resultados en los runs enlazados en ese reporte. La ejecución local directa no se repitió en este entorno porque Python no está disponible."
+    },
+    {
+      "command": "git status --short && git rev-parse HEAD",
+      "result": "pass",
+      "evidence": "La versión técnica observada antes de registrar esta evidencia fue c06e18d5939a19dc6f5caf049cce5f4811f7df82. El estado mostró el modelo de amenazas modificado y la carpeta de evidencias sin atribuir esos cambios a un commit inexistente."
+    }
+  ]
+}
