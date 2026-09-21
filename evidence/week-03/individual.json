@@ -74,7 +74,8 @@
       "aiAssistance": "Se utilizó asistencia de IA para organizar y redactar el análisis; la evidencia se contrastó con los archivos del repositorio y los comandos indicados.",
       "githubLogin": "JulianDele",
       "pullRequests": [],
-      "integrationNote": "Registro personal conservado del commit 4b5cb401d1a37d7723435d3fe313a866c2d9ca7e; corregidos studentId según Week 02 y commits/archivos según git show. El failure path es de osbaldoXxC y aquí sólo se referencia. No se encontró PR independiente para #18; el aporte está directamente en la rama del PR #20."
+      "integrationNote": "Aporte aceptado por el responsable del equipo mediante el commit propio 4b5cb401d1a37d7723435d3fe313a866c2d9ca7e incluido en PR #20; no se requiere un PR independiente. Se preservan su autoría y observaciones personales. El failure path es aporte de osbaldoXxC y sólo se referencia como control del modelo.",
+      "contributionUrl": "https://github.com/Draggodeidad/campusops-dmi-team/pull/20/changes/4b5cb401d1a37d7723435d3fe313a866c2d9ca7e"
     },
     {
       "studentId": "3523110279",

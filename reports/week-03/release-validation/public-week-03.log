@@ -1,3 +1,4 @@
+python3 tools/course_public_evaluator.py --week 03 --mode public --execute-toolchain
 {
   "schemaVersion": 1,
   "week": 3,

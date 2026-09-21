@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "week": 3,
   "mode": "verify",
-  "commitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7",
-  "evaluatedAt": "2026-09-21T23:47:28.415446+00:00",
+  "commitSha": "96fab524e06102646ef33a3b1170534926d22406",
+  "evaluatedAt": "2026-09-21T23:56:41.821233+00:00",
   "status": "pass",
   "checks": [
     {
@@ -49,7 +49,7 @@
     {
       "id": "toolchain_4",
       "status": "pass",
-      "detail": "npm run test:smoke\n> dmi-react-native-starter@1.0.0 test:smoke\n> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx\n\n\nPASS course-tests/smoke.test.tsx\n  ✓ renders the reproducible baseline and resolves backend state (41 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       1 passed, 1 total\nSnapshots:   0 total\nTime:        0.352 s, estimated 1 s\nRan all test suites matching /course-tests\\/smoke.test.tsx/i."
+      "detail": "npm run test:smoke\n> dmi-react-native-starter@1.0.0 test:smoke\n> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx\n\n\nPASS course-tests/smoke.test.tsx\n  ✓ renders the reproducible baseline and resolves backend state (45 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       1 passed, 1 total\nSnapshots:   0 total\nTime:        0.376 s, estimated 1 s\nRan all test suites matching /course-tests\\/smoke.test.tsx/i."
     }
   ]
 }

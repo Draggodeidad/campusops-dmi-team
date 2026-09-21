@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "week": 3,
-  "commitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7",
-  "generatedAt": "2026-09-21T23:49:10.379341+00:00",
+  "commitSha": "96fab524e06102646ef33a3b1170534926d22406",
+  "generatedAt": "2026-09-21T23:57:16.622234+00:00",
   "checks": [
     {
       "id": "ac03-secret-scan-failure-path",
@@ -63,6 +63,14 @@
       "command": "gh run view 35477319355; gh run download 35477319355 --name academic-evidence-week-03-ci-amenazas",
       "evidence": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477319355: Baseline checks and secret scanning success; artefacto descargado, reports/week-03/verify.json status pass y SHA c06e18d5939a19dc6f5caf049cce5f4811f7df82. Ocurrió después del fallo 35477270399.",
       "evaluatedCommitSha": "c06e18d5939a19dc6f5caf049cce5f4811f7df82"
+    },
+    {
+      "id": "accepted-julian-contribution-revalidation",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm ci; make feedback; make verify-week-03",
+      "evidence": "reports/week-03/release-validation/: instalación, suite acumulada, secretos, auditoría critical, bundle y verificación oficial terminaron con exit 0 en checkout limpio.",
+      "evaluatedCommitSha": "96fab524e06102646ef33a3b1170534926d22406"
     }
   ],
   "securityAnalysis": {
