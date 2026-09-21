@@ -9,9 +9,8 @@ setup:
 verify:
 	$(NPM) run typecheck
 	$(NPM) run lint
-	$(NPM) run test:smoke
-	$(NPM) run test:incidents
-	$(NPM) run test:architecture
+	$(NPM) test -- --ci --runInBand
+	$(NPM) run check:architecture
 	$(NPM) run scan:secrets
 
 scan-secrets:
