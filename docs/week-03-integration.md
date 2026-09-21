@@ -19,7 +19,10 @@ funcionalidades posteriores ni cambia la arquitectura de la aplicación.
 - #18: JulianDele incorporó directamente
   `4b5cb401d1a37d7723435d3fe313a866c2d9ca7e` en la rama de #20. El modelo
   describe activos, fronteras, prioridades, controles actuales y futuros y
-  riesgo residual. No aparece un PR independiente de este integrante.
+  riesgo residual. Su aporte se acredita mediante el [commit propio incluido en
+  el PR #20](https://github.com/Draggodeidad/campusops-dmi-team/pull/20/changes/4b5cb401d1a37d7723435d3fe313a866c2d9ca7e),
+  aceptado por el responsable del equipo para esta entrega; no se exige otro PR
+  ni se modifica su autoría.
 
 ## Correcciones de integración
 
@@ -40,8 +43,10 @@ una validación personal no realizada.
 
 El ruleset de `main` exige una aprobación de PR y permite merge commits. El PR
 #20 no tenía aprobaciones al revisar la integración. No se omite esa regla.
-La issue #18 también exige un PR propio y explicación de priorización del
-integrante; su aporte directo es verificable, pero no acredita ese PR ausente.
+La contribución de JulianDele para #18 queda acreditada por su commit propio,
+su modelo de amenazas y sus observaciones registradas. La ausencia de un PR
+independiente no es un pendiente de esta entrega, conforme a la aclaración del
+responsable del equipo.
 
 Después de satisfacer las revisiones y fusionar el PR aprobado:
 
