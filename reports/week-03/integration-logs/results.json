@@ -1,0 +1,82 @@
+{
+  "commitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7",
+  "nodeVersion": "22.22.0",
+  "generatedAt": "2026-09-21T23:49:10.379341+00:00",
+  "results": [
+    {
+      "command": "npm ci",
+      "exitCode": 0,
+      "log": "npm-ci.log"
+    },
+    {
+      "command": "make feedback",
+      "exitCode": 0,
+      "log": "01.log"
+    },
+    {
+      "command": "npm test -- --ci --runInBand",
+      "exitCode": 0,
+      "log": "02.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "log": "03.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "log": "04.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "log": "05.log"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "exitCode": 0,
+      "log": "06.log"
+    },
+    {
+      "command": "make verify-week-01",
+      "exitCode": 0,
+      "log": "07.log"
+    },
+    {
+      "command": "make verify-week-02",
+      "exitCode": 0,
+      "log": "08.log"
+    },
+    {
+      "command": "make verify-week-03",
+      "exitCode": 0,
+      "log": "09.log"
+    },
+    {
+      "command": "python3 tools/revalidate-prior-evidence.py --week 1",
+      "exitCode": 0,
+      "log": "10.log"
+    },
+    {
+      "command": "make public-test-week-01",
+      "exitCode": 0,
+      "log": "11.log"
+    },
+    {
+      "command": "python3 tools/revalidate-prior-evidence.py --week 2",
+      "exitCode": 0,
+      "log": "12.log"
+    },
+    {
+      "command": "make public-test-week-02",
+      "exitCode": 0,
+      "log": "13.log"
+    },
+    {
+      "command": "make public-test-week-03",
+      "exitCode": 0,
+      "log": "public-week-03.log"
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "week": 3,
+  "commitSha": "96fab524e06102646ef33a3b1170534926d22406",
+  "decision": "Priorizamos la exposición de credenciales y adoptamos un control de integración continua con mínimo privilegio, instalación reproducible, typecheck, lint, pruebas, auditoría crítica y secret scanning. El workflow usa permissions: contents: read, no permite bypasses como continue-on-error, || true o --passWithNoTests, conserva los reportes aunque falle un paso y ejecuta el escaneo mediante make feedback. Complementamos este control con un modelo de amenazas que distingue controles existentes, controles implementados esta semana y controles futuros. Elegimos esta amenaza como primera prioridad porque una credencial reutilizable puede comprometer recursos fuera de CampusOps, mientras que todos los datos usados para demostrar la falla son sintéticos.",
+  "alternatives": [
+    "Escaneo local únicamente antes de entregar: Ejecutar tools/scan-secrets.py y las pruebas sólo en la máquina de desarrollo, conservando el resultado en un reporte manual. No protege la integración frente a nuevos commits o pull requests, depende del entorno local y no asegura que el workflow detenga una entrega insegura.",
+    "Workflow CI con permisos amplios y comprobaciones no bloqueantes: Ejecutar las comprobaciones en GitHub Actions con permisos por defecto y permitir que el job continúe después de fallos para publicar un resultado final. Aumenta el impacto de una acción comprometida y podría convertir un incumplimiento de seguridad en un falso éxito; contradice el requisito de mínimo privilegio y de conservar el código de salida del fallo.",
+    "Workflow CI con permisos mínimos y failure path reproducible: Usar permissions: contents: read, npm ci, los checks obligatorios y una fixture sintética temporal que active secret scanning; retirar la fixture sin modificar las reglas y conservar ambos resultados. Permite demostrar que el control detecta una condición insegura y que el estado corregido pasa, sin usar credenciales reales ni ocultar errores."
+  ],
+  "tradeoff": "Beneficios: La detección ocurre en CI y no sólo en una estación local. El failure path produce evidencia útil y verificable, y el estado corregido conserva el mismo detector. La arquitectura por capas limita el acoplamiento entre UI, Application, Domain e Infrastructure y facilita revisar controles. El uso exclusivo de datos sintéticos evita exponer credenciales o datos personales reales. Costos: El workflow tarda más porque instala dependencias, ejecuta varias comprobaciones y genera el bundle. El escaneo regex sólo detecta patrones de alta confianza y no sustituye gestión de secretos, rotación ni revisión humana. La separación arquitectónica no proporciona autenticación ni autorización: sesiones, asignaciones, fotos, ubicación y persistencia permanecen como trabajo futuro. La ejecución local del escaneo requiere Python; en el entorno de validación usado para esta evidencia no estaba disponible.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "sourceEvidence": {
+    "commitSha": "4b5cb401d1a37d7723435d3fe313a866c2d9ca7e",
+    "path": "evidence/week-03/engineering.json",
+    "note": "Contenido aportado por JulianDele; normalización de schema e integración por Draggodeidad con asistencia de IA."
+  },
+  "historicalVerification": [
+    {
+      "command": "npm test -- --ci --runInBand course-tests/public/week-03.test.ts",
+      "result": "pass",
+      "evidence": "La suite pública terminó con 1 suite aprobada y 2 pruebas aprobadas. Verificó que el workflow conserva Node 22, instalación reproducible, mínimo privilegio y comprobaciones obligatorias, y que docs/threat-model.md relaciona activos, amenazas, controles y verificación."
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass",
+      "evidence": "TypeScript terminó con código 0 y sin errores."
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass",
+      "evidence": "ESLint terminó con código 0 y sin errores reportados."
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass",
+      "evidence": "La suite de arquitectura pasó las comprobaciones del árbol actual y el caso controlado que detecta un import UI -> Infrastructure."
+    },
+    {
+      "command": "python tools/scan-secrets.py (failure path) / make feedback (CI)",
+      "result": "pass",
+      "evidence": "reports/week-03/security.json conserva el failure path sintético con exit code 1 sobre 815f153 y la ejecución corregida con status success tras retirar la fixture, sin cambiar las reglas. GitHub Actions registró ambos resultados en los runs enlazados en ese reporte. La ejecución local directa no se repitió en este entorno porque Python no está disponible."
+    },
+    {
+      "command": "git status --short && git rev-parse HEAD",
+      "result": "pass",
+      "evidence": "La versión técnica observada antes de registrar esta evidencia fue c06e18d5939a19dc6f5caf049cce5f4811f7df82. El estado mostró el modelo de amenazas modificado y la carpeta de evidencias sin atribuir esos cambios a un commit inexistente."
+    }
+  ],
+  "verification": [
+    {
+      "command": "gh run view 35477270399; gh run view 35477319355",
+      "result": "failure y success del mismo step obligatorio en ese orden temporal; SHAs verificados mediante GitHub API",
+      "evidence": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477270399 (815f153575756b0b73d841f6aab44d7540944b31); https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/35477319355 (c06e18d5939a19dc6f5caf049cce5f4811f7df82). Baseline checks and secret scanning: fallo por public_secret_name y éxito tras retirar la fixture.",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "npm ci",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/npm-ci.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make feedback",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/01.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "npm test -- --ci --runInBand",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/02.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/03.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/04.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/05.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/06.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make verify-week-01",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/07.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make verify-week-02",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/08.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make verify-week-03",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/09.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "python3 tools/revalidate-prior-evidence.py --week 1",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/10.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make public-test-week-01",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/11.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "python3 tools/revalidate-prior-evidence.py --week 2",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/12.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make public-test-week-02",
+      "result": "exit 0",
+      "evidence": "reports/week-03/integration-logs/13.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "make public-test-week-03",
+      "result": "exit 0; schema de security, engineering e individual aprobado y controles públicos aprobados",
+      "evidence": "reports/week-03/public-tests.json y reports/week-03/integration-logs/public-week-03.log",
+      "evaluatedCommitSha": "960976c484fe5aad5d955c631f729a445bf9f5e7"
+    },
+    {
+      "command": "npm ci",
+      "result": "exit 0",
+      "evidence": "reports/week-03/release-validation/npm-ci.log",
+      "evaluatedCommitSha": "96fab524e06102646ef33a3b1170534926d22406"
+    },
+    {
+      "command": "make feedback",
+      "result": "exit 0",
+      "evidence": "reports/week-03/release-validation/feedback.log",
+      "evaluatedCommitSha": "96fab524e06102646ef33a3b1170534926d22406"
+    },
+    {
+      "command": "make verify-week-03",
+      "result": "exit 0",
+      "evidence": "reports/week-03/release-validation/verify.log",
+      "evaluatedCommitSha": "96fab524e06102646ef33a3b1170534926d22406"
+    },
+    {
+      "command": "make public-test-week-03",
+      "result": "exit 0; formato y pruebas públicas aprobados",
+      "evidence": "reports/week-03/release-validation/public-week-03.log",
+      "evaluatedCommitSha": "96fab524e06102646ef33a3b1170534926d22406"
+    }
+  ],
+  "requirementTraceability": [
+    {
+      "requirementId": "AC-01",
+      "risk": "Deriva del entorno y dependencias",
+      "control": "Node 22.22.0, npm ci, toolchain y bundle",
+      "result": "npm-ci.log, 01.log y 09.log: exit 0"
+    },
+    {
+      "requirementId": "AC-02",
+      "risk": "Modelo desconectado de controles ejecutables",
+      "control": "Threat model de JulianDele, pruebas públicas y pipeline de Draggodeidad",
+      "result": "02.log: 7 suites, 12 pruebas aprobadas"
+    },
+    {
+      "requirementId": "AC-03",
+      "risk": "Falso éxito ante incumplimiento obligatorio",
+      "control": "Escáner de secretos y fixture temporal de osbaldoXxC; regresión del manejo de SHA",
+      "result": "Runs 35477270399 failure y 35477319355 success; 06.log: 7 pruebas aprobadas, incluido fallo obligatorio sin reetiquetar evidencia"
+    },
+    {
+      "requirementId": "AC-04",
+      "risk": "Afirmar validación de código diferente al evaluado",
+      "control": "Evidencia con SHA, decisiones/trade-offs y procedencia de observaciones",
+      "result": "Historial conservado, evaluador oficial sin cambios y resultados en logs de integración"
+    },
+    {
+      "requirementId": "AC-05",
+      "risk": "Atribución incorrecta o validaciones individuales inventadas",
+      "control": "Consolidación desde commits/PR/reportes existentes e IDs históricos",
+      "result": "Tres registros diferenciados con commits propios verificables. JulianDele acredita #18 mediante 4b5cb401d1a37d7723435d3fe313a866c2d9ca7e incluido en PR #20, aceptado expresamente por el responsable del equipo."
+    }
+  ]
+}
