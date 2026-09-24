@@ -1,0 +1,10 @@
+$ git check-ignore --no-index -v .env .env.local .env.production
+.gitignore:8:.env	.env
+.gitignore:9:.env.*	.env.local
+.gitignore:9:.env.*	.env.production
+$ git check-ignore --no-index -v .env.example
+.gitignore:10:!.env.example	.env.example
+$ git check-ignore --no-index -q .env.example
+PASS: .env.example no queda ignorado
+$ git ls-files .env .env.example .env.local .env.production
+.env.example

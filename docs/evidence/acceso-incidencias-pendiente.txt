@@ -1,0 +1,13 @@
+$ rg -n "findAll\(|locationLabel|GetIncidents" src/application/incidents/GetIncidents.ts src/infrastructure/incidents/FakeIncidentRepository.ts src/ui/incidents/IncidentListScreen.tsx src/ui/incidents/IncidentDetailScreen.tsx
+src/application/incidents/GetIncidents.ts:4:export class GetIncidents {
+src/application/incidents/GetIncidents.ts:8:    return this.repository.findAll();
+src/infrastructure/incidents/FakeIncidentRepository.ts:11:    locationLabel: 'Laboratorio B-204',
+src/infrastructure/incidents/FakeIncidentRepository.ts:19:    locationLabel: 'Aula C-112',
+src/infrastructure/incidents/FakeIncidentRepository.ts:27:    locationLabel: 'Biblioteca, planta alta',
+src/infrastructure/incidents/FakeIncidentRepository.ts:32:  async findAll(): Promise<readonly Incident[]> {
+src/ui/incidents/IncidentListScreen.tsx:39:          <Text>{incident.locationLabel}</Text>
+src/ui/incidents/IncidentDetailScreen.tsx:26:          <Text>Ubicación: {incident.locationLabel}</Text>
+$ rg -n "no autentica|no hay sanitizador|control de acceso" docs/threat-model.md
+49:| Usuario ↔ Aplicación móvil | Entradas de descripción, selección de incidencia y, en hitos futuros, sesión, fotos y ubicación. | La UI actual presenta datos sintéticos; no autentica ni autoriza al usuario. No tratamos ocultar botones como control de seguridad. |
+86:- **Riesgo residual:** alto hasta implementar sesión, autorización real y pruebas negativas; los fixtures actuales no demuestran control de acceso.
+151:1. La aplicación actual no autentica ni autoriza; una UI por perfiles no sería una
