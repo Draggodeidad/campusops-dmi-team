@@ -1,0 +1,32 @@
+Comprobacion de falla antes de la correccion:
+Comando ejecutado: npx jest course-tests/public/week-04.test.ts
+Fecha de ejecucion: 2026-09-24 16:43:17 CST
+
+Salida obtenida:
+> dmi-react-native-starter@1.0.0 test
+> jest --no-watchman --cacheDirectory .jest-cache course-tests/public/week-04.test.ts
+
+FAIL course-tests/public/week-04.test.ts (12.023 s)
+  ● CampusOps redacts personal and incident-sensitive data while preserving technical context
+
+    redactForTelemetry must be implemented in the assigned week
+
+      10 |
+      11 | function pending(name: string): never {
+    > 12 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      13 | }
+      14 |
+      15 | export function redactForTelemetry(_input: unknown): unknown {
+
+      at pending (src/course-evaluation/index.ts:12:9)
+      at pending (src/course-evaluation/index.ts:16:10)
+      at Object.<anonymous> (course-tests/public/week-04.test.ts:4:36)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        12.023 s
+
+Diagnostico:
+La funcion redactForTelemetry no estaba implementada en src/course-evaluation/index.ts y lanzaba la excepcion pendiente. Cualquier payload de diagnostico o telemetria en ese estado quedaria sin sanitizar.

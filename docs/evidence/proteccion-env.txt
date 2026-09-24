@@ -1,0 +1,29 @@
+Comprobacion de reglas de exclusion de archivos de entorno:
+Fecha de ejecucion: 2026-09-24 16:46:52 CST
+
+1. Verificacion de git check-ignore con variantes locales de configuracion:
+$ git check-ignore -v .env .env.local .env.development .env.production .env.test .env.example
+.gitignore:8:.env	.env
+.gitignore:9:.env.*	.env.local
+.gitignore:9:.env.*	.env.development
+.gitignore:9:.env.*	.env.production
+.gitignore:9:.env.*	.env.test
+
+Resultado:
+- '.env' queda excluido por la regla directa de linea 8.
+- Las variantes locales ('.env.local', '.env.development', '.env.production', '.env.test') quedan excluidas por la regla comodin '.env.*' de linea 9.
+- '.env.example' NO coincide con las exclusiones gracias a la excepcion '!*.env.example' y permanece versionable como plantilla publica sin secretos.
+
+2. Verificacion de git status:
+$ git status --short
+M .gitignore
+M package.json
+M src/course-evaluation/index.ts
+?? course-tests/week-04-security.test.ts
+?? docs/evidence/
+?? docs/security-audit.md
+?? src/application/telemetry/
+
+Resultado:
+Ningun archivo '.env' real o local se encuentra en el indice de Git ni en estado staged/untracked.
+Se garantiza que un desarrollador no subira accidentalmente secretos o endpoints internos en archivos de entorno no estandar.

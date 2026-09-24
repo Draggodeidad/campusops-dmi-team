@@ -1,0 +1,26 @@
+Comprobacion de exito despues de la correccion:
+Comando ejecutado: npx jest course-tests/public/week-04.test.ts course-tests/week-04-security.test.ts
+Fecha de ejecucion: 2026-09-24 16:45:07 CST
+
+Salida obtenida:
+PASS course-tests/public/week-04.test.ts (2.587 s)
+  √ CampusOps redacts personal and incident-sensitive data while preserving technical context (2 ms)
+
+PASS course-tests/week-04-security.test.ts (3.130 s)
+  redactForTelemetry security unit tests
+    √ redacts sensitive keys regardless of case and formatting (3 ms)
+    √ redacts deeply nested objects and lists while preserving non-sensitive data (1 ms)
+    √ preserves immutability of the original input (1 ms)
+    √ handles primitive values and null/undefined gracefully (1 ms)
+
+Test Suites: 2 passed, 2 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        3.541 s
+
+Diagnostico:
+Se verifico exitosamente que:
+1. La prueba publica de la Semana 4 (course-tests/public/week-04.test.ts) pasa al 100%.
+2. Se ocultan claves criticas: authorization, email, displayName, location, photos, internalComments con '[REDACTED]'.
+3. Se conservan campos tecnicos y de diagnostico: incidentId, accept, status, timestamp, requestId.
+4. Se garantiza la inmutabilidad del objeto original (Object.freeze) y se manejan estructuras anidadas, listas y valores primitivos.

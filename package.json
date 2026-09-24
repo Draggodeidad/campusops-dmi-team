@@ -14,7 +14,7 @@
     "backend:self-test": "node course-backend/self-test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "test": "jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts",
+    "test": "jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-04.test.ts course-tests/week-04-security.test.ts",
     "test:all": "jest --no-watchman --cacheDirectory .jest-cache",
     "test:smoke": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx",
     "test:incidents": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/incidents.test.tsx",

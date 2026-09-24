@@ -1,0 +1,24 @@
+Auditoria de Control de Acceso y Visibilidad de Incidencias:
+Fecha de inspeccion: 2026-09-24 16:47:00 CST
+Ubicacion: src/application/incidents/GetIncidents.ts y src/ui/incidents/IncidentListScreen.tsx
+
+1. Codigo inspeccionado:
+export class GetIncidents {
+  constructor(private readonly repository: IncidentRepository) {}
+
+  async execute(): Promise<readonly Incident[]> {
+    return this.repository.findAll();
+  }
+}
+
+2. Analisis de seguridad y privacidad:
+- En la implementacion actual, GetIncidents.execute() devuelve sin filtro todas las incidencias presentes en el repositorio, incluyendo descripciones detalladas y el campo 'locationLabel' (ej. 'Laboratorio B-204', 'Aula C-112').
+- La interfaz de usuario (IncidentListScreen) presenta la lista completa al usuario actual sin requerir una sesion autenticada ni determinar si el actor es Reportante, Tecnico o Coordinador.
+
+3. Riesgo de seguridad identificado (OWASP Mobile M1 / OWASP Top 10 A01: Broken Access Control):
+- Si el repositorio Fake se reemplaza por una conexion a API backend real con datos de usuarios del campus, cualquier cliente sin autenticar o con permisos basicos podria consultar incidentes ajenos, afectando la privacidad de los reportantes y revelando problemas en zonas de acceso restringido.
+
+4. Estado del hallazgo y plan de solucion:
+- Estado: PENDIENTE (documentado formalmente como riesgo de diseno).
+- Justificacion tecnica: Conforme a la regla estricta fijada en AGENTS.md ('Permisos por rol se validan en el servicio, nunca solo ocultando un botón en la UI'), una solucion cosmetica en React Native no garantiza seguridad.
+- La solucion real requiere vincular el token de sesion al caso de uso y filtrar en la capa de aplicacion/servicio segun el rol del usuario autenticado, lo cual corresponde al hito planificado de Sesion y Autorizacion.
