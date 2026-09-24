@@ -8,9 +8,9 @@ Actividad individual realizada por **Osbaldo** en la rama `week4/security-audit-
 
 | # | Hallazgo | Riesgo | Solución aplicada | Evidencia |
 |---|---|---|---|---|
-| **1** | Fuga de datos sensibles en eventos de telemetría y diagnóstico (`redactForTelemetry`) | El envío de eventos de diagnóstico sin filtrar podría exponer credenciales (`authorization`, `token`, `password`), datos personales (`email`, `displayName`) e información sensible de incidencias (`location`, `photos`, notas internas). | Se implementó una función pura e inmutable de sanitización recursiva en la capa Application (`src/application/telemetry/redactForTelemetry.ts`) que sustituye los valores sensibles por `[REDACTED]`, conservando el contexto técnico. **Corregido.** | [Prueba antes](evidence/redaccion-antes.txt) y [Prueba después](evidence/redaccion-despues.txt) |
-| **2** | Exposición de variantes de configuración local en el repositorio (`.gitignore`) | La regla original solo ignoraba `.env`, dejando desprotegidas variantes como `.env.local`, `.env.development` o `.env.production`. Si un integrante crea dichos archivos con configuraciones locales, podrían subirse accidentalmente a Git. | Se actualizó `.gitignore` con la regla `.env.*` preservando la plantilla pública `!.env.example`. Se verificó el estado con `git check-ignore`. **Corregido.** | [Protección .env](evidence/proteccion-env.txt) |
-| **3** | Ausencia de autorización y filtrado por rol en la consulta de incidencias (`GetIncidents`) | `GetIncidents.execute()` devuelve todas las incidencias y ubicaciones físicas del repositorio a cualquier usuario. En un backend real, un reportante común podría ver incidencias ajenas o áreas restringidas (OWASP A01: Broken Access Control). | **Pendiente.** La regla del proyecto (AGENTS.md) exige que los permisos se validen en el servicio/dominio y no solo ocultando elementos en la UI. Se documenta formalmente como riesgo de diseño para el hito de Autenticación y Sesión. | [Inspección de acceso](evidence/acceso-incidencias-pendiente.txt) |
+| **1** | Fuga de datos sensibles en eventos de telemetría y diagnóstico (`redactForTelemetry`) | El envío de eventos de diagnóstico sin filtrar podría exponer credenciales (`authorization`, `token`, `password`), datos personales (`email`, `displayName`) e información sensible de incidencias (`location`, `photos`, notas internas). | Se implementó una función pura e inmutable de sanitización recursiva en la capa Application (`src/application/telemetry/redactForTelemetry.ts`) que sustituye los valores sensibles por `[REDACTED]`, conservando el contexto técnico. **Corregido.** | [Captura 1](evidence/logs-sanitizados.png) / [Log antes](evidence/redaccion-antes.txt) / [Log después](evidence/redaccion-despues.txt) |
+| **2** | Exposición de variantes de configuración local en el repositorio (`.gitignore`) | La regla original solo ignoraba `.env`, dejando desprotegidas variantes como `.env.local`, `.env.development` o `.env.production`. Si un integrante crea dichos archivos con configuraciones locales, podrían subirse accidentalmente a Git. | Se actualizó `.gitignore` con la regla `.env.*` preservando la plantilla pública `!.env.example`. Se verificó el estado con `git check-ignore`. **Corregido.** | [Captura 2](evidence/gitignore-env.png) / [Log Git](evidence/proteccion-env.txt) |
+| **3** | Ausencia de autorización y filtrado por rol en la consulta de incidencias (`GetIncidents`) | `GetIncidents.execute()` devuelve todas las incidencias y ubicaciones físicas del repositorio a cualquier usuario. En un backend real, un reportante común podría ver incidencias ajenas o áreas restringidas (OWASP A01: Broken Access Control). | **Pendiente.** La regla del proyecto (AGENTS.md) exige que los permisos se validen en el servicio/dominio y no solo ocultando elementos en la UI. Se documenta formalmente como riesgo de diseño para el hito de Autenticación y Sesión. | [Captura 3](evidence/acceso-incidencias.png) / [Inspección](evidence/acceso-incidencias-pendiente.txt) |
 
 ---
 
@@ -72,6 +72,8 @@ export function redactForTelemetry(input: unknown): unknown {
 
 ### Evidencia
 
+![Captura 1 — Pruebas de telemetría sanitizada](evidence/logs-sanitizados.png)
+
 - [Fallo antes de la corrección](evidence/redaccion-antes.txt): La suite oficial `course-tests/public/week-04.test.ts` fallaba con código de salida no cero al intentar ejecutar la función pendiente.
 - [Éxito después de la corrección](evidence/redaccion-despues.txt): La prueba oficial de Semana 4 y la nueva suite unitaria `course-tests/week-04-security.test.ts` pasan al 100% (5 pruebas verificadas exitosamente), demostrando la redacción correcta y la preservación de inmutabilidad.
 
@@ -110,6 +112,8 @@ dist/
 ```
 
 ### Evidencia
+
+![Captura 2 — Protección de variantes .env en Git](evidence/gitignore-env.png)
 
 - [Comprobación de Git](evidence/proteccion-env.txt): Ejecución de `git check-ignore -v .env .env.local .env.development .env.production .env.test .env.example`.
 - Se verificó que todas las variantes locales son efectivamente ignoradas por la regla línea 9 (`.env.*`), mientras que `.env.example` permanece rastreable como plantilla no sensible.
@@ -151,6 +155,8 @@ export class GetIncidents {
 
 ### Evidencia
 
+![Captura 3 — Inspección de control de acceso](evidence/acceso-incidencias.png)
+
 - [Inspección de acceso](evidence/acceso-incidencias-pendiente.txt): Registro detallado de la inspección de código, análisis de impacto según OWASP y justificación del diferimiento al hito de autenticación.
 
 ---
@@ -161,6 +167,7 @@ export class GetIncidents {
 - [x] Documento de auditoría creado y estructurado: `docs/security-audit.md`.
 - [x] Identificados mínimo 3 problemas con análisis de riesgo (2 corregidos, 1 pendiente justificado).
 - [x] Carpeta de evidencias creada con nombres descriptivos: `docs/evidence/`.
+- [x] Capturas de pantalla gráficas generadas y enlazadas: `logs-sanitizados.png`, `gitignore-env.png`, `acceso-incidencias.png`.
 - [x] Verificado que `.gitignore` ignora `.env` y variantes locales (`.env.*`).
 - [x] Confirmado mediante `git status` que no se agregan archivos `.env`.
 - [x] Datos utilizados estrictamente ficticios y sintéticos; ausencia total de credenciales reales.
