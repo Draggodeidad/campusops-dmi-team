@@ -27,6 +27,8 @@ La elección de `expo-secure-store` evita guardar un futuro token en preferencia
 
 Riesgo residual: el secreto puede estar en memoria durante su uso; un dispositivo comprometido o un log futuro fuera de estas rutas puede exponerlo. Keychain en iOS puede persistir después de reinstalar la app. Una falla o indisponibilidad del almacén debe impedir que se finja una sesión guardada. Falta probar el ciclo completo de sesión en Semana 06. `npx expo install --check` señaló recomendaciones de actualización de Expo, React Native, ESLint Expo y Jest Expo del stack ya fijado; no se cambiaron versiones ajenas al control.
 
+Comprobación de este aporte con Node 22.22.0: `make feedback` terminó con código 0, 9 suites y 19 pruebas aprobadas, escáner sin hallazgos, auditoría sin vulnerabilidades reportadas y bundle Android exportado. `make verify-week-04` terminó con estado `pass`. `make public-test-week-04` terminó con estado `fail`: aún faltan `secret-scan.json`, `negative-tests.json`, `engineering.json`, la evidencia individual consolidada y la implementación pública de `redactForTelemetry`. Ese fallo identifica trabajo pendiente de otros integrantes; no se desactivó el control.
+
 ## Trabajo y evidencia de otros integrantes
 
 - Integrante 2: `redactForTelemetry`, conexión a diagnóstico y pruebas de anidamiento e inmutabilidad. Pendiente de su aporte.
