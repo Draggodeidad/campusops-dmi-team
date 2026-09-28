@@ -16,7 +16,16 @@ Baseline reproducible con Node 22.22.0: `npm run typecheck` terminó con código
 
 ## Controles de este aporte
 
-Pendiente de completar después de implementar y comprobar almacenamiento seguro, secretos, manejo de errores y dependencias. Esta sección sólo describirá trabajo verificado del autor de esta rama.
+| Control | Decisión y alcance real | Comprobación |
+|---|---|---|
+| Almacenamiento seguro | `SessionSecretStore` declara guardar, leer y borrar; `ExpoSecureSessionSecretStore` usa `expo-secure-store` con una clave fija y accesibilidad de Keychain limitada al dispositivo desbloqueado. No se guarda ninguna sesión mientras no exista login. | `course-tests/week-04-storage.test.ts` prueba llamadas, lectura nula, borrado, entrada vacía y fallas nativas con un proveedor sustituido. |
+| Errores seguros | Los casos de uso de incidencias y el adaptador de almacenamiento convierten fallas técnicas en `ApplicationFailure` con códigos y mensajes constantes. No adjuntan error crudo ni `cause`; la UI sigue mostrando mensajes genéricos. | `course-tests/week-04-errors.test.tsx` inyecta errores con una cadena sintética sensible y confirma que no aparece en la UI. |
+| Secretos de configuración | `.env.*` queda ignorado, con excepción de `.env.example`. La URL `EXPO_PUBLIC_COURSE_BACKEND_URL` es configuración pública; nunca debe recibir tokens. No se detectaron secretos de alta confianza versionados en la baseline, por lo que no se eliminó una credencial existente. | `git check-ignore` comprueba las variantes y `npm run scan:secrets` conserva el gate previo. |
+| Dependencias | Se instaló el módulo compatible con Expo 57 y se actualizaron versiones transitivas vulnerables dentro de sus rangos existentes. | `npm ci` y `npm audit --json` terminaron con cero vulnerabilidades reportadas en el registro consultado. |
+
+La elección de `expo-secure-store` evita guardar un futuro token en preferencias comunes. En Android utiliza almacenamiento cifrado con Android Keystore; el plugin excluye automáticamente sus entradas del respaldo Android cuando no existe configuración de respaldo propia. En iOS utiliza Keychain. [Referencia del proveedor](https://docs.expo.dev/versions/v54.0.0/sdk/securestore/). El test unitario verifica el uso del proveedor; el bundle Expo no demuestra por sí solo el cifrado en un dispositivo ni una instalación Android.
+
+Riesgo residual: el secreto puede estar en memoria durante su uso; un dispositivo comprometido o un log futuro fuera de estas rutas puede exponerlo. Keychain en iOS puede persistir después de reinstalar la app. Una falla o indisponibilidad del almacén debe impedir que se finja una sesión guardada. Falta probar el ciclo completo de sesión en Semana 06. `npx expo install --check` señaló recomendaciones de actualización de Expo, React Native, ESLint Expo y Jest Expo del stack ya fijado; no se cambiaron versiones ajenas al control.
 
 ## Trabajo y evidencia de otros integrantes
 

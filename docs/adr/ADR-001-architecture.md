@@ -100,3 +100,11 @@ La discrepancia inicial se reproduce consultando el archivo de la línea base co
 - Añadir puertos y adaptadores de sesión, persistencia y ubicación en sus semanas correspondientes.
 - Introducir DTO/mappers sólo si los contratos remotos divergen del dominio.
 - Sustituir la composición manual por un módulo o contenedor cuando su tamaño y ciclo de vida lo justifiquen.
+
+## Anexo de Semana 04 — almacenamiento y errores seguros
+
+La aplicación sigue sin login ni sesión activa. Para preparar un límite real y sustituible sin introducir el flujo de Semana 06, `SessionSecretStore` vive en Application y `ExpoSecureSessionSecretStore` lo implementa en Infrastructure mediante `expo-secure-store`. El adaptador no se inyecta todavía desde `App.tsx` porque ningún caso de uso actual guarda una sesión; sus llamadas nativas se comprueban con un proveedor sustituido en pruebas. La configuración nativa del módulo está en `app.json`.
+
+Alternativas: guardar un token en preferencias comunes sería insuficiente para un secreto; añadir ahora login y ciclo de sesión adelantaría autorización, refresh y logout sin su contrato semanal. El puerto estrecho y el adaptador nativo permiten probar almacenamiento y borrar el secreto, con el costo de una dependencia nativa y de no poder afirmar protección de una sesión aún inexistente.
+
+`ApplicationFailure` entrega códigos y mensajes constantes para fallas de repositorio y almacenamiento. Los casos de uso no propagan mensajes, `cause` ni objetos de error de proveedores a la UI. El control de redacción de telemetría sigue asignado a otro integrante; este mapeo funciona independientemente de él. Las pruebas de Semana 04 verifican sustitución y caminos negativos; `check:architecture` conserva la dirección de imports.
