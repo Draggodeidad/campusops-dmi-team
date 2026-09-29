@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": 4,
-  "commitSha": "42bf03defaf422fa5240d04c3c003fef51527d96",
+  "commitSha": "aaaa4defd547c958975918881c48801d1c6f63f7",
   "decision": "Para cualquier secreto de sesión futuro, usamos un puerto estrecho SessionSecretStore con una implementación de Infrastructure basada en expo-secure-store, en lugar de preferencias comunes; validamos entradas vacías y convertimos errores nativos en ApplicationFailure con mensajes constantes. Para reducir exposición en diagnósticos, elegimos redacción recursiva de claves sensibles sin mutar el objeto y comprobamos fallas con valores sintéticos. El escáner de secretos permanece como control complementario de repositorio y CI. No afirmamos que haya login, sesión activa, autorización por perfil ni un logger productivo conectado.",
   "alternatives": [
     "Guardar un futuro token en preferencias de aplicación comunes (por ejemplo AsyncStorage). Se descartó porque no representa almacenamiento protegido apropiado para un secreto de sesión y no resuelve la exposición en errores o logs.",

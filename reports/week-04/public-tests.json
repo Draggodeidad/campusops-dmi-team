@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "week": 4,
   "mode": "public",
-  "commitSha": "05266e43d9004c247cb5ce84eb041b99ba5c201a",
-  "evaluatedAt": "2026-09-28T21:45:54.746529+00:00",
-  "status": "fail",
+  "commitSha": "aaaa4defd547c958975918881c48801d1c6f63f7",
+  "evaluatedAt": "2026-09-29T04:58:38.701791+00:00",
+  "status": "pass",
   "checks": [
     {
       "id": "base_files",
@@ -33,13 +33,28 @@
     },
     {
       "id": "required_evidence",
-      "status": "fail",
-      "detail": "missing/empty=['reports/week-04/secret-scan.json', 'reports/week-04/negative-tests.json', 'evidence/week-04/engineering.json']"
+      "status": "pass",
+      "detail": "missing/empty=[]"
+    },
+    {
+      "id": "schema:reports/week-04/secret-scan.json",
+      "status": "pass",
+      "detail": "1 checks indexed, 1 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "id": "schema:reports/week-04/negative-tests.json",
+      "status": "pass",
+      "detail": "1 checks indexed, 1 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "id": "schema:evidence/week-04/engineering.json",
+      "status": "pass",
+      "detail": "decision evidence is substantive and reproducible; report evaluates HEAD"
     },
     {
       "id": "schema:evidence/week-04/individual.json",
-      "status": "fail",
-      "detail": "PENDIENTE_INTEGRANTE_2: at least one authored commit SHA is required"
+      "status": "pass",
+      "detail": "three individual evidence records found"
     },
     {
       "id": "toolchain_1",
@@ -58,8 +73,8 @@
     },
     {
       "id": "toolchain_4",
-      "status": "fail",
-      "detail": "npm test -- --ci --runInBand course-tests/public/week-04.test.ts\n> dmi-react-native-starter@1.0.0 test\n> jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts --ci --runInBand course-tests/public/week-04.test.ts\n\n\nFAIL course-tests/public/week-04.test.ts\n  ● CampusOps redacts personal and incident-sensitive data while preserving technical context\n\n    redactForTelemetry must be implemented in the assigned week\n\n      10 |\n      11 | function pending(name: string): never {\n    > 12 |   throw new Error(`${name} must be implemented in the assigned week`);\n         |         ^\n      13 | }\n      14 |\n      15 | export function redactForTelemetry(_input: unknown): unknown {\n\n      at pending (src/course-evaluation/index.ts:12:9)\n      at pending (src/course-evaluation/index.ts:16:10)\n      at Object.<anonymous> (course-tests/public/week-04.test.ts:4:36)\n\nPASS course-tests/smoke.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/incidents.test.tsx\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/architecture.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/public/week-02.test.ts\nPASS course-tests/public/week-01.test.ts\n\nTest Suites: 1 failed, 9 passed, 10 total\nTests:       1 failed, 19 passed, 20 total\nSnapshots:   0 total\nTime:        0.704 s, estimated 1 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-04.test.ts/i."
+      "status": "pass",
+      "detail": "npm test -- --ci --runInBand course-tests/public/week-04.test.ts\n> dmi-react-native-starter@1.0.0 test\n> jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts --ci --runInBand course-tests/public/week-04.test.ts\n\n\nPASS course-tests/public/week-04.test.ts\nPASS course-tests/smoke.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/incidents.test.tsx\nPASS course-tests/architecture.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/public/week-01.test.ts\nPASS course-tests/public/week-02.test.ts\n\nTest Suites: 10 passed, 10 total\nTests:       20 passed, 20 total\nSnapshots:   0 total\nTime:        0.795 s, estimated 1 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-04.test.ts/i."
     }
   ]
 }

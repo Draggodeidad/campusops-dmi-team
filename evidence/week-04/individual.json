@@ -75,7 +75,7 @@
       "studentId": "3522110437",
       "githubLogin": "JulianDele",
       "commitShas": [
-        "42bf03defaf422fa5240d04c3c003fef51527d96"
+        "a96003bdfa11d1b1489325b60ceef899432a9a95"
       ],
       "files": [
         "docs/security-controls.md",
@@ -93,8 +93,8 @@
       "reviews": [],
       "prediction": "Esperaba que los datos sensibles sintéticos quedaran redactados en objetos simples, anidados y listas; que los errores de SecureStore y del repositorio conservaran mensajes seguros; y que el escáner no encontrara patrones de secretos de alta confianza en el árbol actual.",
       "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.exe\" run typecheck && \"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.exe\" run lint; \"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts; C:\\Users\\alvar\\AppData\\Local\\Programs\\Python\\Python313\\python.exe tools\\scan-secrets.py",
-      "observedResult": "Typecheck y lint terminaron sin errores; Jest aprobó 4 suites y 16 pruebas; tools/scan-secrets.py imprimió 'Secret scan passed: no high-confidence secrets found.'. El SHA anotado es el merge actual que sirve de base de validación; los cambios de evidencia y documentación de este registro aún deben quedar en un commit de entrega.",
-      "explanation": "Como JulianDele (studentId 3522110437), completé los reportes reproducibles de escaneo y pruebas negativas, actualicé docs/security-controls.md para relacionar los controles con T1–T4 de Week 03 y registré la decisión y el trade-off del almacenamiento protegido. No atribuyo a mi trabajo la implementación de redactForTelemetry ni el adaptador de SecureStore; las validaciones ejecutadas corroboran el comportamiento integrado. El SHA 42bf03defaf422fa5240d04c3c003fef51527d96 es el merge de Week 04 en el que se basa la revisión, no un commit de estos cambios locales aún no registrados.",
+      "observedResult": "Typecheck y lint terminaron sin errores; Jest aprobó 4 suites y 16 pruebas; tools/scan-secrets.py imprimió 'Secret scan passed: no high-confidence secrets found.'. La documentación y los reportes de este integrante quedaron registrados en el commit a96003bdfa11d1b1489325b60ceef899432a9a95, integrado posteriormente en main.",
+      "explanation": "Como JulianDele (studentId 3522110437), completé los reportes reproducibles de escaneo y pruebas negativas, actualicé docs/security-controls.md para relacionar los controles con T1–T4 de Week 03 y registré la decisión y el trade-off del almacenamiento protegido en a96003bdfa11d1b1489325b60ceef899432a9a95. No atribuyo a mi trabajo la implementación de redactForTelemetry ni el adaptador de SecureStore; las validaciones ejecutadas corroboran el comportamiento integrado.",
       "aiAssistance": "Se utilizó asistencia de IA para organizar la documentación y evidencia. Los comandos y salidas se contrastaron con el código, pruebas y terminal; no se inventaron resultados ni se usaron datos reales."
     }
   ]
