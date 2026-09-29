@@ -1,37 +1,83 @@
 # Controles de seguridad y privacidad — Semana 04
 
-## Línea base observada
+## Controles implementados
 
-Revisión sobre `main` en `a3920ea55f273c1d42544f6df5c120661cc82088`, antes de incorporar el paquete de semana 4. Se usaron sólo datos sintéticos.
-
-| Superficie | Estado observado | Riesgo relacionado |
+| Control | Implementación verificada | Alcance actual |
 |---|---|---|
-| Incidencias | `FakeIncidentRepository` conserva tres incidencias en memoria y las pantallas muestran ubicación ficticia. No hay persistencia de incidencias, fotos ni sesión. | T1/T2: aún no existe autorización por actor; corresponde a hitos posteriores. |
-| Sesión y almacenamiento | No hay login, token de sesión, `AsyncStorage` ni preferencias de aplicación. | T4: antes de agregar una sesión se necesita un límite de almacenamiento seguro. |
-| Diagnóstico y errores | La UI muestra mensajes genéricos al fallar lista o detalle; `GetBackendStatus` devuelve `offline`. No se encontró telemetría de incidencias ni impresión del error crudo en `src/`. | T3: una ruta futura de diagnóstico podría exponer datos si imprime objetos completos. |
-| Configuración | `.env` está ignorado; `.env.*` no lo estaba. `EXPO_PUBLIC_COURSE_BACKEND_URL` es una URL pública del backend didáctico, no una credencial. | T4: una variante de entorno podría añadirse a Git por accidente. |
-| Reportes y CI | Existen reportes históricos en `reports/` y artefactos de Actions. El escáner revisa archivos de texto rastreados y rechaza patrones de alta confianza. | T3/T4: pruebas y reportes también pueden conservar datos sensibles. |
+| Almacenamiento protegido de secretos de sesión | `SessionSecretStore` define guardar, leer y borrar. `ExpoSecureSessionSecretStore` usa `expo-secure-store`, una clave fija y `WHEN_UNLOCKED_THIS_DEVICE_ONLY`; rechaza cadenas vacías y convierte fallas del proveedor en `ApplicationFailure`. | El puerto y adaptador existen, pero no hay login ni sesión activa conectados a la app. La prueba sustituye el módulo nativo; no mide cifrado en un dispositivo. |
+| Errores de aplicación no reveladores | `GetIncidents`, `GetIncidentById` y el adaptador de SecureStore producen códigos y mensajes constantes; no propagan el error del proveedor como `cause`. | La UI de incidencias muestra mensajes genéricos. La prueba usa errores sintéticos que contienen una cadena sensible ficticia. |
+| Redacción de telemetría | `redactForTelemetry` recorre recursivamente objetos y arreglos, normaliza claves ignorando mayúsculas, guiones y guiones bajos, reemplaza valores sensibles con `[REDACTED]` y no muta la entrada. Está exportada desde `src/course-evaluation/index.ts`. | Es una función disponible y probada; no encontramos un sumidero de logging de producción conectado en la app. No afirmamos que todos los logs futuros la invoquen automáticamente. |
+| Exclusión de archivos de entorno | `.gitignore` excluye `.env` y `.env.*`, excepto `.env.example`. `EXPO_PUBLIC_COURSE_BACKEND_URL` es configuración pública de prueba, no un secreto. | El nombre `EXPO_PUBLIC_*` implica exposición al bundle; no se deben poner tokens ni claves allí. |
+| Búsqueda de secretos | `tools/scan-secrets.py` busca claves privadas, tokens GitHub, claves AWS y nombres de variables `EXPO_PUBLIC_*` con nombres sensibles. El workflow W04 tiene `contents: read`, ejecuta verificación reproducible y conserva artefactos con `if: always()`. | El escáner aplica patrones de alta confianza y no acredita ausencia absoluta de secretos. En su ejecución actual reportada no encontró coincidencias. |
 
-Baseline reproducible con Node 22.22.0: `npm run typecheck` terminó con código 0; `npm test -- --ci --runInBand` aprobó 7 suites y 12 pruebas; `npm run scan:secrets` informó `Secret scan passed: no high-confidence secrets found.`; `npm audit --omit=dev --json` informó dos paquetes afectados de severidad alta (`@xmldom/xmldom` y `js-yaml`) y ninguno crítico. El escáner no demuestra ausencia absoluta de secretos.
+## Amenazas mitigadas
 
-## Controles de este aporte
+Relacionamos estos controles con las amenazas T1–T4 de [docs/threat-model.md](threat-model.md):
 
-| Control | Decisión y alcance real | Comprobación |
+| Amenaza | Mitigación de Week 04 | Verificación y límite |
 |---|---|---|
-| Almacenamiento seguro | `SessionSecretStore` declara guardar, leer y borrar; `ExpoSecureSessionSecretStore` usa `expo-secure-store` con una clave fija y accesibilidad de Keychain limitada al dispositivo desbloqueado. No se guarda ninguna sesión mientras no exista login. | `course-tests/week-04-storage.test.ts` prueba llamadas, lectura nula, borrado, entrada vacía y fallas nativas con un proveedor sustituido. |
-| Errores seguros | Los casos de uso de incidencias y el adaptador de almacenamiento convierten fallas técnicas en `ApplicationFailure` con códigos y mensajes constantes. No adjuntan error crudo ni `cause`; la UI sigue mostrando mensajes genéricos. | `course-tests/week-04-errors.test.tsx` inyecta errores con una cadena sintética sensible y confirma que no aparece en la UI. |
-| Secretos de configuración | `.env.*` queda ignorado, con excepción de `.env.example`. La URL `EXPO_PUBLIC_COURSE_BACKEND_URL` es configuración pública; nunca debe recibir tokens. No se detectaron secretos de alta confianza versionados en la baseline, por lo que no se eliminó una credencial existente. | `git check-ignore` comprueba las variantes y `npm run scan:secrets` conserva el gate previo. |
-| Dependencias | Se instaló el módulo compatible con Expo 57 y se actualizaron versiones transitivas vulnerables dentro de sus rangos existentes. | `npm ci` y `npm audit --json` terminaron con cero vulnerabilidades reportadas en el registro consultado. |
+| T1 — Consulta de incidencias ajenas | Los errores de consulta no exponen el identificador o error privado al usuario. | `course-tests/week-04-errors.test.tsx` valida mensajes constantes. Esto no implementa autorización por actor ni permisos del backend. |
+| T2 — Alteración de asignaciones | La redacción oculta `technicianId`, `assignedTechnicianId` y `assignmentHistory` antes de producir el objeto sanitizado. | `course-tests/week-04-telemetry.test.ts` verifica esos campos en una estructura anidada. No hay mutaciones ni autorización real de asignaciones en la app actual. |
+| T3 — Filtración por logs o errores | `redactForTelemetry` oculta ubicación, coordenadas, fotos, evidencia, comentarios internos e identidad; los casos de uso y SecureStore no propagan mensajes crudos de fallas. | Las suites de telemetría y errores usan datos ficticios y comprueban el resultado. No existe un pipeline de telemetría de producción que permita afirmar una cobertura global. |
+| T4 — Exposición de credenciales | El escaneo de patrones de alta confianza bloquea coincidencias; el adaptador de sesión usa SecureStore y no persiste valores vacíos; los errores de proveedor no exponen su mensaje. | El escaneo actual pasó sin hallazgos y las suites de almacenamiento/telemetría pasaron. No hay login ni secretos reales en los fixtures. |
 
-La elección de `expo-secure-store` evita guardar un futuro token en preferencias comunes. En Android utiliza almacenamiento cifrado con Android Keystore; el plugin excluye automáticamente sus entradas del respaldo Android cuando no existe configuración de respaldo propia. En iOS utiliza Keychain. [Referencia del proveedor](https://docs.expo.dev/versions/v54.0.0/sdk/securestore/). El test unitario verifica el uso del proveedor; el bundle Expo no demuestra por sí solo el cifrado en un dispositivo ni una instalación Android.
+## Evidencia asociada
 
-Riesgo residual: el secreto puede estar en memoria durante su uso; un dispositivo comprometido o un log futuro fuera de estas rutas puede exponerlo. Keychain en iOS puede persistir después de reinstalar la app. Una falla o indisponibilidad del almacén debe impedir que se finja una sesión guardada. Falta probar el ciclo completo de sesión en Semana 06. `npx expo install --check` señaló recomendaciones de actualización de Expo, React Native, ESLint Expo y Jest Expo del stack ya fijado; no se cambiaron versiones ajenas al control.
+- `reports/week-04/secret-scan.json` registra la herramienta, comando, alcance,
+	exclusiones y salida observada del escaneo.
+- `reports/week-04/negative-tests.json` relaciona las seis categorías de datos
+	sensibles solicitadas con controles y pruebas negativas.
+- `course-tests/week-04-storage.test.ts` verifica operaciones del adaptador,
+	entrada vacía y fallas del proveedor con valores sintéticos.
+- `course-tests/week-04-errors.test.tsx` confirma que el error de repositorio no
+	aparece en mensajes ni en el árbol renderizado de UI.
+- `course-tests/week-04-telemetry.test.ts` verifica redacción recursiva,
+	normalización de nombres e inmutabilidad.
+- `course-tests/public/week-04.test.ts` valida la redacción de datos de CampusOps.
+- En la revisión actual, `typecheck` y lint terminaron sin errores; las cuatro
+	suites de Week 04 ejecutadas juntas aprobaron 16 pruebas; el escáner informó
+	`Secret scan passed: no high-confidence secrets found.`.
+- Los archivos históricos `reports/week-04/verify.json` y
+	`reports/week-04/public-tests.json` corresponden al SHA anterior
+	`05266e43d9004c247cb5ce84eb041b99ba5c201a`. El primero registra el pase de
+	verificaciones base; el segundo registra un fallo anterior a la integración de
+	la implementación de telemetría. No los presentamos como resultado del HEAD
+	actual `42bf03defaf422fa5240d04c3c003fef51527d96`.
 
-Comprobación de este aporte con Node 22.22.0: `make feedback` terminó con código 0, 9 suites y 19 pruebas aprobadas, escáner sin hallazgos, auditoría sin vulnerabilidades reportadas y bundle Android exportado. `make verify-week-04` terminó con estado `pass`. `make public-test-week-04` terminó con estado `fail`: aún faltan `secret-scan.json`, `negative-tests.json`, `engineering.json`, la evidencia individual consolidada y la implementación pública de `redactForTelemetry`. Ese fallo identifica trabajo pendiente de otros integrantes; no se desactivó el control.
+## Riesgos residuales
 
-## Trabajo y evidencia de otros integrantes
+- No existe autenticación ni autorización de usuario. La redacción de datos no
+	impide consultar o modificar recursos sin permiso.
+- SecureStore no está conectado a un flujo de sesión. Los tests usan un mock del
+	proveedor nativo, por lo que no prueban Android Keystore, Keychain real,
+	reinstalación ni compromiso del dispositivo.
+- El secreto estará disponible en memoria mientras se use. iOS Keychain puede
+	conservar valores entre reinstalaciones según las reglas del sistema.
+- La sanitización debe aplicarse en cada punto de registro. La función por sí
+	sola no protege un logger que la omita ni texto libre que no esté bajo una
+	clave sensible reconocida.
+- Aún no hay almacenamiento de fotografías, ubicación del dispositivo ni
+	sincronización de asignaciones implementados. La prueba de redacción usa
+	objetos sintéticos y no valida artefactos reales de esos flujos.
+- El escáner de secretos puede omitir formatos no incluidos en sus expresiones
+	regulares, secretos divididos/transformados y contenido binario o no UTF-8.
 
-- Integrante 2: `redactForTelemetry`, conexión a diagnóstico y pruebas de anidamiento e inmutabilidad. Pendiente de su aporte.
-- Integrante 3: `reports/week-04/secret-scan.json`, `reports/week-04/negative-tests.json`, trazabilidad de AC-01..AC-05, consolidación de evidencia y tag final. Pendiente de su aporte.
+## Limitaciones actuales
 
-La existencia de un puerto de almacenamiento antes del login no acredita protección de una sesión activa. La autorización por perfil, la persistencia de fotos y la resolución de conflictos permanecen en sus hitos respectivos.
+El modelo de Week 03 describía la sanitización como futura en el SHA evaluado
+entonces. La implementación y las pruebas actuales materializan ese control para
+payloads pasados a `redactForTelemetry`; la amenaza original T3 sigue siendo
+válida para cualquier ruta que no use esa función.
+
+El escáner recorre recursivamente el árbol de trabajo, no sólo archivos
+rastreados. Omite directorios `.git`, `.expo`, `node_modules`, `coverage`,
+`dist`, `android` e `ios`; omite `.env.example` y extensiones de imagen, zip y
+paquetes Android. Ignora archivos que no puede leer como UTF-8 y no informa un
+inventario individual ni un conteo de archivos. Por ello, el pase sólo significa
+que no encontró los patrones declarados dentro de su alcance.
+
+El workflow de Week 04 instala dependencias, genera el bundle, ejecuta
+`make verify-week-04` y `make public-test-week-04`, y sube evidencia incluso ante
+fallas. La comprobación de evidencia final se reserva para `week-04-final`.
+Este documento no afirma que la etiqueta final ya exista ni que se haya validado
+un build nativo instalado en dispositivo.

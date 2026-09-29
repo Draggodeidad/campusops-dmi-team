@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "week": 4,
+  "commitSha": "42bf03defaf422fa5240d04c3c003fef51527d96",
+  "decision": "Para cualquier secreto de sesión futuro, usamos un puerto estrecho SessionSecretStore con una implementación de Infrastructure basada en expo-secure-store, en lugar de preferencias comunes; validamos entradas vacías y convertimos errores nativos en ApplicationFailure con mensajes constantes. Para reducir exposición en diagnósticos, elegimos redacción recursiva de claves sensibles sin mutar el objeto y comprobamos fallas con valores sintéticos. El escáner de secretos permanece como control complementario de repositorio y CI. No afirmamos que haya login, sesión activa, autorización por perfil ni un logger productivo conectado.",
+  "alternatives": [
+    "Guardar un futuro token en preferencias de aplicación comunes (por ejemplo AsyncStorage). Se descartó porque no representa almacenamiento protegido apropiado para un secreto de sesión y no resuelve la exposición en errores o logs.",
+    "No crear almacenamiento hasta implementar el login de Week 06. Se descartó como única opción porque dejaría sin contrato ni prueba el límite seguro que necesita el futuro flujo; se mantiene el alcance acotado y no se inventa una sesión activa.",
+    "Definir SessionSecretStore y usar expo-secure-store detrás del adaptador de Infrastructure; mapear fallas a errores de aplicación constantes y aplicar redactForTelemetry a payloads antes de diagnóstico. Seleccionada porque separa proveedor, permite pruebas sustituibles y deja explícitos los límites de integración pendientes."
+  ],
+  "tradeoff": "Beneficios: los casos de uso no dependen del SDK nativo; los valores de error no revelan mensajes del proveedor; las pruebas cubren datos anidados, normalización de claves, inmutabilidad y fallos con fixtures sintéticas; CI detecta patrones de secretos conocidos. Costos: se agrega un adaptador nativo y reglas de redacción que deben mantenerse; las pruebas mock no validan cifrado real; la función de redacción sólo protege rutas que la invoquen; el escáner regex tiene falsos negativos posibles y la integración de sesión/autorización queda pendiente.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "npm run typecheck && npm run lint",
+      "result": "pass",
+      "evidence": "TypeScript y ESLint terminaron sin errores en el árbol actual después de instalar el lockfile."
+    },
+    {
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "result": "pass: 4 suites, 16 tests",
+      "evidence": "Salida Jest observada: 4 suites passed, 16 tests passed. Incluye las pruebas negativas de almacenamiento, errores, redacción y contrato público de Week 04."
+    },
+    {
+      "command": "C:\\Users\\alvar\\AppData\\Local\\Programs\\Python\\Python313\\python.exe tools/scan-secrets.py",
+      "result": "pass: no high-confidence findings",
+      "evidence": "Salida observada: Secret scan passed: no high-confidence secrets found. El alcance y exclusiones están registrados en reports/week-04/secret-scan.json."
+    }
+  ]
+}
