@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "week": 4,
+  "commitSha": "42bf03defaf422fa5240d04c3c003fef51527d96",
+  "generatedAt": "2026-09-29T04:25:42.763Z",
+  "checks": [
+    {
+      "id": "sensitive-data-negative-suites",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "evidence": "Jest terminó con 4 suites aprobadas y 16 pruebas aprobadas. Incluyó inyección de errores de proveedor con valores sintéticos y verificó que no se revelaran en ApplicationFailure/UI, además de los casos de sanitización y almacenamiento."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "credential-exposure",
+      "threat": "T4 — Exposición de credenciales",
+      "control": "redactForTelemetry reemplaza authorization, password, token, accessToken y refreshToken por [REDACTED].",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "expectedResult": "Ningún valor sintético de credencial aparece en la estructura sanitizada; un error de proveedor no incluye el texto original ni cause.",
+      "observedResult": "PASS. Las pruebas de propiedades sensibles y errores de SecureStore aprobaron; valores sintéticos fueron redactados y no aparecieron en el mensaje de ApplicationFailure.",
+      "status": "pass"
+    },
+    {
+      "id": "session-exposure",
+      "threat": "T4 — Exposición de credenciales",
+      "control": "ExpoSecureSessionSecretStore usa expo-secure-store y mapea fallas del proveedor a mensajes constantes; los campos token/accessToken se redactan en telemetría.",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "expectedResult": "El adaptador escribe/lee/elimina mediante el proveedor protegido, rechaza secreto vacío y no filtra errores nativos.",
+      "observedResult": "PASS. Los mocks confirmaron set/get/delete con la clave fija y WHEN_UNLOCKED_THIS_DEVICE_ONLY; el valor vacío no escribió, y las fallas save/read/clear no expusieron el secreto sintético.",
+      "status": "pass",
+      "limitation": "La suite usa un mock nativo; no comprueba una sesión activa ni el cifrado en dispositivo real."
+    },
+    {
+      "id": "location-exposure",
+      "threat": "T3 — Filtración de datos mediante logs/telemetría",
+      "control": "redactForTelemetry oculta location, latitude y longitude, incluso en payloads anidados.",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "expectedResult": "Las etiquetas y coordenadas sintéticas quedan como [REDACTED] y los campos técnicos no sensibles se conservan.",
+      "observedResult": "PASS. El caso de estructura combinada verificó location, latitude y longitude redactados y conservó incidentId/status/attempt/durationMs.",
+      "status": "pass"
+    },
+    {
+      "id": "photograph-exposure",
+      "threat": "T3 — Filtración de datos mediante logs/telemetría",
+      "control": "redactForTelemetry reemplaza el campo photos completo en lugar de conservar sus referencias o contenido.",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "expectedResult": "La lista de fotos sintéticas queda reemplazada por [REDACTED].",
+      "observedResult": "PASS. El caso combinado verificó photos como [REDACTED]; no se accedió a archivos o fotografías reales.",
+      "status": "pass"
+    },
+    {
+      "id": "assignment-exposure",
+      "threat": "T2 — Alteración de asignaciones; T3 — Filtración de datos mediante logs/telemetría",
+      "control": "redactForTelemetry oculta technicianId, assignedTechnicianId y assignmentHistory.",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "expectedResult": "La identidad del técnico asignado y el historial no quedan visibles en el payload sanitizado.",
+      "observedResult": "PASS. El caso combinado verificó los tres campos como [REDACTED]. No prueba autorización ni mutación de una asignación.",
+      "status": "pass"
+    },
+    {
+      "id": "internal-comment-exposure",
+      "threat": "T3 — Filtración de datos mediante logs/telemetría",
+      "control": "redactForTelemetry oculta internalComments de forma completa.",
+      "command": "\"C:\\Users\\alvar\\AppData\\Local\\Author Software\\nvm\\.nodejs\\node.exe\" node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-04-telemetry.test.ts course-tests/public/week-04.test.ts",
+      "expectedResult": "El contenido sintético de comentarios internos no aparece en el resultado sanitizado.",
+      "observedResult": "PASS. El caso combinado verificó internalComments como [REDACTED].",
+      "status": "pass"
+    }
+  ],
+  "dataNotice": "Todos los valores usados por estas pruebas son sintéticos; no se usaron credenciales, ubicaciones, fotografías ni comentarios reales."
+}
