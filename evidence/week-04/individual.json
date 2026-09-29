@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "week": 4,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110651",
+      "githubLogin": "Draggodeidad",
+      "commitShas": [
+        "59151e5d62a105675d616ce93477fc63ca4b994a",
+        "a4586403bed685d53bb9d9519291fe309744da8e",
+        "c2233f8ff1b25c816b44ed0917b5eec685468106",
+        "8058e0608516dbffdbef97f35ee25f7f3afd7656",
+        "303957c71a5fe6a9c7173b60e9f083718687a7af",
+        "0d90a5793010b85f717507672d56264154599d6d",
+        "6a514963c353fe8b0f39f9fcf72dd3563b91ef02",
+        "05266e43d9004c247cb5ce84eb041b99ba5c201a"
+      ],
+      "files": [
+        "src/application/session/SessionSecretStore.ts",
+        "src/infrastructure/session/ExpoSecureSessionSecretStore.ts",
+        "src/application/errors/ApplicationFailure.ts",
+        "src/application/incidents/GetIncidents.ts",
+        "src/application/incidents/GetIncidentById.ts",
+        "course-tests/week-04-storage.test.ts",
+        "course-tests/week-04-errors.test.tsx",
+        ".github/workflows/week-04-seguridad-privacidad-feedback.yml",
+        "docs/security-controls.md"
+      ],
+      "tests": [
+        "npm ci",
+        "npm test -- --ci --runInBand",
+        "npm run test:architecture",
+        "npm run check:architecture",
+        "npm run scan:secrets",
+        "npm audit --json",
+        "make feedback",
+        "make verify-week-04",
+        "make public-test-week-04"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba que el puerto seguro no escribiera valores vacíos, que las fallas nativas y de repositorio produjeran mensajes constantes sin exponer el error original y que el workflow reservara la verificación de evidencia para el tag final.",
+      "command": "npm ci; npm test -- --ci --runInBand; npm run check:architecture; npm run scan:secrets; npm audit --json; make feedback; make verify-week-04; make public-test-week-04",
+      "observedResult": "Con Node 22.22.0, npm ci terminó correctamente; make feedback aprobó 9 suites y 19 pruebas, arquitectura, escáner, auditoría y bundle Android. make verify-week-04 dio pass. make public-test-week-04 dio fail por archivos de los otros integrantes aún faltantes y por redactForTelemetry pendiente; el control no fue omitido.",
+      "explanation": "Integré el paquete docente, documenté la baseline, añadí un puerto y adaptador de almacenamiento seguro para una futura sesión, convertí fallas técnicas a errores de aplicación seguros, protegí variantes .env.*, corregí dependencias auditadas y limité el paso de evidencia del workflow al tag final. No implementé sanitización de telemetría ni atribuyo reportes o pruebas de los otros integrantes a mi trabajo.",
+      "aiAssistance": "Implementación y ejecución asistidas por Codex. Los comandos y resultados citados fueron observados en esta rama; los aportes pendientes requieren verificación personal de sus autores."
+    },
+    {
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "2ac030aa6895b65a4d37562f3539454cf7f29220",
+        "8db2eb8732aa6d2017c863b08bc2456262e7ed8b"
+      ],
+      "files": [
+        "src/application/telemetry/redactForTelemetry.ts",
+        "src/course-evaluation/index.ts",
+        "course-tests/week-04-telemetry.test.ts"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm run check:architecture",
+        "npx jest course-tests/week-04-telemetry.test.ts",
+        "npx jest course-tests/public/week-04.test.ts"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba que redactForTelemetry normalizara claves ignorando mayúsculas, guiones y guiones bajos, reemplazara completamente valores sensibles por [REDACTED], respetara la inmutabilidad de la entrada congelada y preservara el contexto técnico de diagnóstico.",
+      "command": "npm run typecheck; npm run lint; npm run check:architecture; npx jest course-tests/public/week-04.test.ts course-tests/week-04-telemetry.test.ts",
+      "observedResult": "TypeScript y ESLint finalizaron con exit 0 sin advertencias. La arquitectura confirmó 0 violaciones. Se aprobaron las 8 pruebas de la suite de telemetría y la prueba pública course-tests/public/week-04.test.ts pasó exitosamente sin mutar datos de prueba.",
+      "explanation": "Implementé la sanitización de telemetría en la capa de aplicación (HU #23), normalizando 19 claves sensibles según el contrato de CAMPUSOPS_API.md y protegiendo objetos y listas anidadas contra mutaciones. No modifiqué la lógica de almacenamiento seguro ni el manejo de fallas de los otros integrantes.",
+      "aiAssistance": "Implementación asistida por Antigravity. Los comandos, SHAs y resultados reportados corresponden a ejecuciones reales observadas en la rama feat/week-04-seguridad-privacidad."
+    },
+    {
+      "studentId": "PENDIENTE_INTEGRANTE_3",
+      "commitShas": [],
+      "files": [],
+      "tests": [],
+      "reviews": [],
+      "prediction": "PENDIENTE: completar por el integrante 3.",
+      "command": "PENDIENTE: completar por el integrante 3.",
+      "observedResult": "PENDIENTE: no hay resultado atribuido.",
+      "explanation": "PENDIENTE: reportes, trazabilidad y consolidación final asignados al integrante 3."
+    }
+  ]
+}

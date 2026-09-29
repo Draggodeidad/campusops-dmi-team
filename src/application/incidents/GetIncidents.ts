@@ -1,10 +1,18 @@
 import type { Incident } from '../../domain/incidents/Incident';
 import type { IncidentRepository } from '../../domain/incidents/IncidentRepository';
+import { ApplicationFailure } from '../errors/ApplicationFailure';
 
 export class GetIncidents {
   constructor(private readonly repository: IncidentRepository) {}
 
-  execute(): Promise<readonly Incident[]> {
-    return this.repository.findAll();
+  async execute(): Promise<readonly Incident[]> {
+    try {
+      return await this.repository.findAll();
+    } catch {
+      throw new ApplicationFailure(
+        'INCIDENTS_UNAVAILABLE',
+        'No fue posible cargar las incidencias.',
+      );
+    }
   }
 }

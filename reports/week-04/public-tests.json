@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "week": 4,
+  "mode": "public",
+  "commitSha": "05266e43d9004c247cb5ce84eb041b99ba5c201a",
+  "evaluatedAt": "2026-09-28T21:45:54.746529+00:00",
+  "status": "fail",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "fail",
+      "detail": "missing/empty=['reports/week-04/secret-scan.json', 'reports/week-04/negative-tests.json', 'evidence/week-04/engineering.json']"
+    },
+    {
+      "id": "schema:evidence/week-04/individual.json",
+      "status": "fail",
+      "detail": "PENDIENTE_INTEGRANTE_2: at least one authored commit SHA is required"
+    },
+    {
+      "id": "toolchain_1",
+      "status": "pass",
+      "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+    },
+    {
+      "id": "toolchain_2",
+      "status": "pass",
+      "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+    },
+    {
+      "id": "toolchain_3",
+      "status": "pass",
+      "detail": "npm run audit:ci\n> dmi-react-native-starter@1.0.0 audit:ci\n> npm audit --omit=dev --audit-level=critical\n\nfound 0 vulnerabilities"
+    },
+    {
+      "id": "toolchain_4",
+      "status": "fail",
+      "detail": "npm test -- --ci --runInBand course-tests/public/week-04.test.ts\n> dmi-react-native-starter@1.0.0 test\n> jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts --ci --runInBand course-tests/public/week-04.test.ts\n\n\nFAIL course-tests/public/week-04.test.ts\n  ● CampusOps redacts personal and incident-sensitive data while preserving technical context\n\n    redactForTelemetry must be implemented in the assigned week\n\n      10 |\n      11 | function pending(name: string): never {\n    > 12 |   throw new Error(`${name} must be implemented in the assigned week`);\n         |         ^\n      13 | }\n      14 |\n      15 | export function redactForTelemetry(_input: unknown): unknown {\n\n      at pending (src/course-evaluation/index.ts:12:9)\n      at pending (src/course-evaluation/index.ts:16:10)\n      at Object.<anonymous> (course-tests/public/week-04.test.ts:4:36)\n\nPASS course-tests/smoke.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/incidents.test.tsx\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/architecture.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/public/week-02.test.ts\nPASS course-tests/public/week-01.test.ts\n\nTest Suites: 1 failed, 9 passed, 10 total\nTests:       1 failed, 19 passed, 20 total\nSnapshots:   0 total\nTime:        0.704 s, estimated 1 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-04.test.ts/i."
+    }
+  ]
+}

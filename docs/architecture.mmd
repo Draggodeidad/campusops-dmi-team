@@ -18,6 +18,8 @@ flowchart TB
     GetOne["GetIncidentById"]
     GetHealth["GetBackendStatus"]
     HealthPort["BackendHealthPort"]
+    SecretPort["SessionSecretStore — límite preparado"]
+    SafeFailure["ApplicationFailure"]
   end
 
   subgraph Domain["Domain — src/domain + vocabulario src/campusops"]
@@ -29,6 +31,8 @@ flowchart TB
     FakeRepo["FakeIncidentRepository (in-memory)"]
     HealthAdapter["CourseBackendHealthAdapter"]
     BackendHelper["courseBackend / fetch"]
+    SecretAdapter["ExpoSecureSessionSecretStore"]
+    NativeSecret["expo-secure-store"]
   end
 
   Reporter --> CampusApp
@@ -48,6 +52,11 @@ flowchart TB
   FakeRepo --> IncidentPort
   HealthAdapter --> HealthPort
   HealthAdapter --> BackendHelper
+  SecretAdapter --> SecretPort
+  SecretAdapter --> NativeSecret
+  SecretAdapter --> SafeFailure
+  GetAll --> SafeFailure
+  GetOne --> SafeFailure
   Root --> CampusApp
   Root --> GetAll
   Root --> GetOne
@@ -55,12 +64,12 @@ flowchart TB
   Root --> FakeRepo
   Root --> HealthAdapter
 
-  subgraph Planned["Límites previstos — no implementados en Week 02"]
-    Session["Sesión"]
+  subgraph Planned["Flujos futuros no implementados en Week 04"]
+    Session["Login / ciclo de sesión"]
     Persistence["Persistencia"]
     Location["Ubicación / proveedor externo"]
   end
 
-  Session -. "adaptador futuro dependerá de contrato interno" .-> Domain
+  Session -. "usará puerto de secretos al implementarse" .-> SecretPort
   Persistence -. "adaptador futuro dependerá de contrato interno" .-> Domain
   Location -. "adaptador futuro dependerá de contrato interno" .-> Domain
