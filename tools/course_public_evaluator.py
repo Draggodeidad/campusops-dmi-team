@@ -48,11 +48,17 @@ def load_object(path: Path) -> tuple[dict[str, Any] | None, str]:
     return (value, "ok") if isinstance(value, dict) else (None, "root must be an object")
 
 
-def evidence_sha_matches(repo: Path, reported_sha: object, head_sha: str) -> tuple[bool, str]:
+def evidence_sha_matches(repo: Path, reported_sha: object, head_sha: str, week: int) -> tuple[bool, str]:
     if not isinstance(reported_sha, str) or not re.fullmatch(r"[0-9a-f]{40}", reported_sha):
         return False, "commitSha must be a full lowercase Git SHA"
     if reported_sha == head_sha:
         return True, "report evaluates HEAD"
+    if week == 4:
+        tag_ok, tag_sha = run(repo, ["git", "rev-list", "-n", "1", "week-04-final"], 20)
+        if tag_ok and head_sha != tag_sha.strip():
+            ancestor, _ = run(repo, ["git", "merge-base", "--is-ancestor", reported_sha, head_sha], 20)
+            return ancestor, ("Week 04 historical commit is an ancestor of HEAD"
+                              if ancestor else "Week 04 commitSha must be an ancestor of HEAD")
     ok, parent = run(repo, ["git", "rev-parse", "HEAD^"], 20)
     if not ok or reported_sha != parent.strip():
         return False, "commitSha must be HEAD or its direct evidence-only parent"
@@ -73,7 +79,7 @@ def validate_report(repo: Path, path: Path, week: int, sha: str) -> tuple[bool, 
         return False, f"missing keys: {sorted(required - set(data))}"
     if data["week"] != week:
         return False, "week does not match evaluated checkout"
-    sha_ok, sha_detail = evidence_sha_matches(repo, data["commitSha"], sha)
+    sha_ok, sha_detail = evidence_sha_matches(repo, data["commitSha"], sha, week)
     if not sha_ok:
         return False, sha_detail
     if not isinstance(data["checks"], list) or not data["checks"]:
@@ -111,7 +117,7 @@ def validate_engineering(repo: Path, path: Path, week: int, sha: str) -> tuple[b
         return False, f"missing keys: {sorted(required - set(data))}"
     if data["week"] != week:
         return False, "week mismatch"
-    sha_ok, sha_detail = evidence_sha_matches(repo, data["commitSha"], sha)
+    sha_ok, sha_detail = evidence_sha_matches(repo, data["commitSha"], sha, week)
     if not sha_ok:
         return False, sha_detail
     if not isinstance(data["alternatives"], list) or len(data["alternatives"]) < 2:
