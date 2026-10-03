@@ -1,6 +1,6 @@
 # Contrato de trabajo W05 — incidencias remotas
 
-Estado: baseline de la issue #27. Las firmas de abajo fijan el acuerdo para implementar el cliente y sus pruebas; la app todavía usa `FakeIncidentRepository`. No son evidencia de que el flujo remoto funcione.
+Estado: baseline de la issue #27 para los propietarios de #28–#30. Las firmas de abajo fijan el acuerdo inicial para implementar el cliente y sus pruebas; #28 mantiene este documento cuando la implementación concrete los tipos. La app todavía usa `FakeIncidentRepository`. No son evidencia de que el flujo remoto funcione.
 
 ## Frontera publicada y modelo interno
 

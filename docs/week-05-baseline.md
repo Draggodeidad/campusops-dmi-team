@@ -48,9 +48,10 @@ Después de integrar el kit, `make feedback` volvió a terminar con exit 0 y `ma
 
 | Módulo | Propietario del trabajo | Estado al cerrar esta issue |
 |---|---|---|
-| Kit, workflow, baseline, contrato de trabajo y trazabilidad AC | Owner de issue #27 | Integrado y documentado en esta rama. |
-| `src/course-evaluation/index.ts` (`parseRemoteResource`), puerto de aplicación, adaptador y conexión en `App.tsx` | Responsable del cliente W05, por asignar en el equipo | Pendiente; no atribuir a #27. |
-| Fixtures, pruebas funcionales y `contract-tests.json` / `failure-matrix.json` | Responsable de pruebas W05, por asignar en el equipo | Pendiente; no atribuir a #27. |
-| `engineering.json`, `individual.json`, commit exclusivo de evidencia y tag | Integración de equipo tras aportes verificables de tres integrantes | Pendiente. Cada integrante aporta su propia entrada; no copiar identidades ni SHAs anteriores. |
+| Kit, workflow, baseline, firmas iniciales y trazabilidad AC | Draggodeidad, asignado a #27 | Integrado y documentado en esta rama. |
+| `docs/api-contract.md`, `parseRemoteResource`, DTO/mapper, puerto y adaptador remoto | JulianDele, asignado a #28 | El contrato inicial queda aquí; implementación y ajuste del documento pendientes en #28. |
+| Casos de uso, UI mínima de creación e inyección en `App.tsx` | JulianDele, asignado a #29 | Pendiente tras #28; no atribuir a #27. |
+| Fixtures, pruebas funcionales y `contract-tests.json` / `failure-matrix.json` | osbaldoXxC, asignado a #30 | Pendiente; no atribuir a #27. |
+| `engineering.json`, `individual.json`, commit exclusivo de evidencia y tag | Draggodeidad, asignado a #31, después de los aportes propios de los tres integrantes | Pendiente. Cada integrante aporta su propia entrada; no copiar identidades ni SHAs anteriores. |
 
 El workflow oficial W05 ejecuta `make evidence-week-05` también en `push` y `pull_request`. Antes de crear `week-05-final` y los cinco entregables, ese job debe fallar; el archivo oficial se conserva íntegro y esta limitación queda visible. Los reportes automáticos `verify.json` y `public-tests.json` son diagnósticos, no sustituyen los dos reportes de contrato exigidos. No se declara lista la entrega ni se crea el tag mientras falten cliente, pruebas y evidencia individual.
