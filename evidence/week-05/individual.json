@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "week": 5,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110651",
+      "githubLogin": "Draggodeidad",
+      "commitShas": [],
+      "files": [],
+      "tests": [],
+      "reviews": [],
+      "prediction": "",
+      "command": "",
+      "observedResult": "",
+      "explanation": "",
+      "aiAssistance": ""
+    },
+    {
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "d87ccaa79ca92a35fbdc6ed8653a3044766161df"
+      ],
+      "files": [
+        "App.tsx",
+        "src/application/errors/ApplicationFailure.ts",
+        "src/course-evaluation/index.ts",
+        "src/domain/incidents/IncidentRepository.ts",
+        "src/infrastructure/incidents/FakeIncidentRepository.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/ui/incidents/IncidentListScreen.tsx",
+        "course-tests/week-05-client.test.tsx",
+        "src/application/incidents/CreateIncident.ts",
+        "src/infrastructure/http/FetchIncidentTransport.ts",
+        "src/infrastructure/http/IncidentTransport.ts",
+        "src/infrastructure/incidents/HttpIncidentRepository.ts",
+        "src/infrastructure/incidents/dto/IncidentDto.ts",
+        "src/infrastructure/incidents/dto/IncidentDtoMapper.ts",
+        "src/infrastructure/incidents/parseRemoteResource.ts",
+        "src/ui/incidents/CreateIncidentScreen.tsx"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm run check:architecture",
+        "npm run test:architecture",
+        "npm run backend:self-test",
+        "npm test",
+        "npx jest --ci --runInBand course-tests/public/week-05.test.ts",
+        "npx jest --ci --runInBand course-tests/week-05-client.test.tsx"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba que el cliente HTTP implementara fetch nativo y AbortController, que se mantuviera la retrocompatibilidad con las pruebas historicas al hacer opcional la creacion en el repositorio, y que la pantalla de listado se interconectara exitosamente con el formulario de creacion respetando la arquitectura de puertos y adaptadores.",
+      "command": "npm run typecheck && npm run lint && npm run check:architecture && npm run test:architecture && npm run backend:self-test && npm test && npx jest --ci --runInBand course-tests/public/week-05.test.ts && npx jest --ci --runInBand course-tests/week-05-client.test.tsx",
+      "observedResult": "Todos los tests de semanas previas pasaron con exito (19 pruebas de integracion). La suite publica (5 pruebas) y la nueva suite del cliente HTTP (22 pruebas) concluyeron en Exit 0. Ninguna advertencia de linter y arquitectura intacta.",
+      "explanation": "Implemente el cliente HTTP para el consumo del backend (HU #28 y #29), agregando la inyeccion en App.tsx. Valide los datos consumidos a traves de parseRemoteResource e implemente IncidentDtoMapper para descartar esquemas corruptos del servidor. Asimismo, prepare el entorno visual de la UI CreateIncidentScreen conectada de forma aislada a los casos de uso nativos de react.",
+      "aiAssistance": "Implementacion asistida por Antigravity. Los archivos generados y los tests superados se elaboraron bajo un contexto rigido de aislamiento, cumpliendo las restricciones de arquitectura sin afectar los aportes previos del equipo."
+    },
+    {
+      "studentId": "3522110437",
+      "githubLogin": "JulianDele",
+      "commitShas": [],
+      "files": [],
+      "tests": [],
+      "reviews": [],
+      "prediction": "",
+      "command": "",
+      "observedResult": "",
+      "explanation": "",
+      "aiAssistance": ""
+    }
+  ]
+}
