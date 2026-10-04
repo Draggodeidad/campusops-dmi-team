@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
+import type { CreateIncident, CreateIncidentInput } from '../application/incidents/CreateIncident';
 import type { GetIncidentById } from '../application/incidents/GetIncidentById';
 import type { GetIncidents } from '../application/incidents/GetIncidents';
 import type { BackendStatus, GetBackendStatus } from '../application/system/GetBackendStatus';
 import type { Incident } from '../domain/incidents/Incident';
+import { CreateIncidentScreen } from './incidents/CreateIncidentScreen';
 import { IncidentDetailScreen } from './incidents/IncidentDetailScreen';
 import { IncidentListScreen } from './incidents/IncidentListScreen';
 
@@ -13,17 +15,27 @@ type Props = Readonly<{
   getBackendStatus: GetBackendStatus;
   getIncidents: GetIncidents;
   getIncidentById: GetIncidentById;
+  createIncident?: CreateIncident;
 }>;
 
-export function CampusOpsApp({ getBackendStatus, getIncidents, getIncidentById }: Props) {
+type ActiveView = 'list' | 'detail' | 'create';
+
+export function CampusOpsApp({
+  getBackendStatus,
+  getIncidents,
+  getIncidentById,
+  createIncident,
+}: Props) {
   const [backendStatus, setBackendStatus] = useState<BackendStatus | 'checking'>('checking');
   const [incidents, setIncidents] = useState<readonly Incident[]>([]);
   const [listError, setListError] = useState<string | null>(null);
   const [listLoading, setListLoading] = useState(true);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  const [activeView, setActiveView] = useState<ActiveView>('list');
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -38,8 +50,21 @@ export function CampusOpsApp({ getBackendStatus, getIncidents, getIncidentById }
     };
   }, [getBackendStatus, getIncidents]);
 
+  const refreshIncidents = async () => {
+    setListLoading(true);
+    setListError(null);
+    try {
+      const items = await getIncidents.execute();
+      setIncidents(items);
+    } catch {
+      setListError('No fue posible cargar las incidencias.');
+    } finally {
+      setListLoading(false);
+    }
+  };
+
   const openIncident = async (id: string) => {
-    setSelectedId(id);
+    setActiveView('detail');
     setDetailLoading(true);
     setDetailError(null);
     try {
@@ -54,10 +79,37 @@ export function CampusOpsApp({ getBackendStatus, getIncidents, getIncidentById }
   };
 
   const returnToList = () => {
-    setSelectedId(null);
     setSelectedIncident(null);
     setDetailError(null);
     setDetailLoading(false);
+    setActiveView('list');
+  };
+
+  const handleOpenCreate = () => {
+    setCreateError(null);
+    setActiveView('create');
+  };
+
+  const handleCancelCreate = () => {
+    setCreateError(null);
+    setActiveView('list');
+  };
+
+  const handleCreateSubmit = async (data: CreateIncidentInput) => {
+    if (!createIncident) return;
+    setCreateLoading(true);
+    setCreateError(null);
+    try {
+      await createIncident.execute(data);
+      await refreshIncidents();
+      setActiveView('list');
+    } catch (err: unknown) {
+      setCreateError(
+        err instanceof Error ? err.message : 'No fue posible registrar la incidencia.',
+      );
+    } finally {
+      setCreateLoading(false);
+    }
   };
 
   return (
@@ -67,14 +119,17 @@ export function CampusOpsApp({ getBackendStatus, getIncidents, getIncidentById }
         <Text>Incidencias del campus · entorno académico ficticio</Text>
         <Text testID="backend-status">Backend: {backendStatus}</Text>
       </View>
-      {selectedId === null ? (
-        <IncidentListScreen
-          error={listError}
-          incidents={incidents}
-          loading={listLoading}
-          onSelect={openIncident}
+
+      {activeView === 'create' && (
+        <CreateIncidentScreen
+          error={createError}
+          loading={createLoading}
+          onCancel={handleCancelCreate}
+          onSubmit={handleCreateSubmit}
         />
-      ) : (
+      )}
+
+      {activeView === 'detail' && (
         <IncidentDetailScreen
           error={detailError}
           incident={selectedIncident}
@@ -82,6 +137,17 @@ export function CampusOpsApp({ getBackendStatus, getIncidents, getIncidentById }
           onBack={returnToList}
         />
       )}
+
+      {activeView === 'list' && (
+        <IncidentListScreen
+          error={listError}
+          incidents={incidents}
+          loading={listLoading}
+          onCreate={createIncident ? handleOpenCreate : undefined}
+          onSelect={openIncident}
+        />
+      )}
+
       <StatusBar style="auto" />
     </View>
   );

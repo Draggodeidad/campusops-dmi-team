@@ -1,7 +1,6 @@
 import type {
   AuthEvent,
   JsonObject,
-  ParseResult,
   PermissionEvent,
   RemoteResponse,
   SyncRecord,
@@ -10,15 +9,13 @@ import type { IncidentLocation } from '../campusops/contracts';
 
 import { redactForTelemetry } from '../application/telemetry/redactForTelemetry';
 
+import { parseRemoteResource } from '../infrastructure/incidents/parseRemoteResource';
+
 function pending(name: string): never {
   throw new Error(`${name} must be implemented in the assigned week`);
 }
 
-export { redactForTelemetry };
-
-export function parseRemoteResource(_input: unknown): ParseResult {
-  return pending('parseRemoteResource');
-}
+export { redactForTelemetry, parseRemoteResource };
 
 export function coordinateRefresh(_events: readonly AuthEvent[]): Readonly<{
   status: 'anonymous' | 'authenticated';
