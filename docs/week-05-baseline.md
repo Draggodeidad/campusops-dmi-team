@@ -49,9 +49,13 @@ Después de integrar el kit, `make feedback` volvió a terminar con exit 0 y `ma
 | Módulo | Propietario del trabajo | Estado al cerrar esta issue |
 |---|---|---|
 | Kit, workflow, baseline, firmas iniciales y trazabilidad AC | Draggodeidad, asignado a #27 | Integrado y documentado en esta rama. |
-| `docs/api-contract.md`, `parseRemoteResource`, DTO/mapper, puerto y adaptador remoto | JulianDele, asignado a #28 | El contrato inicial queda aquí; implementación y ajuste del documento pendientes en #28. |
-| Casos de uso, UI mínima de creación e inyección en `App.tsx` | JulianDele, asignado a #29 | Pendiente tras #28; no atribuir a #27. |
-| Fixtures, pruebas funcionales y `contract-tests.json` / `failure-matrix.json` | osbaldoXxC, asignado a #30 | Pendiente; no atribuir a #27. |
+| `docs/api-contract.md`, `parseRemoteResource`, DTO/mapper, puerto y adaptador remoto | osbaldoXxC, asignado a #28 | El contrato inicial de #27 fue ampliado después junto al cliente de osbaldoXxC. |
+| Casos de uso, UI mínima de creación e inyección en `App.tsx` | osbaldoXxC, asignado a #29 | Implementado después de #27 por osbaldoXxC; no atribuir a #27. |
+| Pruebas funcionales y `contract-tests.json` / `failure-matrix.json` | JulianDele, asignado a #30 | Implementado después de #27 por JulianDele; no atribuir a #27. |
 | `engineering.json`, `individual.json`, commit exclusivo de evidencia y tag | Draggodeidad, asignado a #31, después de los aportes propios de los tres integrantes | Pendiente. Cada integrante aporta su propia entrada; no copiar identidades ni SHAs anteriores. |
 
 El workflow oficial W05 ejecuta `make evidence-week-05` también en `push` y `pull_request`. Antes de crear `week-05-final` y los cinco entregables, ese job debe fallar; el archivo oficial se conserva íntegro y esta limitación queda visible. Los reportes automáticos `verify.json` y `public-tests.json` son diagnósticos, no sustituyen los dos reportes de contrato exigidos. No se declara lista la entrega ni se crea el tag mientras falten cliente, pruebas y evidencia individual.
+
+## Estado posterior de integración
+
+La tabla y resultados anteriores describen el baseline de #27, antes de integrar #28–#30. Después se incorporaron los commits `d87ccaa79ca92a35fbdc6ed8653a3044766161df` (cliente/UI, osbaldoXxC) y `4112f42227f18c1d637c905cb7763befeeeedfee` (validación/reportes, JulianDele). `npm test` incluye ahora las suites W05. El workflow W05 conserva sus tres comandos y se ajustó para obtener historial/tags y evaluar el SHA de la rama en PR; así `make evidence-week-05` puede comprobar el tag real. El estado final y SHA evaluado se registran en los reportes W05, no se infieren de los resultados de baseline.
