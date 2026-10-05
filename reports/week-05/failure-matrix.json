@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "week": 5,
+  "commitSha": "ded847db7657ecad85bbc5573bd3bdb192b63a86",
+  "generatedAt": "2026-10-05T02:59:09.925Z",
+  "sourceTreeNote": "Los resultados incluyen el test local no comprometido course-tests/week-05-transport-validation.test.tsx sobre HEAD ded847db7657ecad85bbc5573bd3bdb192b63a86. Regenerar contra el SHA que incluya ese test antes de entrega.",
+  "checks": [
+    {
+      "id": "week-05-failure-matrix",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "La matriz de cinco escenarios se corroboró mediante las suites reales de cliente/parser/mapper y el caso de transporte/UI: 3 suites aprobadas, 31 pruebas aprobadas."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "timeout",
+      "threat": "Falla de disponibilidad durante una consulta remota",
+      "control": "FetchIncidentTransport cancela con AbortController y convierte AbortError en TimeoutError; HttpIncidentRepository lo mapea a ApplicationFailure con código INCIDENT_TIMEOUT.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-transport-validation.test.tsx course-tests/week-05-client.test.tsx",
+      "expected": "El transporte real controlado rechaza como TimeoutError y el repositorio expone un error de aplicación tipado, sin dejar una excepción técnica sin traducir.",
+      "observed": "PASS. El test de transporte activó el abort a los 5 ms y recibió name=TimeoutError; la suite de repositorio verificó código INCIDENT_TIMEOUT.",
+      "status": "pass"
+    },
+    {
+      "id": "malformed",
+      "threat": "DTO u objeto JSON corrupto atraviesa la frontera de Infrastructure",
+      "control": "parseRemoteResource valida el sobre; HttpIncidentRepository convierte JSON malformado a ApplicationFailure y descarta elementos cuyo parser o mapper no produce entidad válida.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts",
+      "expected": "El parser devuelve error de contrato o el repositorio un error tipado; un elemento de lista inválido no se convierte en Incident.",
+      "observed": "PASS. El body HTTP '{invalid-json' produjo ApplicationFailure INCIDENTS_UNAVAILABLE; los casos de parser y de lista con sobre corrupto aprobaron, y sólo el elemento válido llegó al arreglo del dominio. El test UI adicional confirma que el DTO inválido no se renderiza.",
+      "status": "pass"
+    },
+    {
+      "id": "server_error",
+      "threat": "El backend devuelve HTTP 500",
+      "control": "HttpIncidentRepository reconoce status 500 y rechaza con ApplicationFailure de código INCIDENTS_UNAVAILABLE; no interpreta la respuesta como DTO.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx",
+      "expected": "El repositorio devuelve un error tipado controlado; no se filtra una excepción sin clasificar.",
+      "observed": "PASS. El transporte real con fetch controlado confirmó ApplicationFailure, code=INCIDENTS_UNAVAILABLE y el mensaje fijo para HTTP 500. El código actual no define una clase llamada ServerError; se documenta el tipo existente, no uno supuesto.",
+      "status": "pass"
+    },
+    {
+      "id": "nullable",
+      "threat": "Un payload null permitido se confunde con datos completos o formato inválido",
+      "control": "El parser permite payload null; el mapper devuelve null porque faltan campos para construir Incident.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts",
+      "expected": "No hay excepción por el null válido, no se inventan campos del dominio y la ausencia queda representada como null/dato no disponible.",
+      "observed": "PASS. parseRemoteResource aceptó el sobre; mapDtoToIncident retornó null sin fabricar id derivado, categoría, descripción ni ubicación.",
+      "status": "pass"
+    },
+    {
+      "id": "invalid_dto",
+      "threat": "Datos remotos con forma válida pero valores no pertenecientes al dominio alcanzan UI",
+      "control": "IncidentDtoMapper valida categoría, estado, descripción y ubicación; la lista del repositorio conserva sólo DTOs mapeados.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-transport-validation.test.tsx",
+      "expected": "El DTO no genera Incident y sus valores privados/sintéticos no aparecen como fila ni texto en CampusOpsApp.",
+      "observed": "PASS. El mapper descartó la categoría inválida; la UI mostró 'No hay incidencias registradas.' y no mostró el texto o testID de la incidencia rechazada.",
+      "status": "pass"
+    }
+  ],
+  "dataNotice": "Todas las respuestas, identificadores, categorías y textos usados en pruebas fueron sintéticos; no se usó Internet público."
+}

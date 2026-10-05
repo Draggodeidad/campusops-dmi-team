@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "week": 5,
+  "commitSha": "ded847db7657ecad85bbc5573bd3bdb192b63a86",
+  "generatedAt": "2026-10-05T02:59:09.925Z",
+  "sourceTreeNote": "La ejecución se realizó con HEAD ded847db7657ecad85bbc5573bd3bdb192b63a86 más el archivo local course-tests/week-05-transport-validation.test.tsx, que todavía no estaba comprometido al registrar el reporte. Antes de la entrega, guardar el test en un commit técnico y regenerar los reportes contra el nuevo SHA.",
+  "checks": [
+    {
+      "id": "remote-response-valid-and-domain-mapping",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "La suite de cliente ejercitó parseRemoteResource y mapDtoToIncident reales: un DTO válido produjo Incident con id, categoría, estado, descripción, locationLabel y título derivado. La ejecución conjunta final terminó con 3 suites y 31 pruebas aprobadas."
+    },
+    {
+      "id": "nullable-payload-does-not-invent-domain-data",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "parseRemoteResource aceptó payload null; mapDtoToIncident devolvió null, sin fabricar categoría, descripción ni ubicación. El caso está incluido en la suite de cliente aprobada."
+    },
+    {
+      "id": "malformed-envelope-and-json-rejected",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "Las pruebas del parser rechazaron null, primitivos, arreglos, id/status inválidos, version negativa/decimal/string y payload con forma inválida. El repositorio real rechazó bodyText '{invalid-json' con ApplicationFailure INCIDENTS_UNAVAILABLE y descartó sobres corruptos en listas."
+    },
+    {
+      "id": "timeout-abort-controller",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "El FetchIncidentTransport real usó un timeout de 5 ms; un fetch controlado rechazó al recibir el abort y el transporte emitió un error cuyo name fue TimeoutError. 1 suite y 2 pruebas aprobaron."
+    },
+    {
+      "id": "http-500-typed-application-failure",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx",
+      "evidence": "El transporte real con fetch controlado respondió HTTP 500; HttpIncidentRepository rechazó con ApplicationFailure, código INCIDENTS_UNAVAILABLE y mensaje de error 500. La implementación no declara un tipo/clase ServerError dedicado; se validó el error tipado que realmente existe."
+    },
+    {
+      "id": "dto-invalid-not-rendered-in-ui",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "Con FetchIncidentTransport y HttpIncidentRepository reales y respuesta fetch controlada, un DTO con categoría inválida fue descartado por parser/mapper. CampusOpsApp mostró el estado vacío y no renderizó el texto sintético inválido ni una fila de esa incidencia."
+    },
+    {
+      "id": "dto-boundaries-and-forward-compatible-envelope",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+      "evidence": "Los tests validaron id y status no vacíos, version entero no negativo, rechazo de campos obligatorios inválidos, aceptación de payload null, rechazo de payload array/número, y tolerancia a campos futuros del sobre. También comprobaron el DTO -> Incident y el límite de título de presentación."
+    }
+  ]
+}
