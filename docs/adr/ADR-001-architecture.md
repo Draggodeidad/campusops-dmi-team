@@ -72,7 +72,7 @@ Las dependencias prohibidas principales son:
 
 La alternativa elegida consigue el aislamiento que hoy se puede verificar: el repositorio fake es reemplazable, los casos de uso son independientes de React Native y la UI no conoce proveedores. Su costo es proporcional al flujo actual y evita introducir DTO, mappers y un contenedor antes de contar con integraciones reales que los justifiquen.
 
-El cambio de proveedor queda localizado: una futura `ApiIncidentRepository` implementará el mismo contrato y se seleccionará en la raíz de composición. Esta decisión prioriza facilidad de prueba y costo bajo de sustitución, aceptando una cantidad moderada de archivos y composición manual.
+El cambio de proveedor queda localizado: Week 05 añadió `HttpIncidentRepository` bajo el mismo contrato y lo seleccionó en la raíz de composición. Esta decisión prioriza facilidad de prueba y costo bajo de sustitución, aceptando una cantidad moderada de archivos y composición manual.
 
 ## Consecuencias positivas
 
@@ -96,7 +96,7 @@ La discrepancia inicial se reproduce consultando el archivo de la línea base co
 
 ## Posibles evoluciones futuras
 
-- Incorporar `ApiIncidentRepository` cuando el hito requiera backend real.
+- Extender `HttpIncidentRepository` sólo cuando un hito posterior requiera nuevas operaciones.
 - Añadir puertos y adaptadores de sesión, persistencia y ubicación en sus semanas correspondientes.
 - Introducir DTO/mappers sólo si los contratos remotos divergen del dominio.
 - Sustituir la composición manual por un módulo o contenedor cuando su tamaño y ciclo de vida lo justifiquen.
@@ -108,3 +108,15 @@ La aplicación sigue sin login ni sesión activa. Para preparar un límite real 
 Alternativas: guardar un token en preferencias comunes sería insuficiente para un secreto; añadir ahora login y ciclo de sesión adelantaría autorización, refresh y logout sin su contrato semanal. El puerto estrecho y el adaptador nativo permiten probar almacenamiento y borrar el secreto, con el costo de una dependencia nativa y de no poder afirmar protección de una sesión aún inexistente.
 
 `ApplicationFailure` entrega códigos y mensajes constantes para fallas de repositorio y almacenamiento. Los casos de uso no propagan mensajes, `cause` ni objetos de error de proveedores a la UI. El control de redacción de telemetría sigue asignado a otro integrante; este mapeo funciona independientemente de él. Las pruebas de Semana 04 verifican sustitución y caminos negativos; `check:architecture` conserva la dirección de imports.
+
+## Anexo de Semana 05 — cliente HTTP y DTO validado
+
+**Contexto.** Week 05 exige consultar lista y detalle, crear incidencias y soportar respuestas remotas vacías, inválidas o fallidas. El fake de Week 02 no podía probar la frontera de red. El sobre remoto tiene `id`, `version`, `status` y `payload`, mientras `Incident` contiene campos propios de la app, entre ellos un título derivado.
+
+**Alternativas.** (1) Hacer `fetch` en pantallas habría mezclado transporte, validación y presentación e impedido sustituir la red en pruebas. (2) Reutilizar el DTO como `Incident` habría permitido que un `payload: null` o campos corruptos entraran al dominio. (3) Introducir un cliente de aplicación con una unión de resultados y un nuevo contenedor DI habría aislado más estados, pero duplicado el puerto existente y aumentado la migración de casos de uso y pruebas acumuladas.
+
+**Decisión.** Conservar `IncidentRepository` como puerto de dominio y los casos de uso de Application. `HttpIncidentRepository` implementa lista, detalle y creación; `FetchIncidentTransport` encapsula `fetch` y timeout; `parseRemoteResource` valida el sobre y `mapDtoToIncident` convierte sólo DTO completos. `App.tsx` inyecta el HTTP en ejecución normal y el fake en tests de base. `ApplicationFailure` transmite códigos y mensajes controlados sin filtrar objetos de red. La UI mantiene estados de carga, vacío y error.
+
+**Consecuencias y costo.** Las pruebas sustituyen el transporte sin Internet y comprueban que un DTO corrupto no llega a pantalla. Los fallos de timeout, red y HTTP se distinguen en el repositorio, pero lista y detalle aún muestran mensajes genéricos en UI. La lista descarta elementos individuales inválidos; la creación sólo preserva la clave de idempotencia cuando el mismo caller la vuelve a proporcionar. El costo es un mapper y archivos de transporte adicionales, además de mantener el fake para pruebas históricas. No se introduce autenticación real, sincronización ni reintento automático.
+
+**Verificación.** `course-tests/week-05-client.test.tsx`, `course-tests/week-05-transport-validation.test.tsx` y `course-tests/public/week-05.test.ts` ejercen parser, mapper, transporte, repositorio y pantalla con respuestas controladas. `npm run test:architecture` y `npm run check:architecture` comprueban los límites de imports. Los resultados de entrega W05 se indexan en `reports/week-05/` con el SHA evaluado.

@@ -16,6 +16,7 @@ flowchart TB
   subgraph Application["Application — src/application"]
     GetAll["GetIncidents"]
     GetOne["GetIncidentById"]
+    CreateOne["CreateIncident"]
     GetHealth["GetBackendStatus"]
     HealthPort["BackendHealthPort"]
     SecretPort["SessionSecretStore — límite preparado"]
@@ -29,6 +30,9 @@ flowchart TB
 
   subgraph Infrastructure["Infrastructure — src/infrastructure"]
     FakeRepo["FakeIncidentRepository (in-memory)"]
+    HttpRepo["HttpIncidentRepository"]
+    DtoMapper["parseRemoteResource + IncidentDtoMapper"]
+    Transport["FetchIncidentTransport / fetch + AbortController"]
     HealthAdapter["CourseBackendHealthAdapter"]
     BackendHelper["courseBackend / fetch"]
     SecretAdapter["ExpoSecureSessionSecretStore"]
@@ -42,14 +46,19 @@ flowchart TB
   CampusApp --> DetailScreen
   CampusApp --> GetAll
   CampusApp --> GetOne
+  CampusApp --> CreateOne
   CampusApp --> GetHealth
   ListScreen --> Incident
   DetailScreen --> Incident
   GetAll --> IncidentPort
   GetOne --> IncidentPort
+  CreateOne --> IncidentPort
   IncidentPort --> Incident
   GetHealth --> HealthPort
   FakeRepo --> IncidentPort
+  HttpRepo --> IncidentPort
+  HttpRepo --> DtoMapper
+  HttpRepo --> Transport
   HealthAdapter --> HealthPort
   HealthAdapter --> BackendHelper
   SecretAdapter --> SecretPort
@@ -62,9 +71,12 @@ flowchart TB
   Root --> GetOne
   Root --> GetHealth
   Root --> FakeRepo
+  Root --> HttpRepo
+  Root --> Transport
+  Root --> CreateOne
   Root --> HealthAdapter
 
-  subgraph Planned["Flujos futuros no implementados en Week 04"]
+  subgraph Planned["Flujos futuros no implementados en Week 05"]
     Session["Login / ciclo de sesión"]
     Persistence["Persistencia"]
     Location["Ubicación / proveedor externo"]

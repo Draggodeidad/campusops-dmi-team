@@ -1,6 +1,6 @@
 # Contrato de trabajo W05 — incidencias remotas
 
-Estado: baseline de la issue #27 para los propietarios de #28–#30. Las firmas de abajo fijan el acuerdo inicial para implementar el cliente y sus pruebas; #28 mantiene este documento cuando la implementación concrete los tipos. La app todavía usa `FakeIncidentRepository`. No son evidencia de que el flujo remoto funcione.
+Estado: contrato implementado en Week 05. `App.tsx` compone `HttpIncidentRepository` con `FetchIncidentTransport` para la ejecución normal; en pruebas sin `EXPO_PUBLIC_USE_HTTP` conserva el repositorio fake. Las firmas de diseño más abajo documentan el acuerdo inicial; la sección «Contrato implementado» precisa el código real y sus límites.
 
 ## Frontera publicada y modelo interno
 
@@ -55,7 +55,15 @@ interface IncidentTransport {
 }
 ```
 
-`IncidentClientPort` es la frontera de Application; el adaptador HTTP y `IncidentTransport` viven en Infrastructure. El transporte se inyecta al adaptador para ensayar respuestas y errores sin Internet. La composición para cambiar del fake al cliente queda en `App.tsx`, una vez que el cliente esté implementado. Los errores del cliente son un tipo separado de `ParseResult`: `contract` describe un sobre o cuerpo corrupto; `payload_unavailable` describe el `null` permitido que no puede mapearse al dominio; `timeout`/`network` describen fallas técnicas; `server` conserva sólo el código HTTP. Un `500` no se convierte en `contract`. Un `404` de detalle produce `ok: true, value: null`. Se capturan rechazos y abortos del transporte y se traducen sin propagar mensajes de proveedor a la UI.
+Estas firmas eran una propuesta de #27. La implementación final usa `IncidentRepository` en Domain, casos de uso `GetIncidents`, `GetIncidentById` y `CreateIncident` en Application, y `HttpIncidentRepository` más `IncidentTransport` en Infrastructure. No existe `IncidentClientPort` ni una unión `IncidentClientResult` en el código. Un `404` de detalle retorna `null`; los fallos se lanzan como `ApplicationFailure` con código y mensaje controlados. El transporte se inyecta para ensayar respuestas y errores sin Internet.
+
+## Contrato implementado
+
+- `GET /v1/incidents` acepta `200 { items: DTO[] }`; `items: []` produce lista vacía. Cada elemento se valida con `parseRemoteResource` y `mapDtoToIncident`; los elementos no convertibles se omiten. El JSON o sobre de lista inválido produce `INCIDENTS_UNAVAILABLE`.
+- `GET /v1/incidents/:id` codifica el segmento. `404` retorna `null`; `200` con sobre válido y `payload: null` también retorna `null` porque faltan campos del dominio. Un sobre inválido produce `INCIDENT_UNAVAILABLE`.
+- `POST /v1/incidents` envía `{ category, description, location }` e `Idempotency-Key`. `CreateIncident` valida y recorta entradas antes del envío; el repositorio genera una clave cuando no se recibe una de al menos ocho caracteres. Una llamada posterior que represente el mismo reintento debe aportar explícitamente la misma clave. Se aceptan `200` o `201` con `incident` válido; la implementación no inspecciona aún `operationId` ni `duplicate` de la respuesta.
+- `FetchIncidentTransport` usa `fetch` y `AbortController` con timeout por defecto de 5000 ms; su `TimeoutError` se convierte en `INCIDENT_TIMEOUT`. Otras fallas de transporte se convierten en `REMOTE_COMMUNICATION_ERROR`. Los `500` se convierten en `INCIDENTS_UNAVAILABLE`, `INCIDENT_UNAVAILABLE` o `CREATE_INCIDENT_FAILED`, según la operación. La UI muestra mensajes genéricos para lista y detalle; el formulario muestra el mensaje fijo de `ApplicationFailure` para creación.
+- La cabecera de actor y el token son fixtures sintéticos del backend didáctico. El cliente no emite logs de encabezados, respuestas ni valores de ubicación. No existe autenticación productiva, reintento automático ni cola offline en Week 05.
 
 ## Escenarios que deben demostrar los propietarios del cliente y las pruebas
 
@@ -64,4 +72,4 @@ interface IncidentTransport {
 - `slow` con timeout controlado, `server_error` 500, falla de red y respuesta de creación perdida tras guardarse; el reintento usa la misma clave.
 - Stub de `IncidentTransport` determinista y variantes del backend local, con predicción, comando, resultado observado y logs sanitizados.
 
-Los resultados se registrarán en `reports/week-05/contract-tests.json` y `reports/week-05/failure-matrix.json` cuando esas pruebas existan y se hayan ejecutado. No se crean reportes de entrega con resultados supuestos.
+Los resultados observados se indexan en `reports/week-05/contract-tests.json` y `reports/week-05/failure-matrix.json`. Las pruebas usan el parser, mapper, repositorio, transporte y UI reales con entradas externas controladas. La disponibilidad de un servicio público no forma parte de esta validación.
