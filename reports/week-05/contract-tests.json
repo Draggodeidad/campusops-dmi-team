@@ -1,9 +1,8 @@
 {
   "schemaVersion": 1,
   "week": 5,
-  "commitSha": "ded847db7657ecad85bbc5573bd3bdb192b63a86",
-  "generatedAt": "2026-10-05T02:59:09.925Z",
-  "sourceTreeNote": "La ejecución se realizó con HEAD ded847db7657ecad85bbc5573bd3bdb192b63a86 más el archivo local course-tests/week-05-transport-validation.test.tsx, que todavía no estaba comprometido al registrar el reporte. Antes de la entrega, guardar el test en un commit técnico y regenerar los reportes contra el nuevo SHA.",
+  "commitSha": "730da3fee509a41aab0ccc35d3c1f9d2d709592d",
+  "generatedAt": "2026-10-05T04:15:59.318044+00:00",
   "checks": [
     {
       "id": "remote-response-valid-and-domain-mapping",
@@ -53,6 +52,27 @@
       "scenarioType": "boundary",
       "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
       "evidence": "Los tests validaron id y status no vacíos, version entero no negativo, rechazo de campos obligatorios inválidos, aceptación de payload null, rechazo de payload array/número, y tolerancia a campos futuros del sobre. También comprobaron el DTO -> Incident y el límite de título de presentación."
+    },
+    {
+      "id": "controlled-backend-variants",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 (urllib.request GET /v1/incidents con X-Course-Scenario success, nullable, malformed, server_error, slow; timeout=2)",
+      "evidence": "Backend local observado: success=200 con items, nullable=200 con items, malformed=200 con JSON inválido, server_error=500, slow=200 con items en 1.20 s. No se enviaron cuerpos ni valores sensibles al log."
+    },
+    {
+      "id": "ui-failure-state-separation",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-ui-failure.test.tsx",
+      "evidence": "1 suite, 6 pruebas aprobadas: UI distingue contrato inválido, HTTP 500 y timeout en lista; detalle 404, payload null y 500 son estados diferentes. No se mostró el mensaje técnico sintético del proveedor."
+    },
+    {
+      "id": "final-public-evaluation",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make public-test-week-05",
+      "evidence": "reports/week-05/public-tests.json: status pass para SHA 730da3fee509a41aab0ccc35d3c1f9d2d709592d; 14 checks, incluido esquema de los cinco entregables y npm test con 13 suites/56 pruebas."
     }
   ]
 }

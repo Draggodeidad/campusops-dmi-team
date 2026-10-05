@@ -6,15 +6,37 @@
     {
       "studentId": "3523110651",
       "githubLogin": "Draggodeidad",
-      "commitShas": [],
-      "files": [],
-      "tests": [],
-      "reviews": [],
-      "prediction": "",
-      "command": "",
-      "observedResult": "",
-      "explanation": "",
-      "aiAssistance": ""
+      "commitShas": [
+        "df80684e1ddc4ba03b46734a3aecf627dacdd244",
+        "76c79075e79873338d142080e0d1c98373c7386a",
+        "730da3fee509a41aab0ccc35d3c1f9d2d709592d"
+      ],
+      "files": [
+        "docs/week-05-baseline.md",
+        "docs/api-contract.md",
+        "README.md",
+        "src/application/incidents/GetIncidents.ts",
+        "src/application/incidents/GetIncidentById.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "course-tests/week-05-ui-failure.test.tsx"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm test -- --ci --runInBand",
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-ui-failure.test.tsx",
+        "make feedback",
+        "make verify-week-05",
+        "make public-test-week-05"
+      ],
+      "reviews": [
+        "Revisión de la integración #28/#29/#30 contra docs/assignments/week-05.md y docs/assignments/week-05-rubric.md"
+      ],
+      "prediction": "El baseline W05 debía pasar feedback y verify, mientras el parser pendiente fallaría la prueba pública. Tras integrar el cliente, esperaba que timeout, contrato inválido, HTTP 500 y payload nulo llegaran como estados distinguibles hasta la UI sin mostrar mensajes de proveedor.",
+      "command": "npm run typecheck && npm run lint && npm test -- --ci --runInBand && node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-ui-failure.test.tsx",
+      "observedResult": "TypeScript y ESLint terminaron con exit 0. npm test y make feedback aprobaron 13 suites y 56 pruebas; la suite de fallas de UI aprobó 6 casos. verify-week-05 pasó 10 checks y public-test-week-05 pasó 14 checks sobre SHA 730da3fee509a41aab0ccc35d3c1f9d2d709592d. El baseline previo y sus fallas previstas están registrados en docs/week-05-baseline.md.",
+      "explanation": "Integré el kit oficial y fijé el contrato inicial en df80684/76c7907. En 730da3f conservé los códigos de error desde el repositorio hasta la UI y separé 404 de payload null con una razón segura, añadiendo pruebas de los estados. Los commits de cliente de osbaldoXxC y de validación de JulianDele se preservaron en el merge, sin atribuirme su implementación.",
+      "aiAssistance": "La corrección de integración y documentación de cierre tuvieron asistencia de Codex autorizada por el owner. Las pruebas y comandos citados se ejecutaron en el repositorio; la revisión humana final corresponde al owner antes del envío a Classroom."
     },
     {
       "studentId": "3523110279",
@@ -60,7 +82,9 @@
     {
       "studentId": "3522110437",
       "githubLogin": "JulianDele",
-      "commitShas": [],
+      "commitShas": [
+        "4112f42227f18c1d637c905cb7763befeeeedfee"
+      ],
       "files": [
         "course-tests/week-05-transport-validation.test.tsx",
         "reports/week-05/contract-tests.json",
@@ -78,7 +102,7 @@
       "prediction": "Esperaba que el cliente, parser y mapper reales distinguieran la respuesta válida, payload null, DTO malformado, timeout, HTTP 500 y límites del contrato, y que una respuesta inválida no se representara en la UI. Las respuestas de prueba serían controladas y no dependerían de Internet público.",
       "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
       "observedResult": "PASS: 3 suites y 31 pruebas. Los tests adicionales verificaron AbortController/TimeoutError real, body JSON malformado controlado, HTTP 500 como ApplicationFailure con código INCIDENTS_UNAVAILABLE y que un DTO con categoría inválida no se renderizara; las suites existentes aprobaron parser, mapper, null, timeout, campos de frontera y flujo de creación.",
-      "explanation": "Como JulianDele (studentId 3522110437), añadí una prueba de validación del transporte con fetch controlado y otra de integración que recorre transporte, repositorio, parser/mapper y UI reales con un DTO sintético inválido. Preparé además los reportes contractual y de fallas y la decisión de ingeniería. No modifiqué cliente cloud, contratos ni CI. No existe todavía un commit Week 05 autorado por mí en el historial: el SHA ded847db7657ecad85bbc5573bd3bdb192b63a86 pertenece a osbaldoXxC y sólo se usa como base de ejecución, por eso no lo incluyo como commit propio. La evidencia no estará cerrada hasta que se registre mi aporte en un commit real y se actualicen los SHA de los reportes.",
+      "explanation": "Como JulianDele (studentId 3522110437), añadí una prueba de validación del transporte con fetch controlado y otra de integración que recorre transporte, repositorio, parser/mapper y UI reales con un DTO sintético inválido. Preparé además los reportes de contrato y fallas y la decisión de ingeniería en el commit propio 4112f42227f18c1d637c905cb7763befeeeedfee. No modifiqué cliente cloud, contratos ni CI; la integración conserva mi commit y sus pruebas se repitieron con 3 suites y 31 pruebas aprobadas.",
       "aiAssistance": "Se utilizó asistencia de IA para elaborar una prueba adicional y estructurar los reportes; los resultados fueron contrastados con la salida real de Jest, TypeScript y ESLint."
     }
   ]

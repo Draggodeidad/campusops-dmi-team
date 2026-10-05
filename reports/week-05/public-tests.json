@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "week": 5,
+  "mode": "public",
+  "commitSha": "730da3fee509a41aab0ccc35d3c1f9d2d709592d",
+  "evaluatedAt": "2026-10-05T04:16:54.086730+00:00",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "pass",
+      "detail": "missing/empty=[]"
+    },
+    {
+      "id": "schema:reports/week-05/contract-tests.json",
+      "status": "pass",
+      "detail": "10 checks indexed, 9 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "id": "schema:reports/week-05/failure-matrix.json",
+      "status": "pass",
+      "detail": "4 checks indexed, 4 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "id": "schema:evidence/week-05/engineering.json",
+      "status": "pass",
+      "detail": "decision evidence is substantive and reproducible; report evaluates HEAD"
+    },
+    {
+      "id": "schema:evidence/week-05/individual.json",
+      "status": "pass",
+      "detail": "three individual evidence records found"
+    },
+    {
+      "id": "toolchain_1",
+      "status": "pass",
+      "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+    },
+    {
+      "id": "toolchain_2",
+      "status": "pass",
+      "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+    },
+    {
+      "id": "toolchain_3",
+      "status": "pass",
+      "detail": "npm run audit:ci\nn vulnerable versions of @react-native/community-cli-plugin\n          Depends on vulnerable versions of @react-native/jest-preset\n          Depends on vulnerable versions of @react-native/virtualized-lists\n          node_modules/react-native\n            @react-native/virtualized-lists  0.85.0-nightly-20260108-1236b6be4 - 0.87.0-rc.4\n            Depends on vulnerable versions of react-native\n            node_modules/@react-native/virtualized-lists\n    jest-haste-map  18.1.0 - 30.2.0\n    Depends on vulnerable versions of micromatch\n    node_modules/jest-haste-map\n    jest-message-util  18.5.0-alpha.7da3df39 - 30.2.0\n    Depends on vulnerable versions of micromatch\n    node_modules/jest-message-util\n      @jest/fake-timers  <=30.2.0\n      Depends on vulnerable versions of jest-message-util\n      node_modules/@jest/fake-timers\n        @jest/environment  <=30.2.0\n        Depends on vulnerable versions of @jest/fake-timers\n        node_modules/@jest/environment\n        jest-environment-node  24.2.0-alpha.0 - 30.2.0\n        Depends on vulnerable versions of @jest/environment\n        Depends on vulnerable versions of @jest/fake-timers\n        node_modules/jest-environment-node\n    metro-file-map  *\n    Depends on vulnerable versions of micromatch\n    node_modules/metro-file-map\n      @expo/metro  *\n      Depends on vulnerable versions of metro\n      Depends on vulnerable versions of metro-config\n      Depends on vulnerable versions of metro-file-map\n      Depends on vulnerable versions of metro-transform-worker\n      node_modules/@expo/metro\n        @expo/metro-config  >=0.21.0-canary-20250630-547cd82\n        Depends on vulnerable versions of @expo/metro\n        node_modules/@expo/metro-config\n      metro  >=0.71.0\n      Depends on vulnerable versions of metro-config\n      Depends on vulnerable versions of metro-file-map\n      Depends on vulnerable versions of metro-transform-worker\n      node_modules/metro\n        @react-native/community-cli-plugin  *\n        Depends on vulnerable versions of metro\n        Depends on vulnerable versions of metro-config\n        node_modules/@react-native/community-cli-plugin\n        metro-config  >=0.71.0\n        Depends on vulnerable versions of metro\n        node_modules/metro-config\n        metro-transform-worker  >=0.71.0\n        Depends on vulnerable versions of metro\n        node_modules/metro-transform-worker\n\nnode-forge  *\nSeverity: high\nnode-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv\nfix available via `npm audit fix --force`\nWill install expo@44.0.6, which is a breaking change\nnode_modules/node-forge\n  @expo/code-signing-certificates  *\n  Depends on vulnerable versions of node-forge\n  node_modules/@expo/code-signing-certificates\n\n25 high severity vulnerabilities\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force"
+    },
+    {
+      "id": "toolchain_4",
+      "status": "pass",
+      "detail": "npm test -- --ci --runInBand course-tests/public/week-05.test.ts\n> dmi-react-native-starter@1.0.0 test\n> jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-05-client.test.tsx course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-05.test.ts --ci --runInBand course-tests/public/week-05.test.ts\n\n\nPASS course-tests/week-05-client.test.tsx\nPASS course-tests/smoke.test.tsx\nPASS course-tests/week-05-ui-failure.test.tsx\nPASS course-tests/week-05-transport-validation.test.tsx\nPASS course-tests/incidents.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/public/week-02.test.ts\nPASS course-tests/architecture.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-05.test.ts\nPASS course-tests/public/week-01.test.ts\n\nTest Suites: 13 passed, 13 total\nTests:       56 passed, 56 total\nSnapshots:   0 total\nTime:        1.678 s, estimated 2 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/week-05-client.test.tsx|course-tests\\/week-05-transport-validation.test.tsx|course-tests\\/week-05-ui-failure.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-05.test.ts|course-tests\\/public\\/week-05.test.ts/i."
+    }
+  ]
+}

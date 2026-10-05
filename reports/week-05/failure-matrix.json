@@ -1,9 +1,8 @@
 {
   "schemaVersion": 1,
   "week": 5,
-  "commitSha": "ded847db7657ecad85bbc5573bd3bdb192b63a86",
-  "generatedAt": "2026-10-05T02:59:09.925Z",
-  "sourceTreeNote": "Los resultados incluyen el test local no comprometido course-tests/week-05-transport-validation.test.tsx sobre HEAD ded847db7657ecad85bbc5573bd3bdb192b63a86. Regenerar contra el SHA que incluya ese test antes de entrega.",
+  "commitSha": "730da3fee509a41aab0ccc35d3c1f9d2d709592d",
+  "generatedAt": "2026-10-05T04:15:59.318044+00:00",
   "checks": [
     {
       "id": "week-05-failure-matrix",
@@ -11,6 +10,27 @@
       "scenarioType": "failure",
       "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
       "evidence": "La matriz de cinco escenarios se corroboró mediante las suites reales de cliente/parser/mapper y el caso de transporte/UI: 3 suites aprobadas, 31 pruebas aprobadas."
+    },
+    {
+      "id": "backend-failure-variants",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 (urllib.request GET /v1/incidents con X-Course-Scenario success, nullable, malformed, server_error, slow; timeout=2)",
+      "evidence": "Backend local: malformed=200 con JSON inválido; server_error=500; slow=200 tras 1.20 s, inferior al timeout de 2 s del cliente de prueba. El timeout se verificó por separado con transporte controlado."
+    },
+    {
+      "id": "ui-failure-states",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-ui-failure.test.tsx",
+      "evidence": "La suite de integración confirmó 6 casos: contrato, 500, timeout, 404 y payload null con mensajes seguros diferenciados."
+    },
+    {
+      "id": "final-failure-evaluation",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "make public-test-week-05",
+      "evidence": "reports/week-05/public-tests.json: status pass; la prueba pública y los reportes de falla se comprobaron sobre SHA 730da3fee509a41aab0ccc35d3c1f9d2d709592d."
     }
   ],
   "scenarios": [
@@ -57,6 +77,15 @@
       "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-transport-validation.test.tsx",
       "expected": "El DTO no genera Incident y sus valores privados/sintéticos no aparecen como fila ni texto en CampusOpsApp.",
       "observed": "PASS. El mapper descartó la categoría inválida; la UI mostró 'No hay incidencias registradas.' y no mostró el texto o testID de la incidencia rechazada.",
+      "status": "pass"
+    },
+    {
+      "id": "ui_error_distinctions",
+      "threat": "El caso de uso pierde el tipo de falla y la UI confunde 404, payload nulo, contrato inválido, timeout y 500.",
+      "control": "GetIncidents/GetIncidentById conservan ApplicationFailure; el repositorio asigna reason seguro; CampusOpsApp traduce sólo code/reason a texto fijo.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-ui-failure.test.tsx",
+      "expected": "La UI muestra estados diferentes sin propagar el mensaje técnico ni inventar una incidencia.",
+      "observed": "PASS: 1 suite, 6 pruebas; lista y detalle distinguen los casos y el mensaje técnico sintético no aparece.",
       "status": "pass"
     }
   ],

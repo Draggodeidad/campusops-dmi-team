@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "week": 5,
-  "commitSha": "ded847db7657ecad85bbc5573bd3bdb192b63a86",
-  "decision": "Validamos el flujo remoto sin modificar el cliente, parser, mapper ni contratos: mantenemos el parser de sobre en el límite de Infrastructure, convertimos el DTO validado a Incident con el mapper existente y ejercitamos cliente/repositorio/UI con un transporte controlado. Las pruebas cubren éxito, null permitido, sobres inválidos, boundary fields, errores HTTP y timeout; agregamos cobertura del AbortController real del transporte y del descarte de un DTO inválido antes de renderizarlo.",
+  "commitSha": "730da3fee509a41aab0ccc35d3c1f9d2d709592d",
+  "decision": "Mantener IncidentRepository como puerto de Domain, con GetIncidents, GetIncidentById y CreateIncident en Application. HttpIncidentRepository recibe IncidentTransport en Infrastructure, valida el sobre remoto con parseRemoteResource y convierte sólo DTO completos a Incident mediante IncidentDtoMapper. El payload null es válido para el parser pero no fabrica una entidad: en detalle produce payload_unavailable, distinto de 404. Los errores de contrato, HTTP 500, timeout y red se convierten en ApplicationFailure con code/reason seguros que los casos de uso conservan y la UI presenta sin datos de proveedor. App.tsx compone HTTP para ejecución normal y fake para pruebas de base.",
   "alternatives": [
     "Probar sólo parseRemoteResource y mapDtoToIncident como funciones aisladas. Se descartó como validación suficiente porque no comprueba la traducción HTTP, el timeout del transporte ni el límite con UI.",
     "Ejecutar exclusivamente contra un servidor público o el backend compartido. Se descartó porque agrega dependencia de red/estado externo y reduce repetibilidad de los casos de falla.",
     "Usar parser, mapper y repositorio reales con respuestas fetch/transporte controladas y fixtures sintéticas; comprobar separadamente transporte con AbortController y descarte en UI. Seleccionada porque mantiene la lógica bajo prueba real y controla sólo la entrada externa."
   ],
-  "tradeoff": "Beneficios: no se mockean parser, mapper, repositorio ni pantalla; las respuestas son deterministas y no requieren Internet; se verifica la conversión DTO -> Incident y que un DTO inválido no llega a UI. Costos: fetch y reloj se sustituyen/controlan en tests, así que no se prueba disponibilidad real de red ni backend; el test de interfaz usa React Native Testing Library; el reporte actual parte de HEAD ded847d pero incluye un nuevo test todavía sin commit, por lo que hay que regenerarlo después del commit técnico.",
+  "tradeoff": "Beneficio: cliente, parser, mapper y UI se prueban con transporte sustituible y datos sintéticos sin Internet; un DTO corrupto no llega a pantalla y los errores se distinguen hasta UI. Costo: DTO, mapper, transporte y razón segura añaden archivos y reglas de presentación; la lista aún descarta elementos individuales inválidos, no hay reintento automático ni comprobación de red pública. Los tests con fetch controlado y el backend local cubren propiedades diferentes.",
   "requirementIds": [
     "AC-01",
     "AC-02",
@@ -36,7 +36,26 @@
       "command": "npm run lint",
       "result": "pass",
       "evidence": "ESLint terminó sin errores reportados en el terminal."
+    },
+    {
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-ui-failure.test.tsx",
+      "result": "pass: 1 suite, 6 tests",
+      "evidence": "Lista mostró mensajes distintos para contrato, timeout y 500; detalle distinguió 404, payload null y 500; no se mostró mensaje técnico sintético."
+    },
+    {
+      "command": "make feedback",
+      "result": "pass (exit 0)",
+      "evidence": "Salida observada: 13 suites y 56 pruebas; violaciones de arquitectura vacías; escaneo de secretos sin hallazgos; audit bajo umbral critical aprobado con 25 avisos high; export Android completado. SHA técnico 730da3fee509a41aab0ccc35d3c1f9d2d709592d."
+    },
+    {
+      "command": "make verify-week-05",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-05/verify.json: status pass, 10 checks aprobados para SHA 730da3fee509a41aab0ccc35d3c1f9d2d709592d; incluye backend:self-test."
+    },
+    {
+      "command": "make public-test-week-05",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-05/public-tests.json: status pass, 14 checks aprobados para SHA 730da3fee509a41aab0ccc35d3c1f9d2d709592d; valida reportes, engineering, tres miembros y prueba pública W05."
     }
-  ],
-  "sourceTreeNote": "HEAD al registrar esta evidencia: ded847db7657ecad85bbc5573bd3bdb192b63a86. La prueba course-tests/week-05-transport-validation.test.tsx está sin commit; no debe considerarse incluida en ese SHA. Crear el commit técnico y regenerar reportes/evidencia contra el SHA que incluya el test."
+  ]
 }
