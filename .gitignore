@@ -14,3 +14,11 @@ dist/
 *.p12
 reports/**/generated-*
 __pycache__/
+
+DESING.md
+actividad-semana-5.md
+docs/navigation-flows.md
+docs/stitch-prompts.md
+evidencia-semana-04.txt
+reports/week-04/failure.json
+week-05-cliente-cloud.zip
