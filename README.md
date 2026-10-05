@@ -50,10 +50,10 @@ curl -i -H 'Authorization: Bearer course-valid-token' -H 'X-Course-Actor: report
 curl -i -H 'Authorization: Bearer course-valid-token' -H 'X-Course-Actor: reporter-1' -H 'X-Course-Scenario: nullable' http://127.0.0.1:4310/v1/incidents
 curl -i -H 'Authorization: Bearer course-valid-token' -H 'X-Course-Actor: reporter-1' -H 'X-Course-Scenario: malformed' http://127.0.0.1:4310/v1/incidents
 curl -i -H 'Authorization: Bearer course-valid-token' -H 'X-Course-Actor: reporter-1' -H 'X-Course-Scenario: server_error' http://127.0.0.1:4310/v1/incidents
-curl -i --max-time 2 -H 'Authorization: Bearer course-valid-token' -H 'X-Course-Actor: reporter-1' -H 'X-Course-Scenario: slow' http://127.0.0.1:4310/v1/incidents
+curl -i --max-time 1 -H 'Authorization: Bearer course-valid-token' -H 'X-Course-Actor: reporter-1' -H 'X-Course-Scenario: slow' http://127.0.0.1:4310/v1/incidents
 ```
 
-El último comando fuerza un límite de dos segundos en `curl`; la app usa `AbortController` con cinco segundos. El alcance de cada variante depende del endpoint, así que el comportamiento contractual se verifica además con las suites locales.
+El último comando fuerza un límite de un segundo en `curl` para reproducir una espera agotada ante la variante `slow` (observada en aproximadamente 1.2 segundos); la app usa `AbortController` con cinco segundos. El alcance de cada variante depende del endpoint, así que el comportamiento contractual se verifica además con las suites locales.
 
 La lista vacía y el detalle ausente son estados válidos. Un sobre con `payload: null` es válido para el parser, pero no produce una incidencia con datos inventados. Un DTO inválido se descarta antes de entrar al dominio; un cuerpo JSON inválido, timeout, falla de red o HTTP 500 producen errores controlados. La interfaz muestra un mensaje seguro de carga fallida; los códigos técnicos se comprueban en las pruebas del repositorio. No se registran cuerpos ni encabezados sensibles en logs.
 
