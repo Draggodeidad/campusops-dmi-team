@@ -37,6 +37,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'INCIDENTS_UNAVAILABLE',
           'El servicio de incidencias no está disponible (error 500).',
+          'server',
         );
       }
 
@@ -54,6 +55,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'INCIDENTS_UNAVAILABLE',
           'Respuesta del servidor malformada.',
+          'contract',
         );
       }
 
@@ -66,6 +68,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'INCIDENTS_UNAVAILABLE',
           'El sobre de la lista de incidencias es inválido.',
+          'contract',
         );
       }
 
@@ -120,6 +123,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'INCIDENT_UNAVAILABLE',
           'El servicio no está disponible temporalmente (error 500).',
+          'server',
         );
       }
 
@@ -137,6 +141,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'INCIDENT_UNAVAILABLE',
           'Respuesta del detalle malformada.',
+          'contract',
         );
       }
 
@@ -145,10 +150,21 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'INCIDENT_UNAVAILABLE',
           'El sobre de la incidencia no cumple el contrato.',
+          'contract',
         );
       }
 
-      return mapDtoToIncident(envelopeResult.value);
+      const incident = mapDtoToIncident(envelopeResult.value);
+      if (incident === null) {
+        throw new ApplicationFailure(
+          'INCIDENT_UNAVAILABLE',
+          envelopeResult.value.payload === null
+            ? 'Los datos de la incidencia no están disponibles.'
+            : 'Los datos de la incidencia no cumplen el contrato.',
+          envelopeResult.value.payload === null ? 'payload_unavailable' : 'contract',
+        );
+      }
+      return incident;
     } catch (error: unknown) {
       if (error instanceof ApplicationFailure) {
         throw error;
@@ -191,6 +207,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'CREATE_INCIDENT_FAILED',
           'Error del servidor al registrar la incidencia.',
+          'server',
         );
       }
 
@@ -208,6 +225,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'CREATE_INCIDENT_FAILED',
           'Respuesta de creación malformada.',
+          'contract',
         );
       }
 
@@ -219,6 +237,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'CREATE_INCIDENT_FAILED',
           'El sobre de creación no contiene la incidencia generada.',
+          'contract',
         );
       }
 
@@ -229,6 +248,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'CREATE_INCIDENT_FAILED',
           'El sobre de la incidencia creada es inválido.',
+          'contract',
         );
       }
 
@@ -237,6 +257,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         throw new ApplicationFailure(
           'CREATE_INCIDENT_FAILED',
           'No fue posible construir la entidad interna a partir de la respuesta.',
+          'contract',
         );
       }
 

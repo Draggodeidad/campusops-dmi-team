@@ -8,7 +8,8 @@ export class GetIncidents {
   async execute(): Promise<readonly Incident[]> {
     try {
       return await this.repository.findAll();
-    } catch {
+    } catch (error: unknown) {
+      if (error instanceof ApplicationFailure) throw error;
       throw new ApplicationFailure(
         'INCIDENTS_UNAVAILABLE',
         'No fue posible cargar las incidencias.',

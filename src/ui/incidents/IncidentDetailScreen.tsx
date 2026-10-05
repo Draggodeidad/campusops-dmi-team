@@ -28,11 +28,11 @@ export function IncidentDetailScreen({ incident, loading, error, onBack }: Props
           <Text>Estado: {incident.status}</Text>
           <Text>{incident.description}</Text>
         </View>
-      ) : (
+      ) : !loading && !error ? (
         <View style={styles.emptyState}>
           <Text style={styles.emptyTitle}>Selecciona una incidencia para ver sus detalles.</Text>
         </View>
-      )}
+      ) : null}
     </View>
   );
 }

@@ -11,7 +11,8 @@ export class GetIncidentById {
     }
     try {
       return await this.repository.findById(id);
-    } catch {
+    } catch (error: unknown) {
+      if (error instanceof ApplicationFailure) throw error;
       throw new ApplicationFailure(
         'INCIDENT_UNAVAILABLE',
         'No fue posible cargar el detalle.',

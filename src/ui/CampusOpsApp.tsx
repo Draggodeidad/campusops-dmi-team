@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import type { CreateIncident, CreateIncidentInput } from '../application/incidents/CreateIncident';
+import { ApplicationFailure } from '../application/errors/ApplicationFailure';
 import type { GetIncidentById } from '../application/incidents/GetIncidentById';
 import type { GetIncidents } from '../application/incidents/GetIncidents';
 import type { BackendStatus, GetBackendStatus } from '../application/system/GetBackendStatus';
@@ -19,6 +20,20 @@ type Props = Readonly<{
 }>;
 
 type ActiveView = 'list' | 'detail' | 'create';
+
+function presentIncidentFailure(error: unknown, operation: 'list' | 'detail' | 'create'): string {
+  if (error instanceof ApplicationFailure) {
+    if (error.code === 'INCIDENT_TIMEOUT') return 'El servicio tardó demasiado en responder.';
+    if (error.reason === 'contract') return 'El servidor devolvió datos inválidos.';
+    if (error.reason === 'payload_unavailable') return 'Los datos de la incidencia no están disponibles.';
+    if (error.reason === 'server') return 'El servidor informó un error temporal (500).';
+    if (error.code === 'REMOTE_COMMUNICATION_ERROR') return 'No hay conexión con el servicio.';
+    if (operation === 'create') return error.message;
+  }
+  if (operation === 'list') return 'No fue posible cargar las incidencias.';
+  if (operation === 'detail') return 'No fue posible cargar el detalle.';
+  return 'No fue posible registrar la incidencia.';
+}
 
 export function CampusOpsApp({
   getBackendStatus,
@@ -43,7 +58,7 @@ export function CampusOpsApp({
     void getIncidents
       .execute()
       .then((items) => active && setIncidents(items))
-      .catch(() => active && setListError('No fue posible cargar las incidencias.'))
+      .catch((error: unknown) => active && setListError(presentIncidentFailure(error, 'list')))
       .finally(() => active && setListLoading(false));
     return () => {
       active = false;
@@ -56,8 +71,8 @@ export function CampusOpsApp({
     try {
       const items = await getIncidents.execute();
       setIncidents(items);
-    } catch {
-      setListError('No fue posible cargar las incidencias.');
+    } catch (error: unknown) {
+      setListError(presentIncidentFailure(error, 'list'));
     } finally {
       setListLoading(false);
     }
@@ -71,8 +86,8 @@ export function CampusOpsApp({
       const incident = await getIncidentById.execute(id);
       setSelectedIncident(incident);
       if (incident === null) setDetailError('La incidencia solicitada no existe.');
-    } catch {
-      setDetailError('No fue posible cargar el detalle.');
+    } catch (error: unknown) {
+      setDetailError(presentIncidentFailure(error, 'detail'));
     } finally {
       setDetailLoading(false);
     }
@@ -103,10 +118,8 @@ export function CampusOpsApp({
       await createIncident.execute(data);
       await refreshIncidents();
       setActiveView('list');
-    } catch (err: unknown) {
-      setCreateError(
-        err instanceof Error ? err.message : 'No fue posible registrar la incidencia.',
-      );
+    } catch (error: unknown) {
+      setCreateError(presentIncidentFailure(error, 'create'));
     } finally {
       setCreateLoading(false);
     }

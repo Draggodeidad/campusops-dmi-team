@@ -55,13 +55,13 @@ curl -i --max-time 1 -H 'Authorization: Bearer course-valid-token' -H 'X-Course-
 
 El último comando fuerza un límite de un segundo en `curl` para reproducir una espera agotada ante la variante `slow` (observada en aproximadamente 1.2 segundos); la app usa `AbortController` con cinco segundos. El alcance de cada variante depende del endpoint, así que el comportamiento contractual se verifica además con las suites locales.
 
-La lista vacía y el detalle ausente son estados válidos. Un sobre con `payload: null` es válido para el parser, pero no produce una incidencia con datos inventados. Un DTO inválido se descarta antes de entrar al dominio; un cuerpo JSON inválido, timeout, falla de red o HTTP 500 producen errores controlados. La interfaz muestra un mensaje seguro de carga fallida; los códigos técnicos se comprueban en las pruebas del repositorio. No se registran cuerpos ni encabezados sensibles en logs.
+La lista vacía y el detalle ausente son estados válidos. Un sobre con `payload: null` es válido para el parser, pero no produce una incidencia con datos inventados: en detalle se muestra «datos no disponibles», distinto del 404. Un DTO inválido se descarta antes de entrar al dominio; un cuerpo JSON inválido, timeout, falla de red o HTTP 500 producen errores controlados. La interfaz distingue estas fallas con mensajes seguros; los códigos técnicos se comprueban en las pruebas del repositorio. No se registran cuerpos ni encabezados sensibles en logs.
 
 Verificación de Week 05, en el orden de la guía oficial:
 
 ```bash
 make setup
-node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx
+node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx
 make feedback
 make verify-week-05
 make public-test-week-05
