@@ -61,14 +61,25 @@
       "studentId": "3522110437",
       "githubLogin": "JulianDele",
       "commitShas": [],
-      "files": [],
-      "tests": [],
+      "files": [
+        "course-tests/week-05-transport-validation.test.tsx",
+        "reports/week-05/contract-tests.json",
+        "reports/week-05/failure-matrix.json",
+        "evidence/week-05/engineering.json",
+        "evidence/week-05/individual.json"
+      ],
+      "tests": [
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+        "npm run test:architecture",
+        "npm run typecheck",
+        "npm run lint"
+      ],
       "reviews": [],
-      "prediction": "",
-      "command": "",
-      "observedResult": "",
-      "explanation": "",
-      "aiAssistance": ""
+      "prediction": "Esperaba que el cliente, parser y mapper reales distinguieran la respuesta válida, payload null, DTO malformado, timeout, HTTP 500 y límites del contrato, y que una respuesta inválida no se representara en la UI. Las respuestas de prueba serían controladas y no dependerían de Internet público.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-05-client.test.tsx course-tests/public/week-05.test.ts course-tests/week-05-transport-validation.test.tsx",
+      "observedResult": "PASS: 3 suites y 31 pruebas. Los tests adicionales verificaron AbortController/TimeoutError real, body JSON malformado controlado, HTTP 500 como ApplicationFailure con código INCIDENTS_UNAVAILABLE y que un DTO con categoría inválida no se renderizara; las suites existentes aprobaron parser, mapper, null, timeout, campos de frontera y flujo de creación.",
+      "explanation": "Como JulianDele (studentId 3522110437), añadí una prueba de validación del transporte con fetch controlado y otra de integración que recorre transporte, repositorio, parser/mapper y UI reales con un DTO sintético inválido. Preparé además los reportes contractual y de fallas y la decisión de ingeniería. No modifiqué cliente cloud, contratos ni CI. No existe todavía un commit Week 05 autorado por mí en el historial: el SHA ded847db7657ecad85bbc5573bd3bdb192b63a86 pertenece a osbaldoXxC y sólo se usa como base de ejecución, por eso no lo incluyo como commit propio. La evidencia no estará cerrada hasta que se registre mi aporte en un commit real y se actualicen los SHA de los reportes.",
+      "aiAssistance": "Se utilizó asistencia de IA para elaborar una prueba adicional y estructurar los reportes; los resultados fueron contrastados con la salida real de Jest, TypeScript y ESLint."
     }
   ]
 }
