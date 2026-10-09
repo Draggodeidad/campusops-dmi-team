@@ -1,0 +1,62 @@
+python3 tools/course_public_evaluator.py --week 06 --mode public --execute-toolchain
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "mode": "public",
+  "commitSha": "c74e4796b7f50f3d804f853fec2b271fd6417728",
+  "evaluatedAt": "2026-10-09T23:09:25.489402+00:00",
+  "status": "fail",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "fail",
+      "detail": "missing/empty=['docs/session-state-machine.mmd', 'reports/week-06/auth-tests.json', 'reports/week-06/concurrency.json', 'evidence/week-06/engineering.json', 'evidence/week-06/individual.json']"
+    },
+    {
+      "id": "toolchain_1",
+      "status": "pass",
+      "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+    },
+    {
+      "id": "toolchain_2",
+      "status": "pass",
+      "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+    },
+    {
+      "id": "toolchain_3",
+      "status": "fail",
+      "detail": "npm run audit:ci\nles/expo\n        @expo/metro-config  >=0.21.0-canary-20250630-547cd82\n        Depends on vulnerable versions of @expo/metro\n        node_modules/@expo/metro-config\n      metro  >=0.71.0\n      Depends on vulnerable versions of metro-config\n      Depends on vulnerable versions of metro-file-map\n      Depends on vulnerable versions of metro-transform-worker\n      node_modules/metro\n        @react-native/community-cli-plugin  *\n        Depends on vulnerable versions of metro\n        Depends on vulnerable versions of metro-config\n        node_modules/@react-native/community-cli-plugin\n        metro-config  >=0.71.0\n        Depends on vulnerable versions of metro\n        node_modules/metro-config\n        metro-transform-worker  >=0.71.0\n        Depends on vulnerable versions of metro\n        node_modules/metro-transform-worker\n\ncompression  <1.8.2\nSeverity: high\ncompression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95\nfix available via `npm audit fix`\nnode_modules/compression\n\nnode-forge  *\nSeverity: high\nnode-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv\nfix available via `npm audit fix --force`\nWill install expo@44.0.6, which is a breaking change\nnode_modules/node-forge\n  @expo/code-signing-certificates  *\n  Depends on vulnerable versions of node-forge\n  node_modules/@expo/code-signing-certificates\n\nshell-quote  1.8.4 - 1.10.0\nSeverity: critical\nshell-quote: `quote()` command injection via a line terminator in a token after a `{ comment }` token - https://github.com/advisories/GHSA-pqg4-j6r4-53mv\nfix available via `npm audit fix`\nnode_modules/shell-quote\n\nsource-map-js  1.0.0 - 1.2.1\nSeverity: high\nsource-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q\nfix available via `npm audit fix`\nnode_modules/source-map-js\n\nsprintf-js  *\nSeverity: moderate\nsprintf-js vulnerable to denial of service through unbounded precision specifiers - https://github.com/advisories/GHSA-hp3w-g68c-fv3c\nfix available via `npm audit fix --force`\nWill install react-native@0.87.1, which is a breaking change\nnode_modules/sprintf-js\n  argparse  1.0.0 - 1.0.10\n  Depends on vulnerable versions of sprintf-js\n  node_modules/argparse\n    js-yaml  3.2.7 - 3.15.2\n    Depends on vulnerable versions of argparse\n    node_modules/js-yaml\n      @istanbuljs/load-nyc-config  *\n      Depends on vulnerable versions of js-yaml\n      node_modules/@istanbuljs/load-nyc-config\n        babel-plugin-istanbul  >=6.0.0-beta.0\n        Depends on vulnerable versions of @istanbuljs/load-nyc-config\n        node_modules/babel-plugin-istanbul\n\n33 vulnerabilities (5 moderate, 27 high, 1 critical)\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force"
+    },
+    {
+      "id": "toolchain_4",
+      "status": "fail",
+      "detail": "npm test -- --ci --runInBand course-tests/public/week-06.test.ts\nsts/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-05-client.test.tsx course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-05.test.ts course-tests/public/week-06.test.ts --ci --runInBand course-tests/public/week-06.test.ts\n\n\nFAIL course-tests/public/week-06.test.ts\n  ● coalesces concurrent 401s into one refresh and retries each request once\n\n    coordinateRefresh must be implemented in the assigned week\n\n      13 |\n      14 | function pending(name: string): never {\n    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);\n         |         ^\n      16 | }\n      17 |\n      18 | export { redactForTelemetry, parseRemoteResource };\n\n      at pending (src/course-evaluation/index.ts:15:9)\n      at pending (src/course-evaluation/index.ts:27:10)\n      at Object.<anonymous> (course-tests/public/week-06.test.ts:4:36)\n\n  ● logout removes persisted session state\n\n    coordinateRefresh must be implemented in the assigned week\n\n      13 |\n      14 | function pending(name: string): never {\n    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);\n         |         ^\n      16 | }\n      17 |\n      18 | export { redactForTelemetry, parseRemoteResource };\n\n      at pending (src/course-evaluation/index.ts:15:9)\n      at pending (src/course-evaluation/index.ts:27:10)\n      at Object.<anonymous> (course-tests/public/week-06.test.ts:20:27)\n\nPASS course-tests/week-05-client.test.tsx\nPASS course-tests/smoke.test.tsx\nPASS course-tests/incidents.test.tsx\nPASS course-tests/week-05-transport-validation.test.tsx\nPASS course-tests/week-05-ui-failure.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/architecture.test.ts\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/public/week-01.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-05.test.ts\nPASS course-tests/public/week-02.test.ts\n\nTest Suites: 1 failed, 13 passed, 14 total\nTests:       2 failed, 56 passed, 58 total\nSnapshots:   0 total\nTime:        1.326 s, estimated 2 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/week-05-client.test.tsx|course-tests\\/week-05-transport-validation.test.tsx|course-tests\\/week-05-ui-failure.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-05.test.ts|course-tests\\/public\\/week-06.test.ts|course-tests\\/public\\/week-06.test.ts/i."
+    }
+  ]
+}
+make: *** [Makefile:36: public-test-week-06] Error 1

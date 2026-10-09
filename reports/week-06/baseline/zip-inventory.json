@@ -1,0 +1,61 @@
+{
+  "zipSha256": "618bcce708b6d22d7926d6d17918b68358055aaa442fe4f500cbd14ef018a341",
+  "files": [
+    {
+      "path": ".github/workflows/week-06-sesion-segura-feedback.yml",
+      "bytes": 1262,
+      "sha256": "8d386673d2e5de7f36e39dec7c7982774b6a0da7109030d5ab4963f320a6136a",
+      "comparison": "missing",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "INSTALL.md",
+      "bytes": 594,
+      "sha256": "8e0be4e862d145818fe49f59b52234db4ca691d3e0b29713bec3f59ec3fb236c",
+      "comparison": "different",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "course-tests/public/week-06.test.ts",
+      "bytes": 778,
+      "sha256": "ae8674f772be4b7f83b2d8a72c919fffd482bbf30aa9f0eb926f8d70f3edbd71",
+      "comparison": "identical",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "docs/CAMPUSOPS.md",
+      "bytes": 9454,
+      "sha256": "9a992d73aaab3f1e3d14b42f09aac1c44beb53e9eb20d9c194149fbf13bbe578",
+      "comparison": "identical",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "docs/CAMPUSOPS_API.md",
+      "bytes": 6957,
+      "sha256": "86a103f8f64f77885ea0a87f12d4126bd94a31936e7fc6b57546b8af0b44ea08",
+      "comparison": "identical",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "docs/assignments/week-06-repository.md",
+      "bytes": 6247,
+      "sha256": "fb4f45068c6e3823f28213dbeebd90f3e75d637c6880bf16010b89dde4c8c843",
+      "comparison": "missing",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "docs/assignments/week-06-rubric.md",
+      "bytes": 5867,
+      "sha256": "45692f62e1334361720a18df06e02020e2f43d4f8e7aff37f33abc98b2fb3439",
+      "comparison": "missing",
+      "review": "read in full; UTF-8 text; no binaries"
+    },
+    {
+      "path": "docs/assignments/week-06.md",
+      "bytes": 9071,
+      "sha256": "f03130766408b003a2e54e85b92136f5d3ccf9938a258c289f3663a9f33e690f",
+      "comparison": "missing",
+      "review": "read in full; UTF-8 text; no binaries"
+    }
+  ]
+}
