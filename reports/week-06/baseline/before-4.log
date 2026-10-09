@@ -1,0 +1,9 @@
+
+> dmi-react-native-starter@1.0.0 check:architecture
+> node tools/check-architecture.cjs
+
+{
+  "status": "pass",
+  "root": "src",
+  "violations": []
+}

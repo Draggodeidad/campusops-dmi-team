@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "c74e4796b7f50f3d804f853fec2b271fd6417728",
+  "generatedAt": "2026-10-09T23:09:25.500063+00:00",
+  "nodeVersion": "v22.22.0",
+  "commands": [
+    {
+      "command": "make setup",
+      "exitCode": 0,
+      "log": "after-00.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "after-01.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "after-02.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "exitCode": 0,
+      "log": "after-03.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "log": "after-04.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "log": "after-05.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "log": "after-06.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "log": "after-07.log"
+    },
+    {
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-05-client.test.tsx course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-05.test.ts",
+      "exitCode": 0,
+      "log": "after-08.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "exitCode": 1,
+      "log": "after-09.log"
+    },
+    {
+      "command": "npm test -- --listTests --runInBand",
+      "exitCode": 0,
+      "log": "after-10.log"
+    },
+    {
+      "command": "make feedback",
+      "exitCode": 2,
+      "log": "after-11.log"
+    },
+    {
+      "command": "npm run audit:ci",
+      "exitCode": 1,
+      "log": "after-12.log"
+    },
+    {
+      "command": "npm run scan:secrets",
+      "exitCode": 0,
+      "log": "after-13.log"
+    },
+    {
+      "command": "npm run bundle:release",
+      "exitCode": 0,
+      "log": "after-14.log"
+    },
+    {
+      "command": "make verify-week-06",
+      "exitCode": 2,
+      "log": "after-15.log"
+    },
+    {
+      "command": "make public-test-week-06",
+      "exitCode": 2,
+      "log": "after-16.log"
+    }
+  ]
+}
