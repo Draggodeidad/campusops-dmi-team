@@ -52,4 +52,41 @@ export class FakeIncidentRepository implements IncidentRepository {
     this.items.push(created);
     return created;
   }
+
+  async performAction(input: {
+    incidentId: string;
+    action: 'start' | 'resolve' | 'close' | 'reopen';
+    baseVersion: number;
+    diagnosis?: string;
+  }): Promise<Incident> {
+    const target = this.items.find((inc) => inc.id === input.incidentId);
+    if (!target) {
+      throw new Error(`Incidencia ${input.incidentId} no encontrada`);
+    }
+
+    let nextStatus = target.status;
+    switch (input.action) {
+      case 'start':
+        nextStatus = 'in_progress';
+        break;
+      case 'resolve':
+        nextStatus = 'resolved';
+        break;
+      case 'close':
+        nextStatus = 'closed';
+        break;
+      case 'reopen':
+        nextStatus = 'open';
+        break;
+    }
+
+    const updated: Incident = {
+      ...target,
+      status: nextStatus,
+    };
+
+    const index = this.items.indexOf(target);
+    this.items[index] = updated;
+    return updated;
+  }
 }

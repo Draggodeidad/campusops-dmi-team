@@ -7,7 +7,12 @@ export type ApplicationFailureCode =
   | 'CREATE_INCIDENT_FAILED'
   | 'INVALID_INCIDENT_INPUT'
   | 'REMOTE_COMMUNICATION_ERROR'
-  | 'INCIDENT_TIMEOUT';
+  | 'INCIDENT_TIMEOUT'
+  | 'AUTHENTICATION_FAILED'
+  | 'SESSION_EXPIRED'
+  | 'UNAUTHORIZED_ACTION'
+  | 'UPDATE_INCIDENT_FAILED'
+  | 'VERSION_CONFLICT';
 
 export type ApplicationFailureReason = 'contract' | 'server' | 'payload_unavailable';
 

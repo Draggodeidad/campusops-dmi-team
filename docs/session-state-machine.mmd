@@ -1,0 +1,19 @@
+stateDiagram-v2
+    [*] --> anonymous: Arranque inicial / arranque sin sesión previa
+
+    anonymous --> signing-in: login(actorId)
+    signing-in --> authenticated: Credenciales válidas + persistencia SecureStore exitosa (gen++)
+    signing-in --> anonymous: Falla de red, actor desconocido o error de persistencia
+
+    authenticated --> expired: clock.now() >= expiresAt
+    authenticated --> refreshing: Error 401 concurrente / refresh() invocado
+    authenticated --> logging-out: logout()
+
+    expired --> refreshing: Intento de uso / refresh() compartido invocado
+    expired --> logging-out: logout()
+
+    refreshing --> authenticated: Nuevo par de tokens persistido (reintento único exitoso)
+    refreshing --> anonymous: Refresh fallido / rechazado (limpieza de tokens y SecureStore)
+    refreshing --> logging-out: logout() concurrente
+
+    logging-out --> anonymous: SecureStore purgado, estado anónimo establecido (gen++)
