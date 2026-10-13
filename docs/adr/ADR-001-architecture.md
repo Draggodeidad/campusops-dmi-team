@@ -121,45 +121,56 @@ Alternativas: guardar un token en preferencias comunes sería insuficiente para 
 
 **Verificación.** `course-tests/week-05-client.test.tsx`, `course-tests/week-05-transport-validation.test.tsx`, `course-tests/week-05-ui-failure.test.tsx` y `course-tests/public/week-05.test.ts` ejercen parser, mapper, transporte, repositorio y pantalla con respuestas controladas. `npm run test:architecture` y `npm run check:architecture` comprueban los límites de imports. Los resultados de entrega W05 se indexan en `reports/week-05/` con el SHA evaluado.
 
-## Anexo de Semana 06 — sesión integrada y discrepancias de revisión
+## Anexo de Semana 06 — sesión, generaciones y entrega reproducible
 
-**Contexto real.** El commit de osbaldoXxC incorpora `DefaultSessionController`
-en Application con reloj, snapshot sin secretos, generaciones y cola de
-persistencia. `HttpSessionProvider` y `SessionTransportDecorator` implementan
-proveedor y transporte en Infrastructure. `App.tsx` construye e inyecta el
-controlador, SecureStore, proveedor HTTP, decorador, repositorio y casos de uso.
-UI consume `SessionController` y `PerformIncidentAction`. El fake conserva el
-flujo histórico. Los anexos W02–W05 describen sus versiones anteriores; sesión
-y almacenamiento ya tienen consumidores en W06.
+**Contexto.** La revisión de #39 reprodujo ocho fallos en el código recibido:
+identidad saliente incorrecta, autorización fixture desde anonymous, replay
+bajo otra identidad, refresh obsoleto aceptado, envío expirado, restauración
+inválida, carrera restore/logout y fallo de borrado oculto. Los resultados
+originales permanecen en `reports/week-06/validation/` y en el historial.
+El usuario autorizó corregirlos y terminar la validación de entrega.
 
-**Alternativas y decisión.** (1) Renovar por solicitud multiplica refresh y
-permite carreras. (2) Compartir una única promesa global sin generación evita
-duplicados, pero puede aceptar una respuesta después de logout/nuevo login.
-(3) Compartir refresh por generación y serializar persistencia en Application,
-inyectando puertos, es la política elegida: persistir antes de authenticated,
-un replay como máximo, invalidar respuestas viejas y volver a anonymous ante
-fallo. El controlador implementa parte de esa política. No afirmamos que el
-conjunto completo la cumpla: las brechas siguientes son obligatorias antes de
-entregar.
+**Alternativas.** (1) Renovar por solicitud produce refresh duplicados y carreras.
+(2) Una promesa global sin generación no distingue una sesión nueva de una
+respuesta antigua. (3) Una política por generación, una promesa compartida y
+persistencia serializada permite limitar replays e invalidar respuestas viejas.
+Elegimos la tercera, conservando inyección manual y los puertos existentes.
 
-**Discrepancias existentes.** `coordinateRefresh` mantiene un reducer separado
-que no invoca Application; `AuthenticatedIncidentTransport`, usado por otra
-suite, también implementa refresh por separado y no está compuesto en la app.
-El repositorio añade cabeceras históricas que el decorador no reemplaza con la
-sesión activa. El decorador permite replay bajo otra generación y no consulta
-expiración antes de enviar. `restore` existe pero no se llama al arrancar,
-valida sólo tipos y puede restaurar después de logout. El cleanup del
-controlador oculta fallas de borrado y la UI oculta errores de login/logout.
-La versión del recurso se pierde al mapearlo y la pantalla envía siempre 1.
-Estas observaciones no se corrigen sólo cambiando documentación.
+**Decisión implementada.** `RefreshCoordinator` en Application comparte la
+política de generación, cancelación y replay con `DefaultSessionController` y
+el adaptador público `coordinateRefresh`. El controlador mantiene reloj,
+identidad y tokens; persiste antes de publicar authenticated; login/logout
+invalidan la generación anterior; restore valida schema, strings, rol y
+expiración finita y comprueba generación después de la lectura. Las escrituras
+y borrados se serializan; un error de clear se propaga como falla controlada,
+no como purga exitosa. La UI restaura al arrancar, presenta fallos, permite
+reintentar el cierre y oculta datos privados al perder sesión.
 
-**Consecuencias y verificación.** La inyección permite pruebas con reloj y
-promesas controladas, a costa de manejar generaciones, serialización y errores
-de almacenamiento. Los tests de backend prueban permisos del servidor, pero
-no validan la sesión de la app ni toda su UI. Las cinco suites W06 y
-`tools/check-week-06-readiness.cjs` se ejecutan sobre código real; los probes
-adicionales fallan cuando se violan invariantes. Ver logs/exit codes y requisito
-→ decisión → prueba en `reports/week-06/validation/` y
-`evidence/week-06/engineering.json`. No se cambian los SHA de evidencias W02–W05
-para aparentar validación actual. Los pendientes de producto siguen en #37;
-regresiones y reportes independientes, en #38.
+`SessionTransportDecorator` sustituye las cabeceras de identidad sin distinguir
+mayúsculas/minúsculas. Consulta expiración, comparte refresh antes del envío,
+comprueba generación antes de aceptar respuestas o replay y conserva cuerpo y
+clave de idempotencia. Un segundo 401 invalida sesión; 403 no renueva. Un 401
+retardado del token anterior reutiliza la renovación ya completada. La UI usa
+la versión remota preservada por el mapper; las fixtures antiguas del fake
+pueden carecer de versión y no autorizan una acción versionada.
+
+`AuthenticatedIncidentTransport` se conserva como demostración histórica de
+la actividad separada #35, fuera del grafo de la app; sus resultados no
+sustituyen la prueba del decorador compuesto. No se elimina trabajo anterior.
+
+**Consecuencias y límites.** Puertos inyectables y reloj controlado permiten
+pruebas deterministas; generaciones, cola de almacenamiento y estados de UI
+requieren pruebas adicionales de carreras y fallas. El backend sigue siendo
+sintético: token fixture, sin expiración real del servidor ni rotación
+productiva completa. SecureStore se prueba detrás del SDK sustituido, sin
+certificar cifrado físico ni un APK. GPS y cola offline siguen fuera de W06.
+
+**Verificación.** `npm run check:week-06-readiness` conserva las ocho aserciones
+originales. Las seis suites W06 incluyen pruebas del grafo real compuesto por
+`App.tsx` y su UI contra el backend loopback, versiones sucesivas, errores
+visibles, limpieza, restore, escrituras retenidas y respuestas obsoletas.
+Los logs y SHA de validación final se indexan en
+`reports/week-06/final-validation/index.json`. Los documentos W02–W05 y sus
+observaciones históricas conservan procedencia; los workflows revalidan el
+checkout desechable y comprueban tags históricos en su propia versión, sin
+mover etiquetas ni reemplazar SHA como atajo.

@@ -1,0 +1,1359 @@
+command: npm run test:week-06
+commitSha: 1730b6f0f5291db74c221d20f0eb0d11a949afc4
+startedAt: 2026-10-13T05:54:27.741505+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 test:week-06
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-06.test.ts course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/week-06-integration-regression.test.tsx
+
+PASS course-tests/week-06-integration-regression.test.tsx
+  ● Console
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      78 |     let previousGeneration = sessionController.getSnapshot().generation;
+      79 |     const unsubscribe = sessionController.subscribe((snapshot) => {
+    > 80 |       setSession(snapshot);
+         |       ^
+      81 |       if (snapshot.generation !== previousGeneration) {
+      82 |         previousGeneration = snapshot.generation;
+      83 |         setSelectedIncident(null);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSession (src/ui/CampusOpsApp.tsx:80:7)
+      at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+      at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      141 |       const incident = await getIncidentById.execute(id);
+      142 |       if (!isCurrent(generation)) return;
+    > 143 |       setSelectedIncident(incident);
+          |       ^
+      144 |       if (incident === null) setDetailError('La incidencia solicitada no existe.');
+      145 |     } catch (error: unknown) {
+      146 |       if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSelectedIncident (src/ui/CampusOpsApp.tsx:143:7)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      146 |       if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
+      147 |     } finally {
+    > 148 |       if (isCurrent(generation)) setDetailLoading(false);
+          |                                  ^
+      149 |     }
+      150 |   };
+      151 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setDetailLoading (src/ui/CampusOpsApp.tsx:148:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      232 |       const updated = await performIncidentAction.execute(actionPayload);
+      233 |       if (!isCurrent(generation)) return;
+    > 234 |       setSelectedIncident(updated);
+          |       ^
+      235 |       await refreshIncidents();
+      236 |     } catch (err: unknown) {
+      237 |       if (!isCurrent(generation)) return;
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSelectedIncident (src/ui/CampusOpsApp.tsx:234:7)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      120 |   const refreshIncidents = async () => {
+      121 |     const generation = sessionController?.getSnapshot().generation;
+    > 122 |     setListLoading(true);
+          |     ^
+      123 |     setListError(null);
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:122:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      121 |     const generation = sessionController?.getSnapshot().generation;
+      122 |     setListLoading(true);
+    > 123 |     setListError(null);
+          |     ^
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+      126 |       if (isCurrent(generation)) setIncidents(items);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListError (src/ui/CampusOpsApp.tsx:123:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+    > 126 |       if (isCurrent(generation)) setIncidents(items);
+          |                                  ^
+      127 |     } catch (error: unknown) {
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setIncidents (src/ui/CampusOpsApp.tsx:126:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+    > 130 |       if (isCurrent(generation)) setListLoading(false);
+          |                                  ^
+      131 |     }
+      132 |   };
+      133 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:130:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      242 |       }
+      243 |     } finally {
+    > 244 |       if (isCurrent(generation)) setActionLoading(false);
+          |                                  ^
+      245 |     }
+      246 |   };
+      247 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setActionLoading (src/ui/CampusOpsApp.tsx:244:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      232 |       const updated = await performIncidentAction.execute(actionPayload);
+      233 |       if (!isCurrent(generation)) return;
+    > 234 |       setSelectedIncident(updated);
+          |       ^
+      235 |       await refreshIncidents();
+      236 |     } catch (err: unknown) {
+      237 |       if (!isCurrent(generation)) return;
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSelectedIncident (src/ui/CampusOpsApp.tsx:234:7)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      120 |   const refreshIncidents = async () => {
+      121 |     const generation = sessionController?.getSnapshot().generation;
+    > 122 |     setListLoading(true);
+          |     ^
+      123 |     setListError(null);
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:122:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      121 |     const generation = sessionController?.getSnapshot().generation;
+      122 |     setListLoading(true);
+    > 123 |     setListError(null);
+          |     ^
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+      126 |       if (isCurrent(generation)) setIncidents(items);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListError (src/ui/CampusOpsApp.tsx:123:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+    > 126 |       if (isCurrent(generation)) setIncidents(items);
+          |                                  ^
+      127 |     } catch (error: unknown) {
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setIncidents (src/ui/CampusOpsApp.tsx:126:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+    > 130 |       if (isCurrent(generation)) setListLoading(false);
+          |                                  ^
+      131 |     }
+      132 |   };
+      133 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:130:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      242 |       }
+      243 |     } finally {
+    > 244 |       if (isCurrent(generation)) setActionLoading(false);
+          |                                  ^
+      245 |     }
+      246 |   };
+      247 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setActionLoading (src/ui/CampusOpsApp.tsx:244:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      78 |     let previousGeneration = sessionController.getSnapshot().generation;
+      79 |     const unsubscribe = sessionController.subscribe((snapshot) => {
+    > 80 |       setSession(snapshot);
+         |       ^
+      81 |       if (snapshot.generation !== previousGeneration) {
+      82 |         previousGeneration = snapshot.generation;
+      83 |         setSelectedIncident(null);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSession (src/ui/CampusOpsApp.tsx:80:7)
+      at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+      at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      141 |       const incident = await getIncidentById.execute(id);
+      142 |       if (!isCurrent(generation)) return;
+    > 143 |       setSelectedIncident(incident);
+          |       ^
+      144 |       if (incident === null) setDetailError('La incidencia solicitada no existe.');
+      145 |     } catch (error: unknown) {
+      146 |       if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSelectedIncident (src/ui/CampusOpsApp.tsx:143:7)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      146 |       if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
+      147 |     } finally {
+    > 148 |       if (isCurrent(generation)) setDetailLoading(false);
+          |                                  ^
+      149 |     }
+      150 |   };
+      151 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setDetailLoading (src/ui/CampusOpsApp.tsx:148:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      232 |       const updated = await performIncidentAction.execute(actionPayload);
+      233 |       if (!isCurrent(generation)) return;
+    > 234 |       setSelectedIncident(updated);
+          |       ^
+      235 |       await refreshIncidents();
+      236 |     } catch (err: unknown) {
+      237 |       if (!isCurrent(generation)) return;
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSelectedIncident (src/ui/CampusOpsApp.tsx:234:7)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      120 |   const refreshIncidents = async () => {
+      121 |     const generation = sessionController?.getSnapshot().generation;
+    > 122 |     setListLoading(true);
+          |     ^
+      123 |     setListError(null);
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:122:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      121 |     const generation = sessionController?.getSnapshot().generation;
+      122 |     setListLoading(true);
+    > 123 |     setListError(null);
+          |     ^
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+      126 |       if (isCurrent(generation)) setIncidents(items);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListError (src/ui/CampusOpsApp.tsx:123:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+    > 126 |       if (isCurrent(generation)) setIncidents(items);
+          |                                  ^
+      127 |     } catch (error: unknown) {
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setIncidents (src/ui/CampusOpsApp.tsx:126:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+    > 130 |       if (isCurrent(generation)) setListLoading(false);
+          |                                  ^
+      131 |     }
+      132 |   };
+      133 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:130:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      242 |       }
+      243 |     } finally {
+    > 244 |       if (isCurrent(generation)) setActionLoading(false);
+          |                                  ^
+      245 |     }
+      246 |   };
+      247 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setActionLoading (src/ui/CampusOpsApp.tsx:244:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      232 |       const updated = await performIncidentAction.execute(actionPayload);
+      233 |       if (!isCurrent(generation)) return;
+    > 234 |       setSelectedIncident(updated);
+          |       ^
+      235 |       await refreshIncidents();
+      236 |     } catch (err: unknown) {
+      237 |       if (!isCurrent(generation)) return;
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSelectedIncident (src/ui/CampusOpsApp.tsx:234:7)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      120 |   const refreshIncidents = async () => {
+      121 |     const generation = sessionController?.getSnapshot().generation;
+    > 122 |     setListLoading(true);
+          |     ^
+      123 |     setListError(null);
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:122:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      121 |     const generation = sessionController?.getSnapshot().generation;
+      122 |     setListLoading(true);
+    > 123 |     setListError(null);
+          |     ^
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+      126 |       if (isCurrent(generation)) setIncidents(items);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListError (src/ui/CampusOpsApp.tsx:123:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/ui/CampusOpsApp.tsx:120:25)
+      at refreshIncidents (src/ui/CampusOpsApp.tsx:235:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      124 |     try {
+      125 |       const items = await getIncidents.execute();
+    > 126 |       if (isCurrent(generation)) setIncidents(items);
+          |                                  ^
+      127 |     } catch (error: unknown) {
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setIncidents (src/ui/CampusOpsApp.tsx:126:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      128 |       if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
+      129 |     } finally {
+    > 130 |       if (isCurrent(generation)) setListLoading(false);
+          |                                  ^
+      131 |     }
+      132 |   };
+      133 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setListLoading (src/ui/CampusOpsApp.tsx:130:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      242 |       }
+      243 |     } finally {
+    > 244 |       if (isCurrent(generation)) setActionLoading(false);
+          |                                  ^
+      245 |     }
+      246 |   };
+      247 |
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setActionLoading (src/ui/CampusOpsApp.tsx:244:34)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      78 |     let previousGeneration = sessionController.getSnapshot().generation;
+      79 |     const unsubscribe = sessionController.subscribe((snapshot) => {
+    > 80 |       setSession(snapshot);
+         |       ^
+      81 |       if (snapshot.generation !== previousGeneration) {
+      82 |         previousGeneration = snapshot.generation;
+      83 |         setSelectedIncident(null);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSession (src/ui/CampusOpsApp.tsx:80:7)
+      at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+      at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+    console.error
+      An update to CampusOpsApp inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      78 |     let previousGeneration = sessionController.getSnapshot().generation;
+      79 |     const unsubscribe = sessionController.subscribe((snapshot) => {
+    > 80 |       setSession(snapshot);
+         |       ^
+      81 |       if (snapshot.generation !== previousGeneration) {
+      82 |         previousGeneration = snapshot.generation;
+      83 |         setSelectedIncident(null);
+
+      at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+      at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+      at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+      at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+      at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+      at setSession (src/ui/CampusOpsApp.tsx:80:7)
+      at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+      at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+PASS course-tests/week-06-authorization.test.tsx
+PASS course-tests/week-06-session-validation.test.ts
+PASS course-tests/public/week-06.test.ts
+PASS course-tests/week-06-session.test.ts
+  ● Console
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] RETRY
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] RETRY
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [AUTH] REFRESH FAIL
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH FAIL
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [SESSION] CLEAR
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [SESSION] CLEAR
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [AUTH] ANONYMOUS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] ANONYMOUS
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [LOGIN] REQUIRED
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [LOGIN] REQUIRED
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+PASS course-tests/week-06-session-controller.test.ts
+
+Test Suites: 6 passed, 6 total
+Tests:       31 passed, 31 total
+Snapshots:   0 total
+Time:        2.468 s, estimated 3 s
+Ran all test suites within paths "course-tests/public/week-06.test.ts", "course-tests/week-06-session.test.ts", "course-tests/week-06-session-controller.test.ts", "course-tests/week-06-session-validation.test.ts", "course-tests/week-06-authorization.test.tsx", "course-tests/week-06-integration-regression.test.tsx".
+
+exitCode: 0

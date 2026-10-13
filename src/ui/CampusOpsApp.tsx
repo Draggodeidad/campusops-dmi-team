@@ -65,56 +65,87 @@ export function CampusOpsApp({
   const [session, setSession] = useState<SessionSnapshot | null>(
     sessionController ? sessionController.getSnapshot() : null,
   );
+  const [sessionError, setSessionError] = useState<string | null>(null);
+  const [restoring, setRestoring] = useState(Boolean(sessionController));
+  const sessionUsable = !sessionController || (session !== null && ['authenticated', 'expired', 'refreshing'].includes(session.state));
+  const isCurrent = (generation: number | undefined) => !sessionController || generation === sessionController.getSnapshot().generation;
   const [actionLoading, setActionLoading] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sessionController) return;
-    const unsubscribe = sessionController.subscribe((snap) => {
-      setSession(snap);
+    let active = true;
+    let previousGeneration = sessionController.getSnapshot().generation;
+    const unsubscribe = sessionController.subscribe((snapshot) => {
+      setSession(snapshot);
+      if (snapshot.generation !== previousGeneration) {
+        previousGeneration = snapshot.generation;
+        setSelectedIncident(null);
+        setActiveView('list');
+        setIncidents([]);
+        setListError(null);
+        setDetailError(null);
+        setActionError(null);
+        setActionLoading(false);
+        setCreateLoading(false);
+        setListLoading(snapshot.state === 'authenticated');
+      }
+      if (snapshot.state === 'anonymous') setListLoading(false);
     });
-    return unsubscribe;
+    const timer = setInterval(() => sessionController.getSnapshot(), 1000);
+    void sessionController.restore()
+      .catch((error: unknown) => {
+        if (active) setSessionError(error instanceof ApplicationFailure ? error.message : 'No fue posible recuperar la sesión.');
+      })
+      .finally(() => { if (active) setRestoring(false); });
+    return () => { active = false; unsubscribe(); clearInterval(timer); };
   }, [sessionController]);
 
   useEffect(() => {
     let active = true;
-    void getBackendStatus.execute().then((status) => active && setBackendStatus(status));
-    void getIncidents
-      .execute()
-      .then((items) => active && setIncidents(items))
-      .catch((error: unknown) => active && setListError(presentIncidentFailure(error, 'list')))
-      .finally(() => active && setListLoading(false));
-    return () => {
-      active = false;
-    };
-  }, [getBackendStatus, getIncidents, session?.actorId]);
+    void getBackendStatus.execute().then((status) => { if (active) setBackendStatus(status); });
+    return () => { active = false; };
+  }, [getBackendStatus]);
+
+  useEffect(() => {
+    let active = true;
+    if (!sessionUsable) return;
+    void getIncidents.execute()
+      .then((items) => { if (active) setIncidents(items); })
+      .catch((error: unknown) => { if (active) setListError(presentIncidentFailure(error, 'list')); })
+      .finally(() => { if (active) setListLoading(false); });
+    return () => { active = false; };
+  }, [getIncidents, session?.generation, sessionUsable]);
 
   const refreshIncidents = async () => {
+    const generation = sessionController?.getSnapshot().generation;
     setListLoading(true);
     setListError(null);
     try {
       const items = await getIncidents.execute();
-      setIncidents(items);
+      if (isCurrent(generation)) setIncidents(items);
     } catch (error: unknown) {
-      setListError(presentIncidentFailure(error, 'list'));
+      if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
     } finally {
-      setListLoading(false);
+      if (isCurrent(generation)) setListLoading(false);
     }
   };
 
   const openIncident = async (id: string) => {
+    const generation = sessionController?.getSnapshot().generation;
     setActiveView('detail');
     setDetailLoading(true);
     setDetailError(null);
     setActionError(null);
     try {
       const incident = await getIncidentById.execute(id);
+      if (!isCurrent(generation)) return;
       setSelectedIncident(incident);
       if (incident === null) setDetailError('La incidencia solicitada no existe.');
     } catch (error: unknown) {
-      setDetailError(presentIncidentFailure(error, 'detail'));
+      if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
     } finally {
-      setDetailLoading(false);
+      if (isCurrent(generation)) setDetailLoading(false);
     }
   };
 
@@ -138,36 +169,46 @@ export function CampusOpsApp({
 
   const handleCreateSubmit = async (data: CreateIncidentInput) => {
     if (!createIncident) return;
+    const generation = sessionController?.getSnapshot().generation;
     setCreateLoading(true);
     setCreateError(null);
     try {
       await createIncident.execute(data);
+      if (!isCurrent(generation)) return;
       await refreshIncidents();
+      if (!isCurrent(generation)) return;
       setActiveView('list');
     } catch (error: unknown) {
-      setCreateError(presentIncidentFailure(error, 'create'));
+      if (isCurrent(generation)) setCreateError(presentIncidentFailure(error, 'create'));
     } finally {
-      setCreateLoading(false);
+      if (isCurrent(generation)) setCreateLoading(false);
     }
   };
 
   const handleLogin = async (actorId: string) => {
     if (!sessionController) return;
-    try {
-      await sessionController.login(actorId);
-      await refreshIncidents();
-    } catch {
-      // Ignorar o manejar error de inicio de sesión
+    setSessionError(null);
+    try { await sessionController.login(actorId); }
+    catch (error: unknown) {
+      setSessionError(error instanceof ApplicationFailure ? error.message : 'No fue posible iniciar sesión.');
     }
   };
 
   const handleLogout = async () => {
     if (!sessionController) return;
-    try {
-      await sessionController.logout();
-      await refreshIncidents();
-    } catch {
-      // Ignorar o manejar error de logout
+    setSessionError(null);
+    try { await sessionController.logout(); }
+    catch (error: unknown) {
+      setSessionError(error instanceof ApplicationFailure ? error.message : 'No fue posible cerrar sesión.');
+    }
+  };
+
+  const handleRefresh = async () => {
+    if (!sessionController) return;
+    setSessionError(null);
+    try { await sessionController.refresh(); }
+    catch (error: unknown) {
+      setSessionError(error instanceof ApplicationFailure ? error.message : 'No fue posible renovar la sesión.');
     }
   };
 
@@ -176,27 +217,31 @@ export function CampusOpsApp({
     diagnosis?: string,
   ) => {
     if (!performIncidentAction || !selectedIncident) return;
+    const generation = sessionController?.getSnapshot().generation;
     setActionLoading(true);
     setActionError(null);
     try {
+      if (selectedIncident.version === undefined) throw new ApplicationFailure('VERSION_CONFLICT', 'Actualiza la incidencia antes de ejecutar la acción.');
       const actionPayload: PerformIncidentActionInput = {
         incidentId: selectedIncident.id,
         action,
-        baseVersion: 1, // Versión base inicial en campusops.mjs
+        baseVersion: selectedIncident.version,
         actorRole: session?.role ?? null,
         ...(diagnosis !== undefined ? { diagnosis } : {}),
       };
       const updated = await performIncidentAction.execute(actionPayload);
+      if (!isCurrent(generation)) return;
       setSelectedIncident(updated);
       await refreshIncidents();
     } catch (err: unknown) {
+      if (!isCurrent(generation)) return;
       if (err instanceof ApplicationFailure) {
         setActionError(err.message);
       } else {
         setActionError('No fue posible ejecutar la acción.');
       }
     } finally {
-      setActionLoading(false);
+      if (isCurrent(generation)) setActionLoading(false);
     }
   };
 
@@ -213,7 +258,9 @@ export function CampusOpsApp({
               Estado: {session.state}
               {session.actorId ? ` | ${session.actorId} (${session.role})` : ''}
             </Text>
-            {session.state === 'anonymous' ? (
+            {sessionError ? <Text accessibilityRole="alert" testID="session-error">{sessionError}</Text> : null}
+            {restoring ? <Text accessibilityRole="progressbar">Recuperando sesión…</Text> : null}
+            {session.state === 'anonymous' && !restoring ? (
               <View style={styles.authButtonsRow}>
                 <Pressable
                   accessibilityRole="button"
@@ -243,6 +290,7 @@ export function CampusOpsApp({
             ) : (
               <Pressable
                 accessibilityRole="button"
+                disabled={restoring || session.state === 'logging-out'}
                 onPress={handleLogout}
                 style={styles.logoutBtn}
                 testID="logout-button"
@@ -250,11 +298,13 @@ export function CampusOpsApp({
                 <Text style={styles.logoutBtnText}>Cerrar sesión</Text>
               </Pressable>
             )}
+            {session.state === 'expired' ? <Pressable accessibilityRole="button" onPress={handleRefresh} testID="refresh-session"><Text>Renovar sesión</Text></Pressable> : null}
+            {session.state === 'anonymous' && sessionError ? <Pressable accessibilityRole="button" onPress={handleLogout} testID="retry-session-cleanup"><Text>Reintentar cierre de sesión</Text></Pressable> : null}
           </View>
         )}
       </View>
 
-      {activeView === 'create' && (
+      {sessionUsable && activeView === 'create' && (
         <CreateIncidentScreen
           error={createError}
           loading={createLoading}
@@ -263,7 +313,7 @@ export function CampusOpsApp({
         />
       )}
 
-      {activeView === 'detail' && (
+      {sessionUsable && activeView === 'detail' && (
         <IncidentDetailScreen
           actionError={actionError}
           actionLoading={actionLoading}
@@ -276,12 +326,12 @@ export function CampusOpsApp({
         />
       )}
 
-      {activeView === 'list' && (
+      {sessionUsable && activeView === 'list' && (
         <IncidentListScreen
           error={listError}
           incidents={incidents}
           loading={listLoading}
-          onCreate={createIncident ? handleOpenCreate : undefined}
+          onCreate={createIncident && (!sessionController || session?.role === 'reporter') ? handleOpenCreate : undefined}
           onSelect={openIncident}
         />
       )}

@@ -165,6 +165,8 @@ describe('Week 06 single-flight concurrency and races', () => {
       },
     };
     const context = {
+      getSnapshot: () => controller.getSnapshot(),
+      invalidate: (generation: number) => controller.invalidate(generation),
       getAuthorizationHeader: () => controller.getAuthorizationHeader(),
       getActorId: () => controller.getActorId(),
       getGeneration: () => controller.getGeneration(),
@@ -247,6 +249,8 @@ describe('Week 06 single-flight concurrency and races', () => {
       },
     };
     const decorator = new SessionTransportDecorator(transport, {
+      getSnapshot: () => controller.getSnapshot(),
+      invalidate: (generation: number) => controller.invalidate(generation),
       getAuthorizationHeader: () => controller.getAuthorizationHeader(),
       getActorId: () => controller.getActorId(),
       getGeneration: () => controller.getGeneration(),

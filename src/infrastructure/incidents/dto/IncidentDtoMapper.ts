@@ -62,6 +62,7 @@ export function mapDtoToIncident(envelope: RemoteIncidentEnvelopeDto): Incident 
 
   return {
     id: envelope.id,
+    version: envelope.version,
     title: deriveTitle(description, envelope.id),
     description,
     category: category as IncidentCategory,

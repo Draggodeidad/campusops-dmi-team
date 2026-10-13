@@ -1,0 +1,266 @@
+command: python3 tools/revalidate-prior-evidence.py --week 6
+commitSha: a3606300785f080bbc287829e9c97986fe81dc5b
+startedAt: 2026-10-13T06:07:15.847626+00:00
+
+[week-06] make feedback
+s on vulnerable versions of @expo/metro
+        node_modules/@expo/metro-config
+      metro  >=0.71.0
+      Depends on vulnerable versions of metro-config
+      Depends on vulnerable versions of metro-file-map
+      Depends on vulnerable versions of metro-transform-worker
+      node_modules/metro
+        @react-native/community-cli-plugin  *
+        Depends on vulnerable versions of metro
+        Depends on vulnerable versions of metro-config
+        node_modules/@react-native/community-cli-plugin
+        metro-config  >=0.71.0
+        Depends on vulnerable versions of metro
+        node_modules/metro-config
+        metro-transform-worker  >=0.71.0
+        Depends on vulnerable versions of metro
+        node_modules/metro-transform-worker
+
+compression  <1.8.2
+Severity: high
+compression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95
+fix available via `npm audit fix`
+node_modules/compression
+
+node-forge  *
+Severity: high
+node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv
+fix available via `npm audit fix --force`
+Will install expo@44.0.6, which is a breaking change
+node_modules/node-forge
+  @expo/code-signing-certificates  *
+  Depends on vulnerable versions of node-forge
+  node_modules/@expo/code-signing-certificates
+
+source-map-js  1.0.0 - 1.2.1
+Severity: high
+source-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q
+fix available via `npm audit fix`
+node_modules/source-map-js
+
+sprintf-js  *
+Severity: moderate
+sprintf-js vulnerable to denial of service through unbounded precision specifiers - https://github.com/advisories/GHSA-hp3w-g68c-fv3c
+fix available via `npm audit fix --force`
+Will install react-native@0.87.1, which is a breaking change
+node_modules/sprintf-js
+  argparse  1.0.0 - 1.0.10
+  Depends on vulnerable versions of sprintf-js
+  node_modules/argparse
+    js-yaml  3.2.7 - 3.15.2
+    Depends on vulnerable versions of argparse
+    node_modules/js-yaml
+      @istanbuljs/load-nyc-config  *
+      Depends on vulnerable versions of js-yaml
+      node_modules/@istanbuljs/load-nyc-config
+        babel-plugin-istanbul  >=6.0.0-beta.0
+        Depends on vulnerable versions of @istanbuljs/load-nyc-config
+        node_modules/babel-plugin-istanbul
+
+32 vulnerabilities (5 moderate, 27 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+npm run bundle:release
+
+> dmi-react-native-starter@1.0.0 bundle:release
+> expo export --platform android --output-dir dist/export
+
+Starting Metro Bundler
+
+Android Bundled 3963ms index.ts (605 modules)
+
+› android bundles (1):
+_expo/static/js/android/index-8d85736a1b24d225b32b1a69a2805def.hbc (1.5MB)
+
+› Files (1):
+metadata.json (150B)
+
+Exported: dist/export
+
+[week-06] npm run check:week-06-readiness
+
+> dmi-react-native-starter@1.0.0 check:week-06-readiness
+> node tools/check-week-06-readiness.cjs
+
+{
+  "week": 6,
+  "purpose": "independent-readiness-review",
+  "checks": [
+    {
+      "id": "repository-uses-active-session-actor",
+      "status": "pass",
+      "observed": {
+        "activeActorMatchesOutgoingActor": true
+      }
+    },
+    {
+      "id": "anonymous-repository-does-not-send-fixture-authorization",
+      "status": "pass",
+      "observed": {
+        "anonymous": true,
+        "sentAuthorization": false
+      }
+    },
+    {
+      "id": "old-401-is-not-replayed-as-new-actor",
+      "status": "pass",
+      "observed": {
+        "attempts": 1,
+        "replayedUnderNewActor": false
+      }
+    },
+    {
+      "id": "evaluation-rejects-refresh-success-after-logout",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous",
+        "retainedToken": false
+      }
+    },
+    {
+      "id": "expired-request-refreshes-before-send",
+      "status": "pass",
+      "observed": {
+        "expired": true,
+        "refreshCallsBeforeSend": 1
+      }
+    },
+    {
+      "id": "restore-rejects-invalid-role-and-empty-tokens",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous",
+        "clearCalls": 1
+      }
+    },
+    {
+      "id": "restore-completion-cannot-resurrect-after-logout",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous"
+      }
+    },
+    {
+      "id": "refresh-cleanup-reports-storage-delete-failure",
+      "status": "pass",
+      "observed": {
+        "errorCode": "SECURE_STORAGE_UNAVAILABLE",
+        "persistedRecordRemains": true,
+        "state": "anonymous"
+      }
+    }
+  ]
+}
+
+[week-06] npm run test:week-06
+nticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] ANONYMOUS
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [LOGIN] REQUIRED
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [LOGIN] REQUIRED
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+PASS course-tests/week-06-session-controller.test.ts
+PASS course-tests/public/week-06.test.ts
+
+Test Suites: 6 passed, 6 total
+Tests:       31 passed, 31 total
+Snapshots:   0 total
+Time:        2.644 s, estimated 4 s
+Ran all test suites within paths "course-tests/public/week-06.test.ts", "course-tests/week-06-session.test.ts", "course-tests/week-06-session-controller.test.ts", "course-tests/week-06-session-validation.test.ts", "course-tests/week-06-authorization.test.tsx", "course-tests/week-06-integration-regression.test.tsx".
+
+[week-06] npm run backend:self-test
+
+> dmi-react-native-starter@1.0.0 backend:self-test
+> node course-backend/self-test.mjs
+
+CampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS.
+Controlled backend self-test passed.
+
+
+exitCode: 0

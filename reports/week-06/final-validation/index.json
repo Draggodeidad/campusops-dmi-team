@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+  "generatedAt": "2026-10-13T05:59:01.858129+00:00",
+  "nodeVersion": "v22.22.0",
+  "npmVersion": "10.9.4",
+  "prediction": "Tras corregir las causas, espero ocho invariantes aprobadas, seis suites W06/31 pruebas y 19 suites/87 pruebas acumuladas, gates críticos/export y controles históricos con procedencia intacta. Sólo congelaré una versión con checks completos.",
+  "commands": [
+    {
+      "command": "make setup",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:01.269417+00:00",
+      "durationSeconds": 14.01,
+      "log": "reports/week-06/final-validation/00.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:15.280411+00:00",
+      "durationSeconds": 2.52,
+      "log": "reports/week-06/final-validation/01.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:17.796576+00:00",
+      "durationSeconds": 4.04,
+      "log": "reports/week-06/final-validation/02.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:21.840007+00:00",
+      "durationSeconds": 1.83,
+      "log": "reports/week-06/final-validation/03.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:23.670656+00:00",
+      "durationSeconds": 1.69,
+      "log": "reports/week-06/final-validation/04.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:25.364991+00:00",
+      "durationSeconds": 1.44,
+      "log": "reports/week-06/final-validation/05.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:26.802647+00:00",
+      "durationSeconds": 0.2,
+      "log": "reports/week-06/final-validation/06.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:27.007210+00:00",
+      "durationSeconds": 0.73,
+      "log": "reports/week-06/final-validation/07.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:27.741505+00:00",
+      "durationSeconds": 3.48,
+      "log": "reports/week-06/final-validation/08.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:31.218113+00:00",
+      "durationSeconds": 0.73,
+      "log": "reports/week-06/final-validation/09.log"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:31.952374+00:00",
+      "durationSeconds": 2.18,
+      "log": "reports/week-06/final-validation/10.log"
+    },
+    {
+      "command": "make feedback",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:34.134217+00:00",
+      "durationSeconds": 25.03,
+      "log": "reports/week-06/final-validation/11.log"
+    },
+    {
+      "command": "make verify-week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:54:59.164062+00:00",
+      "durationSeconds": 13.47,
+      "log": "reports/week-06/final-validation/12.log"
+    },
+    {
+      "command": "python3 /tmp/campusops-w06-history.py",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:55:12.638903+00:00",
+      "durationSeconds": 189.87,
+      "log": "reports/week-06/final-validation/13.log"
+    },
+    {
+      "command": "make public-test-week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "log": "reports/week-06/final-validation/14.log"
+    }
+  ],
+  "readiness": "validated",
+  "notExecuted": [
+    "Merge del PR en main",
+    "Entrega en Classroom"
+  ],
+  "postTagSequence": "Guardar commit exclusivo reports/evidence; crear tag anotado; make evidence-week-06; publicar rama/tag y comprobar Actions. Reporte posterior al tag local, sin nuevo commit.",
+  "historicalOrchestratorSource": "reports/week-06/final-validation/historical-orchestrator-source.txt",
+  "summary": {
+    "readinessInvariants": 8,
+    "readinessPassed": 8,
+    "week06Suites": 6,
+    "week06Tests": 31,
+    "cumulativeSuites": 19,
+    "cumulativeTests": 87,
+    "pythonTests": 16,
+    "technicalCommitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+    "plannedTag": "week-06-final",
+    "sourceOfPriorFailures": "372064458bfed08f29e72fcc6319b48fabd8d9c5; reports/week-06/validation"
+  }
+}

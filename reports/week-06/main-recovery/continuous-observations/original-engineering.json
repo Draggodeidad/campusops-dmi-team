@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+  "readiness": "validated",
+  "decision": "Una política RefreshCoordinator en Application comparte generación, cancelación y replay entre DefaultSessionController y coordinateRefresh. Se comparte una promesa de renovación por generación, se serializa persistencia, se persiste antes de authenticated y se invalida la generación al perder sesión. El decorador toma identidad de la sesión, comprueba expiración y generación antes de enviar/aceptar/repetir, conserva cuerpo/clave y limita reintentos. Restore valida registros y descarta lecturas obsoletas; clear fallido se presenta y permite reintento. La UI usa la versión real del DTO y oculta vistas privadas al cerrar sesión.",
+  "alternatives": [
+    "Renovar independientemente cada request401: descartado por refresh duplicados y carreras de persistencia, demostrado por el requisito A/B/C.",
+    "Compartir una promesa global sin generación: evita duplicación nominal, pero admite replay con identidad nueva o restauración tardía tras logout; descartado por los ocho probes originales.",
+    "Compartir política de generación y una promesa por generación con cola de persistencia, reloj y puertos inyectados: seleccionada y comprobada con las aserciones originales, carreras retenidas y grafo real/UI contra backend local."
+  ],
+  "tradeoff": "Beneficio: los ocho probes antes fallidos ahora aprueban, incluyendo identidad activa, cancelación y errores de borrado; las seis suites W06 ejercen además roles/versiones en el grafo real. Costo: generaciones, cola de escritura, estados de UI y compatibilidad con fixtures históricas exigen más regresiones. SecureStore no puede garantizar una purga si el proveedor falla: se invalida memoria y se muestra error/reintento. El backend y SDK simulado no acreditan producción ni cifrado físico. CI revalida observaciones actuales sin reescribir evidencia histórica; el tag W05 se verifica en su propio SHA.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "requirementTrace": [
+    {
+      "requirementId": "AC-01",
+      "evidence": "final-validation/index.json: setup, feedback, verify/public, regresiones históricas y umbral crítico; SHA técnico guardado."
+    },
+    {
+      "requirementId": "AC-02",
+      "evidence": "auth-tests.json: login, expiración, restore, roles, grafo/UI y versiones sucesivas."
+    },
+    {
+      "requirementId": "AC-03",
+      "evidence": "concurrency.json: A/B/C, replay único, logout, respuestas viejas, escrituras y error de clear."
+    },
+    {
+      "requirementId": "AC-04",
+      "evidence": "ADR W06, alternativas/tradeoff y verification reproducible sobre el código real."
+    },
+    {
+      "requirementId": "AC-05",
+      "evidence": "individual.json: roster confirmado, tres aportes originales y correcciones posteriores atribuidas a su autor real."
+    }
+  ],
+  "verification": [
+    {
+      "command": "make setup",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/00.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/01.log"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/02.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/03.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/04.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/05.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/06.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/07.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/08.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/09.log"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/10.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/11.log"
+    },
+    {
+      "command": "make verify-week-06",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/12.log"
+    },
+    {
+      "command": "python3 /tmp/campusops-w06-history.py",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/13.log"
+    },
+    {
+      "command": "make public-test-week-06",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/final-validation/14.log"
+    }
+  ],
+  "sourceTreeNote": "Validación final sobre código/configuración/documentos guardados en el SHA técnico indicado; siguiente commit sólo reports/evidence. Los fallos previos permanecen en validation y en el commit 372064458bfed08f29e72fcc6319b48fabd8d9c5. No se relabelan como ejecuciones aprobadas.",
+  "aiAssistance": "Implementación, pruebas, documentación y ejecución asistidas por Codex a petición de Draggodeidad; contrastadas con comandos, logs y aserciones originales sin omitir controles."
+}

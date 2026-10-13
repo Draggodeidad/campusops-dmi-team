@@ -112,6 +112,57 @@ class RevalidationTests(unittest.TestCase):
     def test_official_evaluator_still_rejects_stale_sha(self):
         self.assertFalse(module.validate_report(self.repo, self.report, 1, self.sha)[0])
 
+class MultiReportRevalidationTests(RevalidationTests):
+    def prepare_week(self, week):
+        names = {5: ['contract-tests.json', 'failure-matrix.json'], 6: ['auth-tests.json', 'concurrency.json']}[week]
+        key = f'week-{week:02d}'
+        for relative, original in [
+            *((f'reports/{key}/{name}', self.report) for name in names),
+            (f'evidence/{key}/engineering.json', self.engineering),
+            (f'evidence/{key}/individual.json', self.repo / 'evidence/week-01/individual.json'),
+        ]:
+            data = json.loads(original.read_text())
+            data['week'] = week
+            path = self.repo / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(data))
+        self.commit(f'week {week} synthetic indexes')
+        self.sha = self.git('rev-parse', 'HEAD')
+        return [self.repo / 'reports' / key / name for name in names]
+
+    def test_both_reports_preserve_original_provenance(self):
+        for week in [5, 6]:
+            with self.subTest(week=week):
+                paths = self.prepare_week(week)
+                command = [sys.executable, '-c', 'print("synthetic regression")']
+                with patch.dict(module.COMMANDS, {week: [('synthetic', 'boundary', command)]}):
+                    module.revalidate(self.repo, week)
+                for path in paths:
+                    data = json.loads(path.read_text())
+                    self.assertEqual(data['commitSha'], self.sha)
+                    self.assertEqual(data['checks'][0]['evaluatedCommitSha'], self.source)
+                    self.assertEqual(data['checks'][0]['status'], 'fail')
+                    self.assertTrue(module.validate_report(self.repo, path, week, self.sha)[0])
+
+    def test_failure_does_not_relabel_either_index(self):
+        for week in [5, 6]:
+            with self.subTest(week=week):
+                paths = self.prepare_week(week)
+                originals = [path.read_bytes() for path in paths]
+                command = [sys.executable, '-c', 'raise SystemExit(9)']
+                with patch.dict(module.COMMANDS, {week: [('failure', 'failure', command)]}):
+                    with self.assertRaises(subprocess.CalledProcessError):
+                        module.revalidate(self.repo, week)
+                self.assertEqual([path.read_bytes() for path in paths], originals)
+
+    def test_week_six_final_tag_forbids_revalidation(self):
+        paths = self.prepare_week(6)
+        originals = [path.read_bytes() for path in paths]
+        with patch.dict(os.environ, {'GITHUB_REF': 'refs/tags/week-06-final'}):
+            with self.assertRaisesRegex(ValueError, 'forbidden'):
+                module.revalidate(self.repo, 6)
+        self.assertEqual([path.read_bytes() for path in paths], originals)
+
 
 if __name__ == '__main__':
     unittest.main()

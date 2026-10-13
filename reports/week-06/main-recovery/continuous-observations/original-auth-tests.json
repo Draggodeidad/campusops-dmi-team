@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+  "generatedAt": "2026-10-13T05:58:26.002791+00:00",
+  "readiness": "validated",
+  "sourceTreeNote": "Validación final sobre código/configuración/documentos guardados en el SHA técnico indicado; siguiente commit sólo reports/evidence. Los fallos previos permanecen en validation y en el commit 372064458bfed08f29e72fcc6319b48fabd8d9c5. No se relabelan como ejecuciones aprobadas.",
+  "checks": [
+    {
+      "id": "login-success-and-persistence",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-06",
+      "evidence": "Controller persiste registro schemaVersion 1 antes de publicar sesión; la suite del grafo inicia sesión/restaura y recorre UI con identidades reales sintéticas. 6 suites/31 pruebas; reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "login-invalid-transport-and-persistence-failures",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Login inválido, red y save fallidos no publican authenticated; UI presenta mensaje seguro sin error privado del proveedor. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "expiration-boundaries",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "expiresAt-1 válido; expiresAt y +1 expirados con reloj controlado. El decorador renueva antes de enviar y un 401 posterior a renovación invalida sin segundo refresh. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "authorization-app-graph-and-versions",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "Grafo exportado por App.tsx + UI + proveedor/decorador/repositorio reales contra backend loopback: técnico inicia/resuelve con versiones 1/2; coordinador cierra/reabre con versiones 3/4; resultado versión 5. Reportante recibe 403 sin mutación. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "authorization-foreign-assignment",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Suite de backend comprueba 403 para técnico no asignado y 409 para versión antigua; estado/versión no cambian. Complementa el grafo/UI. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "active-role-and-anonymous-request",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Sesión técnica coincide con actor saliente; anonymous envía autorización=false. Aserciones originales aprobadas. reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "restore-validation-and-logout-race",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Registro con rol inválido/tokens vacíos termina anonymous y clearCalls=1; lectura retenida tras logout termina anonymous. reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "cleanup-storage-failure-observable",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Clear fallido deja registro retenido y propaga SECURE_STORAGE_UNAVAILABLE, sin afirmar purga. UI oculta vistas privadas, muestra error y reintenta; nuevo clear exitoso deja null. reports/week-06/final-validation/08.log; reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "architecture-boundaries",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "Cero violaciones de imports; detector y sustitución también probados por test:architecture/test:incidents. final-validation/05.log y 06.log."
+    },
+    {
+      "id": "backend-contract-self-test",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run backend:self-test",
+      "evidence": "Backend self-test aprobó contratos sintéticos; final-validation/07.log."
+    }
+  ],
+  "limits": "Backend sintético sin expiración temporal/rotación productiva completa; SDK nativo simulado. No certifica autenticación institucional, cifrado físico ni APK."
+}

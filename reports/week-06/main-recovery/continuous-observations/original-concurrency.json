@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+  "generatedAt": "2026-10-13T05:58:26.002791+00:00",
+  "readiness": "validated",
+  "sourceTreeNote": "Validación final sobre código/configuración/documentos guardados en el SHA técnico indicado; siguiente commit sólo reports/evidence. Los fallos previos permanecen en validation y en el commit 372064458bfed08f29e72fcc6319b48fabd8d9c5. No se relabelan como ejecuciones aprobadas.",
+  "checks": [
+    {
+      "id": "three-401s-share-one-refresh",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "Barrera A/B/C y refresh retenido: 3 waiters, 1 refresh, 6 intentos, 3 respuestas 200 y máximo un replay por solicitud. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "failed-refresh-releases-all-waiters",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Refresh rechazado: tres requests finalizan 401, sesión anonymous, store limpiado una vez y ningún unhandledRejection. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "stale-request-generation-replay",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "401 anterior a nuevo login: attempts=1; replayedUnderNewActor=false. reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "evaluation-obsolete-refresh-after-logout",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Adaptador usa RefreshCoordinator compartido: resultado posterior a logout queda anonymous, retainedToken=false. reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "obsolete-success-and-failure-preserve-new-login",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Refresh anterior exitoso o fallido no restaura ni borra la sesión nueva. La política rechaza éxito/fallo de generación vieja y no repite requestId ya reintentado. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "logout-orders-pending-storage-write",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Save retenido, logout y liberación: ambos finalizan; borrado ocurre después de la escritura y snapshot termina anonymous/store null. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "delayed-401-reuses-renewal-and-post-identity",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "B recibe 401 después del refresh de A: un solo refresh total y dos intentos por solicitud conservando cuerpo y clave idempotente. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "no-refresh-on-403-and-single-replay",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "403 no renueva; segundo 401 invalida y no genera bucle. 401 del endpoint refresh nunca se intercepta recursivamente. reports/week-06/final-validation/08.log"
+    }
+  ],
+  "limits": "Backend sintético sin expiración temporal/rotación productiva completa; SDK nativo simulado. No certifica autenticación institucional, cifrado físico ni APK.",
+  "metrics": {
+    "requestsInitiated": 3,
+    "requestsCompleted": 3,
+    "requestIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "transportAttempts": 6,
+    "refreshWaiters": 3,
+    "refreshCount": 1,
+    "retryCount": 3,
+    "maxRetriesPerRequest": 1,
+    "generationBeforeRefresh": 1,
+    "generationAfterRefresh": 1,
+    "finalSessionState": "authenticated",
+    "finalRequestStatuses": [
+      200,
+      200,
+      200
+    ],
+    "refreshFailureFinalState": "anonymous",
+    "refreshFailureWaiterStatuses": [
+      401,
+      401,
+      401
+    ]
+  },
+  "metricsSource": "Aserciones del escenario A/B/C retenido en week-06-session-validation.test.ts, ejecutadas en reports/week-06/final-validation/08.log; las otras carreras se indexan por separado."
+}

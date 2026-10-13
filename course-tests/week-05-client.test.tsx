@@ -131,6 +131,7 @@ describe('HU #28 — Contrato y Cliente Remoto', () => {
 
       expect(incident).toEqual({
         id: 'campus-inc-001',
+        version: 1,
         title: 'Falla eléctrica en tablero principal',
         description: 'Falla eléctrica en tablero principal',
         category: 'electrical',

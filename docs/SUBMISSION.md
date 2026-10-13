@@ -53,3 +53,38 @@ make public-test-week-02
 
 Ejecutar una vez por checkout desechable y conservar los artefactos. Para probar
 la propia revalidación: `python3 -m unittest discover -s tools/tests -v`.
+
+## Seguimiento acumulativo W05 y congelación W06
+
+W05 también admite revalidación reproducible de `contract-tests.json`,
+`failure-matrix.json` y engineering en el checkout desechable de CI. Usa
+`python3 tools/revalidate-prior-evidence.py --week 5`: verifica primero esquema
+e historia originales, conserva copias/observaciones y sólo actualiza índices
+si todas las regresiones ejecutadas aprueban. La evidencia individual no se
+reescribe. La prueba congelada sigue evaluándose en su tag original mediante
+`python3 tools/verify-frozen-evidence.py --week 5`; ese comando exige tag
+anotado y usa una copia temporal, sin mover refs ni modificar evidencia Git.
+Sobre el tag exacto W05 se mantiene el evaluador oficial directo.
+
+W06 conserva todos sus gates, añade readiness y comprueba el SHA del HEAD del
+PR con historial/tags completos. El tag anotado `week-06-final` se crea sólo
+tras checks locales y aportes completos; `make evidence-week-06` lo comprueba
+antes de publicarlo. Su reporte posterior permanece local, sin otro commit
+que altere la entrega congelada. El SHA final se toma de la referencia real,
+no de una cifra escrita previamente en documentación.
+
+## W06 después de integrar en main
+
+Después de congelar `week-06-final`, main puede avanzar conservando ese tag.
+La retroalimentación continua W06 usa la misma separación de W05:
+`python3 tools/revalidate-prior-evidence.py --week 6` repite los controles reales
+y conserva procedencia en el checkout desechable; el evaluador público
+comprueba ese SHA actual; `python3 tools/verify-frozen-evidence.py --week 6`
+comprueba la entrega original en una copia del tag. Sobre el evento del tag
+exacto se ejecutan los evaluadores directos sin revalidación. El script rechaza
+cualquier intento de revalidar el tag final. No se cambian etiquetas históricas
+ni se omiten gates para hacer pasar main.
+
+El caso de recuperación del merge prematuro de #40 se documenta en
+`docs/week-06-main-recovery.md`. Integrar correcciones después no modifica el
+SHA que ya fue enviado en Classroom.

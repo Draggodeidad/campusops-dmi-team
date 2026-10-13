@@ -1,0 +1,37 @@
+{
+  "commitSha": "a3606300785f080bbc287829e9c97986fe81dc5b",
+  "checks": [
+    {
+      "id": "revalidation-feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "exit 0; reports/week-06/generated-revalidation/feedback.log",
+      "evaluatedCommitSha": "a3606300785f080bbc287829e9c97986fe81dc5b"
+    },
+    {
+      "id": "revalidation-session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "exit 0; reports/week-06/generated-revalidation/session-readiness.log",
+      "evaluatedCommitSha": "a3606300785f080bbc287829e9c97986fe81dc5b"
+    },
+    {
+      "id": "revalidation-session-integration",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "exit 0; reports/week-06/generated-revalidation/session-integration.log",
+      "evaluatedCommitSha": "a3606300785f080bbc287829e9c97986fe81dc5b"
+    },
+    {
+      "id": "revalidation-backend-contract",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run backend:self-test",
+      "evidence": "exit 0; reports/week-06/generated-revalidation/backend-contract.log",
+      "evaluatedCommitSha": "a3606300785f080bbc287829e9c97986fe81dc5b"
+    }
+  ]
+}

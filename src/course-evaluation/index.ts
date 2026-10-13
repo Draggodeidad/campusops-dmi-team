@@ -7,6 +7,8 @@ import type {
 } from './contracts';
 import type { IncidentLocation } from '../campusops/contracts';
 
+import { RefreshCoordinator } from '../application/session/RefreshCoordinator';
+
 import { redactForTelemetry } from '../application/telemetry/redactForTelemetry';
 
 import { parseRemoteResource } from '../infrastructure/incidents/parseRemoteResource';
@@ -24,75 +26,30 @@ export function coordinateRefresh(events: readonly AuthEvent[]): Readonly<{
   retriedRequestIds: readonly string[];
   persistedToken: string | null;
 }> {
-  let status: 'anonymous' | 'authenticated' = 'anonymous';
-  let activeGeneration: number | null = null;
-  let refreshCalls = 0;
-  let persistedToken: string | null = null;
-
-  const retriedRequestIds: string[] = [];
-  const pendingRequestsByGeneration = new Map<number, string[]>();
-  const activeRefreshGenerations = new Set<number>();
-
+  const coordinator = new RefreshCoordinator();
   for (const event of events) {
     switch (event.type) {
-      case 'request401': {
-        const gen = event.generation ?? 0;
-        if (event.requestId) {
-          const list = pendingRequestsByGeneration.get(gen) ?? [];
-          list.push(event.requestId);
-          pendingRequestsByGeneration.set(gen, list);
-        }
-        if (!activeRefreshGenerations.has(gen)) {
-          activeRefreshGenerations.add(gen);
-          refreshCalls++;
-        }
+      case 'request401':
+        coordinator.begin(event.generation ?? 0, event.requestId);
         break;
-      }
       case 'refreshSucceeded': {
-        status = 'authenticated';
-        activeGeneration =
-          event.generation ?? (activeGeneration !== null ? activeGeneration + 1 : 1);
-        persistedToken = event.token ?? null;
-
-        for (const [gen, requestIds] of pendingRequestsByGeneration.entries()) {
-          if (activeGeneration === null || gen <= activeGeneration) {
-            for (const id of requestIds) {
-              if (!retriedRequestIds.includes(id)) {
-                retriedRequestIds.push(id);
-              }
-            }
-          }
+        const source = coordinator.getFlightGeneration();
+        if (source !== null && (event.generation === undefined || event.generation === source + 1)) {
+          coordinator.complete(source, event.token ?? '', event.generation ?? source + 1);
         }
-        pendingRequestsByGeneration.clear();
-        activeRefreshGenerations.clear();
         break;
       }
       case 'refreshFailed': {
-        status = 'anonymous';
-        activeGeneration = null;
-        persistedToken = null;
-        pendingRequestsByGeneration.clear();
-        activeRefreshGenerations.clear();
+        const source = coordinator.getFlightGeneration();
+        if (source !== null && (event.generation === undefined || event.generation === source)) coordinator.fail(source);
         break;
       }
-      case 'logout': {
-        status = 'anonymous';
-        activeGeneration = null;
-        persistedToken = null;
-        pendingRequestsByGeneration.clear();
-        activeRefreshGenerations.clear();
+      case 'logout':
+        coordinator.invalidate();
         break;
-      }
     }
   }
-
-  return {
-    status,
-    activeGeneration,
-    refreshCalls,
-    retriedRequestIds,
-    persistedToken,
-  };
+  return coordinator.getSummary();
 }
 
 export function resolveSync(
