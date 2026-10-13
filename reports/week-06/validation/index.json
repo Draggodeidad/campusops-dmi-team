@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+  "generatedAt": "2026-10-13T05:34:16.228875+00:00",
+  "nodeVersion": "v22.22.0",
+  "npmVersion": "10.9.4",
+  "prediction": "Tras reinstalar el lockfile corregido, espero que las suites existentes, auditoría crítica y export aprueben. Los ocho probes de revisión deben seguir fallando porque no se modificó producto. Compararé códigos reales sin declarar la entrega lista.",
+  "commands": [
+    {
+      "command": "make setup",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:07.833218+00:00",
+      "durationSeconds": 11.1,
+      "log": "reports/week-06/validation/00.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:18.933633+00:00",
+      "durationSeconds": 2.34,
+      "log": "reports/week-06/validation/01.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:21.278296+00:00",
+      "durationSeconds": 3.69,
+      "log": "reports/week-06/validation/02.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:24.966839+00:00",
+      "durationSeconds": 1.8,
+      "log": "reports/week-06/validation/03.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:26.768966+00:00",
+      "durationSeconds": 1.76,
+      "log": "reports/week-06/validation/04.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:28.525257+00:00",
+      "durationSeconds": 1.33,
+      "log": "reports/week-06/validation/05.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:29.858925+00:00",
+      "durationSeconds": 0.18,
+      "log": "reports/week-06/validation/06.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:30.038251+00:00",
+      "durationSeconds": 0.68,
+      "log": "reports/week-06/validation/07.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:30.721406+00:00",
+      "durationSeconds": 2.3,
+      "log": "reports/week-06/validation/08.log"
+    },
+    {
+      "command": "make feedback",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:32:33.024226+00:00",
+      "durationSeconds": 20.37,
+      "log": "reports/week-06/validation/09.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 1,
+      "status": "fail",
+      "startedAt": "2026-10-13T05:32:53.391976+00:00",
+      "durationSeconds": 0.73,
+      "log": "reports/week-06/validation/10.log"
+    },
+    {
+      "command": "make verify-week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:33:47.699855+00:00",
+      "durationSeconds": 12.65,
+      "log": "reports/week-06/validation/11.log"
+    },
+    {
+      "command": "make public-test-week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:34:00.352780+00:00",
+      "durationSeconds": 15.88,
+      "log": "reports/week-06/validation/12.log"
+    }
+  ],
+  "readiness": "not-ready",
+  "notExecuted": [
+    "make evidence-week-06: requiere tag final; no autorizado en esta tarea",
+    "merge PR into main; create/move/publish week-06-final; Classroom submission"
+  ],
+  "summary": {
+    "officialGates": "pass",
+    "readiness": "not-ready",
+    "readinessFailedInvariants": 8,
+    "cumulativeSuites": 18,
+    "cumulativeTests": 79,
+    "week06Suites": 5,
+    "week06Tests": 23,
+    "finalSubmissionSha": null,
+    "plannedTag": "week-06-final",
+    "authorshipEvidence": "reports/week-06/validation/authorship.json",
+    "remainingOwners": [
+      "#37 osbaldoXxC: correcciones productivas",
+      "#38 JulianDele: regresiones con grafo real",
+      "#39 Draggodeidad: repetir consolidación tras correcciones; autorización posterior de entrega"
+    ]
+  }
+}

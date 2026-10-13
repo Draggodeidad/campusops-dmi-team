@@ -1,0 +1,5 @@
+
+> dmi-react-native-starter@1.0.0 scan:secrets
+> python3 tools/scan-secrets.py
+
+Secret scan passed: no high-confidence secrets found.

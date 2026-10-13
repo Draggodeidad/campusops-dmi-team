@@ -1,0 +1,41 @@
+FAIL course-tests/public/week-06.test.ts
+  ✕ coalesces concurrent 401s into one refresh and retries each request once
+  ✕ logout removes persisted session state
+
+  ● coalesces concurrent 401s into one refresh and retries each request once
+
+    coordinateRefresh must be implemented in the assigned week
+
+      13 |
+      14 | function pending(name: string): never {
+    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      16 | }
+      17 |
+      18 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:15:9)
+      at pending (src/course-evaluation/index.ts:27:10)
+      at Object.<anonymous> (course-tests/public/week-06.test.ts:4:36)
+
+  ● logout removes persisted session state
+
+    coordinateRefresh must be implemented in the assigned week
+
+      13 |
+      14 | function pending(name: string): never {
+    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      16 | }
+      17 |
+      18 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:15:9)
+      at pending (src/course-evaluation/index.ts:27:10)
+      at Object.<anonymous> (course-tests/public/week-06.test.ts:20:27)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 2 total
+Snapshots:   0 total
+Time:        0.45 s, estimated 1 s
+Ran all test suites within paths "course-tests/public/week-06.test.ts".

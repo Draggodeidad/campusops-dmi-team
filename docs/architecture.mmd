@@ -19,7 +19,12 @@ flowchart TB
     CreateOne["CreateIncident"]
     GetHealth["GetBackendStatus"]
     HealthPort["BackendHealthPort"]
-    SecretPort["SessionSecretStore — límite preparado"]
+    SecretPort["SessionSecretStore"]
+    SessionController["DefaultSessionController / SessionController"]
+    SessionClock["SessionClock"]
+    SessionProvider["SessionProvider"]
+    SessionContext["SessionAuthorizationContext"]
+    PerformAction["PerformIncidentAction"]
     SafeFailure["ApplicationFailure"]
   end
 
@@ -33,6 +38,9 @@ flowchart TB
     HttpRepo["HttpIncidentRepository"]
     DtoMapper["parseRemoteResource + IncidentDtoMapper"]
     Transport["FetchIncidentTransport / fetch + AbortController"]
+    SessionTransport["SessionTransportDecorator"]
+    HttpSession["HttpSessionProvider"]
+    ParallelTransport["AuthenticatedIncidentTransport — sólo suite dedicada"]
     HealthAdapter["CourseBackendHealthAdapter"]
     BackendHelper["courseBackend / fetch"]
     SecretAdapter["ExpoSecureSessionSecretStore"]
@@ -48,17 +56,30 @@ flowchart TB
   CampusApp --> GetOne
   CampusApp --> CreateOne
   CampusApp --> GetHealth
+  CampusApp --> SessionController
+  CampusApp --> PerformAction
   ListScreen --> Incident
   DetailScreen --> Incident
   GetAll --> IncidentPort
   GetOne --> IncidentPort
   CreateOne --> IncidentPort
+  PerformAction --> IncidentPort
   IncidentPort --> Incident
   GetHealth --> HealthPort
   FakeRepo --> IncidentPort
   HttpRepo --> IncidentPort
   HttpRepo --> DtoMapper
-  HttpRepo --> Transport
+  HttpRepo --> SessionTransport
+  SessionTransport --> Transport
+  SessionTransport --> SessionContext
+  SessionController --> SessionContext
+  SessionController --> SessionClock
+  SessionController --> SessionProvider
+  SessionController --> SecretPort
+  HttpSession --> SessionProvider
+  HttpSession --> Transport
+  ParallelTransport --> SecretPort
+  ParallelTransport --> Transport
   HealthAdapter --> HealthPort
   HealthAdapter --> BackendHelper
   SecretAdapter --> SecretPort
@@ -75,13 +96,23 @@ flowchart TB
   Root --> Transport
   Root --> CreateOne
   Root --> HealthAdapter
+  Root --> SessionController
+  Root --> SessionClock
+  Root --> HttpSession
+  Root --> SecretAdapter
+  Root --> SessionTransport
+  Root --> PerformAction
 
-  subgraph Planned["Flujos futuros no implementados en Week 05"]
-    Session["Login / ciclo de sesión"]
+  Evaluation["course-evaluation.coordinateRefresh — reducer independiente, brecha #37"]
+  SessionTests["Suites W06"] --> SessionController
+  SessionTests --> SessionTransport
+  SessionTests --> ParallelTransport
+  SessionTests --> Evaluation
+
+  subgraph Planned["Flujos futuros fuera de W06"]
     Persistence["Persistencia"]
     Location["Ubicación / proveedor externo"]
   end
 
-  Session -. "usará puerto de secretos al implementarse" .-> SecretPort
   Persistence -. "adaptador futuro dependerá de contrato interno" .-> Domain
   Location -. "adaptador futuro dependerá de contrato interno" .-> Domain

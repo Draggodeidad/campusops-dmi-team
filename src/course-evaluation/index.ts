@@ -17,14 +17,82 @@ function pending(name: string): never {
 
 export { redactForTelemetry, parseRemoteResource };
 
-export function coordinateRefresh(_events: readonly AuthEvent[]): Readonly<{
+export function coordinateRefresh(events: readonly AuthEvent[]): Readonly<{
   status: 'anonymous' | 'authenticated';
   activeGeneration: number | null;
   refreshCalls: number;
   retriedRequestIds: readonly string[];
   persistedToken: string | null;
 }> {
-  return pending('coordinateRefresh');
+  let status: 'anonymous' | 'authenticated' = 'anonymous';
+  let activeGeneration: number | null = null;
+  let refreshCalls = 0;
+  let persistedToken: string | null = null;
+
+  const retriedRequestIds: string[] = [];
+  const pendingRequestsByGeneration = new Map<number, string[]>();
+  const activeRefreshGenerations = new Set<number>();
+
+  for (const event of events) {
+    switch (event.type) {
+      case 'request401': {
+        const gen = event.generation ?? 0;
+        if (event.requestId) {
+          const list = pendingRequestsByGeneration.get(gen) ?? [];
+          list.push(event.requestId);
+          pendingRequestsByGeneration.set(gen, list);
+        }
+        if (!activeRefreshGenerations.has(gen)) {
+          activeRefreshGenerations.add(gen);
+          refreshCalls++;
+        }
+        break;
+      }
+      case 'refreshSucceeded': {
+        status = 'authenticated';
+        activeGeneration =
+          event.generation ?? (activeGeneration !== null ? activeGeneration + 1 : 1);
+        persistedToken = event.token ?? null;
+
+        for (const [gen, requestIds] of pendingRequestsByGeneration.entries()) {
+          if (activeGeneration === null || gen <= activeGeneration) {
+            for (const id of requestIds) {
+              if (!retriedRequestIds.includes(id)) {
+                retriedRequestIds.push(id);
+              }
+            }
+          }
+        }
+        pendingRequestsByGeneration.clear();
+        activeRefreshGenerations.clear();
+        break;
+      }
+      case 'refreshFailed': {
+        status = 'anonymous';
+        activeGeneration = null;
+        persistedToken = null;
+        pendingRequestsByGeneration.clear();
+        activeRefreshGenerations.clear();
+        break;
+      }
+      case 'logout': {
+        status = 'anonymous';
+        activeGeneration = null;
+        persistedToken = null;
+        pendingRequestsByGeneration.clear();
+        activeRefreshGenerations.clear();
+        break;
+      }
+    }
+  }
+
+  return {
+    status,
+    activeGeneration,
+    refreshCalls,
+    retriedRequestIds,
+    persistedToken,
+  };
 }
 
 export function resolveSync(

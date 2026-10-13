@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "1f2a4b43decf3747caa5c77eecaebe2750dd0fd0"
+      ],
+      "files": [
+        "App.tsx",
+        "docs/session-state-machine.mmd",
+        "src/application/errors/ApplicationFailure.ts",
+        "src/application/incidents/PerformIncidentAction.ts",
+        "src/application/session/DefaultSessionController.ts",
+        "src/application/session/SessionAuthorizationContext.ts",
+        "src/application/session/SessionClock.ts",
+        "src/application/session/SessionController.ts",
+        "src/application/session/SessionProvider.ts",
+        "src/application/session/SessionSnapshot.ts",
+        "src/course-evaluation/index.ts",
+        "src/domain/incidents/IncidentRepository.ts",
+        "src/infrastructure/http/AuthenticatedIncidentTransport.ts",
+        "src/infrastructure/http/SessionTransportDecorator.ts",
+        "src/infrastructure/incidents/FakeIncidentRepository.ts",
+        "src/infrastructure/incidents/HttpIncidentRepository.ts",
+        "src/infrastructure/session/HttpSessionProvider.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/ui/incidents/IncidentDetailScreen.tsx",
+        "course-tests/week-06-session-controller.test.ts",
+        "course-tests/week-06-session.test.ts"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm run test:architecture",
+        "npm run check:architecture",
+        "npm test -- --runInBand",
+        "npm run test:week-06",
+        "npm run backend:self-test",
+        "python tools/course_public_evaluator.py --week 6 --mode verify"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba implementar la maquina de estados de sesion formal desacoplada de la UI, el decorador de transporte con coalescing de 401 en un solo refresh y reintento unico, la autorizacion por roles (reporter, technician, coordinator) en el repositorio y caso de uso de acciones, y coordinar coordinateRefresh sin romper ninguna prueba de W01 a W05.",
+      "command": "npm run typecheck && npm run lint && npm run test:architecture && npm run check:architecture && npm test -- --runInBand && npm run test:week-06 && npm run backend:self-test",
+      "observedResult": "TypeScript estricto y ESLint aprobaron con 0 errores y 0 warnings. Arquitectura hexagonal validada con 0 violaciones. La suite completa de npm test aprobo 14 suites y 58 pruebas. La suite publica week-06.test.ts aprobo sus 2 pruebas, y las suites dedicadas de sesion y concurrencia aprobaron 12 pruebas al 100%.",
+      "explanation": "Implemente DefaultSessionController con estados explicitos, reloj abstracto y persistencia versionada segura. Cree SessionTransportDecorator para interceptar 401, compartir una unica promesa de refresh por generacion y reintentar solicitudes sin ciclos. Incorpore autorizacion por roles para start/resolve/close/reopen en PerformIncidentAction y HttpIncidentRepository respetando baseVersion e idempotencia, y conecte el grafo en App.tsx.",
+      "aiAssistance": "Implementacion y auditoria asistidas por Antigravity bajo direccion tecnica de osbaldoXxC. Codigo, contratos, diagramas y pruebas verificados localmente sin colisiones con issues asignadas a otros companeros."
+    }
+  ]
+}

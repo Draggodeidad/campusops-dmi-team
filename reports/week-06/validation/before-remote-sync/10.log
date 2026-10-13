@@ -1,0 +1,80 @@
+command: npm run check:week-06-readiness
+commitSha: de51e16606f97a3006e6af861bfad56b46ea316e
+startedAt: 2026-10-13T05:31:52.107309+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 check:week-06-readiness
+> node tools/check-week-06-readiness.cjs
+
+{
+  "week": 6,
+  "purpose": "independent-readiness-review",
+  "checks": [
+    {
+      "id": "repository-uses-active-session-actor",
+      "status": "fail",
+      "observed": {
+        "activeActorMatchesOutgoingActor": false
+      }
+    },
+    {
+      "id": "anonymous-repository-does-not-send-fixture-authorization",
+      "status": "fail",
+      "observed": {
+        "anonymous": true,
+        "sentAuthorization": true
+      }
+    },
+    {
+      "id": "old-401-is-not-replayed-as-new-actor",
+      "status": "fail",
+      "observed": {
+        "attempts": 2,
+        "replayedUnderNewActor": true
+      }
+    },
+    {
+      "id": "evaluation-rejects-refresh-success-after-logout",
+      "status": "fail",
+      "observed": {
+        "state": "authenticated",
+        "retainedToken": true
+      }
+    },
+    {
+      "id": "expired-request-refreshes-before-send",
+      "status": "fail",
+      "observed": {
+        "expired": true,
+        "refreshCallsBeforeSend": 0
+      }
+    },
+    {
+      "id": "restore-rejects-invalid-role-and-empty-tokens",
+      "status": "fail",
+      "observed": {
+        "state": "authenticated",
+        "clearCalls": 0
+      }
+    },
+    {
+      "id": "restore-completion-cannot-resurrect-after-logout",
+      "status": "fail",
+      "observed": {
+        "state": "authenticated"
+      }
+    },
+    {
+      "id": "refresh-cleanup-reports-storage-delete-failure",
+      "status": "fail",
+      "observed": {
+        "errorCode": "SESSION_EXPIRED",
+        "persistedRecordRemains": true,
+        "state": "anonymous"
+      }
+    }
+  ]
+}
+
+exitCode: 1

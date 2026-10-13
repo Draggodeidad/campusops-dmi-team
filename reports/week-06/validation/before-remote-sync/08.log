@@ -1,0 +1,340 @@
+command: npm run test:week-06
+commitSha: de51e16606f97a3006e6af861bfad56b46ea316e
+startedAt: 2026-10-13T05:31:20.332874+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 test:week-06
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-06.test.ts course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx
+
+PASS course-tests/public/week-06.test.ts
+PASS course-tests/week-06-session-validation.test.ts
+PASS course-tests/week-06-session.test.ts
+  ● Console
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] RETRY
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] RETRY
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] REQUEST
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [B] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [C] 401
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [AUTH] REFRESH FAIL
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH FAIL
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [SESSION] CLEAR
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [SESSION] CLEAR
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [AUTH] ANONYMOUS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] ANONYMOUS
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [LOGIN] REQUIRED
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [LOGIN] REQUIRED
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+PASS course-tests/week-06-session-controller.test.ts
+PASS course-tests/week-06-authorization.test.tsx
+
+Test Suites: 5 passed, 5 total
+Tests:       23 passed, 23 total
+Snapshots:   0 total
+Time:        2.374 s
+Ran all test suites within paths "course-tests/public/week-06.test.ts", "course-tests/week-06-session.test.ts", "course-tests/week-06-session-controller.test.ts", "course-tests/week-06-session-validation.test.ts", "course-tests/week-06-authorization.test.tsx".
+
+exitCode: 0

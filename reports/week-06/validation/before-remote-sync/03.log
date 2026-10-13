@@ -1,0 +1,19 @@
+command: npm run test:smoke
+commitSha: de51e16606f97a3006e6af861bfad56b46ea316e
+startedAt: 2026-10-13T05:31:12.618523+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 test:smoke
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx
+
+PASS course-tests/smoke.test.tsx
+  ✓ renders the reproducible baseline and resolves backend state (121 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        2.408 s
+Ran all test suites matching /course-tests\/smoke.test.tsx/i.
+
+exitCode: 0

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+  "generatedAt": "2026-10-13T05:34:50.889164+00:00",
+  "checks": [
+    {
+      "id": "Draggodeidad-c74e4796b7f50f3d804f853fec2b271fd6417728",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an c74e4796b7f50f3d804f853fec2b271fd6417728; git merge-base --is-ancestor c74e4796b7f50f3d804f853fec2b271fd6417728 HEAD",
+      "evidence": "Autor=Draggodeidad; ancestralidad exit 0; SHA completo c74e4796b7f50f3d804f853fec2b271fd6417728"
+    },
+    {
+      "id": "Draggodeidad-84be09df0220dd4116267275abf626c876bce7c8",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an 84be09df0220dd4116267275abf626c876bce7c8; git merge-base --is-ancestor 84be09df0220dd4116267275abf626c876bce7c8 HEAD",
+      "evidence": "Autor=Draggodeidad; ancestralidad exit 0; SHA completo 84be09df0220dd4116267275abf626c876bce7c8"
+    },
+    {
+      "id": "Draggodeidad-de51e16606f97a3006e6af861bfad56b46ea316e",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an de51e16606f97a3006e6af861bfad56b46ea316e; git merge-base --is-ancestor de51e16606f97a3006e6af861bfad56b46ea316e HEAD",
+      "evidence": "Autor=Draggodeidad; ancestralidad exit 0; SHA completo de51e16606f97a3006e6af861bfad56b46ea316e"
+    },
+    {
+      "id": "Draggodeidad-4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4; git merge-base --is-ancestor 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4 HEAD",
+      "evidence": "Autor=Draggodeidad; ancestralidad exit 0; SHA completo 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4"
+    },
+    {
+      "id": "osbaldoXxC-1f2a4b43decf3747caa5c77eecaebe2750dd0fd0",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an 1f2a4b43decf3747caa5c77eecaebe2750dd0fd0; git merge-base --is-ancestor 1f2a4b43decf3747caa5c77eecaebe2750dd0fd0 HEAD",
+      "evidence": "Autor=osbaldoXxC; ancestralidad exit 0; SHA completo 1f2a4b43decf3747caa5c77eecaebe2750dd0fd0"
+    },
+    {
+      "id": "JulianDele-500b51cbc13ed11eb5c46bdbf01a4da928face1c",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an 500b51cbc13ed11eb5c46bdbf01a4da928face1c; git merge-base --is-ancestor 500b51cbc13ed11eb5c46bdbf01a4da928face1c HEAD",
+      "evidence": "Autor=JulianDele; ancestralidad exit 0; SHA completo 500b51cbc13ed11eb5c46bdbf01a4da928face1c"
+    },
+    {
+      "id": "JulianDele-8bf9663afed401128a34ae942f564c466df8302d",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git show -s --format=%an 8bf9663afed401128a34ae942f564c466df8302d; git merge-base --is-ancestor 8bf9663afed401128a34ae942f564c466df8302d HEAD",
+      "evidence": "Autor=JulianDele; ancestralidad exit 0; SHA completo 8bf9663afed401128a34ae942f564c466df8302d"
+    }
+  ],
+  "rosterConfirmation": "Usuario confirmó privadamente los identificadores ya registrados y aporte Julian; no se consultó un roster externo ni se publicaron identidades en issues.",
+  "osbaldoRecord": "Conservado exactamente desde su archivo individual propio; comparación JSON exitosa."
+}

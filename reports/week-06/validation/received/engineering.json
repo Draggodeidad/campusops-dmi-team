@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "f4a77a8e150c8ea6c4698056270a39b8f31da8a7",
+  "decision": "Validamos el controller y el decorador existentes con reloj y promesas controlados, y reservamos una prueba separada contra el backend local real para comprobar autorización por perfil. Para concurrencia usamos tres requests retenidos detrás de una barrera hasta recibir A/B/C con 401, y mantenemos pendiente el refresh hasta observar que los tres waiters se unieron; así la evidencia prueba solapamiento efectivo y un único refresh, no sólo llamadas sucesivas a una promesa ya resuelta.",
+  "alternatives": [
+    "Usar esperas temporales reales o Promise.all sobre respuestas inmediatas. Se descartó porque no fija una frontera de solapamiento y puede pasar sin demostrar requests realmente concurrentes.",
+    "Mockear SessionController, repositorio o reglas del backend. Se descartó porque probaría dobles de la lógica que se evalúa en lugar de la implementación integrada.",
+    "Controlar el reloj, las promesas de proveedor/transporte y el proceso real del backend local; conservar parser/controller/decorator/repository/backend reales y simular sólo entradas externas. Seleccionada por determinismo y fidelidad de integración sin Internet público."
+  ],
+  "tradeoff": "Beneficios: los escenarios de expiración y carrera son reproducibles; el single-flight registra IDs, waiters, generaciones, refresh y retries; el backend local verifica códigos HTTP y estado/version tras rechazo; el SecureStore se prueba detrás del adaptador real con el SDK nativo simulado. Costos: fixtures deferred y procesos locales añaden mantenimiento y deben cerrarse en finally/afterAll; el mock de SecureStore no demuestra cifrado físico; la red de prueba permanece loopback y no certifica un despliegue institucional.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts",
+      "result": "pass: 5 suites, 23 tests",
+      "evidence": "Salida observada: cinco suites W06 aprobaron 23 pruebas, incluyendo las dos suites nuevas y el contrato público."
+    },
+    {
+      "command": "npm run backend:self-test",
+      "result": "pass",
+      "evidence": "Salida observada: contratos de roles, conflicto de reasignación, respuesta perdida, idempotencia, evidencia y geocoding PASS; Controlled backend self-test passed."
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass",
+      "evidence": "Después de eliminar el cast incompatible de ChildProcess y restaurar las dependencias del lockfile, `tsc --noEmit` terminó sin errores."
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass",
+      "evidence": "ESLint terminó sin errores tras quitar los símbolos no usados reportados en la primera revisión de la suite nueva."
+    },
+    {
+      "command": "npm run test:architecture && npm run check:architecture",
+      "result": "pass",
+      "evidence": "Prueba arquitectónica: 1 suite, 2 tests pass. check:architecture: status pass, violations []."
+    },
+    {
+      "command": "make setup",
+      "result": "pass with audit warnings",
+      "evidence": "npm ci agregó 971 paquetes; el resumen reportó 57 advisories: 5 moderate, 51 high y 1 critical."
+    },
+    {
+      "command": "make PYTHON=C:/Users/alvar/AppData/Local/Programs/Python/Python313/python.exe verify-week-06",
+      "result": "fail: audit:ci",
+      "evidence": "reports/week-06/verify.json del SHA f4a77a8e150c8ea6c4698056270a39b8f31da8a7 registró base files, workflow, typecheck, lint, smoke, secret scan y backend self-test en pass; audit:ci falló por vulnerabilidades, incluida una crítica de shell-quote."
+    },
+    {
+      "command": "C:/Users/alvar/AppData/Local/Programs/Python/Python313/python.exe tools/course_public_evaluator.py --week 6 --mode public --execute-toolchain",
+      "result": "fail: audit:ci and incomplete teammate evidence",
+      "evidence": "reports/week-06/public-tests.json del SHA f4a77a8e150c8ea6c4698056270a39b8f31da8a7 registró los cuatro schemas de reportes/engineering en pass y la prueba pública Jest con 14 suites/58 pruebas en pass. El validador señaló que el miembro Draggodeidad no tiene authored commit SHA; su registro se preservó sin inventarlo. También falló el audit gate por el advisory crítico."
+    }
+  ],
+  "sourceTreeNote": "HEAD base actual al generar la evidencia: f4a77a8e150c8ea6c4698056270a39b8f31da8a7. Los nuevos tests y fixtures no están incluidos en ese SHA; registrar primero un commit técnico, repetir validación completa y actualizar commitSha antes del commit de reportes/evidencias. make setup terminó con npm ci. npm audit durante setup reportó 57 advisories, incluido 1 crítico."
+}

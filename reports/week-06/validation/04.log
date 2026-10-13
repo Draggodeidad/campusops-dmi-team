@@ -1,0 +1,21 @@
+command: npm run test:incidents
+commitSha: 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4
+startedAt: 2026-10-13T05:32:26.768966+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 test:incidents
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/incidents.test.tsx
+
+PASS course-tests/incidents.test.tsx
+  ✓ opens an incident from the list and returns from its detail (112 ms)
+  ✓ application use cases accept a substitute repository (2 ms)
+  ✓ shows a helpful placeholder when no incident is selected (3 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.842 s, estimated 1 s
+Ran all test suites matching /course-tests\/incidents.test.tsx/i.
+
+exitCode: 0

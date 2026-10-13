@@ -1,0 +1,41 @@
+{
+  "commitSha": "791e222a6c057acf3ca534d233bcf79771c554c9",
+  "generatedAt": "2026-10-09T23:07:32.873197+00:00",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "before-0.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "before-1.log"
+    },
+    {
+      "command": "npm test -- --ci --runInBand",
+      "exitCode": 0,
+      "log": "before-2.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "log": "before-3.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "log": "before-4.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "log": "before-5.log"
+    },
+    {
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-06.test.ts",
+      "exitCode": 1,
+      "log": "before-6.log"
+    }
+  ]
+}

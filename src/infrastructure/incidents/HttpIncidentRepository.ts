@@ -1,5 +1,5 @@
 import type { Incident } from '../../domain/incidents/Incident';
-import type { CreateIncidentData, IncidentRepository } from '../../domain/incidents/IncidentRepository';
+import type { CreateIncidentData, IncidentActionData, IncidentRepository } from '../../domain/incidents/IncidentRepository';
 import { ApplicationFailure } from '../../application/errors/ApplicationFailure';
 import type { IncidentTransport } from '../http/IncidentTransport';
 import { mapDtoToIncident } from './dto/IncidentDtoMapper';
@@ -275,6 +275,114 @@ export class HttpIncidentRepository implements IncidentRepository {
       throw new ApplicationFailure(
         'REMOTE_COMMUNICATION_ERROR',
         'Falla de red o comunicación al registrar la incidencia.',
+      );
+    }
+  }
+
+  async performAction(input: IncidentActionData): Promise<Incident> {
+    const key =
+      input.idempotencyKey && input.idempotencyKey.trim().length >= 8
+        ? input.idempotencyKey.trim()
+        : generateIdempotencyKey();
+
+    try {
+      const payload: Record<string, unknown> = {
+        action: input.action,
+        baseVersion: input.baseVersion,
+      };
+
+      if (input.diagnosis) {
+        payload.diagnosis = input.diagnosis;
+      }
+
+      const response = await this.transport.send({
+        method: 'POST',
+        path: `/v1/incidents/${encodeURIComponent(input.incidentId)}/actions`,
+        headers: {
+          ...this.authHeaders,
+          'idempotency-key': key,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.status === 403) {
+        throw new ApplicationFailure(
+          'UNAUTHORIZED_ACTION',
+          'No tienes autorización para realizar esta acción en la incidencia.',
+        );
+      }
+
+      if (response.status === 409) {
+        throw new ApplicationFailure(
+          'VERSION_CONFLICT',
+          'Conflicto de versión o transición al realizar la acción.',
+        );
+      }
+
+      if (response.status !== 200 && response.status !== 201) {
+        throw new ApplicationFailure(
+          'UPDATE_INCIDENT_FAILED',
+          `No fue posible ejecutar la acción (código HTTP ${response.status}).`,
+        );
+      }
+
+      let parsedJson: unknown;
+      try {
+        parsedJson = JSON.parse(response.bodyText);
+      } catch {
+        throw new ApplicationFailure(
+          'UPDATE_INCIDENT_FAILED',
+          'Respuesta de la acción malformada.',
+          'contract',
+        );
+      }
+
+      if (
+        parsedJson === null ||
+        typeof parsedJson !== 'object' ||
+        !('incident' in parsedJson)
+      ) {
+        throw new ApplicationFailure(
+          'UPDATE_INCIDENT_FAILED',
+          'El sobre de la acción no contiene la incidencia resultante.',
+          'contract',
+        );
+      }
+
+      const envelopeResult = parseRemoteResource(
+        (parsedJson as { incident: unknown }).incident,
+      );
+      if (!envelopeResult.ok) {
+        throw new ApplicationFailure(
+          'UPDATE_INCIDENT_FAILED',
+          'El sobre de la incidencia modificada es inválido.',
+          'contract',
+        );
+      }
+
+      const updated = mapDtoToIncident(envelopeResult.value);
+      if (updated === null) {
+        throw new ApplicationFailure(
+          'UPDATE_INCIDENT_FAILED',
+          'No fue posible construir la entidad interna a partir de la respuesta.',
+          'contract',
+        );
+      }
+
+      return updated;
+    } catch (error: unknown) {
+      if (error instanceof ApplicationFailure) {
+        throw error;
+      }
+      if (error instanceof Error && error.name === 'TimeoutError') {
+        throw new ApplicationFailure(
+          'INCIDENT_TIMEOUT',
+          'La acción sobre la incidencia excedió el tiempo límite.',
+        );
+      }
+      throw new ApplicationFailure(
+        'REMOTE_COMMUNICATION_ERROR',
+        'Falla de comunicación al ejecutar la acción sobre la incidencia.',
       );
     }
   }

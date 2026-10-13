@@ -1,0 +1,161 @@
+
+> dmi-react-native-starter@1.0.0 audit:ci
+> npm audit --omit=dev --audit-level=critical
+
+# npm audit report
+
+brace-expansion  <=1.1.20 || 4.0.0 - 5.0.11
+Severity: high
+brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service - https://github.com/advisories/GHSA-q2hr-2g5m-vwhr
+brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service - https://github.com/advisories/GHSA-q2hr-2g5m-vwhr
+brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion - https://github.com/advisories/GHSA-qhr7-859c-m2p7
+brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion - https://github.com/advisories/GHSA-qhr7-859c-m2p7
+brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p
+brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p
+fix available via `npm audit fix`
+node_modules/@expo/fingerprint/node_modules/brace-expansion
+node_modules/brace-expansion
+node_modules/glob/node_modules/brace-expansion
+
+braces  *
+Severity: high
+braces vulnerable to stack-exhaustion denial of service through deeply nested patterns - https://github.com/advisories/GHSA-vfj7-8cjw-p6xm
+fix available via `npm audit fix --force`
+Will install expo@44.0.6, which is a breaking change
+node_modules/braces
+  micromatch  >=0.2.0
+  Depends on vulnerable versions of braces
+  node_modules/micromatch
+    @expo/metro-file-map  <=57.0.3 || 58.0.0-canary-20260806-8c2d007 - 58.0.3
+    Depends on vulnerable versions of micromatch
+    node_modules/@expo/metro-file-map
+    @jest/transform  *
+    Depends on vulnerable versions of babel-plugin-istanbul
+    Depends on vulnerable versions of jest-haste-map
+    Depends on vulnerable versions of micromatch
+    node_modules/@jest/transform
+      babel-jest  >=24.2.0-alpha.0
+      Depends on vulnerable versions of @jest/transform
+      Depends on vulnerable versions of babel-plugin-istanbul
+      node_modules/babel-jest
+        @react-native/jest-preset  *
+        Depends on vulnerable versions of babel-jest
+        Depends on vulnerable versions of jest-environment-node
+        node_modules/@react-native/jest-preset
+          react-native  >=0.73.0-nightly-20230506-1af868c52
+          Depends on vulnerable versions of @react-native/community-cli-plugin
+          Depends on vulnerable versions of @react-native/jest-preset
+          Depends on vulnerable versions of @react-native/virtualized-lists
+          node_modules/react-native
+            @react-native/virtualized-lists  >=0.85.0-nightly-20260108-1236b6be4
+            Depends on vulnerable versions of react-native
+            node_modules/@react-native/virtualized-lists
+    jest-haste-map  18.1.0 - 30.2.0
+    Depends on vulnerable versions of micromatch
+    node_modules/jest-haste-map
+    jest-message-util  18.5.0-alpha.7da3df39 - 30.2.0
+    Depends on vulnerable versions of micromatch
+    node_modules/jest-message-util
+      @jest/fake-timers  <=30.2.0
+      Depends on vulnerable versions of jest-message-util
+      node_modules/@jest/fake-timers
+        @jest/environment  <=30.2.0
+        Depends on vulnerable versions of @jest/fake-timers
+        node_modules/@jest/environment
+        jest-environment-node  24.2.0-alpha.0 - 30.2.0
+        Depends on vulnerable versions of @jest/environment
+        Depends on vulnerable versions of @jest/fake-timers
+        node_modules/jest-environment-node
+    metro-file-map  *
+    Depends on vulnerable versions of micromatch
+    node_modules/metro-file-map
+      @expo/metro  *
+      Depends on vulnerable versions of metro
+      Depends on vulnerable versions of metro-config
+      Depends on vulnerable versions of metro-file-map
+      Depends on vulnerable versions of metro-transform-worker
+      node_modules/@expo/metro
+        @expo/cli  <=0.0.0-canary-20231123-1b19f96-4 || >=0.0.1-canary-20231125-d600e44
+        Depends on vulnerable versions of @expo/code-signing-certificates
+        Depends on vulnerable versions of @expo/metro
+        Depends on vulnerable versions of @expo/metro-config
+        Depends on vulnerable versions of node-forge
+        node_modules/expo/node_modules/@expo/cli
+          expo  >=45.0.0-beta.1
+          Depends on vulnerable versions of @expo/cli
+          Depends on vulnerable versions of @expo/metro
+          Depends on vulnerable versions of @expo/metro-config
+          node_modules/expo
+        @expo/metro-config  >=0.21.0-canary-20250630-547cd82
+        Depends on vulnerable versions of @expo/metro
+        node_modules/@expo/metro-config
+      metro  >=0.71.0
+      Depends on vulnerable versions of metro-config
+      Depends on vulnerable versions of metro-file-map
+      Depends on vulnerable versions of metro-transform-worker
+      node_modules/metro
+        @react-native/community-cli-plugin  *
+        Depends on vulnerable versions of metro
+        Depends on vulnerable versions of metro-config
+        node_modules/@react-native/community-cli-plugin
+        metro-config  >=0.71.0
+        Depends on vulnerable versions of metro
+        node_modules/metro-config
+        metro-transform-worker  >=0.71.0
+        Depends on vulnerable versions of metro
+        node_modules/metro-transform-worker
+
+compression  <1.8.2
+Severity: high
+compression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95
+fix available via `npm audit fix`
+node_modules/compression
+
+node-forge  *
+Severity: high
+node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv
+fix available via `npm audit fix --force`
+Will install expo@44.0.6, which is a breaking change
+node_modules/node-forge
+  @expo/code-signing-certificates  *
+  Depends on vulnerable versions of node-forge
+  node_modules/@expo/code-signing-certificates
+
+shell-quote  1.8.4 - 1.10.0
+Severity: critical
+shell-quote: `quote()` command injection via a line terminator in a token after a `{ comment }` token - https://github.com/advisories/GHSA-pqg4-j6r4-53mv
+fix available via `npm audit fix`
+node_modules/shell-quote
+
+source-map-js  1.0.0 - 1.2.1
+Severity: high
+source-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q
+fix available via `npm audit fix`
+node_modules/source-map-js
+
+sprintf-js  *
+Severity: moderate
+sprintf-js vulnerable to denial of service through unbounded precision specifiers - https://github.com/advisories/GHSA-hp3w-g68c-fv3c
+fix available via `npm audit fix --force`
+Will install react-native@0.72.17, which is a breaking change
+node_modules/sprintf-js
+  argparse  1.0.0 - 1.0.10
+  Depends on vulnerable versions of sprintf-js
+  node_modules/argparse
+    js-yaml  3.2.7 - 3.15.2
+    Depends on vulnerable versions of argparse
+    node_modules/js-yaml
+      @istanbuljs/load-nyc-config  *
+      Depends on vulnerable versions of js-yaml
+      node_modules/@istanbuljs/load-nyc-config
+        babel-plugin-istanbul  >=6.0.0-beta.0
+        Depends on vulnerable versions of @istanbuljs/load-nyc-config
+        node_modules/babel-plugin-istanbul
+
+33 vulnerabilities (5 moderate, 27 high, 1 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force

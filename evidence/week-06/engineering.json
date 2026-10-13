@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+  "readiness": "not-ready",
+  "decision": "Elegimos una promesa de refresh compartida por generación en Application: los 401 de esa generación comparten renovación, cada solicitud tiene como máximo un replay con el mismo cuerpo/clave, se persiste antes de authenticated y una falla debe limpiar estado y volver a anonymous. Logout/nuevo login invalidan resultados viejos. DefaultSessionController implementa parte de esa política con SessionProvider, SessionClock y SessionSecretStore inyectados; la revisión demuestra que la integración completa aún la incumple. coordinateRefresh y AuthenticatedIncidentTransport siguen siendo algoritmos separados y no se presentan como garantía del controlador compuesto.",
+  "alternatives": [
+    "Un refresh independiente por cada 401. Se descarta: tres solicitudes pueden producir tres renovaciones y carreras de persistencia; caso A/B/C exige una sola llamada.",
+    "Una promesa global sin generación ni cola de persistencia. Coalesce solicitudes, pero no distingue sesión vieja y nueva; logout o cambio de actor pueden aceptar una respuesta tardía o un replay ajeno.",
+    "Una promesa por generación con invalidación y persistencia serializada en Application. Seleccionada por sustitución de proveedor y pruebas deterministas; requiere completar controles en transporte, restore y cleanup para cumplir la política."
+  ],
+  "tradeoff": "Beneficio observado: el controller permite reloj controlado, tres waiters de un refresh y persistencia antes de publicar sesión. Costo: generaciones, serialización y fallas nativas exigen escenarios independientes además del caso nominal. Los probes muestran replay con otra identidad, fixture autorizado sin sesión, restore inseguro y borrado fallido oculto; por eso no se declara éxito global aunque las 23 pruebas aportadas pasen. El backend sintético no modela expiración temporal ni rotación productiva; el mock nativo no acredita cifrado físico.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "requirementTrace": [
+    {
+      "requirementId": "AC-01",
+      "source": "docs/assignments/week-06-rubric.md",
+      "decision": "Conservar stack y lockfile; parche transitorio compatible de shell-quote; incluir suites existentes en comandos oficiales.",
+      "evidence": "validation/index.json; setup, feedback y gates W06."
+    },
+    {
+      "requirementId": "AC-02",
+      "source": "docs/assignments/week-06.md",
+      "decision": "Controlador inyectable con reloj, generaciones y persistencia previa.",
+      "evidence": "auth-tests.json; validation/08.log y fallos en validation/10.log."
+    },
+    {
+      "requirementId": "AC-03",
+      "source": "docs/assignments/week-06.md",
+      "decision": "Un refresh por generación, replay único e invalidación al cerrar.",
+      "evidence": "concurrency.json; A/B/C pasa; replay de otra generación y reducer obsoleto fallan."
+    },
+    {
+      "requirementId": "AC-04",
+      "source": "docs/assignments/week-06-rubric.md",
+      "decision": "Comparar las tres políticas con pruebas y limitaciones reales.",
+      "evidence": "Este registro; ADR W06 y docs/week-06-delivery.md."
+    },
+    {
+      "requirementId": "AC-05",
+      "source": "docs/assignments/week-06-repository.md",
+      "decision": "Reunir registros propios sin atribuir tests de Julian a osbaldo.",
+      "evidence": "individual.json; commits de los tres autores; roster y aporte Julian confirmados por usuario."
+    }
+  ],
+  "verification": [
+    {
+      "command": "make setup",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/00.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/01.log"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/02.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/03.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/04.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/05.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/06.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/07.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/08.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/09.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "fail: exit 1",
+      "evidence": "reports/week-06/validation/10.log"
+    },
+    {
+      "command": "make verify-week-06",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/11.log El gate oficial aprueba su alcance; no certifica las ocho invariantes que fallan en validation/10.log."
+    },
+    {
+      "command": "make public-test-week-06",
+      "result": "pass: exit 0",
+      "evidence": "reports/week-06/validation/12.log El gate oficial aprueba su alcance; no certifica las ocho invariantes que fallan en validation/10.log."
+    }
+  ],
+  "sourceTreeNote": "Reejecutado sobre el SHA técnico integrado indicado, con Node 22.22.0 y lockfile instalado mediante make setup. Después sólo se modifican reports/evidence. Resultados recibidos e intento previo permanecen en validation/received y validation/before-remote-sync con sus SHA originales. No es validación final de entrega; hay brechas funcionales reproducidas.",
+  "aiAssistance": "Consolidación, revisión y ejecución asistidas por Codex a petición de Draggodeidad. No se inventan revisiones remotas ni ejecución manual de los compañeros."
+}

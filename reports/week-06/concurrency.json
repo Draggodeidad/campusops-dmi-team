@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+  "generatedAt": "2026-10-13T05:33:47.632188+00:00",
+  "sourceTreeNote": "Reejecutado sobre el SHA técnico integrado indicado, con Node 22.22.0 y lockfile instalado mediante make setup. Después sólo se modifican reports/evidence. Resultados recibidos e intento previo permanecen en validation/received y validation/before-remote-sync con sus SHA originales. No es validación final de entrega; hay brechas funcionales reproducidas.",
+  "checks": [
+    {
+      "id": "three-401s-share-one-refresh",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "La prueba usó una barrera deferred que no libera hasta recibir A, B y C con 401; el refresh provider quedó retenido hasta observar 3 waiters. Se observó providerRefreshCount=1; al liberar, se completaron los tres requests con una sola repetición cada uno. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+    },
+    {
+      "id": "failed-refresh-releases-all-waiters",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "La promesa de refresh compartida se rechazó deliberadamente; A/B/C terminaron con la respuesta 401 original, la sesión quedó anonymous, el store se limpió una vez y no se observó ningún unhandledRejection. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+    },
+    {
+      "id": "stale-request-generation-replay",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "401 antiguo tras nuevo login produce 2 intentos y replayedUnderNewActor=true. Probe old-401-is-not-replayed-as-new-actor falla. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+    },
+    {
+      "id": "evaluation-obsolete-refresh-after-logout",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "coordinateRefresh(request401, logout, refreshSucceeded viejo) termina authenticated con token retenido. Probe evaluation-rejects-refresh-success-after-logout falla; el reducer no comparte lógica con Application. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+    }
+  ],
+  "metrics": {
+    "requestsInitiated": 3,
+    "requestsCompleted": 3,
+    "transportAttempts": 6,
+    "requestIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "refreshWaiters": 3,
+    "refreshCount": 1,
+    "retryCount": 3,
+    "maxRetriesPerRequest": 1,
+    "generationIds": [
+      1
+    ],
+    "generationBeforeRefresh": 1,
+    "generationAfterRefresh": 1,
+    "finalSessionState": "authenticated",
+    "finalRequestStatuses": [
+      200,
+      200,
+      200
+    ],
+    "refreshFailureFinalState": "anonymous",
+    "refreshFailureWaiterStatuses": [
+      401,
+      401,
+      401
+    ]
+  },
+  "dataNotice": "Tokens, actores, IDs y payloads usados en estas pruebas son sintéticos. El backend se ejecutó sólo en loopback y no se utilizó Internet público.",
+  "readiness": "not-ready",
+  "metricsSource": "Métricas preservadas de las aserciones del caso controlado A/B/C en week-06-session-validation.test.ts, repetido en validation/08.log. Describen ese escenario, no todas las carreras del grafo real."
+}
