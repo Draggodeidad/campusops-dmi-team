@@ -72,3 +72,19 @@ tras checks locales y aportes completos; `make evidence-week-06` lo comprueba
 antes de publicarlo. Su reporte posterior permanece local, sin otro commit
 que altere la entrega congelada. El SHA final se toma de la referencia real,
 no de una cifra escrita previamente en documentación.
+
+## W06 después de integrar en main
+
+Después de congelar `week-06-final`, main puede avanzar conservando ese tag.
+La retroalimentación continua W06 usa la misma separación de W05:
+`python3 tools/revalidate-prior-evidence.py --week 6` repite los controles reales
+y conserva procedencia en el checkout desechable; el evaluador público
+comprueba ese SHA actual; `python3 tools/verify-frozen-evidence.py --week 6`
+comprueba la entrega original en una copia del tag. Sobre el evento del tag
+exacto se ejecutan los evaluadores directos sin revalidación. El script rechaza
+cualquier intento de revalidar el tag final. No se cambian etiquetas históricas
+ni se omiten gates para hacer pasar main.
+
+El caso de recuperación del merge prematuro de #40 se documenta en
+`docs/week-06-main-recovery.md`. Integrar correcciones después no modifica el
+SHA que ya fue enviado en Classroom.

@@ -28,7 +28,7 @@ def verify(repo: Path, week: int) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--week", type=int, required=True, choices=(1, 2, 3, 4, 5))
+    parser.add_argument("--week", type=int, required=True, choices=(1, 2, 3, 4, 5, 6))
     args = parser.parse_args()
     try:
         verify(Path.cwd(), args.week)

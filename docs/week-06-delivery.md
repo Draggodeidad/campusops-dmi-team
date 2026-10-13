@@ -15,8 +15,8 @@ consolidación no sustituyen esa validación.
 | Cierre oficial del kit | 12/10/2026 23:59 America/Mexico_City |
 
 El formato solicitado para Classroom usa W06. `week-05-final` y su SHA son la
-entrega histórica W05: se conservan sin moverlos. No se envía en Classroom ni
-se fusiona en main desde esta tarea. El usuario autorizó arreglar las ocho
+entrega histórica W05: se conservan sin moverlos. La congelación original no envió en Classroom ni
+fusionó en main. El usuario autorizó arreglar las ocho
 regresiones, verificar los checks y preparar la referencia final de entrega.
 
 ## Procedencia y autoría
@@ -101,3 +101,12 @@ físico ni instalación de APK. La auditoría aprueba el umbral crítico fijado,
 no la ausencia de todos los advisories. GPS, proveedores externos y cola
 offline quedan fuera de W06. `AuthenticatedIncidentTransport` conserva la
 demostración histórica separada #35; no sustituye el grafo productivo evaluado.
+
+
+## Recuperación posterior de main
+
+El merge #40 incorporó la versión anterior a los dos commits finales. La
+recuperación posterior, las referencias efectivamente entregadas y la
+validación continua que conserva el tag se documentan en
+`docs/week-06-main-recovery.md`. El tag de entrega publicado sigue siendo el
+mismo; la integración posterior no modifica el commit enviado en Classroom.

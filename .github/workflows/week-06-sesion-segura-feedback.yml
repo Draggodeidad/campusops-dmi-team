@@ -40,10 +40,17 @@ jobs:
         run: npm run check:architecture
       - name: AC-01 — reproducibility
         run: make verify-week-06
+      - name: Revalidate current session evidence after integration
+        if: github.ref != 'refs/tags/week-06-final'
+        run: python3 tools/revalidate-prior-evidence.py --week 6
       - name: AC-02 — public behavior
         run: make public-test-week-06
-      - name: AC-03 — declared failure evidence
+      - name: AC-03 — declared failure evidence on its frozen revision
+        if: github.ref == 'refs/tags/week-06-final'
         run: make evidence-week-06
+      - name: AC-03 — verify frozen W06 evidence without moving its tag
+        if: github.ref != 'refs/tags/week-06-final'
+        run: python3 tools/verify-frozen-evidence.py --week 6
       - name: Upload academic evidence
         if: always()
         uses: actions/upload-artifact@v4
