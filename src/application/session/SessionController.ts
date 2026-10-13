@@ -6,4 +6,5 @@ export interface SessionController {
   login(actorId: string): Promise<void>;
   refresh(): Promise<void>;
   logout(): Promise<void>;
+  restore(): Promise<void>;
 }

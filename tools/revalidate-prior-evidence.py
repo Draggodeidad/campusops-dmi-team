@@ -25,6 +25,9 @@ COMMANDS = {
         ("architecture-imports", "boundary", ["npm", "run", "check:architecture"]),
         ("repository-substitution", "boundary", ["npm", "run", "test:incidents"]),
         ("public-regression", "nominal", ["npm", "test", "--", "--ci", "--runInBand", "course-tests/public/week-02.test.ts"])],
+    5: [("feedback", "nominal", ["make", "feedback"]),
+        ("backend-contract", "boundary", ["npm", "run", "backend:self-test"]),
+        ("client-failure-regressions", "failure", ["node", "node_modules/jest/bin/jest.js", "--no-watchman", "--ci", "--runInBand", "--runTestsByPath", "course-tests/week-05-client.test.tsx", "course-tests/week-05-transport-validation.test.tsx", "course-tests/week-05-ui-failure.test.tsx", "course-tests/public/week-05.test.ts"])],
 }
 
 
@@ -41,12 +44,12 @@ def revalidate(repo: Path, week: int) -> None:
     if any(not line[3:].startswith(("reports/", "evidence/")) for line in changes):
         raise ValueError("Commit code/configuration before revalidation")
     sha = git(repo, "rev-parse", "HEAD")
-    report_name = "baseline.json" if week == 1 else "dependencies.json"
-    report_path = repo / "reports" / key / report_name
+    report_names = {1: ["baseline.json"], 2: ["dependencies.json"], 5: ["contract-tests.json", "failure-matrix.json"]}[week]
+    report_paths = [repo / "reports" / key / name for name in report_names]
     engineering_path = repo / "evidence" / key / "engineering.json"
     individual_path = repo / "evidence" / key / "individual.json"
     sources = []
-    for path, validator in [(report_path, validate_report), (engineering_path, validate_engineering)]:
+    for path, validator in [*((path, validate_report) for path in report_paths), (engineering_path, validate_engineering)]:
         raw = path.read_bytes()
         data = json.loads(raw)
         source_sha = data.get("commitSha", "")
@@ -85,7 +88,7 @@ def revalidate(repo: Path, week: int) -> None:
     # observations with explicit provenance; append newly executed controls.
     for path, _, data in sources:
         source_sha = data["commitSha"]
-        field = "checks" if path == report_path else "verification"
+        field = "checks" if path in report_paths else "verification"
         for observation in data[field]:
             observation.setdefault("evaluatedCommitSha", source_sha)
         data["commitSha"] = sha
@@ -104,7 +107,7 @@ def revalidate(repo: Path, week: int) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--week", type=int, choices=(1, 2), required=True)
+    parser.add_argument("--week", type=int, choices=(1, 2, 5), required=True)
     args = parser.parse_args()
     try:
         revalidate(Path.cwd(), args.week)

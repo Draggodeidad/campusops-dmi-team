@@ -96,3 +96,16 @@ independiente se ejecuta con `npm run check:week-06-readiness`; un fallo es una
 brecha real y no se incluye como éxito de los gates oficiales. Consultar
 `reports/week-06/validation/` para logs, SHA y exit codes de esta consolidación.
 Los logs baseline conservan sus SHA y resultados históricos.
+
+
+## Seguimiento autorizado de cierre W06
+
+El usuario autorizó corregir las ocho regresiones y completar la validación.
+`RefreshCoordinator`, controlador, decorador y UI se corrigieron manteniendo
+capas, contratos públicos y pruebas anteriores. La máquina de estados y el ADR
+reflejan el código actual. La prueba añadida `week-06-integration-regression`
+recorre el grafo de App.tsx contra backend loopback y conserva las versiones
+reales en acciones sucesivas. Los resultados de la primera consolidación se
+mantienen en validation; los nuevos, en final-validation. La autoría de las
+correcciones se atribuye a Draggodeidad con asistencia de Codex, preservando
+las contribuciones originales de osbaldoXxC y JulianDele.

@@ -104,11 +104,12 @@ El flujo de Week 02 descrito abajo es histórico y sigue cubierto por el fake.
 Week 05 añadió HTTP y Week 06 añadió `DefaultSessionController`,
 `SessionTransportDecorator`, `HttpSessionProvider`, SecureStore inyectado y
 `PerformIncidentAction`. Ver ADR, `docs/architecture.mmd` y
-`docs/week-06-delivery.md` para el estado real y las brechas abiertas de #37/#38.
+`docs/week-06-delivery.md` para el estado real y las correcciones W06.
 La existencia de esos archivos no acredita entrega W06 completa. Sesión ya
 corresponde al hito actual; GPS, cola offline y proveedores externos siguen
-fuera de alcance. `npm run check:week-06-readiness` reproduce brechas de revisión
-y debe conservar su código de error mientras no se corrijan.
+fuera de alcance. `npm run check:week-06-readiness` conserva las ocho regresiones de revisión
+y debe fallar si cualquiera reaparece. RefreshCoordinator comparte la política
+de generación entre el controlador real y coordinateRefresh.
 
 La funcionalidad implementada en Week 02 es deliberadamente pequeña:
 
