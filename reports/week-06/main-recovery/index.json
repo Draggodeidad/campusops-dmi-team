@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "a3606300785f080bbc287829e9c97986fe81dc5b",
+  "generatedAt": "2026-10-13T06:08:20.068145+00:00",
+  "scope": "Post-submission integration recovery; does not change submitted commit or frozen tag",
+  "submittedCommitSha": "5e79d9ffc38f7fa6a86403a3607f7b6ca3152425",
+  "frozenTag": "week-06-final",
+  "frozenTagSha": "4ae9afa32d14d5dcfc8aa9ec2ab0db0baa2df7a6",
+  "prediction": "Runtime/course-tests and frozen reports should be identical to the validated tag. Current revalidation must pass eight invariants, six W06 suites and all 87 accumulated tests; frozen evidence must still pass at its own original SHA.",
+  "nodeVersion": "v22.22.0",
+  "checks": [
+    {
+      "id": "recovery-00",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code week-06-final HEAD -- src App.tsx course-tests package.json package-lock.json reports/week-06/auth-tests.json reports/week-06/concurrency.json evidence/week-06/engineering.json evidence/week-06/individual.json",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/00.log",
+      "durationSeconds": 0.01
+    },
+    {
+      "id": "recovery-01",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/01.log",
+      "durationSeconds": 9.82
+    },
+    {
+      "id": "recovery-02",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/02.log",
+      "durationSeconds": 2.47
+    },
+    {
+      "id": "recovery-03",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 tools/revalidate-prior-evidence.py --week 6",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/03.log",
+      "durationSeconds": 34.98
+    },
+    {
+      "id": "recovery-04",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-06",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/04.log",
+      "durationSeconds": 13.08
+    },
+    {
+      "id": "recovery-05",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make public-test-week-06",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/05.log",
+      "durationSeconds": 15.75
+    },
+    {
+      "id": "recovery-06",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 tools/verify-frozen-evidence.py --week 6",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/06.log",
+      "durationSeconds": 0.41
+    },
+    {
+      "id": "recovery-07",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code -- evidence/week-06/individual.json",
+      "exitCode": 0,
+      "evidence": "reports/week-06/main-recovery/07.log",
+      "durationSeconds": 0.0
+    }
+  ],
+  "status": "pass"
+}

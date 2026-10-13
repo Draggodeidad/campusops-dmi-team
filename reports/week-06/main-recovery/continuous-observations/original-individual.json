@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110651",
+      "githubLogin": "Draggodeidad",
+      "commitShas": [
+        "c74e4796b7f50f3d804f853fec2b271fd6417728",
+        "84be09df0220dd4116267275abf626c876bce7c8",
+        "de51e16606f97a3006e6af861bfad56b46ea316e",
+        "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+        "1730b6f0f5291db74c221d20f0eb0d11a949afc4"
+      ],
+      "files": [
+        "docs/week-06-baseline.md",
+        "docs/week-06-delivery.md",
+        "docs/adr/ADR-001-architecture.md",
+        "docs/architecture.mmd",
+        "docs/session-state-machine.mmd",
+        "package.json",
+        "package-lock.json",
+        "tools/check-week-06-readiness.cjs",
+        "reports/week-06/validation/index.json",
+        "evidence/week-06/engineering.json",
+        "evidence/week-06/individual.json",
+        "src/application/session/RefreshCoordinator.ts",
+        "src/application/session/DefaultSessionController.ts",
+        "src/infrastructure/http/SessionTransportDecorator.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/infrastructure/incidents/dto/IncidentDtoMapper.ts",
+        "course-tests/week-06-integration-regression.test.tsx",
+        "tools/revalidate-prior-evidence.py",
+        "tools/verify-frozen-evidence.py",
+        ".github/workflows/week-06-sesion-segura-feedback.yml",
+        ".github/workflows/week-05-cliente-cloud-feedback.yml"
+      ],
+      "tests": [
+        "make setup",
+        "npm run typecheck",
+        "npm run lint",
+        "npm run test:smoke",
+        "npm run test:incidents",
+        "npm run test:architecture",
+        "npm run check:architecture",
+        "npm run backend:self-test",
+        "npm run test:week-06",
+        "npm run check:week-06-readiness",
+        "python3 -m unittest discover -s tools/tests -v",
+        "make feedback",
+        "make verify-week-06",
+        "python3 /tmp/campusops-w06-history.py",
+        "make public-test-week-06"
+      ],
+      "reviews": [
+        "Revisión local del diff de #37/#38 y reproducciones independientes en tools/check-week-06-readiness.cjs; hallazgos y responsables en docs/week-06-delivery.md. No constituye aprobación o review publicado en GitHub."
+      ],
+      "prediction": "Tras corregir las causas, espero ocho invariantes aprobadas, seis suites W06/31 pruebas y 19 suites/87 pruebas acumuladas, gates críticos/export y controles históricos con procedencia intacta. Sólo congelaré una versión con checks completos.",
+      "command": "make feedback; npm run check:week-06-readiness (comandos separados y códigos reales en final-validation/index.json)",
+      "observedResult": "SHA técnico 1730b6f0f5291db74c221d20f0eb0d11a949afc4: ocho invariantes originales pasan; seis suites W06/31 pruebas y acumuladas 19 suites/87 pruebas pasan; TypeScript/lint/arquitectura/backend, 16 tests Python, make setup/feedback/verify W06 aprueban. Regresiones históricas W01/W02/W05 se reprodujeron en checkout desechable con instalación propia, observaciones originales preservadas y tag W05 validado en su SHA. Public W06 y congelación se completan con sus resultados exactos en el índice final y reporte posterior al tag. make public-test-week-06 aprobó con 19 suites/87 pruebas y todos los schemas; congelación se verifica después del tag, sin añadir otro commit.",
+      "explanation": "Mi aporte W06 incluye baseline y contrato del ZIP en c74e479, logs reales en 84be09d, inclusión de suites, parche mínimo de lockfile, documentación del grafo existente y probes de revisión en de51e16, más integración del último commit remoto sin reescribir historia en el SHA técnico actual. Consolidé los registros de los tres autores y corregí la atribución errónea de un SHA de Julian a osbaldo usando su registro original. Los fallos de producto quedan asignados a #37 y sus regresiones a #38; no los presento como garantías cumplidas ni creo tag/entrega. En el seguimiento autorizado corregí las ocho causas en el commit técnico actual: política compartida, identidad del transporte, expiración, generaciones/restore, error de clear y UI. Añadí regresiones del grafo real y versiones sucesivas, y corregí CI histórico conservando tag/evidencias W05. Estas correcciones son mi aporte asistido; no se atribuyen a osbaldo ni Julian ni sustituyen sus contribuciones originales.",
+      "aiAssistance": "Código, revisión, pruebas, documentación y comandos asistidos por Codex a petición de Draggodeidad. Se verificaron las ocho aserciones originales, suites acumuladas, arquitectura, esquemas y precedencia de commits. No se inventan reviews GitHub ni ejecución manual personal de compañeros."
+    },
+    {
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "1f2a4b43decf3747caa5c77eecaebe2750dd0fd0"
+      ],
+      "files": [
+        "App.tsx",
+        "docs/session-state-machine.mmd",
+        "src/application/errors/ApplicationFailure.ts",
+        "src/application/incidents/PerformIncidentAction.ts",
+        "src/application/session/DefaultSessionController.ts",
+        "src/application/session/SessionAuthorizationContext.ts",
+        "src/application/session/SessionClock.ts",
+        "src/application/session/SessionController.ts",
+        "src/application/session/SessionProvider.ts",
+        "src/application/session/SessionSnapshot.ts",
+        "src/course-evaluation/index.ts",
+        "src/domain/incidents/IncidentRepository.ts",
+        "src/infrastructure/http/AuthenticatedIncidentTransport.ts",
+        "src/infrastructure/http/SessionTransportDecorator.ts",
+        "src/infrastructure/incidents/FakeIncidentRepository.ts",
+        "src/infrastructure/incidents/HttpIncidentRepository.ts",
+        "src/infrastructure/session/HttpSessionProvider.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/ui/incidents/IncidentDetailScreen.tsx",
+        "course-tests/week-06-session-controller.test.ts",
+        "course-tests/week-06-session.test.ts"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm run test:architecture",
+        "npm run check:architecture",
+        "npm test -- --runInBand",
+        "npm run test:week-06",
+        "npm run backend:self-test",
+        "python tools/course_public_evaluator.py --week 6 --mode verify"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba implementar la maquina de estados de sesion formal desacoplada de la UI, el decorador de transporte con coalescing de 401 en un solo refresh y reintento unico, la autorizacion por roles (reporter, technician, coordinator) en el repositorio y caso de uso de acciones, y coordinar coordinateRefresh sin romper ninguna prueba de W01 a W05.",
+      "command": "npm run typecheck && npm run lint && npm run test:architecture && npm run check:architecture && npm test -- --runInBand && npm run test:week-06 && npm run backend:self-test",
+      "observedResult": "TypeScript estricto y ESLint aprobaron con 0 errores y 0 warnings. Arquitectura hexagonal validada con 0 violaciones. La suite completa de npm test aprobo 14 suites y 58 pruebas. La suite publica week-06.test.ts aprobo sus 2 pruebas, y las suites dedicadas de sesion y concurrencia aprobaron 12 pruebas al 100%.",
+      "explanation": "Implemente DefaultSessionController con estados explicitos, reloj abstracto y persistencia versionada segura. Cree SessionTransportDecorator para interceptar 401, compartir una unica promesa de refresh por generacion y reintentar solicitudes sin ciclos. Incorpore autorizacion por roles para start/resolve/close/reopen en PerformIncidentAction y HttpIncidentRepository respetando baseVersion e idempotencia, y conecte el grafo en App.tsx.",
+      "aiAssistance": "Implementacion y auditoria asistidas por Antigravity bajo direccion tecnica de osbaldoXxC. Codigo, contratos, diagramas y pruebas verificados localmente sin colisiones con issues asignadas a otros companeros."
+    },
+    {
+      "studentId": "3522110437",
+      "githubLogin": "JulianDele",
+      "commitShas": [
+        "500b51cbc13ed11eb5c46bdbf01a4da928face1c",
+        "8bf9663afed401128a34ae942f564c466df8302d"
+      ],
+      "files": [
+        "course-tests/week-06-session-validation.test.ts",
+        "course-tests/week-06-authorization.test.tsx",
+        "course-tests/fixtures/week-06/deferred.ts",
+        "course-tests/fixtures/week-06/localBackend.ts",
+        "reports/week-06/auth-tests.json",
+        "reports/week-06/concurrency.json",
+        "evidence/week-06/engineering.json",
+        "evidence/week-06/individual.json"
+      ],
+      "tests": [
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts",
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-06.test.ts",
+        "npm run backend:self-test",
+        "npm run typecheck",
+        "npm run lint",
+        "npm run test:architecture",
+        "npm run check:architecture"
+      ],
+      "reviews": [],
+      "prediction": "Esperaba que las pruebas deterministas confirmaran expiración en los tres límites, un único refresh compartido por A/B/C, liberación de waiters ante error, rechazo 403/409 sin mutación y limpieza de persistencia sin falsos éxitos.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts",
+      "observedResult": "En esta sesión del workspace, la suite enfocada pasó 5 suites y 23 pruebas; la suite pública aislada pasó 2/2; backend:self-test pasó; typecheck, lint y arquitectura finalizaron sin errores. Esta salida fue ejecutada por el agente en asistencia al usuario y no constituye por sí sola confirmación de que Julian la ejecutó personalmente.",
+      "explanation": "Aporte W06 confirmado por el usuario y verificable en el commit de JulianDele 500b51cbc13ed11eb5c46bdbf01a4da928face1c: suites de validación de sesión y autorización, fixtures deferred/backend local y reportes. El commit posterior 8bf9663afed401128a34ae942f564c466df8302d cambia evidencia; su atribución errónea del SHA de implementación se corrige con el registro original de osbaldo. Se conserva la predicción/observación asistida recibida, sin convertirla en afirmación de ejecución manual personal; las suites se repitieron en la consolidación y su resultado está en validation/08.log.",
+      "aiAssistance": "Pruebas y evidencia asistidas por IA según el registro recibido. El usuario confirmó este aporte; el historial contiene commits W06 propios de JulianDele. La reejecución de consolidación fue asistida por Codex para Draggodeidad."
+    }
+  ],
+  "provenance": {
+    "roster": "Usuario confirmó privadamente teamId/studentId ya registrados; no se publican identidades en issues.",
+    "osbaldo": "Registro propio conservado exactamente desde individual.osbaldoxxc.json; implementación 1f2a4b43decf3747caa5c77eecaebe2750dd0fd0.",
+    "julian": "Aporte confirmado por usuario; autoría corroborada mediante git show de los commits W06.",
+    "consolidationCommitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+    "readiness": "validated"
+  }
+}
