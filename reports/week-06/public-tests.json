@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "week": 6,
   "mode": "public",
-  "commitSha": "c74e4796b7f50f3d804f853fec2b271fd6417728",
-  "evaluatedAt": "2026-10-09T23:09:25.489402+00:00",
+  "commitSha": "f4a77a8e150c8ea6c4698056270a39b8f31da8a7",
+  "evaluatedAt": "2026-10-13T05:15:45.060702+00:00",
   "status": "fail",
   "checks": [
     {
@@ -33,8 +33,28 @@
     },
     {
       "id": "required_evidence",
+      "status": "pass",
+      "detail": "missing/empty=[]"
+    },
+    {
+      "id": "schema:reports/week-06/auth-tests.json",
+      "status": "pass",
+      "detail": "7 checks indexed, 4 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "id": "schema:reports/week-06/concurrency.json",
+      "status": "pass",
+      "detail": "2 checks indexed, 2 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "id": "schema:evidence/week-06/engineering.json",
+      "status": "pass",
+      "detail": "decision evidence is substantive and reproducible; report evaluates HEAD"
+    },
+    {
+      "id": "schema:evidence/week-06/individual.json",
       "status": "fail",
-      "detail": "missing/empty=['docs/session-state-machine.mmd', 'reports/week-06/auth-tests.json', 'reports/week-06/concurrency.json', 'evidence/week-06/engineering.json', 'evidence/week-06/individual.json']"
+      "detail": "3523110651: at least one authored commit SHA is required"
     },
     {
       "id": "toolchain_1",
@@ -53,8 +73,8 @@
     },
     {
       "id": "toolchain_4",
-      "status": "fail",
-      "detail": "npm test -- --ci --runInBand course-tests/public/week-06.test.ts\nsts/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-05-client.test.tsx course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-05.test.ts course-tests/public/week-06.test.ts --ci --runInBand course-tests/public/week-06.test.ts\n\n\nFAIL course-tests/public/week-06.test.ts\n  ● coalesces concurrent 401s into one refresh and retries each request once\n\n    coordinateRefresh must be implemented in the assigned week\n\n      13 |\n      14 | function pending(name: string): never {\n    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);\n         |         ^\n      16 | }\n      17 |\n      18 | export { redactForTelemetry, parseRemoteResource };\n\n      at pending (src/course-evaluation/index.ts:15:9)\n      at pending (src/course-evaluation/index.ts:27:10)\n      at Object.<anonymous> (course-tests/public/week-06.test.ts:4:36)\n\n  ● logout removes persisted session state\n\n    coordinateRefresh must be implemented in the assigned week\n\n      13 |\n      14 | function pending(name: string): never {\n    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);\n         |         ^\n      16 | }\n      17 |\n      18 | export { redactForTelemetry, parseRemoteResource };\n\n      at pending (src/course-evaluation/index.ts:15:9)\n      at pending (src/course-evaluation/index.ts:27:10)\n      at Object.<anonymous> (course-tests/public/week-06.test.ts:20:27)\n\nPASS course-tests/week-05-client.test.tsx\nPASS course-tests/smoke.test.tsx\nPASS course-tests/incidents.test.tsx\nPASS course-tests/week-05-transport-validation.test.tsx\nPASS course-tests/week-05-ui-failure.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/architecture.test.ts\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/public/week-01.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-05.test.ts\nPASS course-tests/public/week-02.test.ts\n\nTest Suites: 1 failed, 13 passed, 14 total\nTests:       2 failed, 56 passed, 58 total\nSnapshots:   0 total\nTime:        1.326 s, estimated 2 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/week-05-client.test.tsx|course-tests\\/week-05-transport-validation.test.tsx|course-tests\\/week-05-ui-failure.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-05.test.ts|course-tests\\/public\\/week-06.test.ts|course-tests\\/public\\/week-06.test.ts/i."
+      "status": "pass",
+      "detail": "npm test -- --ci --runInBand course-tests/public/week-06.test.ts\n> dmi-react-native-starter@1.0.0 test\n> jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-05-client.test.tsx course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-05.test.ts course-tests/public/week-06.test.ts --ci --runInBand course-tests/public/week-06.test.ts\n\n\nPASS course-tests/week-05-client.test.tsx\nPASS course-tests/smoke.test.tsx\nPASS course-tests/week-05-transport-validation.test.tsx\nPASS course-tests/week-05-ui-failure.test.tsx\nPASS course-tests/incidents.test.tsx\nPASS course-tests/week-04-errors.test.tsx\nPASS course-tests/architecture.test.ts\nPASS course-tests/public/week-06.test.ts\nPASS course-tests/public/week-03.test.ts\nPASS course-tests/public/week-05.test.ts\nPASS course-tests/week-04-storage.test.ts\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/public/week-01.test.ts\nPASS course-tests/public/week-02.test.ts\n\nTest Suites: 14 passed, 14 total\nTests:       58 passed, 58 total\nSnapshots:   0 total\nTime:        8.646 s, estimated 24 s\nRan all test suites matching /course-tests\\\\smoke.test.tsx|course-tests\\\\incidents.test.tsx|course-tests\\\\architecture.test.ts|course-tests\\\\week-03-ci.test.ts|course-tests\\\\week-04-storage.test.ts|course-tests\\\\week-04-errors.test.tsx|course-tests\\\\week-05-client.test.tsx|course-tests\\\\week-05-transport-validation.test.tsx|course-tests\\\\week-05-ui-failure.test.tsx|course-tests\\\\public\\\\week-01.test.ts|course-tests\\\\public\\\\week-02.test.ts|course-tests\\\\public\\\\week-03.test.ts|course-tests\\\\public\\\\week-05.test.ts|course-tests\\\\public\\\\week-06.test.ts|course-tests\\\\public\\\\week-06.test.ts/i."
     }
   ]
 }

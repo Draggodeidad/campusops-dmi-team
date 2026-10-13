@@ -43,7 +43,15 @@
         "src/ui/CampusOpsApp.tsx",
         "src/ui/incidents/IncidentDetailScreen.tsx",
         "course-tests/week-06-session-controller.test.ts",
-        "course-tests/week-06-session.test.ts"
+        "course-tests/week-06-session.test.ts",
+        "course-tests/week-06-session-validation.test.ts",
+        "course-tests/week-06-authorization.test.tsx",
+        "course-tests/fixtures/week-06/deferred.ts",
+        "course-tests/fixtures/week-06/localBackend.ts",
+        "reports/week-06/auth-tests.json",
+        "reports/week-06/concurrency.json",
+        "evidence/week-06/engineering.json",
+        "evidence/week-06/individual.json"
       ],
       "tests": [
         "npm run typecheck",
@@ -53,27 +61,45 @@
         "npm test -- --runInBand",
         "npm run test:week-06",
         "npm run backend:self-test",
-        "python tools/course_public_evaluator.py --week 6 --mode verify"
+        "python tools/course_public_evaluator.py --week 6 --mode verify",
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts"
       ],
       "reviews": [],
       "prediction": "Esperaba implementar la maquina de estados de sesion formal desacoplada de la UI, el decorador de transporte con coalescing de 401 en un solo refresh y reintento unico, la autorizacion por roles (reporter, technician, coordinator) en el repositorio y caso de uso de acciones, y coordinar coordinateRefresh sin romper ninguna prueba de W01 a W05.",
       "command": "npm run typecheck && npm run lint && npm run test:architecture && npm run check:architecture && npm test -- --runInBand && npm run test:week-06 && npm run backend:self-test",
-      "observedResult": "TypeScript estricto y ESLint aprobaron con 0 errores y 0 warnings. Arquitectura hexagonal validada con 0 violaciones. La suite completa de npm test aprobo 14 suites y 58 pruebas. La suite publica week-06.test.ts aprobo sus 2 pruebas, y las suites dedicadas de sesion y concurrencia aprobaron 12 pruebas al 100%.",
-      "explanation": "Implemente DefaultSessionController con estados explicitos, reloj abstracto y persistencia versionada segura. Cree SessionTransportDecorator para interceptar 401, compartir una unica promesa de refresh por generacion y reintentar solicitudes sin ciclos. Incorpore autorizacion por roles para start/resolve/close/reopen en PerformIncidentAction y HttpIncidentRepository respetando baseVersion e idempotencia, y conecte el grafo en App.tsx.",
+      "observedResult": "La validación enfocada W06 pasó 5 suites y 23 pruebas; la prueba pública aislada pasó 2/2. El backend self-test pasó. TypeScript y ESLint terminaron sin errores; arquitectura pasó 2/2 y check:architecture reportó cero violaciones. make setup terminó con npm ci y reportó 57 advisories (5 moderate, 51 high, 1 critical). verify y public evaluaron el SHA f4a77a8: la suite pública pasó 14/14 suites y 58/58 tests, pero el gate global falló por audit:ci y la plantilla individual incompleta del miembro Draggodeidad. No se cambió la evidencia ajena ni se desactivó ningún gate.",
+      "explanation": "Mi commit de implementación 1f2a4b43decf3747caa5c77eecaebe2750dd0fd0 aporta el controller, el refresh compartido y la autorización por roles. Para esta validación añadí localmente pruebas deterministas de expiración exacta, fallos de login/persistencia, single-flight A/B/C con tres waiters, logout y refresh obsoleto, reintentos limitados, 403 sin refresh y el adaptador SecureStore simulado. La prueba de autorización inicia course-backend/server.mjs en loopback y verifica 403/409 sin cambios de estado/version. Los nuevos tests/reportes aún no están comprometidos ni incluidos en ese SHA; se debe crear un commit técnico y actualizar los SHA de reportes antes del commit final de evidencia.",
       "aiAssistance": "Implementacion y auditoria asistidas por Antigravity bajo direccion tecnica de osbaldoXxC. Codigo, contratos, diagramas y pruebas verificados localmente sin colisiones con issues asignadas a otros companeros."
     },
     {
       "studentId": "3522110437",
       "githubLogin": "JulianDele",
       "commitShas": [],
-      "files": [],
-      "tests": [],
+      "files": [
+        "course-tests/week-06-session-validation.test.ts",
+        "course-tests/week-06-authorization.test.tsx",
+        "course-tests/fixtures/week-06/deferred.ts",
+        "course-tests/fixtures/week-06/localBackend.ts",
+        "reports/week-06/auth-tests.json",
+        "reports/week-06/concurrency.json",
+        "evidence/week-06/engineering.json",
+        "evidence/week-06/individual.json"
+      ],
+      "tests": [
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts",
+        "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-06.test.ts",
+        "npm run backend:self-test",
+        "npm run typecheck",
+        "npm run lint",
+        "npm run test:architecture",
+        "npm run check:architecture"
+      ],
       "reviews": [],
-      "prediction": "",
-      "command": "",
-      "observedResult": "",
-      "explanation": "",
-      "aiAssistance": ""
+      "prediction": "Esperaba que las pruebas deterministas confirmaran expiración en los tres límites, un único refresh compartido por A/B/C, liberación de waiters ante error, rechazo 403/409 sin mutación y limpieza de persistencia sin falsos éxitos.",
+      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts",
+      "observedResult": "En esta sesión del workspace, la suite enfocada pasó 5 suites y 23 pruebas; la suite pública aislada pasó 2/2; backend:self-test pasó; typecheck, lint y arquitectura finalizaron sin errores. Esta salida fue ejecutada por el agente en asistencia al usuario y no constituye por sí sola confirmación de que Julian la ejecutó personalmente.",
+      "explanation": "Este registro identifica a JulianDele (studentId 3522110437) y consolida la validación observada de Week 06 como borrador asistido. El historial revisado no contiene un commit Week 06 autorado por Julian; su SHA 4112f42227f18c1d637c905cb7763befeeeedfee corresponde a Week 05 y no lo reutilizo para esta entrega. Los tests/evidencias preparados en el workspace aún requieren que Julian confirme su aporte, genere un commit propio de Week 06 y actualice el SHA antes de poder considerarse evidencia individual completa.",
+      "aiAssistance": "Las pruebas y el borrador de evidencia se prepararon con asistencia de IA y se contrastaron con salidas observadas en el workspace; la atribución personal y el commit W06 siguen pendientes de confirmación por JulianDele."
     }
   ]
 }
