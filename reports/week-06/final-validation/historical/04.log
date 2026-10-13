@@ -1,0 +1,202 @@
+command: python3 tools/revalidate-prior-evidence.py --week 2
+evaluatedCommitSha: 1730b6f0f5291db74c221d20f0eb0d11a949afc4
+
+[week-02] make feedback
+s on vulnerable versions of @expo/metro
+        node_modules/@expo/metro-config
+      metro  >=0.71.0
+      Depends on vulnerable versions of metro-config
+      Depends on vulnerable versions of metro-file-map
+      Depends on vulnerable versions of metro-transform-worker
+      node_modules/metro
+        @react-native/community-cli-plugin  *
+        Depends on vulnerable versions of metro
+        Depends on vulnerable versions of metro-config
+        node_modules/@react-native/community-cli-plugin
+        metro-config  >=0.71.0
+        Depends on vulnerable versions of metro
+        node_modules/metro-config
+        metro-transform-worker  >=0.71.0
+        Depends on vulnerable versions of metro
+        node_modules/metro-transform-worker
+
+compression  <1.8.2
+Severity: high
+compression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95
+fix available via `npm audit fix`
+node_modules/compression
+
+node-forge  *
+Severity: high
+node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv
+fix available via `npm audit fix --force`
+Will install expo@44.0.6, which is a breaking change
+node_modules/node-forge
+  @expo/code-signing-certificates  *
+  Depends on vulnerable versions of node-forge
+  node_modules/@expo/code-signing-certificates
+
+source-map-js  1.0.0 - 1.2.1
+Severity: high
+source-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q
+fix available via `npm audit fix`
+node_modules/source-map-js
+
+sprintf-js  *
+Severity: moderate
+sprintf-js vulnerable to denial of service through unbounded precision specifiers - https://github.com/advisories/GHSA-hp3w-g68c-fv3c
+fix available via `npm audit fix --force`
+Will install react-native@0.87.1, which is a breaking change
+node_modules/sprintf-js
+  argparse  1.0.0 - 1.0.10
+  Depends on vulnerable versions of sprintf-js
+  node_modules/argparse
+    js-yaml  3.2.7 - 3.15.2
+    Depends on vulnerable versions of argparse
+    node_modules/js-yaml
+      @istanbuljs/load-nyc-config  *
+      Depends on vulnerable versions of js-yaml
+      node_modules/@istanbuljs/load-nyc-config
+        babel-plugin-istanbul  >=6.0.0-beta.0
+        Depends on vulnerable versions of @istanbuljs/load-nyc-config
+        node_modules/babel-plugin-istanbul
+
+32 vulnerabilities (5 moderate, 27 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+npm run bundle:release
+
+> dmi-react-native-starter@1.0.0 bundle:release
+> expo export --platform android --output-dir dist/export
+
+Starting Metro Bundler
+
+Android Bundled 3563ms index.ts (605 modules)
+
+› android bundles (1):
+_expo/static/js/android/index-8d85736a1b24d225b32b1a69a2805def.hbc (1.5MB)
+
+› Files (1):
+metadata.json (150B)
+
+Exported: dist/export
+
+[week-02] npm run test:architecture
+
+> dmi-react-native-starter@1.0.0 test:architecture
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/architecture.test.ts
+
+PASS course-tests/architecture.test.ts
+  ✓ the current source tree respects the declared dependency boundaries (6 ms)
+  ✓ the architecture check detects a direct UI-to-infrastructure import (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.555 s, estimated 1 s
+Ran all test suites matching /course-tests\/architecture.test.ts/i.
+
+[week-02] npm run check:architecture
+
+> dmi-react-native-starter@1.0.0 check:architecture
+> node tools/check-architecture.cjs
+
+{
+  "status": "pass",
+  "root": "src",
+  "violations": []
+}
+
+[week-02] npm run test:incidents
+
+> dmi-react-native-starter@1.0.0 test:incidents
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/incidents.test.tsx
+
+PASS course-tests/incidents.test.tsx
+  ✓ opens an incident from the list and returns from its detail (110 ms)
+  ✓ application use cases accept a substitute repository (2 ms)
+  ✓ shows a helpful placeholder when no incident is selected (3 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.863 s, estimated 1 s
+Ran all test suites matching /course-tests\/incidents.test.tsx/i.
+
+[week-02] npm test -- --ci --runInBand course-tests/public/week-02.test.ts
+uthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [B] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [C] RESULT
+
+      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+          at Generator.throw (<anonymous>)
+
+    console.log
+      [A] REQUEST
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] 401
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH START
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [AUTH] REFRESH SUCCESS
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RETRY
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+    console.log
+      [A] RESULT
+
+      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+
+PASS course-tests/week-05-transport-validation.test.tsx
+PASS course-tests/smoke.test.tsx
+PASS course-tests/week-04-errors.test.tsx
+PASS course-tests/week-06-session-validation.test.ts
+PASS course-tests/public/week-01.test.ts
+PASS course-tests/public/week-05.test.ts
+PASS course-tests/week-03-ci.test.ts
+PASS course-tests/week-06-session-controller.test.ts
+PASS course-tests/public/week-03.test.ts
+PASS course-tests/week-04-storage.test.ts
+PASS course-tests/public/week-02.test.ts
+PASS course-tests/public/week-06.test.ts
+
+Test Suites: 19 passed, 19 total
+Tests:       87 passed, 87 total
+Snapshots:   0 total
+Time:        4.537 s, estimated 5 s
+Ran all test suites matching /course-tests\/smoke.test.tsx|course-tests\/incidents.test.tsx|course-tests\/architecture.test.ts|course-tests\/week-03-ci.test.ts|course-tests\/week-04-storage.test.ts|course-tests\/week-04-errors.test.tsx|course-tests\/week-05-client.test.tsx|course-tests\/week-05-transport-validation.test.tsx|course-tests\/week-05-ui-failure.test.tsx|course-tests\/public\/week-01.test.ts|course-tests\/public\/week-02.test.ts|course-tests\/public\/week-03.test.ts|course-tests\/public\/week-05.test.ts|course-tests\/public\/week-06.test.ts|course-tests\/week-06-session.test.ts|course-tests\/week-06-session-controller.test.ts|course-tests\/week-06-session-validation.test.ts|course-tests\/week-06-authorization.test.tsx|course-tests\/week-06-integration-regression.test.tsx|course-tests\/public\/week-02.test.ts/i.
+
+
+exitCode: 0

@@ -1,0 +1,26 @@
+from pathlib import Path
+import shutil,subprocess,sys,tempfile
+root=Path.cwd(); out=root/'reports/week-06/final-validation/historical'; out.mkdir(parents=True,exist_ok=True)
+with tempfile.TemporaryDirectory(prefix='campusops-w06-ci-') as directory:
+    checkout=Path(directory)/'repo'
+    subprocess.run(['git','clone','--quiet','--shared','--no-checkout',str(root),str(checkout)],check=True)
+    sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+    subprocess.run(['git','checkout','--quiet','--detach',sha],cwd=checkout,check=True)
+    commands=[['make','setup']]
+    for week in [1,2,5]:
+        commands.extend([['python3','tools/revalidate-prior-evidence.py','--week',str(week)],['make',f'verify-week-{week:02d}'],['make',f'public-test-week-{week:02d}']])
+    commands.append(['python3','tools/verify-frozen-evidence.py','--week','5'])
+    try:
+        for n,command in enumerate(commands):
+            log=out/f'{n:02d}.log'
+            with log.open('w') as stream:
+                stream.write('command: '+' '.join(command)+'\nevaluatedCommitSha: '+sha+'\n\n'); stream.flush()
+                result=subprocess.run(command,cwd=checkout,stdout=stream,stderr=subprocess.STDOUT)
+                stream.write(f'\nexitCode: {result.returncode}\n')
+            print('Historical/continuous check: '+' '.join(command)+f' => exit {result.returncode}',flush=True)
+            if result.returncode: raise subprocess.CalledProcessError(result.returncode,command)
+    finally:
+        for week in [1,2,5]:
+            folder=checkout/'reports'/f'week-{week:02d}'
+            for path in folder.glob('generated-*'):
+                if path.is_dir(): shutil.copytree(path,out/f'week-{week:02d}'/path.name,dirs_exist_ok=True)

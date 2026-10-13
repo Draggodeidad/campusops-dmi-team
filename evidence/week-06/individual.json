@@ -10,7 +10,8 @@
         "c74e4796b7f50f3d804f853fec2b271fd6417728",
         "84be09df0220dd4116267275abf626c876bce7c8",
         "de51e16606f97a3006e6af861bfad56b46ea316e",
-        "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4"
+        "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+        "1730b6f0f5291db74c221d20f0eb0d11a949afc4"
       ],
       "files": [
         "docs/week-06-baseline.md",
@@ -23,7 +24,17 @@
         "tools/check-week-06-readiness.cjs",
         "reports/week-06/validation/index.json",
         "evidence/week-06/engineering.json",
-        "evidence/week-06/individual.json"
+        "evidence/week-06/individual.json",
+        "src/application/session/RefreshCoordinator.ts",
+        "src/application/session/DefaultSessionController.ts",
+        "src/infrastructure/http/SessionTransportDecorator.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/infrastructure/incidents/dto/IncidentDtoMapper.ts",
+        "course-tests/week-06-integration-regression.test.tsx",
+        "tools/revalidate-prior-evidence.py",
+        "tools/verify-frozen-evidence.py",
+        ".github/workflows/week-06-sesion-segura-feedback.yml",
+        ".github/workflows/week-05-cliente-cloud-feedback.yml"
       ],
       "tests": [
         "make setup",
@@ -35,19 +46,21 @@
         "npm run check:architecture",
         "npm run backend:self-test",
         "npm run test:week-06",
-        "make feedback",
         "npm run check:week-06-readiness",
+        "python3 -m unittest discover -s tools/tests -v",
+        "make feedback",
         "make verify-week-06",
+        "python3 /tmp/campusops-w06-history.py",
         "make public-test-week-06"
       ],
       "reviews": [
         "Revisión local del diff de #37/#38 y reproducciones independientes en tools/check-week-06-readiness.cjs; hallazgos y responsables en docs/week-06-delivery.md. No constituye aprobación o review publicado en GitHub."
       ],
-      "prediction": "Tras reinstalar el lockfile corregido, espero que las suites existentes, auditoría crítica y export aprueben. Los ocho probes de revisión deben seguir fallando porque no se modificó producto. Compararé códigos reales sin declarar la entrega lista.",
-      "command": "make feedback; npm run check:week-06-readiness (ejecutados por separado, códigos conservados en validation/index.json)",
-      "observedResult": "En el SHA técnico integrado 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4, instalación, TypeScript, lint, smoke, incidencias, arquitectura, backend y cinco suites W06 aprobaron (23/23 pruebas). make feedback pasó 18 suites/79 pruebas, auditoría crítica y export Android. make verify-week-06 y make public-test-week-06 aprobaron (exit 0), incluidos los schemas de los tres aportes. Readiness terminó exit 1 con ocho invariantes incumplidas: actor/cabeceras, petición anónima autorizada, replay con otra identidad, reducer obsoleto, expiración antes del envío, validación y carrera restore/logout, y cleanup que oculta error de clear. Los logs conservan el fallo inicial de shell-quote y su actualización. La entrega sigue no lista para tag; no se ejecutó evidence-week-06.",
-      "explanation": "Mi aporte W06 incluye baseline y contrato del ZIP en c74e479, logs reales en 84be09d, inclusión de suites, parche mínimo de lockfile, documentación del grafo existente y probes de revisión en de51e16, más integración del último commit remoto sin reescribir historia en el SHA técnico actual. Consolidé los registros de los tres autores y corregí la atribución errónea de un SHA de Julian a osbaldo usando su registro original. Los fallos de producto quedan asignados a #37 y sus regresiones a #38; no los presento como garantías cumplidas ni creo tag/entrega.",
-      "aiAssistance": "Revisión de kit/código, scripts, documentación, consolidación y comandos ejecutados con Codex bajo petición de Draggodeidad. Se declaran resultados reales y fallos; no se afirma ejecución manual personal ni trabajo ajeno."
+      "prediction": "Tras corregir las causas, espero ocho invariantes aprobadas, seis suites W06/31 pruebas y 19 suites/87 pruebas acumuladas, gates críticos/export y controles históricos con procedencia intacta. Sólo congelaré una versión con checks completos.",
+      "command": "make feedback; npm run check:week-06-readiness (comandos separados y códigos reales en final-validation/index.json)",
+      "observedResult": "SHA técnico 1730b6f0f5291db74c221d20f0eb0d11a949afc4: ocho invariantes originales pasan; seis suites W06/31 pruebas y acumuladas 19 suites/87 pruebas pasan; TypeScript/lint/arquitectura/backend, 16 tests Python, make setup/feedback/verify W06 aprueban. Regresiones históricas W01/W02/W05 se reprodujeron en checkout desechable con instalación propia, observaciones originales preservadas y tag W05 validado en su SHA. Public W06 y congelación se completan con sus resultados exactos en el índice final y reporte posterior al tag. make public-test-week-06 aprobó con 19 suites/87 pruebas y todos los schemas; congelación se verifica después del tag, sin añadir otro commit.",
+      "explanation": "Mi aporte W06 incluye baseline y contrato del ZIP en c74e479, logs reales en 84be09d, inclusión de suites, parche mínimo de lockfile, documentación del grafo existente y probes de revisión en de51e16, más integración del último commit remoto sin reescribir historia en el SHA técnico actual. Consolidé los registros de los tres autores y corregí la atribución errónea de un SHA de Julian a osbaldo usando su registro original. Los fallos de producto quedan asignados a #37 y sus regresiones a #38; no los presento como garantías cumplidas ni creo tag/entrega. En el seguimiento autorizado corregí las ocho causas en el commit técnico actual: política compartida, identidad del transporte, expiración, generaciones/restore, error de clear y UI. Añadí regresiones del grafo real y versiones sucesivas, y corregí CI histórico conservando tag/evidencias W05. Estas correcciones son mi aporte asistido; no se atribuyen a osbaldo ni Julian ni sustituyen sus contribuciones originales.",
+      "aiAssistance": "Código, revisión, pruebas, documentación y comandos asistidos por Codex a petición de Draggodeidad. Se verificaron las ocho aserciones originales, suites acumuladas, arquitectura, esquemas y precedencia de commits. No se inventan reviews GitHub ni ejecución manual personal de compañeros."
     },
     {
       "studentId": "3523110279",
@@ -133,7 +146,7 @@
     "roster": "Usuario confirmó privadamente teamId/studentId ya registrados; no se publican identidades en issues.",
     "osbaldo": "Registro propio conservado exactamente desde individual.osbaldoxxc.json; implementación 1f2a4b43decf3747caa5c77eecaebe2750dd0fd0.",
     "julian": "Aporte confirmado por usuario; autoría corroborada mediante git show de los commits W06.",
-    "consolidationCommitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
-    "readiness": "not-ready"
+    "consolidationCommitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+    "readiness": "validated"
   }
 }

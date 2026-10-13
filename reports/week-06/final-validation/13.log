@@ -1,0 +1,18 @@
+command: python3 /tmp/campusops-w06-history.py
+commitSha: 1730b6f0f5291db74c221d20f0eb0d11a949afc4
+startedAt: 2026-10-13T05:55:12.638903+00:00
+node: v22.22.0
+
+Historical/continuous check: make setup => exit 0
+Historical/continuous check: python3 tools/revalidate-prior-evidence.py --week 1 => exit 0
+Historical/continuous check: make verify-week-01 => exit 0
+Historical/continuous check: make public-test-week-01 => exit 0
+Historical/continuous check: python3 tools/revalidate-prior-evidence.py --week 2 => exit 0
+Historical/continuous check: make verify-week-02 => exit 0
+Historical/continuous check: make public-test-week-02 => exit 0
+Historical/continuous check: python3 tools/revalidate-prior-evidence.py --week 5 => exit 0
+Historical/continuous check: make verify-week-05 => exit 0
+Historical/continuous check: make public-test-week-05 => exit 0
+Historical/continuous check: python3 tools/verify-frozen-evidence.py --week 5 => exit 0
+
+exitCode: 0
