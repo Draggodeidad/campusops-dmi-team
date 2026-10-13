@@ -20,7 +20,7 @@ G1/G2/G3 limitan a 4.8/8 ante falta de reproducción/flujo central o exposición
 
 ## Interfaces de diseño para #37 y #38
 
-**Estas firmas quedan publicadas para implementación posterior; no existen aún en src.** Application mantiene estado y coordinación; Infrastructure implementa proveedor/persistencia/transporte; App.tsx compone; UI sólo recibe Application y tipos de Domain. No se cambia el ADR ni el diagrama vigente para representar código futuro.
+**Snapshot histórico del contrato publicado en #36, antes de #37/#38.** Estas firmas ya tienen implementaciones en la rama W06 tras los commits `1f2a4b43decf3747caa5c77eecaebe2750dd0fd0` y `500b51cbc13ed11eb5c46bdbf01a4da928face1c`. Application mantiene el controlador; Infrastructure implementa proveedor/persistencia/transporte; App.tsx compone; UI recibe Application y tipos de Domain. El estado real y las discrepancias se registran en `docs/week-06-delivery.md`, ADR y diagrama actualizado. Los párrafos prescriptivos siguientes conservan el contrato, no certifican su cumplimiento.
 
 ```ts
 // src/application/session/SessionClock.ts
@@ -87,3 +87,12 @@ El workflow se conserva íntegro: también exige evidencias/tag finales y puede 
 Entregables finales: `docs/session-state-machine.mmd`, `reports/week-06/auth-tests.json`, `reports/week-06/concurrency.json`, `evidence/week-06/engineering.json`, `evidence/week-06/individual.json`. Los crea su issue responsable, no #36. Reportes: schemaVersion 1, week 6, commitSha completo, generatedAt ISO y checks con id/status/scenarioType/command/evidence; estados pass/fail/not_applicable, escenarios nominal/boundary/failure y al menos un boundary/failure por reporte. Engineering incluye decisión, dos alternativas, tradeoff, AC-01..AC-05 y verification; individual exactamente tres miembros con identidades y aportaciones reales. Consultar EVIDENCE_CONTRACT y guía de repositorio para campos completos y commit final exclusivo de reports/evidence.
 
 Logs antes/después e índice de comandos: `reports/week-06/baseline/`. Verify/public son diagnósticos generados del checkout, no reportes auth-tests/concurrency ni evidencia de entrega completa. Los fallos de coordinateRefresh corresponden a #37; suites/reportes independientes a #38; consolidación/tag a #39. #36 no crea tag ni evidence final. Ayuda material de Codex: revisión del kit, documentación, scripts y ejecución; verificable mediante diff y logs, sin atribuir trabajo a compañeros.
+
+## Consolidación #39
+
+Las suites productivas de W06 ya existen y ahora se incluyen explícitamente en
+`npm test` y `npm run test:week-06`, además de la prueba pública. La revisión
+independiente se ejecuta con `npm run check:week-06-readiness`; un fallo es una
+brecha real y no se incluye como éxito de los gates oficiales. Consultar
+`reports/week-06/validation/` para logs, SHA y exit codes de esta consolidación.
+Los logs baseline conservan sus SHA y resultados históricos.
