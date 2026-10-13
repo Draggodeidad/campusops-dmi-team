@@ -18,7 +18,12 @@ en Classroom durante esta tarea.
 Se sincronizó la rama mediante fast-forward hasta
 `500b51cbc13ed11eb5c46bdbf01a4da928face1c`; `origin/main` seguía en
 `791e222a6c057acf3ca534d233bcf79771c554c9` y ya era ancestro. No se fusiona
-el PR en main. El ZIP local se conserva sin añadirlo a Git. Inventario/hash y
+el PR en main. Durante la validación se incorporó también el commit remoto
+`8bf9663afed401128a34ae942f564c466df8302d`, conservando ambas líneas de historia.
+Ese cambio asignaba a osbaldo un SHA de Julian; la consolidación restituye el
+registro propio verificable de cada autor. Los primeros logs de revisión se
+conservan en `validation/before-remote-sync/`, con su SHA real.
+El ZIP local se conserva sin añadirlo a Git. Inventario/hash y
 comparación íntegra originales: `reports/week-06/baseline/zip-inventory.json`.
 El mapeo AC y los 8 puntos se verifican en las tres guías oficiales de
 `docs/assignments/week-06*`; el quiz es separado y no forma parte de esta tarea.
