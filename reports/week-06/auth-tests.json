@@ -1,88 +1,81 @@
 {
   "schemaVersion": 1,
   "week": 6,
-  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
-  "generatedAt": "2026-10-13T05:33:47.632188+00:00",
-  "sourceTreeNote": "Reejecutado sobre el SHA técnico integrado indicado, con Node 22.22.0 y lockfile instalado mediante make setup. Después sólo se modifican reports/evidence. Resultados recibidos e intento previo permanecen en validation/received y validation/before-remote-sync con sus SHA originales. No es validación final de entrega; hay brechas funcionales reproducidas.",
+  "commitSha": "1730b6f0f5291db74c221d20f0eb0d11a949afc4",
+  "generatedAt": "2026-10-13T05:58:26.002791+00:00",
+  "readiness": "validated",
+  "sourceTreeNote": "Validación final sobre código/configuración/documentos guardados en el SHA técnico indicado; siguiente commit sólo reports/evidence. Los fallos previos permanecen en validation y en el commit 372064458bfed08f29e72fcc6319b48fabd8d9c5. No se relabelan como ejecuciones aprobadas.",
   "checks": [
     {
       "id": "login-success-and-persistence",
       "status": "pass",
       "scenarioType": "nominal",
       "command": "npm run test:week-06",
-      "evidence": "La suite integrada aprobó 5 suites/23 pruebas. El controller persistió sesión versionada en el test determinista y la suite de autorización inició sesión de los cuatro actores contra el backend local real; el backend self-test también confirmó login válido e inválido. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+      "evidence": "Controller persiste registro schemaVersion 1 antes de publicar sesión; la suite del grafo inicia sesión/restaura y recorre UI con identidades reales sintéticas. 6 suites/31 pruebas; reports/week-06/final-validation/08.log"
     },
     {
       "id": "login-invalid-transport-and-persistence-failures",
       "status": "pass",
       "scenarioType": "failure",
       "command": "npm run test:week-06",
-      "evidence": "La prueba aprobada verificó actor inválido, rechazo de transporte y fallo al escribir persistencia; los tres caminos terminan sin publicar estado authenticated y el error de red se representa mediante mensaje ApplicationFailure constante. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+      "evidence": "Login inválido, red y save fallidos no publican authenticated; UI presenta mensaje seguro sin error privado del proveedor. reports/week-06/final-validation/08.log"
     },
     {
       "id": "expiration-boundaries",
       "status": "pass",
       "scenarioType": "boundary",
       "command": "npm run test:week-06",
-      "evidence": "Con TestClock controlable, expiresAt-1 produjo authenticated; exactamente expiresAt produjo expired; expiresAt+1 permaneció expired. No se usaron esperas temporales reales. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+      "evidence": "expiresAt-1 válido; expiresAt y +1 expirados con reloj controlado. El decorador renueva antes de enviar y un 401 posterior a renovación invalida sin segundo refresh. reports/week-06/final-validation/08.log"
     },
     {
-      "id": "refresh-logout-and-error-cleanup",
-      "status": "pass",
-      "scenarioType": "failure",
-      "command": "npm run test:week-06",
-      "evidence": "Refresh fallido liberó los tres requests con respuesta 401, limpió tokens y terminó anonymous; logout purgó la persistencia. El listener unhandledRejection observó cero rechazos no manejados. El adapter SecureStore simulado rechazó clear cuando el proveedor rechazó, sin presentarlo como éxito. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
-    },
-    {
-      "id": "authorization-real-local-backend",
+      "id": "authorization-app-graph-and-versions",
       "status": "pass",
       "scenarioType": "boundary",
       "command": "npm run test:week-06",
-      "evidence": "La prueba pasó contra course-backend/server.mjs local en puerto efímero: reporter creó incidencia y recibió 403 al resolver/cerrar; technician-1 inició y resolvió la incidencia asignada; technician-2 recibió 403 al resolver la ajena; coordinator cerró y reabrió; versión obsoleta devolvió 409. Se comparó estado y versión antes/después de rechazos. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+      "evidence": "Grafo exportado por App.tsx + UI + proveedor/decorador/repositorio reales contra backend loopback: técnico inicia/resuelve con versiones 1/2; coordinador cierra/reabre con versiones 3/4; resultado versión 5. Reportante recibe 403 sin mutación. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "authorization-foreign-assignment",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Suite de backend comprueba 403 para técnico no asignado y 409 para versión antigua; estado/versión no cambian. Complementa el grafo/UI. reports/week-06/final-validation/08.log"
+    },
+    {
+      "id": "active-role-and-anonymous-request",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Sesión técnica coincide con actor saliente; anonymous envía autorización=false. Aserciones originales aprobadas. reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "restore-validation-and-logout-race",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Registro con rol inválido/tokens vacíos termina anonymous y clearCalls=1; lectura retenida tras logout termina anonymous. reports/week-06/final-validation/09.log"
+    },
+    {
+      "id": "cleanup-storage-failure-observable",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "Clear fallido deja registro retenido y propaga SECURE_STORAGE_UNAVAILABLE, sin afirmar purga. UI oculta vistas privadas, muestra error y reintenta; nuevo clear exitoso deja null. reports/week-06/final-validation/08.log; reports/week-06/final-validation/09.log"
     },
     {
       "id": "architecture-boundaries",
       "status": "pass",
-      "scenarioType": "nominal",
-      "command": "npm run test:architecture && npm run check:architecture",
-      "evidence": "test:architecture pasó 1 suite/2 pruebas y check:architecture reportó status pass con 0 violations. Reejecución: validation/05.log y validation/06.log."
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "Cero violaciones de imports; detector y sustitución también probados por test:architecture/test:incidents. final-validation/05.log y 06.log."
     },
     {
       "id": "backend-contract-self-test",
       "status": "pass",
       "scenarioType": "nominal",
       "command": "npm run backend:self-test",
-      "evidence": "Salida observada: CampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS. Controlled backend self-test passed. Reejecución: validation/07.log."
-    },
-    {
-      "id": "active-role-and-anonymous-request",
-      "status": "fail",
-      "scenarioType": "failure",
-      "command": "npm run check:week-06-readiness",
-      "evidence": "El repositorio conserva cabeceras fixture: actor saliente distinto de la sesión activa; anonymous también envía autorización. Probes repository-uses-active-session-actor y anonymous-repository-does-not-send-fixture-authorization fallan. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
-    },
-    {
-      "id": "expiration-before-transport",
-      "status": "fail",
-      "scenarioType": "boundary",
-      "command": "npm run check:week-06-readiness",
-      "evidence": "Snapshot expired en expiresAt, pero el decorador envía con 0 refresh previos. Probe expired-request-refreshes-before-send falla. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
-    },
-    {
-      "id": "stored-record-validation-and-restore-logout",
-      "status": "fail",
-      "scenarioType": "failure",
-      "command": "npm run check:week-06-readiness",
-      "evidence": "Restore acepta rol inválido/tokens vacíos y puede publicar authenticated tras logout. Fallan restore-rejects-invalid-role-and-empty-tokens y restore-completion-cannot-resurrect-after-logout. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
-    },
-    {
-      "id": "cleanup-delete-error-observability",
-      "status": "fail",
-      "scenarioType": "failure",
-      "command": "npm run check:week-06-readiness",
-      "evidence": "Clear falla y el registro persiste; refresh informa SESSION_EXPIRED ocultando SECURE_STORAGE_UNAVAILABLE. Probe refresh-cleanup-reports-storage-delete-failure falla. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+      "evidence": "Backend self-test aprobó contratos sintéticos; final-validation/07.log."
     }
   ],
-  "readiness": "not-ready",
-  "coverageLimits": "La autorización por perfiles se probó directamente contra el backend, no a través del grafo/UI de la app. El SDK de SecureStore fue sustituido; no demuestra cifrado físico. UI/arranque/versiones requieren correcciones y regresiones #37/#38."
+  "limits": "Backend sintético sin expiración temporal/rotación productiva completa; SDK nativo simulado. No certifica autenticación institucional, cifrado físico ni APK."
 }

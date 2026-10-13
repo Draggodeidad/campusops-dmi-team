@@ -1,0 +1,16 @@
+command: npm run check:architecture
+commitSha: 1730b6f0f5291db74c221d20f0eb0d11a949afc4
+startedAt: 2026-10-13T05:54:26.802647+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 check:architecture
+> node tools/check-architecture.cjs
+
+{
+  "status": "pass",
+  "root": "src",
+  "violations": []
+}
+
+exitCode: 0

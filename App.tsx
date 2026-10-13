@@ -4,6 +4,9 @@ import { CreateIncident } from './src/application/incidents/CreateIncident';
 import { GetIncidentById } from './src/application/incidents/GetIncidentById';
 import { GetIncidents } from './src/application/incidents/GetIncidents';
 import { PerformIncidentAction } from './src/application/incidents/PerformIncidentAction';
+import type { SessionClock } from './src/application/session/SessionClock';
+import type { SessionSecretStore } from './src/application/session/SessionSecretStore';
+import type { IncidentTransport } from './src/infrastructure/http/IncidentTransport';
 import { DefaultSessionController } from './src/application/session/DefaultSessionController';
 import { SystemClock } from './src/application/session/SessionClock';
 import { GetBackendStatus } from './src/application/system/GetBackendStatus';
@@ -20,12 +23,17 @@ import { CampusOpsApp } from './src/ui/CampusOpsApp';
 export const BACKEND_URL =
   Platform.OS === 'android' ? 'http://10.0.2.2:4310' : 'http://localhost:4310';
 
-export function createGraph() {
-  const isTest = process.env.NODE_ENV === 'test' && !process.env.EXPO_PUBLIC_USE_HTTP;
-  const baseTransport = new FetchIncidentTransport(BACKEND_URL);
+export function createGraph(options: Readonly<{
+  useHttp?: boolean;
+  transport?: IncidentTransport;
+  secretStore?: SessionSecretStore;
+  clock?: SessionClock;
+}> = {}) {
+  const isTest = options.useHttp !== true && process.env.NODE_ENV === 'test' && !process.env.EXPO_PUBLIC_USE_HTTP;
+  const baseTransport = options.transport ?? new FetchIncidentTransport(BACKEND_URL);
   const sessionProvider = new HttpSessionProvider(baseTransport);
-  const sessionStore = new ExpoSecureSessionSecretStore();
-  const sessionClock = new SystemClock();
+  const sessionStore = options.secretStore ?? new ExpoSecureSessionSecretStore();
+  const sessionClock = options.clock ?? new SystemClock();
   const sessionController = new DefaultSessionController(sessionProvider, sessionStore, sessionClock);
   const sessionTransport = new SessionTransportDecorator(baseTransport, sessionController);
 
@@ -41,6 +49,7 @@ export function createGraph() {
 
   return {
     repository,
+    useSession: !isTest,
     sessionController,
     getIncidents,
     getIncidentById,
@@ -64,7 +73,7 @@ export default function App() {
       getIncidentById={defaultGraph.getIncidentById}
       getIncidents={defaultGraph.getIncidents}
       performIncidentAction={defaultGraph.performIncidentAction}
-      sessionController={defaultGraph.sessionController}
+      {...(defaultGraph.useSession ? { sessionController: defaultGraph.sessionController } : {})}
     />
   );
 }

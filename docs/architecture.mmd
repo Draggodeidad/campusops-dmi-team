@@ -22,6 +22,7 @@ flowchart TB
     SecretPort["SessionSecretStore"]
     SessionController["DefaultSessionController / SessionController"]
     SessionClock["SessionClock"]
+    RefreshPolicy["RefreshCoordinator — generaciones y replay"]
     SessionProvider["SessionProvider"]
     SessionContext["SessionAuthorizationContext"]
     PerformAction["PerformIncidentAction"]
@@ -73,6 +74,7 @@ flowchart TB
   SessionTransport --> Transport
   SessionTransport --> SessionContext
   SessionController --> SessionContext
+  SessionController --> RefreshPolicy
   SessionController --> SessionClock
   SessionController --> SessionProvider
   SessionController --> SecretPort
@@ -103,7 +105,8 @@ flowchart TB
   Root --> SessionTransport
   Root --> PerformAction
 
-  Evaluation["course-evaluation.coordinateRefresh — reducer independiente, brecha #37"]
+  Evaluation["course-evaluation.coordinateRefresh — adaptador de política compartida"]
+  Evaluation --> RefreshPolicy
   SessionTests["Suites W06"] --> SessionController
   SessionTests --> SessionTransport
   SessionTests --> ParallelTransport

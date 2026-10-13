@@ -1,37 +1,32 @@
 stateDiagram-v2
     [*] --> anonymous: constructor; generación 0
-    anonymous --> signing_in: login; generación++
-    authenticated --> signing_in: nuevo login; generación++
+    anonymous --> signing_in: login; invalida generación anterior
+    authenticated --> signing_in: nuevo login; invalida generación anterior
     signing_in --> authenticated: proveedor + persistencia exitosa; generación vigente
-    signing_in --> anonymous: login falla; limpia memoria
-    authenticated --> expired: getSnapshot y clock.now >= expiresAt
-    authenticated --> refreshing: refresh o 401
-    expired --> refreshing: refresh invocado
+    signing_in --> anonymous: falla controlada; limpia estado y persistencia
+    authenticated --> expired: reloj alcanza expiresAt
+    authenticated --> refreshing: 401 de token actual
+    expired --> refreshing: renovación explícita o antes del envío
     refreshing --> authenticated: tokens persistidos; generación vigente
-    refreshing --> anonymous: refresh falla; cleanup intenta borrar
-    anonymous --> authenticated: restore acepta registro futuro
-    anonymous --> logging_out: logout; generación++
-    signing_in --> logging_out: logout; generación++
-    authenticated --> logging_out: logout; generación++
-    expired --> logging_out: logout; generación++
-    refreshing --> logging_out: logout; generación++
-    logging_out --> anonymous: finally; incluso si clear falla
-
+    refreshing --> anonymous: refresh falla; invalida generación y limpia
+    anonymous --> authenticated: restore válido, no expirado y generación vigente
+    anonymous --> logging_out: logout o reintento de borrado
+    signing_in --> logging_out: logout; invalida generación
+    authenticated --> logging_out: logout o segundo 401
+    expired --> logging_out: logout
+    refreshing --> logging_out: logout concurrente
+    logging_out --> anonymous: memoria invalidada; resultado de borrado observable
     state "signing-in" as signing_in
     state "logging-out" as logging_out
     note right of anonymous
-      restore existe, pero App.tsx no lo invoca.
-      Validación y carrera restore/logout pendientes #37.
-      Cleanup puede dejar persistencia si clear falla.
-      Error de login/logout no se presenta en UI.
-    end note
-    note right of expired
-      Expiración sólo al consultar snapshot.
-      Decorador no la comprueba antes de enviar.
+      UI restaura al arrancar y oculta vistas privadas.
+      Registro corrupto o expirado se descarta y borra.
+      Falla de clear se muestra; permite reintentar.
+      No se afirma purga mientras el proveedor falle.
     end note
     note right of refreshing
-      Promesa compartida por generación en controller.
-      Éxito/fallo obsoleto no reemplaza la memoria nueva.
-      Replay de petición aún no verifica generación.
-      coordinateRefresh es lógica independiente pendiente.
+      Una promesa por generación; máximo un replay.
+      Resultado viejo nunca restaura ni borra sesión nueva.
+      Decorador conserva cuerpo y clave de idempotencia.
+      RefreshCoordinator comparte la política con evaluación.
     end note

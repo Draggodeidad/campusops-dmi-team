@@ -1,0 +1,70 @@
+command: python3 tools/verify-frozen-evidence.py --week 5
+evaluatedCommitSha: 1730b6f0f5291db74c221d20f0eb0d11a949afc4
+
+{
+  "schemaVersion": 1,
+  "week": 5,
+  "mode": "evidence",
+  "commitSha": "791e222a6c057acf3ca534d233bcf79771c554c9",
+  "evaluatedAt": "2026-10-13T05:58:22.017858+00:00",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "pass",
+      "detail": "missing/empty=[]"
+    },
+    {
+      "id": "schema:reports/week-05/contract-tests.json",
+      "status": "pass",
+      "detail": "10 checks indexed, 9 boundary/failure; evidence-only commit; invalid changes=[]"
+    },
+    {
+      "id": "schema:reports/week-05/failure-matrix.json",
+      "status": "pass",
+      "detail": "4 checks indexed, 4 boundary/failure; evidence-only commit; invalid changes=[]"
+    },
+    {
+      "id": "schema:evidence/week-05/engineering.json",
+      "status": "pass",
+      "detail": "decision evidence is substantive and reproducible; evidence-only commit; invalid changes=[]"
+    },
+    {
+      "id": "schema:evidence/week-05/individual.json",
+      "status": "pass",
+      "detail": "three individual evidence records found"
+    },
+    {
+      "id": "frozen_sha",
+      "status": "pass",
+      "detail": "tag=week-05-final tagSha=791e222a6c057acf3ca534d233bcf79771c554c9 head=791e222a6c057acf3ca534d233bcf79771c554c9"
+    }
+  ]
+}
+
+exitCode: 0

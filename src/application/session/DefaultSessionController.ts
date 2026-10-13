@@ -1,5 +1,6 @@
 import type { CampusRole } from '../../campusops/contracts';
 import { ApplicationFailure } from '../errors/ApplicationFailure';
+import { RefreshCoordinator } from './RefreshCoordinator';
 import type { SessionAuthorizationContext } from './SessionAuthorizationContext';
 import { type SessionClock, SystemClock } from './SessionClock';
 import type { SessionController } from './SessionController';
@@ -24,6 +25,7 @@ export class DefaultSessionController
   private role: CampusRole | null = null;
   private expiresAt: number | null = null;
   private generation = 0;
+  private readonly coordinator = new RefreshCoordinator();
 
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
@@ -84,7 +86,7 @@ export class DefaultSessionController
   }
 
   getAuthorizationHeader(): string | null {
-    return this.accessToken ? `Bearer ${this.accessToken}` : null;
+    return (this.state === 'authenticated' || this.state === 'refreshing') && this.accessToken ? `Bearer ${this.accessToken}` : null;
   }
 
   getActorId(): string | null {
@@ -103,16 +105,22 @@ export class DefaultSessionController
     // Incrementar generación invalida operaciones anteriores en curso
     this.generation++;
     const currentGen = this.generation;
+    this.coordinator.invalidate(currentGen);
     this.refreshPromise = null;
     this.refreshPromiseGeneration = null;
 
+    this.accessToken = null;
+    this.refreshToken = null;
+    this.actorId = null;
+    this.role = null;
+    this.expiresAt = null;
     this.state = 'signing-in';
     this.notify();
 
     try {
       const result = await this.provider.login(actorId.trim());
 
-      if (this.generation !== currentGen) {
+      if (!this.coordinator.isCurrent(currentGen)) {
         // Otra operación tomó control mientras el login estaba en vuelo
         return;
       }
@@ -130,11 +138,11 @@ export class DefaultSessionController
 
       // Persistir ANTES de publicar 'authenticated'
       await this.serializeStorage(async () => {
-        if (this.generation !== currentGen) return;
+        if (!this.coordinator.isCurrent(currentGen)) return;
         await this.storage?.save(JSON.stringify(record));
       });
 
-      if (this.generation !== currentGen) return;
+      if (!this.coordinator.isCurrent(currentGen)) return;
 
       this.actorId = result.actorId;
       this.role = result.role;
@@ -142,9 +150,10 @@ export class DefaultSessionController
       this.refreshToken = result.refreshToken;
       this.expiresAt = expiresAt;
       this.state = 'authenticated';
+      this.coordinator.replace(currentGen, result.accessToken);
       this.notify();
     } catch (error: unknown) {
-      if (this.generation === currentGen) {
+      if (this.coordinator.isCurrent(currentGen)) {
         this.actorId = null;
         this.role = null;
         this.accessToken = null;
@@ -152,6 +161,7 @@ export class DefaultSessionController
         this.expiresAt = null;
         this.state = 'anonymous';
         this.notify();
+        await this.clearStorage(currentGen);
       }
       if (error instanceof ApplicationFailure) {
         throw error;
@@ -177,15 +187,18 @@ export class DefaultSessionController
       return this.refreshPromise;
     }
 
+    const refreshToken = this.refreshToken;
+    this.coordinator.begin(currentGen);
     this.refreshPromiseGeneration = currentGen;
-    this.refreshPromise = (async () => {
+    this.refreshPromise = Promise.resolve().then(async () => {
       try {
+        if (!this.coordinator.isCurrent(currentGen)) return;
         this.state = 'refreshing';
         this.notify();
 
-        const tokens = await this.provider.refresh(this.refreshToken!);
+        const tokens = await this.provider.refresh(refreshToken);
 
-        if (this.generation !== currentGen) {
+        if (!this.coordinator.isCurrent(currentGen)) {
           // La sesión cambió o se cerró durante la llamada
           return;
         }
@@ -202,19 +215,20 @@ export class DefaultSessionController
         };
 
         await this.serializeStorage(async () => {
-          if (this.generation !== currentGen) return;
+          if (!this.coordinator.isCurrent(currentGen)) return;
           await this.storage?.save(JSON.stringify(record));
         });
 
-        if (this.generation !== currentGen) return;
+        if (!this.coordinator.isCurrent(currentGen)) return;
 
+        if (!this.coordinator.complete(currentGen, tokens.accessToken)) return;
         this.accessToken = tokens.accessToken;
         this.refreshToken = tokens.refreshToken;
         this.expiresAt = expiresAt;
         this.state = 'authenticated';
         this.notify();
       } catch (error: unknown) {
-        if (this.generation === currentGen) {
+        if (this.coordinator.isCurrent(currentGen)) {
           await this.doCleanup();
         }
         if (error instanceof ApplicationFailure) {
@@ -227,7 +241,7 @@ export class DefaultSessionController
           this.refreshPromiseGeneration = null;
         }
       }
-    })();
+    });
 
     return this.refreshPromise;
   }
@@ -235,6 +249,7 @@ export class DefaultSessionController
   async logout(): Promise<void> {
     this.generation++;
     const currentGen = this.generation;
+    this.coordinator.invalidate(currentGen);
     this.refreshPromise = null;
     this.refreshPromiseGeneration = null;
 
@@ -252,7 +267,7 @@ export class DefaultSessionController
         await this.storage?.clear();
       });
     } finally {
-      if (this.generation === currentGen) {
+      if (this.coordinator.isCurrent(currentGen)) {
         this.state = 'anonymous';
         this.notify();
       }
@@ -265,66 +280,67 @@ export class DefaultSessionController
     this.actorId = null;
     this.role = null;
     this.expiresAt = null;
+    this.generation++;
+    const cleanupGen = this.generation;
+    this.coordinator.invalidate(cleanupGen);
     this.state = 'anonymous';
     this.notify();
 
+    await this.clearStorage(cleanupGen);
+  }
+
+  private async clearStorage(expectedGeneration: number): Promise<void> {
     try {
       await this.serializeStorage(async () => {
-        await this.storage?.clear();
+        if (this.generation === expectedGeneration) await this.storage?.clear();
       });
     } catch {
-      // Ignorar fallos al limpiar almacenamiento persistente
+      throw new ApplicationFailure('SECURE_STORAGE_UNAVAILABLE', 'No fue posible borrar la sesión de forma segura.');
     }
+  }
+
+  async invalidate(expectedGeneration: number): Promise<void> {
+    if (this.generation === expectedGeneration) await this.logout();
   }
 
   async restore(): Promise<void> {
-    if (!this.storage) return;
-
+    if (!this.storage || this.state !== 'anonymous') return;
+    const currentGen = this.generation;
+    let raw: string | null;
     try {
-      const raw = await this.storage.read();
-      if (!raw) return;
-
-      let parsed: unknown;
-      try {
-        parsed = JSON.parse(raw);
-      } catch {
-        await this.storage.clear();
-        return;
-      }
-
-      if (
-        !parsed ||
-        typeof parsed !== 'object' ||
-        (parsed as { schemaVersion: unknown }).schemaVersion !== 1 ||
-        typeof (parsed as StoredSessionRecord).actorId !== 'string' ||
-        typeof (parsed as StoredSessionRecord).role !== 'string' ||
-        typeof (parsed as StoredSessionRecord).accessToken !== 'string' ||
-        typeof (parsed as StoredSessionRecord).refreshToken !== 'string' ||
-        typeof (parsed as StoredSessionRecord).expiresAt !== 'number'
-      ) {
-        // Formato corrupto o legado incompatible (e.g. string plano de W04)
-        await this.storage.clear();
-        return;
-      }
-
-      const record = parsed as StoredSessionRecord;
-
-      if (this.clock.now() >= record.expiresAt) {
-        // Sesión expirada
-        await this.storage.clear();
-        return;
-      }
-
-      this.generation++;
-      this.actorId = record.actorId;
-      this.role = record.role;
-      this.accessToken = record.accessToken;
-      this.refreshToken = record.refreshToken;
-      this.expiresAt = record.expiresAt;
-      this.state = 'authenticated';
-      this.notify();
+      raw = await this.storage.read();
     } catch {
-      await this.storage.clear();
+      if (!this.coordinator.isCurrent(currentGen)) return;
+      throw new ApplicationFailure('SECURE_STORAGE_UNAVAILABLE', 'No fue posible leer la sesión de forma segura.');
     }
+    if (!this.coordinator.isCurrent(currentGen) || !raw) return;
+    let parsed: unknown;
+    try { parsed = JSON.parse(raw); } catch { parsed = null; }
+    if (!isStoredSession(parsed) || this.clock.now() >= parsed.expiresAt) {
+      await this.clearStorage(currentGen);
+      return;
+    }
+    // No await between final generation check and publication.
+    if (!this.coordinator.isCurrent(currentGen)) return;
+    this.generation++;
+    this.actorId = parsed.actorId;
+    this.role = parsed.role;
+    this.accessToken = parsed.accessToken;
+    this.refreshToken = parsed.refreshToken;
+    this.expiresAt = parsed.expiresAt;
+    this.state = 'authenticated';
+    this.coordinator.replace(this.generation, parsed.accessToken);
+    this.notify();
   }
+}
+
+function isStoredSession(value: unknown): value is StoredSessionRecord {
+  if (!value || typeof value !== 'object') return false;
+  const record = value as Record<string, unknown>;
+  return record.schemaVersion === 1 &&
+    typeof record.actorId === 'string' && record.actorId.trim().length > 0 &&
+    (record.role === 'reporter' || record.role === 'technician' || record.role === 'coordinator') &&
+    typeof record.accessToken === 'string' && record.accessToken.trim().length > 0 &&
+    typeof record.refreshToken === 'string' && record.refreshToken.trim().length > 0 &&
+    typeof record.expiresAt === 'number' && Number.isFinite(record.expiresAt) && record.expiresAt >= 0;
 }

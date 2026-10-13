@@ -112,6 +112,45 @@ class RevalidationTests(unittest.TestCase):
     def test_official_evaluator_still_rejects_stale_sha(self):
         self.assertFalse(module.validate_report(self.repo, self.report, 1, self.sha)[0])
 
+class WeekFiveRevalidationTests(RevalidationTests):
+    def prepare_week_five(self):
+        for relative, original in [
+            ('reports/week-05/contract-tests.json', self.report),
+            ('reports/week-05/failure-matrix.json', self.report),
+            ('evidence/week-05/engineering.json', self.engineering),
+            ('evidence/week-05/individual.json', self.repo / 'evidence/week-01/individual.json'),
+        ]:
+            data = json.loads(original.read_text())
+            data['week'] = 5
+            path = self.repo / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(data))
+        self.commit('week five synthetic indexes')
+        self.sha = self.git('rev-parse', 'HEAD')
+
+    def test_both_week_five_reports_preserve_provenance(self):
+        self.prepare_week_five()
+        command = [sys.executable, '-c', 'print("synthetic W05 regression")']
+        with patch.dict(module.COMMANDS, {5: [('synthetic-five', 'boundary', command)]}):
+            module.revalidate(self.repo, 5)
+        for name in ['contract-tests.json', 'failure-matrix.json']:
+            path = self.repo / 'reports/week-05' / name
+            data = json.loads(path.read_text())
+            self.assertEqual(data['commitSha'], self.sha)
+            self.assertEqual(data['checks'][0]['evaluatedCommitSha'], self.source)
+            self.assertEqual(data['checks'][0]['status'], 'fail')
+            self.assertTrue(module.validate_report(self.repo, path, 5, self.sha)[0])
+
+    def test_week_five_failure_does_not_relabel_either_index(self):
+        self.prepare_week_five()
+        paths = [self.repo / 'reports/week-05' / name for name in ['contract-tests.json', 'failure-matrix.json']]
+        originals = [path.read_bytes() for path in paths]
+        command = [sys.executable, '-c', 'raise SystemExit(9)']
+        with patch.dict(module.COMMANDS, {5: [('failure', 'failure', command)]}):
+            with self.assertRaises(subprocess.CalledProcessError):
+                module.revalidate(self.repo, 5)
+        self.assertEqual([path.read_bytes() for path in paths], originals)
+
 
 if __name__ == '__main__':
     unittest.main()
