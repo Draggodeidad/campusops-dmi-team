@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "sourceCommitSha": "500b51cbc13ed11eb5c46bdbf01a4da928face1c",
+  "purpose": "Exact incoming W06 artifacts before consolidation; sourceTreeNote documents uncommitted tests at generation. Individual records remain recoverable through Git; do not claim these observations certify current HEAD.",
+  "preliminaryCommands": [
+    {
+      "command": "make setup",
+      "node": "v22.22.0",
+      "exitCode": 0,
+      "log": "setup-before.log"
+    },
+    {
+      "command": "npm run audit:ci",
+      "node": "v22.22.0",
+      "exitCode": 1,
+      "log": "audit-before.log"
+    },
+    {
+      "command": "npm update shell-quote --package-lock-only --ignore-scripts",
+      "node": "v22.22.0",
+      "exitCode": 0,
+      "log": "lock-update.log"
+    }
+  ]
+}

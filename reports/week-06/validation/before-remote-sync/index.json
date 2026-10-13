@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "week": 6,
+  "commitSha": "de51e16606f97a3006e6af861bfad56b46ea316e",
+  "generatedAt": "2026-10-13T05:31:53.118500+00:00",
+  "nodeVersion": "v22.22.0",
+  "npmVersion": "10.9.4",
+  "prediction": "Tras reinstalar el lockfile corregido, espero que las suites existentes, auditoría crítica y export aprueben. Los ocho probes de revisión deben seguir fallando porque no se modificó producto. Compararé códigos reales sin declarar la entrega lista.",
+  "commands": [
+    {
+      "command": "make setup",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:30:50.022062+00:00",
+      "durationSeconds": 14.13,
+      "log": "reports/week-06/validation/00.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:04.156543+00:00",
+      "durationSeconds": 3.1,
+      "log": "reports/week-06/validation/01.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:07.255199+00:00",
+      "durationSeconds": 5.36,
+      "log": "reports/week-06/validation/02.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:12.618523+00:00",
+      "durationSeconds": 3.49,
+      "log": "reports/week-06/validation/03.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:16.107020+00:00",
+      "durationSeconds": 1.92,
+      "log": "reports/week-06/validation/04.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:18.026766+00:00",
+      "durationSeconds": 1.35,
+      "log": "reports/week-06/validation/05.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:19.382192+00:00",
+      "durationSeconds": 0.2,
+      "log": "reports/week-06/validation/06.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:19.586615+00:00",
+      "durationSeconds": 0.75,
+      "log": "reports/week-06/validation/07.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:20.332874+00:00",
+      "durationSeconds": 3.39,
+      "log": "reports/week-06/validation/08.log"
+    },
+    {
+      "command": "make feedback",
+      "exitCode": 0,
+      "status": "pass",
+      "startedAt": "2026-10-13T05:31:23.725455+00:00",
+      "durationSeconds": 28.38,
+      "log": "reports/week-06/validation/09.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 1,
+      "status": "fail",
+      "startedAt": "2026-10-13T05:31:52.107309+00:00",
+      "durationSeconds": 1.01,
+      "log": "reports/week-06/validation/10.log"
+    }
+  ],
+  "readiness": "not-ready",
+  "notExecuted": [
+    "make evidence-week-06: requiere tag final; no autorizado en esta tarea",
+    "merge PR into main; create/move/publish week-06-final; Classroom submission"
+  ]
+}

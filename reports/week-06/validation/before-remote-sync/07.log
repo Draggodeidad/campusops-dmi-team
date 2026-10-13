@@ -1,0 +1,13 @@
+command: npm run backend:self-test
+commitSha: de51e16606f97a3006e6af861bfad56b46ea316e
+startedAt: 2026-10-13T05:31:19.586615+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 backend:self-test
+> node course-backend/self-test.mjs
+
+CampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS.
+Controlled backend self-test passed.
+
+exitCode: 0

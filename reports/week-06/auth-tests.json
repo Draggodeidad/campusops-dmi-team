@@ -1,58 +1,88 @@
 {
   "schemaVersion": 1,
   "week": 6,
-  "commitSha": "f4a77a8e150c8ea6c4698056270a39b8f31da8a7",
-  "generatedAt": "2026-10-13T05:16:41.499Z",
-  "sourceTreeNote": "Los checks de las suites nuevas se ejecutaron sobre HEAD f4a77a8e150c8ea6c4698056270a39b8f31da8a7 con cambios locales sin commit en course-tests/week-06-authorization.test.tsx, course-tests/week-06-session-validation.test.ts y course-tests/fixtures/week-06/*. Regenerar generatedAt/SHA tras registrar los tests en un commit técnico.",
+  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+  "generatedAt": "2026-10-13T05:33:47.632188+00:00",
+  "sourceTreeNote": "Reejecutado sobre el SHA técnico integrado indicado, con Node 22.22.0 y lockfile instalado mediante make setup. Después sólo se modifican reports/evidence. Resultados recibidos e intento previo permanecen en validation/received y validation/before-remote-sync con sus SHA originales. No es validación final de entrega; hay brechas funcionales reproducidas.",
   "checks": [
     {
       "id": "login-success-and-persistence",
       "status": "pass",
       "scenarioType": "nominal",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/public/week-06.test.ts",
-      "evidence": "La suite integrada aprobó 5 suites/23 pruebas. El controller persistió sesión versionada en el test determinista y la suite de autorización inició sesión de los cuatro actores contra el backend local real; el backend self-test también confirmó login válido e inválido."
+      "command": "npm run test:week-06",
+      "evidence": "La suite integrada aprobó 5 suites/23 pruebas. El controller persistió sesión versionada en el test determinista y la suite de autorización inició sesión de los cuatro actores contra el backend local real; el backend self-test también confirmó login válido e inválido. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
     },
     {
       "id": "login-invalid-transport-and-persistence-failures",
       "status": "pass",
       "scenarioType": "failure",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session-validation.test.ts",
-      "evidence": "La prueba aprobada verificó actor inválido, rechazo de transporte y fallo al escribir persistencia; los tres caminos terminan sin publicar estado authenticated y el error de red se representa mediante mensaje ApplicationFailure constante."
+      "command": "npm run test:week-06",
+      "evidence": "La prueba aprobada verificó actor inválido, rechazo de transporte y fallo al escribir persistencia; los tres caminos terminan sin publicar estado authenticated y el error de red se representa mediante mensaje ApplicationFailure constante. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
     },
     {
       "id": "expiration-boundaries",
       "status": "pass",
       "scenarioType": "boundary",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session-validation.test.ts",
-      "evidence": "Con TestClock controlable, expiresAt-1 produjo authenticated; exactamente expiresAt produjo expired; expiresAt+1 permaneció expired. No se usaron esperas temporales reales."
+      "command": "npm run test:week-06",
+      "evidence": "Con TestClock controlable, expiresAt-1 produjo authenticated; exactamente expiresAt produjo expired; expiresAt+1 permaneció expired. No se usaron esperas temporales reales. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
     },
     {
       "id": "refresh-logout-and-error-cleanup",
       "status": "pass",
       "scenarioType": "failure",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session.test.ts course-tests/week-06-session-validation.test.ts",
-      "evidence": "Refresh fallido liberó los tres requests con respuesta 401, limpió tokens y terminó anonymous; logout purgó la persistencia. El listener unhandledRejection observó cero rechazos no manejados. El adapter SecureStore simulado rechazó clear cuando el proveedor rechazó, sin presentarlo como éxito."
+      "command": "npm run test:week-06",
+      "evidence": "Refresh fallido liberó los tres requests con respuesta 401, limpió tokens y terminó anonymous; logout purgó la persistencia. El listener unhandledRejection observó cero rechazos no manejados. El adapter SecureStore simulado rechazó clear cuando el proveedor rechazó, sin presentarlo como éxito. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
     },
     {
       "id": "authorization-real-local-backend",
       "status": "pass",
       "scenarioType": "boundary",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-authorization.test.tsx",
-      "evidence": "La prueba pasó contra course-backend/server.mjs local en puerto efímero: reporter creó incidencia y recibió 403 al resolver/cerrar; technician-1 inició y resolvió la incidencia asignada; technician-2 recibió 403 al resolver la ajena; coordinator cerró y reabrió; versión obsoleta devolvió 409. Se comparó estado y versión antes/después de rechazos."
+      "command": "npm run test:week-06",
+      "evidence": "La prueba pasó contra course-backend/server.mjs local en puerto efímero: reporter creó incidencia y recibió 403 al resolver/cerrar; technician-1 inició y resolvió la incidencia asignada; technician-2 recibió 403 al resolver la ajena; coordinator cerró y reabrió; versión obsoleta devolvió 409. Se comparó estado y versión antes/después de rechazos. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
     },
     {
       "id": "architecture-boundaries",
       "status": "pass",
       "scenarioType": "nominal",
       "command": "npm run test:architecture && npm run check:architecture",
-      "evidence": "test:architecture pasó 1 suite/2 pruebas y check:architecture reportó status pass con 0 violations."
+      "evidence": "test:architecture pasó 1 suite/2 pruebas y check:architecture reportó status pass con 0 violations. Reejecución: validation/05.log y validation/06.log."
     },
     {
       "id": "backend-contract-self-test",
       "status": "pass",
       "scenarioType": "nominal",
       "command": "npm run backend:self-test",
-      "evidence": "Salida observada: CampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS. Controlled backend self-test passed."
+      "evidence": "Salida observada: CampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS. Controlled backend self-test passed. Reejecución: validation/07.log."
+    },
+    {
+      "id": "active-role-and-anonymous-request",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "El repositorio conserva cabeceras fixture: actor saliente distinto de la sesión activa; anonymous también envía autorización. Probes repository-uses-active-session-actor y anonymous-repository-does-not-send-fixture-authorization fallan. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+    },
+    {
+      "id": "expiration-before-transport",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Snapshot expired en expiresAt, pero el decorador envía con 0 refresh previos. Probe expired-request-refreshes-before-send falla. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+    },
+    {
+      "id": "stored-record-validation-and-restore-logout",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Restore acepta rol inválido/tokens vacíos y puede publicar authenticated tras logout. Fallan restore-rejects-invalid-role-and-empty-tokens y restore-completion-cannot-resurrect-after-logout. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+    },
+    {
+      "id": "cleanup-delete-error-observability",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "Clear falla y el registro persiste; refresh informa SESSION_EXPIRED ocultando SECURE_STORAGE_UNAVAILABLE. Probe refresh-cleanup-reports-storage-delete-failure falla. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
     }
-  ]
+  ],
+  "readiness": "not-ready",
+  "coverageLimits": "La autorización por perfiles se probó directamente contra el backend, no a través del grafo/UI de la app. El SDK de SecureStore fue sustituido; no demuestra cifrado físico. UI/arranque/versiones requieren correcciones y regresiones #37/#38."
 }

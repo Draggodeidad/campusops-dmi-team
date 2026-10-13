@@ -1,0 +1,20 @@
+command: npm run test:architecture
+commitSha: 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4
+startedAt: 2026-10-13T05:32:28.525257+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 test:architecture
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/architecture.test.ts
+
+PASS course-tests/architecture.test.ts
+  ✓ the current source tree respects the declared dependency boundaries (6 ms)
+  ✓ the architecture check detects a direct UI-to-infrastructure import (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.561 s, estimated 1 s
+Ran all test suites matching /course-tests\/architecture.test.ts/i.
+
+exitCode: 0

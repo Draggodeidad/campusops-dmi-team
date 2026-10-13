@@ -1,23 +1,37 @@
 {
   "schemaVersion": 1,
   "week": 6,
-  "commitSha": "f4a77a8e150c8ea6c4698056270a39b8f31da8a7",
-  "generatedAt": "2026-10-13T05:16:41.499Z",
-  "sourceTreeNote": "Los resultados incluyen una suite y fixtures de Week 06 aún sin commit, ejecutados sobre HEAD f4a77a8e150c8ea6c4698056270a39b8f31da8a7. Actualizar SHA después del commit técnico que incorpore course-tests/week-06-session-validation.test.ts y course-tests/fixtures/week-06/deferred.ts.",
+  "commitSha": "4eca33bb7a50beb358acc0dd5a3bc667326ffbd4",
+  "generatedAt": "2026-10-13T05:33:47.632188+00:00",
+  "sourceTreeNote": "Reejecutado sobre el SHA técnico integrado indicado, con Node 22.22.0 y lockfile instalado mediante make setup. Después sólo se modifican reports/evidence. Resultados recibidos e intento previo permanecen en validation/received y validation/before-remote-sync con sus SHA originales. No es validación final de entrega; hay brechas funcionales reproducidas.",
   "checks": [
     {
       "id": "three-401s-share-one-refresh",
       "status": "pass",
       "scenarioType": "boundary",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session-validation.test.ts",
-      "evidence": "La prueba usó una barrera deferred que no libera hasta recibir A, B y C con 401; el refresh provider quedó retenido hasta observar 3 waiters. Se observó providerRefreshCount=1; al liberar, se completaron los tres requests con una sola repetición cada uno."
+      "command": "npm run test:week-06",
+      "evidence": "La prueba usó una barrera deferred que no libera hasta recibir A, B y C con 401; el refresh provider quedó retenido hasta observar 3 waiters. Se observó providerRefreshCount=1; al liberar, se completaron los tres requests con una sola repetición cada uno. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
     },
     {
       "id": "failed-refresh-releases-all-waiters",
       "status": "pass",
       "scenarioType": "failure",
-      "command": "node node_modules/jest/bin/jest.js --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-06-session-validation.test.ts",
-      "evidence": "La promesa de refresh compartida se rechazó deliberadamente; A/B/C terminaron con la respuesta 401 original, la sesión quedó anonymous, el store se limpió una vez y no se observó ningún unhandledRejection."
+      "command": "npm run test:week-06",
+      "evidence": "La promesa de refresh compartida se rechazó deliberadamente; A/B/C terminaron con la respuesta 401 original, la sesión quedó anonymous, el store se limpió una vez y no se observó ningún unhandledRejection. Reejecución agregada de las cinco suites: validation/08.log (5 suites, 23 pruebas)."
+    },
+    {
+      "id": "stale-request-generation-replay",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "401 antiguo tras nuevo login produce 2 intentos y replayedUnderNewActor=true. Probe old-401-is-not-replayed-as-new-actor falla. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
+    },
+    {
+      "id": "evaluation-obsolete-refresh-after-logout",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "coordinateRefresh(request401, logout, refreshSucceeded viejo) termina authenticated con token retenido. Probe evaluation-rejects-refresh-success-after-logout falla; el reducer no comparte lógica con Application. Salida/exit 1: reports/week-06/validation/10.log; responsables #37 y regresiones #38."
     }
   ],
   "metrics": {
@@ -51,5 +65,7 @@
       401
     ]
   },
-  "dataNotice": "Tokens, actores, IDs y payloads usados en estas pruebas son sintéticos. El backend se ejecutó sólo en loopback y no se utilizó Internet público."
+  "dataNotice": "Tokens, actores, IDs y payloads usados en estas pruebas son sintéticos. El backend se ejecutó sólo en loopback y no se utilizó Internet público.",
+  "readiness": "not-ready",
+  "metricsSource": "Métricas preservadas de las aserciones del caso controlado A/B/C en week-06-session-validation.test.ts, repetido en validation/08.log. Describen ese escenario, no todas las carreras del grafo real."
 }

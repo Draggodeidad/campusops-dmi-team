@@ -1,0 +1,11 @@
+command: npm run typecheck
+commitSha: 4eca33bb7a50beb358acc0dd5a3bc667326ffbd4
+startedAt: 2026-10-13T05:32:18.933633+00:00
+node: v22.22.0
+
+
+> dmi-react-native-starter@1.0.0 typecheck
+> tsc --noEmit
+
+
+exitCode: 0
