@@ -1,0 +1,14 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-baseline.test.ts
+
+PASS course-tests/week-08-baseline.test.ts
+  ✓ shared fixture preserves the required actor, base, stable operation and reassignment (3 ms)
+  ✓ temporary factory reopens a real file with a new handle and cleans only its own resource (12 ms)
+  ✓ transaction failure injection targets one named point once without touching files (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.301 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-08-baseline.test.ts".

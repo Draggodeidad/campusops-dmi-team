@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "9f56862e269221ff96a5789b77d32162c8d57d24",
+  "generatedAt": "2026-10-21T06:30:41.847953+00:00",
+  "scope": "Issue #42 preparation; not final W08 delivery. Native adapter and sync remain #43-45.",
+  "nodeVersion": "v22.22.0",
+  "npmVersion": "10.9.4",
+  "checks": [
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "evidence": "reports/week-08/baseline/setup.log",
+      "exitCode": 0,
+      "durationSeconds": 9.84
+    },
+    {
+      "id": "types",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run typecheck",
+      "evidence": "reports/week-08/baseline/types.log",
+      "exitCode": 0,
+      "durationSeconds": 1.35
+    },
+    {
+      "id": "lint",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run lint",
+      "evidence": "reports/week-08/baseline/lint.log",
+      "exitCode": 0,
+      "durationSeconds": 2.16
+    },
+    {
+      "id": "smoke",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:smoke",
+      "evidence": "reports/week-08/baseline/smoke.log",
+      "exitCode": 0,
+      "durationSeconds": 2.15
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "reports/week-08/baseline/incidents.log",
+      "exitCode": 0,
+      "durationSeconds": 1.1
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-08/baseline/architecture-tests.log",
+      "exitCode": 0,
+      "durationSeconds": 0.85
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-08/baseline/architecture.log",
+      "exitCode": 0,
+      "durationSeconds": 0.09
+    },
+    {
+      "id": "backend",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run backend:self-test",
+      "evidence": "reports/week-08/baseline/backend.log",
+      "exitCode": 0,
+      "durationSeconds": 0.44
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-08/baseline/session.log",
+      "exitCode": 0,
+      "durationSeconds": 2.23
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-08/baseline/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.34
+    },
+    {
+      "id": "baseline-fixtures",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:baseline",
+      "evidence": "reports/week-08/baseline/baseline-fixtures.log",
+      "exitCode": 0,
+      "durationSeconds": 0.8
+    },
+    {
+      "id": "provider",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-08-provider",
+      "evidence": "reports/week-08/baseline/provider.log",
+      "exitCode": 0,
+      "durationSeconds": 0.23
+    },
+    {
+      "id": "module-runner",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:module -- course-tests/week-08-baseline.test.ts",
+      "evidence": "reports/week-08/baseline/module-runner.log",
+      "exitCode": 0,
+      "durationSeconds": 0.75
+    },
+    {
+      "id": "public-isolated",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:public",
+      "evidence": "reports/week-08/baseline/public-isolated.log",
+      "exitCode": 1,
+      "durationSeconds": 0.68
+    },
+    {
+      "id": "week08-aggregate",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-08/baseline/week08-aggregate.log",
+      "exitCode": 1,
+      "durationSeconds": 1.79
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-08/baseline/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 16.17
+    },
+    {
+      "id": "verify-w08",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-08",
+      "evidence": "reports/week-08/baseline/verify-w08.log",
+      "exitCode": 0,
+      "durationSeconds": 8.06
+    },
+    {
+      "id": "public-w08",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "evidence": "reports/week-08/baseline/public-w08.log",
+      "exitCode": 2,
+      "durationSeconds": 8.66
+    },
+    {
+      "id": "preserve-history",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code a57c8de8878f3a5a946244f2fecab81a869e78ba -- package-lock.json src/campusops/contracts.ts src/course-evaluation/index.ts course-tests/public .github/workflows/week-01-feedback.yml .github/workflows/week-02-arquitectura-justificable-feedback.yml .github/workflows/week-03-ci-amenazas-feedback.yml .github/workflows/week-04-seguridad-privacidad-feedback.yml .github/workflows/week-05-cliente-cloud-feedback.yml .github/workflows/week-06-sesion-segura-feedback.yml reports/week-01 reports/week-02 reports/week-03 reports/week-04 reports/week-05 reports/week-06 evidence",
+      "evidence": "reports/week-08/baseline/preserve-history.log",
+      "exitCode": 0,
+      "durationSeconds": 0.0
+    },
+    {
+      "id": "kit-inventory",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "python3 tools/inspect-week-08-kit.py /home/dragodeidad/Downloads/testw08/week-08-persistencia-sincronizacion.zip --destination /tmp/campusops-w08-verified-technical-sha --ref a57c8de8878f3a5a946244f2fecab81a869e78ba",
+      "evidence": "reports/week-08/baseline/kit-inspection.log",
+      "exitCode": 0
+    }
+  ],
+  "status": "fail",
+  "pendingIssues": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52
+  ],
+  "interpretation": {
+    "preparation": "All preparation, W06 regression and history-preservation checks passed.",
+    "remainingFailures": {
+      "public-isolated": "3/3 W08 tests fail at existing resolveSync/deduplicateOperations stubs (#44).",
+      "week08-aggregate": "Stops at the same public stub failures after baseline/provider pass.",
+      "public-w08": "Missing five official deliverables (#43/#44/#52) and public W08 stubs. The 87 accumulated tests pass; 3 W08 tests fail."
+    },
+    "notClaimed": [
+      "native Expo SQLite execution",
+      "CampusOps durable adapter or migration",
+      "app offline sync integration",
+      "three individual contributions",
+      "human review",
+      "W08 final delivery"
+    ]
+  },
+  "prediction": "W06 and preparation remain green; public W08 stays red until #44 and required deliverables are completed. No bypasses.",
+  "aiAssistance": "Codex assisted inspection, contracts, fixture/tool implementation, documentation and commands at user request. Human review remains pending."
+}

@@ -1,0 +1,1383 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "9f56862e269221ff96a5789b77d32162c8d57d24",
+  "generatedAt": "2026-10-21T06:29:08.663262+00:00",
+  "name": "expo-sqlite",
+  "version": "57.0.4",
+  "integrity": "sha512-3N/bnDx4+kWEC9GABxKPLe/6RHTZJR/7DNT5tz/cYi8f7emign3ooavXnJn0+JPBA0JhHmsdDPrmC+CtT86Jzg==",
+  "archiveSha256": "da25d44a0d3e0ba70586a6a22ab61d2538924cb61d1569e99ffe142c859c249e",
+  "source": "npm registry, npm pack expo-sqlite@57.0.4 outside repository",
+  "documentation": "https://docs.expo.dev/versions/latest/sdk/sqlite/",
+  "inspection": "Read package.json and SQLiteDatabase.ts, withExclusiveTransactionAsync BEGIN/COMMIT/ROLLBACK/finally; binary entries inventoried only, not executed. No runtime dependency added.",
+  "files": [
+    {
+      "path": "package/.babelrc",
+      "bytes": 39,
+      "sha256": "32a77fe32bada16f697d62ec51ded65a3b7d08643750db7c6197b84108b0e768",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/libsql",
+      "bytes": 7823064,
+      "sha256": "d79491eb5cc4feae05dfabee2a6888ac71c3a4ed937561827e5aa24604d25bd6",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64/libsql.framework/libsql",
+      "bytes": 7778804,
+      "sha256": "569860b529aca719e1d7fc787d6e4edcdfcbf395ee8fadbf2a791663cf37652e",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar",
+      "bytes": 3823428,
+      "sha256": "fafd65cc002c5173fe1935d4db3a860f7fb248e1252a18cd45374fd951183125",
+      "binary": true
+    },
+    {
+      "path": "package/vendor/sqlcipher/sqlite3.c",
+      "bytes": 9486677,
+      "sha256": "8fdf08e15777a45386fe4b2fc7604f125eb9ec57d0aaa8bde11ec8d8115ed915",
+      "binary": false
+    },
+    {
+      "path": "package/vendor/sqlite3/sqlite3.c",
+      "bytes": 9306729,
+      "sha256": "df16f4f2845488289d416e1d3b928c82ade5256564605b762daf0113fad394c5",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/NativeDatabaseBinding.cpp",
+      "bytes": 7952,
+      "sha256": "98e57d5df2be092fd28323bcbe470cdf7061ea86580ff5649aebe75d1ef65db2",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/NativeDatabaseBinding.cpp",
+      "bytes": 8492,
+      "sha256": "935f1b5b9abc3829a8e13562660f962a43ed749041b875414f6aee6793459329",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/NativeSessionBinding.cpp",
+      "bytes": 3012,
+      "sha256": "b9b7e16bc9a67410a6e6b5e748b751bf7d9fea06e1c9d3270b7e8277072f378b",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/NativeSessionBinding.cpp",
+      "bytes": 4752,
+      "sha256": "521176155370a0349acd8472738b2ebf9775bc329ebd77b83499238320b3c43d",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/NativeStatementBinding.cpp",
+      "bytes": 7919,
+      "sha256": "5c551790e783075dbc8699fef3a124d4ed0d69b3cc2bf135871c0117553ea4f1",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/NativeStatementBinding.cpp",
+      "bytes": 6211,
+      "sha256": "e141ecc169806c156e8558d3e121f0d1836b45445a4f1ef2d1a1173228653408",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/SQLite3Main.cpp",
+      "bytes": 460,
+      "sha256": "35c5f47f937abe87cefdd9e6afe2404a1c0122e3d6ba69589f3a44066118d2ca",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/SQLite3Main.cpp",
+      "bytes": 460,
+      "sha256": "35c5f47f937abe87cefdd9e6afe2404a1c0122e3d6ba69589f3a44066118d2ca",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/_expo/static/css/global-907315ee35d4ca59dd590c0671386803.css",
+      "bytes": 39949,
+      "sha256": "d33bab0a085ea49c81de157c177e6241cbd68060072a7bc639f01ef672bbefe5",
+      "binary": false
+    },
+    {
+      "path": "package/android/build.gradle",
+      "bytes": 3002,
+      "sha256": "cbac6bfa980788e1c044f714bd4c519fc191622ddf6117f8292129f1e16d7a60",
+      "binary": false
+    },
+    {
+      "path": "package/android/shouldUsePublication.groovy",
+      "bytes": 214,
+      "sha256": "cebd4cc7b19c94ba7c613dc0fb4bb4adb7e0d4d2a086e65e62b8479609860264",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/Exceptions.h",
+      "bytes": 1681,
+      "sha256": "4a6d3060de51fc709690d05f3f53635aad2b8b2ec3e012e0fce723657fff70e1",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/Exceptions.h",
+      "bytes": 2780,
+      "sha256": "2b8612a7c4e318a83091d4ed3e53af565fae4416fc15edea8df144fe1e91016f",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Headers/libsql-umbrella.h",
+      "bytes": 19,
+      "sha256": "f6fc20349898fea65a28af2c9ec0392fd8197e117d840e6991f64ab611910e31",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64/libsql.framework/Headers/libsql-umbrella.h",
+      "bytes": 19,
+      "sha256": "f6fc20349898fea65a28af2c9ec0392fd8197e117d840e6991f64ab611910e31",
+      "binary": false
+    },
+    {
+      "path": "package/android/libsql/libsql.h",
+      "bytes": 5507,
+      "sha256": "3fde80a3bcbbfb08508c721da6f2072912c02d6b574099a3d390621af94b2513",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Headers/libsql.h",
+      "bytes": 5507,
+      "sha256": "3fde80a3bcbbfb08508c721da6f2072912c02d6b574099a3d390621af94b2513",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64/libsql.framework/Headers/libsql.h",
+      "bytes": 5507,
+      "sha256": "3fde80a3bcbbfb08508c721da6f2072912c02d6b574099a3d390621af94b2513",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/NativeDatabaseBinding.h",
+      "bytes": 2548,
+      "sha256": "1dca3a010cf39fe996a26d882fb6eae660cfb07632b3f8e39b69e21a0c2902ba",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/NativeDatabaseBinding.h",
+      "bytes": 2355,
+      "sha256": "c3a5c357896ef19ab4fa4cffdeffc4e6ecb137b0aa3567b667002e45f3e71575",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/NativeSessionBinding.h",
+      "bytes": 1426,
+      "sha256": "2140efc520914306638ae0c8ef932550ea38d314d1b86c8c2393407ba2d239fd",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/NativeSessionBinding.h",
+      "bytes": 1480,
+      "sha256": "0a113a08e956713b491c27c5247d6c2d59561106d4e5c00ca40f6001cb0eeacc",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/libsql/NativeStatementBinding.h",
+      "bytes": 1413,
+      "sha256": "5c25750637c46899940a8fec6b2cc6c9f69dabf9ada37e57048b732aedc8c02a",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/cpp/NativeStatementBinding.h",
+      "bytes": 1303,
+      "sha256": "dcb79b5c521623dfc51c9546ecba0701e8d5e1a994ac92703233608ff1ebf5c8",
+      "binary": false
+    },
+    {
+      "path": "package/vendor/sqlcipher/sqlite3.h",
+      "bytes": 666696,
+      "sha256": "3c6356d8cf67ed92522114559cdcba1b38b39eab05e9f5989c1758b8eacef5b9",
+      "binary": false
+    },
+    {
+      "path": "package/vendor/sqlite3/sqlite3.h",
+      "bytes": 667756,
+      "sha256": "0d247fd5e5e2fd602f427227bae7bf6349dd3322d6090d9751b21b5b3f51db62",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/_sitemap.html",
+      "bytes": 17417,
+      "sha256": "33fe80bd4a91bf98454fe00298b272e1dc41f84252fd819a41bb21b4ce6876f0",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/+not-found.html",
+      "bytes": 17417,
+      "sha256": "33fe80bd4a91bf98454fe00298b272e1dc41f84252fd819a41bb21b4ce6876f0",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/index.html",
+      "bytes": 21968,
+      "sha256": "9c4497164c6cba69f3d5aca7d79f00c258ac83da8e6c32c581aa90e15bda17e0",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar",
+      "bytes": 11596,
+      "sha256": "02bdb019cd014cbe43cff391ee53f9eed49ff6c78e425113af3a892390822f29",
+      "binary": true
+    },
+    {
+      "path": "package/.eslintrc.js",
+      "bytes": 103,
+      "sha256": "fe55757d154f21bc2d929a503441b247d05191782a2e0c63349fc41560367fab",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/AccessHandlePoolVFS.js",
+      "bytes": 14398,
+      "sha256": "8f90335aeefae4e3108e37279a5a834c947eab374acfe39b231ceaaae64745f7",
+      "binary": false
+    },
+    {
+      "path": "package/app.plugin.js",
+      "bytes": 55,
+      "sha256": "61c738059a4c4f8a9a64b3519f346bf7e81cfe6d5249df14b52a6d3f3c8fbe77",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/babel.config.js",
+      "bytes": 69,
+      "sha256": "5320da0292856d0b485fdb2d4f891b4cfd256f1733bf76f10955000ddc035386",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/_expo/static/js/web/entry-6b462075328bf796a095088ecb34b129.js",
+      "bytes": 3378233,
+      "sha256": "cfa6b0dacfd0b5334c569a52413742d06af50412dfc0c5be4a42cf49babb51b0",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.js",
+      "bytes": 132,
+      "sha256": "0c7086ab8af2ea19e74dda94f410c92bc7846c4746bd2686c32b54f95079271a",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.web.js",
+      "bytes": 411,
+      "sha256": "d9034d1e98604d91d6dfbd35a7586ae8a87e203e1bef5eeb7e9800a2b466dee9",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/FacadeVFS.js",
+      "bytes": 13620,
+      "sha256": "dd00dc59720c0bebb91b6f982e5339351997467ff868a608e915cc020e13fbca",
+      "binary": false
+    },
+    {
+      "path": "package/build/hooks.js",
+      "bytes": 7906,
+      "sha256": "af202e64ee2cba677fcfff9282cf24998e79dcdcdc5591e85bc71368aea7066d",
+      "binary": false
+    },
+    {
+      "path": "package/build/index.js",
+      "bytes": 197,
+      "sha256": "9659e488ad576b29b098bef7f2d97589fa2958f3cf604f677b6d52bcff013e01",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/build/index.js",
+      "bytes": 135,
+      "sha256": "c0ad901dfb7e9d66760f4d127f441c47fac2a2d4cc38087681b0d0e4cab7e270",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/index.js",
+      "bytes": 37,
+      "sha256": "b6275f41c7508ff9f8eb4514da9638f193b771b6971d748b12ee50c3d038ceed",
+      "binary": false
+    },
+    {
+      "path": "package/localStorage/install.js",
+      "bytes": 118,
+      "sha256": "93a5dede9301b985ad0551b4b879589afa75187cbc57aaf47cf1b51b2f77e022",
+      "binary": false
+    },
+    {
+      "path": "package/kv-store.js",
+      "bytes": 45,
+      "sha256": "60de779cedb024763da8d794bb80db690c248e8c9a2aaeb9ba50d4c00809f0b0",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/MemoryVFS.js",
+      "bytes": 4548,
+      "sha256": "8c43242567c2adc29603c65625226ecbdc6aa1b552029d60068bb0af7b9829b7",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeDatabase.js",
+      "bytes": 523,
+      "sha256": "a527f281ff194e9b1f58025e3f7299dd6891ad58f010fb4097022fc2f87174ae",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeSession.js",
+      "bytes": 52,
+      "sha256": "6e07c9680dd4b4d8970e89eccb424675f93ce1956bdd9888eb3a91266d319826",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeStatement.js",
+      "bytes": 54,
+      "sha256": "491f4295d23e063eaec30ddb08b8c7c84ec9897d26dbf2249452fe514d213487",
+      "binary": false
+    },
+    {
+      "path": "package/build/paramUtils.js",
+      "bytes": 3594,
+      "sha256": "5fe008ed872b3d1079dbefadbb9921ee767a33ade8c14c66a6d5843f754e6bd2",
+      "binary": false
+    },
+    {
+      "path": "package/build/pathUtils.js",
+      "bytes": 1297,
+      "sha256": "69bf74e0b647e50dffe50c05e093b2a983470a7a17fe7e3ac949922d82703097",
+      "binary": false
+    },
+    {
+      "path": "package/build/queryUtils.js",
+      "bytes": 1987,
+      "sha256": "3a72c3f5cc52b621f67357edfcfd6051075d9adbb7cfddd2ca8bcd787694e93e",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/sqlite-api.js",
+      "bytes": 35511,
+      "sha256": "155b842a519ea14d833b409851eb75ef0087f0bed29b7d6d5665da3ad52e7169",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/sqlite-constants.js",
+      "bytes": 11605,
+      "sha256": "a3ea6962a1d2d86a2477328ee444543cfd9cae4eb574a0e7b2ca96714c48b981",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDatabase.js",
+      "bytes": 22408,
+      "sha256": "3d40a78e4900863a8e420b5599d0339ca9bbbda60d20e532f36bd5b04ea5b850",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDevToolsClient.js",
+      "bytes": 7931,
+      "sha256": "19b0277fe00e844c4585a7afd478b2688ab9aeb4c9f99c484bbafb29ad790404",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteSession.js",
+      "bytes": 6163,
+      "sha256": "4d99f34bd260aaa947673bb8eaf25ee25d0a15fffe1a6ed2ca38f4ea0d03d8c8",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteStatement.js",
+      "bytes": 16253,
+      "sha256": "515cfc3d7d5de5154fa89fac17c26d3bc398720efa9aa6a8d3a174d0f0d86fc5",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteTaggedQuery.js",
+      "bytes": 5547,
+      "sha256": "b1125a7515cbf49493100160224b687333ed7abce019f7a273b2565707b79155",
+      "binary": false
+    },
+    {
+      "path": "package/build/Storage.js",
+      "bytes": 15042,
+      "sha256": "133a37b543a0c37a15ce6d4d2feec5f62900dde37d0caac27bb50db53420c1e7",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/VFS.js",
+      "bytes": 4445,
+      "sha256": "55e7455e2ec0000cc4ba7a8bf7882f414a40f2a0ba6eb4c4ac847f379f54d92f",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/wa-sqlite.js",
+      "bytes": 109108,
+      "sha256": "f1a7205810c18fdf13849c2a16192772ce1eed78ff67b1600369d8dee188dd03",
+      "binary": false
+    },
+    {
+      "path": "package/build/WebStorage.js",
+      "bytes": 2815,
+      "sha256": "83e4fe6429baa0271c657828122575a4bf8d9d015d59657966d45a6a7066e892",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/build/withSQLite.js",
+      "bytes": 3320,
+      "sha256": "59aebee0fc93eae782ae902b451ef3f5a3fbbd7fb664ee2df3c788f00b86f288",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/_expo/static/js/web/worker-aaddcc908d9758af99bee8e068c81a7f.js",
+      "bytes": 132552,
+      "sha256": "4da812a995dbc1b35dd488e12187f4c5963db8f0764ec0b4a4814fcc3c0c94b2",
+      "binary": false
+    },
+    {
+      "path": "package/dev-plugin-dist/_expo/.routes.json",
+      "bytes": 21,
+      "sha256": "18234e6b8c5aee837883245f400d379f3f9686f1396b7d90d7ebcdad76c51d47",
+      "binary": false
+    },
+    {
+      "path": "package/expo-module.config.json",
+      "bytes": 484,
+      "sha256": "bbd3d98e2833b7d3227fe02f3ba9296a0ef9a0179b258cf5e68819bacd331bca",
+      "binary": false
+    },
+    {
+      "path": "package/package.json",
+      "bytes": 2038,
+      "sha256": "dfbcb74ec3dae858221cde06efa60f09b838f56f79260c97b806d339a5fa00ec",
+      "binary": false
+    },
+    {
+      "path": "package/spm.config.json",
+      "bytes": 2291,
+      "sha256": "8d12855e2af9f4b42f9af4d12c778def14f7c4bd184c583d8904aec68f91f07f",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/tsconfig.json",
+      "bytes": 229,
+      "sha256": "3141c61d3c0a723e5f6574d6561c166c041aa8b3f43ed22085f2ccd1100b01b8",
+      "binary": false
+    },
+    {
+      "path": "package/tsconfig.json",
+      "bytes": 263,
+      "sha256": "c47e79bd86e360fc929d8bef85e0c111e005c324ff450109e8a821aa64096992",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/types/tsconfig.json",
+      "bytes": 80,
+      "sha256": "0e01c30a40807f4183617f7040678e603cd0e6c13e366d02d3904fa83d81e330",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/NativeDatabase.kt",
+      "bytes": 844,
+      "sha256": "c8b6cfb05ce487bc3e873084ffd36f3410423cbc00a4c41ba8516ec87af96917",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/NativeDatabaseBinding.kt",
+      "bytes": 2898,
+      "sha256": "ddde637b79d13ee8739a60f5349c0ad36d8fbc92bf9e0dc0ec34eb1049e281fa",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/NativeSession.kt",
+      "bytes": 512,
+      "sha256": "37f9cf047577e41aee258e6bedb2d407f0df2e5775f31c30621c718a8071d8b9",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/NativeSessionBinding.kt",
+      "bytes": 1178,
+      "sha256": "fef5266dde9ad866ce56a7aac3f9cce14eac469d83cc0908b120b850345ca682",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/NativeStatement.kt",
+      "bytes": 875,
+      "sha256": "9ba97c0b96cec2d4b335360b3a8d57bf00f07c39b5e138c12e1ea0fe6ced3fe2",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/NativeStatementBinding.kt",
+      "bytes": 1211,
+      "sha256": "723c90090422ca502d113d7cc4fa5d4804ebcbb6f1ce0bbb32e528d37a69714e",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/SQLExceptions.kt",
+      "bytes": 1473,
+      "sha256": "889ebed8598c3df17990b744f425a6909c9f865a8ec67cb432056aea094cb94b",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/SQLiteHelpers.kt",
+      "bytes": 684,
+      "sha256": "728f6963df02127b5c0cfb513e97070f09c68ad11bdccef32fd89d785d23d6e6",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/SQLiteModule.kt",
+      "bytes": 27885,
+      "sha256": "ff9a4ec24d965cab34610924612105751c0b436b63a60e11162a28d69198915f",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/SQLiteOptions.kt",
+      "bytes": 613,
+      "sha256": "dfacc404baf637cf0a26ba5cab449a06669dfc6fdcd1cdbccb6d5057b73f2b10",
+      "binary": false
+    },
+    {
+      "path": "package/android/src/main/java/expo/modules/sqlite/SQLRecords.kt",
+      "bytes": 730,
+      "sha256": "8c240423cf141dcae31d761684ac28e972044ed695dca61b1f7d62aac900f870",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.d.ts.map",
+      "bytes": 126,
+      "sha256": "43f2d2884c91d32a1a3d8f4b55b6a192a94dc46b5219766056d153bd2db840ea",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.js.map",
+      "bytes": 309,
+      "sha256": "7063123acfa6ae64f9f80598c6f951eab8558ed9d919cf75d79ff763c487858a",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.web.d.ts.map",
+      "bytes": 171,
+      "sha256": "3951215b03d184b59e8332f702bad79f5d04462c3e1fdc89ec3040e7912c1e08",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.web.js.map",
+      "bytes": 884,
+      "sha256": "4172b87579ef77d071e88e209cc822deee815396f74758b270c7b1e39c40625d",
+      "binary": false
+    },
+    {
+      "path": "package/build/hooks.d.ts.map",
+      "bytes": 1217,
+      "sha256": "d8211fd48bc8eb63610a068d5bf0751e6273448c23a0483add9fcb4aab9a405a",
+      "binary": false
+    },
+    {
+      "path": "package/build/hooks.js.map",
+      "bytes": 17340,
+      "sha256": "4d805e6992b68b8892fe7ac0e6e39afa4705c001bb4e20e8bf640bc5511430dc",
+      "binary": false
+    },
+    {
+      "path": "package/build/index.d.ts.map",
+      "bytes": 215,
+      "sha256": "718c091c4285810071974d800dcd31f1a750aeddf960939a1a66aac5d5ca6464",
+      "binary": false
+    },
+    {
+      "path": "package/build/index.js.map",
+      "bytes": 404,
+      "sha256": "c7847a2b374b523b58083a9deb10bb385c4534f39878a2703f801f38c7a7b0ed",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeDatabase.d.ts.map",
+      "bytes": 1743,
+      "sha256": "40fcdd2b6c807b415cb860288a1ec7ed8da7b4a2da0ff10c7b359c84b543bbdd",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeDatabase.js.map",
+      "bytes": 3784,
+      "sha256": "102977bb5a7a4983001ada54de3dadc0981a96d4fe078bfd8428b1d0016d1e24",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeSession.d.ts.map",
+      "bytes": 1229,
+      "sha256": "4f86b8d822e80c6869988b138d388b7353447ba8cb24523c3adc8b37f679bc61",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeSession.js.map",
+      "bytes": 1777,
+      "sha256": "8a8354843354ccf9091ae253b4bb4a4f61787e01f90b9f845e42840699366444",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeStatement.d.ts.map",
+      "bytes": 1692,
+      "sha256": "7c7a00299e47f83971411f370cb602589ed28b024d293af0755931e96d37b7e7",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeStatement.js.map",
+      "bytes": 3935,
+      "sha256": "e00193b487adad9e4551fd91b17efb518d0f84bbb860020bc4b483f15d72845c",
+      "binary": false
+    },
+    {
+      "path": "package/build/paramUtils.d.ts.map",
+      "bytes": 606,
+      "sha256": "ddf0be83ac87c9a29a9ebcdba1c69747d8f9575610783714c798b1beba400c56",
+      "binary": false
+    },
+    {
+      "path": "package/build/paramUtils.js.map",
+      "bytes": 7134,
+      "sha256": "64766dfdd9350350e6185129e15ca0619bf20c3329dd3d3f62805a6b0c4ae0cb",
+      "binary": false
+    },
+    {
+      "path": "package/build/pathUtils.d.ts.map",
+      "bytes": 260,
+      "sha256": "fb24077eba5ff50100b8a3451bc9b9a8cd29ce0dd145ff5ad4a6964b55aaaf0e",
+      "binary": false
+    },
+    {
+      "path": "package/build/pathUtils.js.map",
+      "bytes": 2301,
+      "sha256": "0b939d9f908c023bb6671f4d77286b6dfe18086dede7abdf87cdade812aeac23",
+      "binary": false
+    },
+    {
+      "path": "package/build/queryUtils.d.ts.map",
+      "bytes": 256,
+      "sha256": "39418bf2603659ce8606dd30f42052336a1ad1296ad23911c1836f0c930879a3",
+      "binary": false
+    },
+    {
+      "path": "package/build/queryUtils.js.map",
+      "bytes": 3046,
+      "sha256": "333f8f2c2f72c0bb6018b0d7364a3df69241eaf4001b2dae5e136e8b3bec50f4",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDatabase.d.ts.map",
+      "bytes": 5375,
+      "sha256": "a45ac608a58be0e5cf7ad25fc46c13c5210045f68c24dee03f43af910e05471a",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDatabase.js.map",
+      "bytes": 42149,
+      "sha256": "fcfb8b154c1371df2fabf9ddb1358f9e2b2b6e4f2eee0dddfda3eb7e6ac19bff",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDevToolsClient.d.ts.map",
+      "bytes": 385,
+      "sha256": "4818429bfd5b3befffb67c7d841c5ef2f77c8a17c33ae549d93563252d4ed6c2",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDevToolsClient.js.map",
+      "bytes": 15994,
+      "sha256": "1f49c9b39f0ead4b93dd2c92a8547cbc6a06275d16657bf6cd72295ae83d14c4",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteSession.d.ts.map",
+      "bytes": 1190,
+      "sha256": "a04d72b8f0735269c6af7d80ef3d68596f9c975f51ea6175a29ba433213003f4",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteSession.js.map",
+      "bytes": 8781,
+      "sha256": "2b339af56fecda978de5749f4278c63b5bea7070c3402aa6fa1ed34dff131431",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteStatement.d.ts.map",
+      "bytes": 2382,
+      "sha256": "bbdac5df5c36f606ec418f2baf6b33e14518987f22fdbd095fd9b0a624ec66e9",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteStatement.js.map",
+      "bytes": 37118,
+      "sha256": "0013be66df44b011d0aef754f27f50cab71d02494b67a510e591d643da8b5bc2",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteTaggedQuery.d.ts.map",
+      "bytes": 1399,
+      "sha256": "e40e421cf7c64eb535e2fe3c5fd6f75c6125bc3073a45619181913414880f996",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteTaggedQuery.js.map",
+      "bytes": 8809,
+      "sha256": "6b9bee6aa0abfa13b425f73bbf9ce6c039b680ab4c7262a5510425896abf924a",
+      "binary": false
+    },
+    {
+      "path": "package/build/Storage.d.ts.map",
+      "bytes": 2348,
+      "sha256": "8da3634cc31398bb1251687be0556d2f1293f88b466110dc54979dc5014ecefc",
+      "binary": false
+    },
+    {
+      "path": "package/build/Storage.js.map",
+      "bytes": 26949,
+      "sha256": "5cac8bcea45666157f0a3da0e425e8196ba713db5ae5ae90d8320615beaf981f",
+      "binary": false
+    },
+    {
+      "path": "package/build/WebStorage.d.ts.map",
+      "bytes": 587,
+      "sha256": "3b5854889023ab828fd97624e107afa94ecf9d7843af02a7483b617a0919e3cd",
+      "binary": false
+    },
+    {
+      "path": "package/build/WebStorage.js.map",
+      "bytes": 5562,
+      "sha256": "a8ed8efc118449769c1630a5f21eea28a26ec973b5076b5df7c863fda374b761",
+      "binary": false
+    },
+    {
+      "path": "package/CHANGELOG.md",
+      "bytes": 34454,
+      "sha256": "949af8be3ce718e9eae1ef43f151f209d32987f62c195def256e571538433966",
+      "binary": false
+    },
+    {
+      "path": "package/README.md",
+      "bytes": 2069,
+      "sha256": "348df76e682b9250356b77dafd40df255002c73f53f652d18e9a1410e59f7af0",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.md5",
+      "bytes": 32,
+      "sha256": "3fc9e287727a74bab250dc0137795f08df67e2e3d05d2370eb69df3d0192eb33",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.md5",
+      "bytes": 32,
+      "sha256": "f444cee095d10cd872e29c63383b0d4a36c3ddd2e432c9c8bf99e608d3a430ff",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.md5",
+      "bytes": 32,
+      "sha256": "156bbed769effa1208486514e8366ef234d6c759b11695501a1f2474cbca4a19",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.md5",
+      "bytes": 32,
+      "sha256": "dbe7445e58c67925db661df150ad65408a0f13d9933ce8df4868de7cffeb1f6c",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.md5",
+      "bytes": 32,
+      "sha256": "98c03e653d337de9c49a1f96b1c1a202ccb51d8db618cbc4d5b1b6d5091cbed2",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module",
+      "bytes": 3282,
+      "sha256": "32006cd7b6db719b0d1128927fb263d3fd32c3603ba2d693d136f8164c28d396",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Modules/module.modulemap",
+      "bytes": 101,
+      "sha256": "af95949badf5bc60bc31eec87f4e1dd284a335ffbdff4b0b31dcf0f6775f933c",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64/libsql.framework/Modules/module.modulemap",
+      "bytes": 101,
+      "sha256": "af95949badf5bc60bc31eec87f4e1dd284a335ffbdff4b0b31dcf0f6775f933c",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/Info.plist",
+      "bytes": 1143,
+      "sha256": "da15a7d1aeae3d4198bd9da2b513cb52bd1cca448e5a2b20e27279c95485269e",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Info.plist",
+      "bytes": 723,
+      "sha256": "21231533c48562e7f973e2a12d97b6c31a910b50918b71d34a7f074c76f4707d",
+      "binary": false
+    },
+    {
+      "path": "package/ios/libsql.xcframework/ios-arm64/libsql.framework/Info.plist",
+      "bytes": 723,
+      "sha256": "21231533c48562e7f973e2a12d97b6c31a910b50918b71d34a7f074c76f4707d",
+      "binary": false
+    },
+    {
+      "path": "package/ios/ExpoSQLite.podspec",
+      "bytes": 3430,
+      "sha256": "1c6e72b1a331a953e0a53948bf13e48924f9e7f4554aeedd8349798305d7c1b6",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom",
+      "bytes": 2214,
+      "sha256": "62d81beab910b4ef587a515c384b64afe2ad0be9dbe55dd2a0104cd0b053f4cc",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.sha1",
+      "bytes": 40,
+      "sha256": "23845c200105f519dfed3d0451e74be5172a5b901b6ed5dce983950a7ff243e8",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.sha1",
+      "bytes": 40,
+      "sha256": "1d7f0bac7d4f3c2b406999c44f5084c855ba8c1caf2daadffcc3b5c71e36411e",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.sha1",
+      "bytes": 40,
+      "sha256": "9429ce6301cee32f6733045fc4b6106020f12c470bbc04db695924fc0f10247e",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.sha1",
+      "bytes": 40,
+      "sha256": "cd67179f472711c46fb1aba6cf3f453532c1e4154748f0cb80fe31a5e7910385",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.sha1",
+      "bytes": 40,
+      "sha256": "c21323e418c32c50b752e733ece6e60a3ac553eec73c131b4f153285f0f1a5ce",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.sha256",
+      "bytes": 64,
+      "sha256": "624732ad805dbeac8e84a4c70895d4808d14ee59115913d33f1153b51c8b0767",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.sha256",
+      "bytes": 64,
+      "sha256": "2a575cbc5b707ca23f2fdb0146f68ba5577433e792239ab4821a832f7c0ece27",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.sha256",
+      "bytes": 64,
+      "sha256": "71154c6c11b6c73777286ebd66fa15563e8d9be88e4360940a4cbc44daeaec52",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.sha256",
+      "bytes": 64,
+      "sha256": "c136778d32dacc0c1904eec076f597a969498b8ad0ad451225dc06de0d61641f",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.sha256",
+      "bytes": 64,
+      "sha256": "0cfebfce3806964f04daa116c6139f5828de67fe7982c1b184d247ba70ae2300",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.sha512",
+      "bytes": 128,
+      "sha256": "38e9ed9b242f6f0d90f45da58426bd62c325cf51eed025e854468a9e108e5820",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.sha512",
+      "bytes": 128,
+      "sha256": "c8bc2d299868662b5dd22b495e98fb6b32ab3b6adb2144f834e28c1a9a3458a7",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.sha512",
+      "bytes": 128,
+      "sha256": "978cbfcd2552147abb0379bdbdd256de43126d71200e0f316b0177f614384067",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.sha512",
+      "bytes": 128,
+      "sha256": "b39bbcd6a9e0ca121ac692b34c01144f93965e3eaaefceaaae8c87f132c762e0",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.sha512",
+      "bytes": 128,
+      "sha256": "a4becfef98e1a548355f826f98965f847e9b84feac7d91e37d8b67efbaa1138d",
+      "binary": false
+    },
+    {
+      "path": "package/android/libsql/arm64-v8a/libsql_experimental.so",
+      "bytes": 8158680,
+      "sha256": "bce68bac0576b4142e33e68ee183c0b546c4f77aad699f39d0fad8e0b9f74be2",
+      "binary": true
+    },
+    {
+      "path": "package/android/libsql/armeabi-v7a/libsql_experimental.so",
+      "bytes": 5985336,
+      "sha256": "3de2c967ae4fdafa5dee5a20875720cbd26206e6d7637a7313afd9fcc18d08c6",
+      "binary": true
+    },
+    {
+      "path": "package/android/libsql/x86_64/libsql_experimental.so",
+      "bytes": 9171168,
+      "sha256": "f5e5955a1ec91e2143f7e3f673f74002a2f162aec5946add145152e5f3dd55fb",
+      "binary": true
+    },
+    {
+      "path": "package/android/libsql/x86/libsql_experimental.so",
+      "bytes": 9408924,
+      "sha256": "4935a2084fcc1bf0ad9718f8e95cd138cb4a24219d6dfad97b018835e2cd9436",
+      "binary": true
+    },
+    {
+      "path": "package/android/vec/arm64-v8a/vec.so",
+      "bytes": 135200,
+      "sha256": "0ff1080d5881edaae5a7cb6fded9e368a2a4647f218915a222f04762889394fd",
+      "binary": true
+    },
+    {
+      "path": "package/android/vec/armeabi-v7a/vec.so",
+      "bytes": 120056,
+      "sha256": "3c5bab87e8ecb5f5aab6c304029bff0f2e0bd531c820e8bbc65d5290a253ed27",
+      "binary": true
+    },
+    {
+      "path": "package/android/vec/x86_64/vec.so",
+      "bytes": 131960,
+      "sha256": "7995b101c0f27c248cab6fc714095ffee998e80e9a301aff6e9bcec5596b20f4",
+      "binary": true
+    },
+    {
+      "path": "package/android/vec/x86/vec.so",
+      "bytes": 133460,
+      "sha256": "eec586c2ef5696c2727cf9088bea85b3937c07e391cd93c7b886c34ad903b5b5",
+      "binary": true
+    },
+    {
+      "path": "package/ios/AtomicInteger.swift",
+      "bytes": 678,
+      "sha256": "a88d3b1e3ceec4411d7793ae68ef0d4df47880533b75cb0fee0cc2b45e01db8c",
+      "binary": false
+    },
+    {
+      "path": "package/ios/Exceptions.swift",
+      "bytes": 2253,
+      "sha256": "12b5659f1cc4f31aca72be63ac8fe9672c753ceea9a8da9ac76ea1d86f4e38bf",
+      "binary": false
+    },
+    {
+      "path": "package/ios/NativeDatabase.swift",
+      "bytes": 947,
+      "sha256": "22392485ad6eb5fa358663894985cec6f3639e2d177c19666ce63bc7bee25304",
+      "binary": false
+    },
+    {
+      "path": "package/ios/NativeSession.swift",
+      "bytes": 308,
+      "sha256": "d3a5567109e03ca5e890f79e0c7665ee1943e5433b32327dbbb787ae877caf6f",
+      "binary": false
+    },
+    {
+      "path": "package/ios/NativeStatement.swift",
+      "bytes": 425,
+      "sha256": "7e097ff53e8ee0f35ccc69cc4edb09670b75e306bea65c9e1b7bac8d6ffb8af2",
+      "binary": false
+    },
+    {
+      "path": "package/ios/SQLAction.swift",
+      "bytes": 402,
+      "sha256": "0b53f33afe7eea166f16a06ecb22e26d238705bff03b49bae7b406ed3483259f",
+      "binary": false
+    },
+    {
+      "path": "package/ios/SQLiteModule.swift",
+      "bytes": 33783,
+      "sha256": "90de4a69db1e6e4494ad4ef1d98d7f0561cbc1164bb942f63fa938d33c23c8cd",
+      "binary": false
+    },
+    {
+      "path": "package/ios/SQLiteModuleLibSQL.swift",
+      "bytes": 28680,
+      "sha256": "3f363f960a159f03f6d76b2b4c3c39ad160d081a28eb103fd2253f3a03d7939f",
+      "binary": false
+    },
+    {
+      "path": "package/ios/SQLiteOptions.swift",
+      "bytes": 891,
+      "sha256": "6d45c0867eb955b209232c639d01448fd6901e2893d7a8bc8b212b19eb10dd1a",
+      "binary": false
+    },
+    {
+      "path": "package/ios/URL+FilePath.swift",
+      "bytes": 232,
+      "sha256": "de6d3ed41cee81cdd0f570a646cded70d1ca0bd0b90f0ec747bf4b155c283240",
+      "binary": false
+    },
+    {
+      "path": "package/web/Deferred.ts",
+      "bytes": 666,
+      "sha256": "f1e498d74675b7616b02fc89b69db40e213ef2fc6d0aebae2362f388c9518599",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.d.ts",
+      "bytes": 94,
+      "sha256": "7879523367923980bea10f0c131194ac78eeb90a0495c445e56a6e8543ffe2e2",
+      "binary": false
+    },
+    {
+      "path": "package/src/ExpoSQLite.ts",
+      "bytes": 94,
+      "sha256": "3bfc3e38a6e1cb6e61db57a16b28e47a1d9ccaff88b9e735d4f3edcde9af942c",
+      "binary": false
+    },
+    {
+      "path": "package/build/ExpoSQLite.web.d.ts",
+      "bytes": 100,
+      "sha256": "e6cfe4c883f2a8b89475f23e02dbdae046ceae44a70841107b2f4781e127175b",
+      "binary": false
+    },
+    {
+      "path": "package/src/ExpoSQLite.web.ts",
+      "bytes": 366,
+      "sha256": "0cad4ed596c100057641112ce9803df33d71e6caf4f7326202effe86bf809a7a",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/types/globals.d.ts",
+      "bytes": 1651,
+      "sha256": "c11d5e65cee58e9efd20fe3130d9816aa7446f56f434546b0227ff35c4dee9f4",
+      "binary": false
+    },
+    {
+      "path": "package/build/hooks.d.ts",
+      "bytes": 3374,
+      "sha256": "06aa0c6fd65f38b7b83d3268e01009cd52c99f72701a1ff59d53c5b6012680f8",
+      "binary": false
+    },
+    {
+      "path": "package/build/index.d.ts",
+      "bytes": 199,
+      "sha256": "76eaf33ec67d5a1fae321de719025ed1cec7fa541283d1b3a7041d104aade008",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/build/index.d.ts",
+      "bytes": 123,
+      "sha256": "237b9196128784490d49a567690281dff62e9e4d95b68711da1b4b5c6090ca52",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/index.d.ts",
+      "bytes": 35,
+      "sha256": "4f1577365cc095fec3b9283ae10873c8807dcead476330b8ae817d59b2fa2e94",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/types/index.d.ts",
+      "bytes": 48597,
+      "sha256": "300dc322eaeb2729cf01d786c53804e88062ca0e166e2527c76d7dbca059feb4",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/src/index.ts",
+      "bytes": 118,
+      "sha256": "01ca5a5076d2f9989f01e886e0158b547c272776fe3de631235f48452df9c0ea",
+      "binary": false
+    },
+    {
+      "path": "package/src/index.ts",
+      "bytes": 164,
+      "sha256": "3e51bcd65a0ac3f205ab1d336fd58db154ad7cf45e25684c2f539f6e7d645f74",
+      "binary": false
+    },
+    {
+      "path": "package/kv-store.d.ts",
+      "bytes": 76,
+      "sha256": "79079ca43a2015d655f4fb15d207f375e5bfcc488b7a5a37987f380a50dd00c2",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeDatabase.d.ts",
+      "bytes": 2804,
+      "sha256": "9fa25f3207df8e2675e916ea98d8a5b478c2388cac7c2236b7c365175a081ad0",
+      "binary": false
+    },
+    {
+      "path": "package/src/NativeDatabase.ts",
+      "bytes": 3179,
+      "sha256": "59bfd5a103f882f00dd8334e1d81647709d9d15de30b34c4723a9f9f739067fc",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeSession.d.ts",
+      "bytes": 1419,
+      "sha256": "43d954d302279ea07dbd6aa2cee51406abc6aca081a5088c4cec2b9a243b05c4",
+      "binary": false
+    },
+    {
+      "path": "package/src/NativeSession.ts",
+      "bytes": 1590,
+      "sha256": "a4343e79f11f7de9c4b3e3c202d36763201693b04b5a91f895cfc2f1840b3a42",
+      "binary": false
+    },
+    {
+      "path": "package/build/NativeStatement.d.ts",
+      "bytes": 3581,
+      "sha256": "6e276df9cde38cdc114687effb10c5df8218041287f1f804718872f77f452edb",
+      "binary": false
+    },
+    {
+      "path": "package/src/NativeStatement.ts",
+      "bytes": 3696,
+      "sha256": "069e17aa588467f2ba0567da8c36a82ed49695698b36ac7545e7b359a13955a0",
+      "binary": false
+    },
+    {
+      "path": "package/build/paramUtils.d.ts",
+      "bytes": 1142,
+      "sha256": "91df9d35601ff10862e59834604d786030b2b7484b20124844ce8a75f20b95b9",
+      "binary": false
+    },
+    {
+      "path": "package/src/paramUtils.ts",
+      "bytes": 3956,
+      "sha256": "e2a8cee30758c067fadf6985652bf45c2ee1682e4dc2b3a0dee78a186ef5e6dc",
+      "binary": false
+    },
+    {
+      "path": "package/build/pathUtils.d.ts",
+      "bytes": 468,
+      "sha256": "a7944563ceffff5b4d8d5faa50ee12ccda4d852b9b63f2f9a2bf75c177bd4c31",
+      "binary": false
+    },
+    {
+      "path": "package/src/pathUtils.ts",
+      "bytes": 1322,
+      "sha256": "5c7b1d7ad06aa0eed1690065b2e0d511583d079c0479539f8c9df4672100564e",
+      "binary": false
+    },
+    {
+      "path": "package/build/queryUtils.d.ts",
+      "bytes": 969,
+      "sha256": "b4dec919f934dce3c5998b1ea7cf8e122ca883a7b8e042a9dd9340dbdc4290dd",
+      "binary": false
+    },
+    {
+      "path": "package/src/queryUtils.ts",
+      "bytes": 2039,
+      "sha256": "284c30883a2b0aa10b17d7d88aa96b7a2e386a215fc940a128d0e42de9237278",
+      "binary": false
+    },
+    {
+      "path": "package/web/SQLAction.ts",
+      "bytes": 362,
+      "sha256": "2e26eef7ba93081bb69f25fb1952679e5e1389ed681b3bbedb81c1535030a242",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDatabase.d.ts",
+      "bytes": 23185,
+      "sha256": "209ba0bdfc8ee692e7acbfbda03984136a4a52a9257f9fdea307d5a10e89556a",
+      "binary": false
+    },
+    {
+      "path": "package/src/SQLiteDatabase.ts",
+      "bytes": 31182,
+      "sha256": "00c2d10db74537fedc0425ebca6af59b52d7fe1ebe8788f90e79a7f08e706791",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteDevToolsClient.d.ts",
+      "bytes": 444,
+      "sha256": "6f159f222d244d687463f8417be66678f061060877ca0d5911d801389e3593d3",
+      "binary": false
+    },
+    {
+      "path": "package/src/SQLiteDevToolsClient.ts",
+      "bytes": 8874,
+      "sha256": "5fa1ad483293e2a4043340378b3a70762c8372252bf6530313e5f3c031cebd52",
+      "binary": false
+    },
+    {
+      "path": "package/web/SQLiteModule.node.ts",
+      "bytes": 5852,
+      "sha256": "df901ebffab6f4fb8dc9d2c4732978b5c89259d65f90b4d0733ce1bb7c32915b",
+      "binary": false
+    },
+    {
+      "path": "package/web/SQLiteModule.ts",
+      "bytes": 14306,
+      "sha256": "60be4b3a62e23d3286c9b27f75b8bf882769e3f6234299c23f9bb76fe1fe8bf1",
+      "binary": false
+    },
+    {
+      "path": "package/web/SQLiteOptions.ts",
+      "bytes": 1157,
+      "sha256": "09a75fe43aa7045cf0dd9b37498b30450c8926fe17561258da4318302af8fd37",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteSession.d.ts",
+      "bytes": 4868,
+      "sha256": "ad6870e4f6be721dfa8efe949d580587b7329022c7ff5d9ee2b141dfc97858aa",
+      "binary": false
+    },
+    {
+      "path": "package/src/SQLiteSession.ts",
+      "bytes": 6322,
+      "sha256": "1347031edc7d1addf86ca23c8e81cd20920e14f547387cd66a36951b2e4cc5b5",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteStatement.d.ts",
+      "bytes": 11044,
+      "sha256": "db3be6d8de274290106b428c21678b3432b7b39f9c0b62dc7f362786ba20eb4d",
+      "binary": false
+    },
+    {
+      "path": "package/src/SQLiteStatement.ts",
+      "bytes": 25440,
+      "sha256": "6f0304a3a446741a6a6c34b9ee716378db56f4c7efe17966db2b5ec949ad1489",
+      "binary": false
+    },
+    {
+      "path": "package/build/SQLiteTaggedQuery.d.ts",
+      "bytes": 4546,
+      "sha256": "6f1cc3689dff86208d3aea0b1ac99d48db91f2320b832e39e4e6e67c31169daa",
+      "binary": false
+    },
+    {
+      "path": "package/src/SQLiteTaggedQuery.ts",
+      "bytes": 6208,
+      "sha256": "0ae719f1d1d33d0c343d922082bbfe8b419128a531906259076c132f68917c12",
+      "binary": false
+    },
+    {
+      "path": "package/build/Storage.d.ts",
+      "bytes": 5420,
+      "sha256": "4c2700efd99f2fb020d1accc80a5da181571098a398e0c63f07aa7f7d751d116",
+      "binary": false
+    },
+    {
+      "path": "package/src/Storage.ts",
+      "bytes": 15322,
+      "sha256": "5e9d4291f9f76b734aeb7b0f121170fccb022bc5536d87c1b2794fcf4ede0091",
+      "binary": false
+    },
+    {
+      "path": "package/web/SyncSerializer.ts",
+      "bytes": 992,
+      "sha256": "66ea39b6246ac9f737907138fe1ec4e70e6030fd1138e9c93f987c3ed30634ce",
+      "binary": false
+    },
+    {
+      "path": "package/web/web.types.ts",
+      "bytes": 6779,
+      "sha256": "daff6435aac10278da48b70ab1519d8255e221759fb7aac682e6128550413b37",
+      "binary": false
+    },
+    {
+      "path": "package/build/WebStorage.d.ts",
+      "bytes": 854,
+      "sha256": "1552bdb53574e81d124a172294a0376cc237b0151a1df0aa2b48e688f55477b5",
+      "binary": false
+    },
+    {
+      "path": "package/src/WebStorage.ts",
+      "bytes": 2800,
+      "sha256": "bcc374aa9d15b96b7e851e21169ef14384a654082ecdde1198738115a8745990",
+      "binary": false
+    },
+    {
+      "path": "package/src/ts-declarations/whatwg-url-without-unicode.d.ts",
+      "bytes": 284,
+      "sha256": "a9339861133190dc4195a581c8411cb0565cf1d327675e0d4ca5f368f074bdbb",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/build/withSQLite.d.ts",
+      "bytes": 704,
+      "sha256": "8b0853d3a1039e5fef00af2777c5fda173b8d0ac1b25c1157ad41fd634138b51",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/src/withSQLite.ts",
+      "bytes": 4165,
+      "sha256": "c19048517afbadd427d484bfb9e5278edb9618e2ffda00d38f86dcf3860ade31",
+      "binary": false
+    },
+    {
+      "path": "package/web/worker.ts",
+      "bytes": 25342,
+      "sha256": "5294dff8ab8489b336f7757d011cbcde2c845b592df0c1924da468a416937cd0",
+      "binary": false
+    },
+    {
+      "path": "package/web/WorkerChannel.ts",
+      "bytes": 4116,
+      "sha256": "59a8941ff8c31a5e540c698ff8488b086cb7e705c4f2a684050a85185d659687",
+      "binary": false
+    },
+    {
+      "path": "package/plugin/tsconfig.tsbuildinfo",
+      "bytes": 50,
+      "sha256": "6ee87521427957564fff82d59d4e0eac9cfa4ff329fd6be32a0add1e309d9180",
+      "binary": false
+    },
+    {
+      "path": "package/src/hooks.tsx",
+      "bytes": 10544,
+      "sha256": "063e7da130365404f892b6aa04cd18b64de2d26613683e34a169757b06d39442",
+      "binary": false
+    },
+    {
+      "path": "package/android/CMakeLists.txt",
+      "bytes": 1310,
+      "sha256": "57ada8eb0c3b0050ad884f8ca92131126cb5663e4efa595c19a584766ecdf2bf",
+      "binary": false
+    },
+    {
+      "path": "package/web/wa-sqlite/wa-sqlite.wasm",
+      "bytes": 621492,
+      "sha256": "e40812d09b0a9e78dcb2b95f99fb2e88efdffdc7642d75909efe0fda54d8f020",
+      "binary": true
+    },
+    {
+      "path": "package/android/src/main/AndroidManifest.xml",
+      "bytes": 24,
+      "sha256": "844e510155ee78d36b6238ef065340c63a1f8a21478d3c5755679d13659cbcf4",
+      "binary": false
+    },
+    {
+      "path": "package/local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml",
+      "bytes": 346,
+      "sha256": "14c9e125a492e31b4f9e6767f02b6cac50a969754bf68978c7ad7bc6dff7cd23",
+      "binary": false
+    },
+    {
+      "path": "package/LICENSE",
+      "bytes": 1106,
+      "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+      "binary": false
+    }
+  ]
+}
