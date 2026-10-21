@@ -31,6 +31,8 @@ const waitFile = async name => {
 };
 
 device('get-state'); // Fail early without a running device; ANDROID_SERIAL selects one.
+const tsconfigPath = 'tsconfig.json';
+const tsconfig = readFileSync(tsconfigPath, 'utf8');
 run('npx', ['expo', 'prebuild', '--platform', 'android', '--no-install']);
 const applicationPath = 'android/app/src/main/java/mx/edu/dmi/engineeringapp/MainApplication.kt';
 const gradlePath = 'android/app/build.gradle';
@@ -68,6 +70,8 @@ try {
   console.log(JSON.stringify({ ...result, firstPid, secondPid, device: device('shell', 'getprop', 'ro.build.version.sdk') }, null, 2));
   if (result.status !== 'pass') process.exitCode = 1;
 } finally {
+  // Expo start may rewrite include/types even though this entry needs no config changes.
+  writeFileSync(tsconfigPath, tsconfig);
   writeFileSync(applicationPath, application);
   writeFileSync(gradlePath, gradle);
   if (metro?.pid) { try { process.kill(-metro.pid, 'SIGTERM'); } catch { /* already stopped */ } }
