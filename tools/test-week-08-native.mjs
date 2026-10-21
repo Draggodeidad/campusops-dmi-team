@@ -8,8 +8,9 @@ const adb = join(sdk, 'platform-tools/adb');
 const appId = 'mx.edu.dmi.engineeringapp.w08test';
 const serial = process.env.ANDROID_SERIAL;
 const adbArgs = serial ? ['-s', serial] : [];
+const nativeEnv = { ...process.env, ANDROID_HOME: sdk, NODE_ENV: 'development' };
 const run = (cmd, args, capture = false) => {
-  const result = spawnSync(cmd, args, { encoding: 'utf8', stdio: capture ? 'pipe' : 'inherit', env: { ...process.env, ANDROID_HOME: sdk } });
+  const result = spawnSync(cmd, args, { encoding: 'utf8', stdio: capture ? 'pipe' : 'inherit', env: nativeEnv });
   if (result.status !== 0) throw new Error(`Command failed: ${cmd} (exit ${result.status})`);
   return result.stdout?.trim();
 };
@@ -43,10 +44,10 @@ try {
   writeFileSync(applicationPath, application.replace('context = applicationContext,', 'context = applicationContext,\n      jsMainModulePath = "tools/week-08-native-entry",'));
   writeFileSync(gradlePath, gradle.replace('buildTypes {\n        debug {', 'buildTypes {\n        debug {\n            applicationIdSuffix ".w08test"'));
   run('./android/gradlew', ['-p', 'android', 'assembleDebug', '-PreactNativeArchitectures=x86_64', '-PreactNativeDevServerPort=8098']);
-  metro = spawn('npx', ['expo', 'start', '--localhost', '--port', '8098'], { stdio: 'inherit', env: { ...process.env, CI: '1' }, detached: true });
+  metro = spawn('npx', ['expo', 'start', '--localhost', '--port', '8098'], { stdio: 'inherit', env: { ...nativeEnv, CI: '1' }, detached: true });
   for (let i = 0; ; i++) {
     try { if ((await (await fetch('http://localhost:8098/status')).text()).includes('running')) break; } catch { /* startup */ }
-    if (i >= 60) throw new Error('Metro did not start');
+    if (metro.exitCode !== null || i >= 60) throw new Error('Metro did not start');
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
   device('reverse', 'tcp:8098', 'tcp:8098');
