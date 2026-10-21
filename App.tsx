@@ -10,6 +10,8 @@ import type { IncidentTransport } from './src/infrastructure/http/IncidentTransp
 import { DefaultSessionController } from './src/application/session/DefaultSessionController';
 import { SystemClock } from './src/application/session/SessionClock';
 import { GetBackendStatus } from './src/application/system/GetBackendStatus';
+import { resolveSync } from './src/application/sync/resolveSync';
+import { deduplicateOperations } from './src/application/sync/deduplicateOperations';
 import type { IncidentRepository } from './src/domain/incidents/IncidentRepository';
 import { FetchIncidentTransport } from './src/infrastructure/http/FetchIncidentTransport';
 import { SessionTransportDecorator } from './src/infrastructure/http/SessionTransportDecorator';
@@ -49,6 +51,7 @@ export function createGraph(options: Readonly<{
 
   return {
     repository,
+    syncEngine: { resolveSync, deduplicateOperations },
     useSession: !isTest,
     sessionController,
     getIncidents,

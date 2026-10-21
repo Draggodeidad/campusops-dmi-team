@@ -40,6 +40,8 @@ jobs:
         run: npm run check:architecture
       - name: W08 baseline contracts and provider probe
         run: npm run test:week-08:baseline && npm run check:week-08-provider
+      - name: W08 shared sync engine and composition
+        run: npm run test:week-08:sync
       - name: AC-01 — reproducibility
         run: make verify-week-08
       - name: AC-02 — public behavior

@@ -1,5 +1,14 @@
 # W08 — baseline, kit y contratos compartidos (#42)
 
+> Este documento registra el estado histórico de #42. Evolución posterior #44:
+> el motor ya está en `src/application/sync/`, evaluación lo reexporta y
+> `createGraph().syncEngine` lo expone. `npm run test:week-08:sync` ejecuta
+> comportamiento y composición; el agregado W08 también lo incluye. La política
+> vigente y los límites están en [sync-policy.md](sync-policy.md), y los nuevos
+> resultados en `reports/week-08/sync/`. Las referencias a stubs/fallos abajo
+> describen el SHA original del baseline, cuyos reportes se conservan intactos.
+> El adaptador durable y el flujo offline de #43/#45 siguen pendientes.
+
 Fecha de revisión: **21-10-2026**, America/Mexico_City. Rama:
 `feat/week-08-baseline-persistencia-sync`. Base: `main` y `origin/main`,
 `a57c8de8878f3a5a946244f2fecab81a869e78ba`.

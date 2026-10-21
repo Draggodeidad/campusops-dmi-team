@@ -32,8 +32,9 @@
     "test:week-08:baseline": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-baseline.test.ts",
     "test:week-08:public": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-08.test.ts",
     "test:week-08:module": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath",
+    "test:week-08:sync": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts",
     "check:week-08-provider": "node tools/check-week-08-provider.mjs",
-    "test:week-08": "npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:public"
+    "test:week-08": "npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:sync && npm run test:week-08:public"
   },
   "dependencies": {
     "expo": "~57.0.9",
