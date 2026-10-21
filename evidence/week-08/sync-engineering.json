@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+  "scope": "Issue #44 only; auxiliary input for the final W08 engineering evidence in #52.",
+  "decision": "Una implementación de Application para merge de tres vías por campo JSON completo y dedupe de primera identidad. App.tsx/createGraph y course-evaluation exponen las mismas funciones. work es indivisible: reasignación remota e inicio local producen conflicto explícito sin mutar las entradas ni eliminar intención pendiente.",
+  "alternatives": [
+    "Last-write-wins por reloj o versión: simple pero puede perder intención o imponer una asignación antigua.",
+    "Merge recursivo de subcampos: combina más cambios pero puede iniciar atención bajo una asignación que no autorizó ese actor.",
+    "Merge de tres vías por campo completo con comparación estructural y resolución informada: combina cambios compatibles y conserva el conflicto."
+  ],
+  "tradeoff": "Beneficio: política determinista reutilizada por app/evaluación sin HTTP, almacenamiento ni dependencia de Application en evaluación. Costo: retener base/local/remoto e intervención para conflictos de campos compuestos; dedupe no sustituye rechazo de ID/contenido divergente, confirmación ni idempotencia remota.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04"
+  ],
+  "verification": [
+    {
+      "command": "npm run test:week-08:module -- course-tests/week-08-sync.test.ts",
+      "result": "exit 0; 22 tests de JSON estructural, altas/bajas/null, conflicto ordenado, work, dedupe e inmutabilidad.",
+      "evidence": "reports/week-08/sync/sync-module.log"
+    },
+    {
+      "command": "npm run test:week-08",
+      "result": "exit 0; 3 baseline + probe proveedor + 24 motor/composición + 3 públicos. La suite de composición invoca createGraph().syncEngine y comprueba identidad con evaluación.",
+      "evidence": "reports/week-08/sync/week08-aggregate.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "exit 0; 6 suites/31 tests acumulados de sesión.",
+      "evidence": "reports/week-08/sync/session.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "exit 0; sin violaciones de imports.",
+      "evidence": "reports/week-08/sync/architecture.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "exit 0; tipos/lint, 19 suites/87 tests, arquitectura, secretos, auditoría critical y export Android.",
+      "evidence": "reports/week-08/sync/feedback.log"
+    },
+    {
+      "command": "make public-test-week-08",
+      "result": "exit 2; toolchain y 20 suites/90 tests pasan. Faltan cuatro artefactos de entrega global, conservado como fail.",
+      "evidence": "reports/week-08/sync/public-w08.log"
+    }
+  ],
+  "aiAssistance": "Codex: implementación, pruebas, documentación y comandos por instrucción del usuario. No se atribuye revisión humana, aportaciones de compañeros ni AC-05.",
+  "humanValidation": "pending"
+}

@@ -35,5 +35,21 @@
       "result": "Test Suites: 1 passed, 1 total; Tests: 1 passed, 1 total",
       "evidence": "La prueba pública encontró UI, Application, Domain e Infrastructure en docs/architecture.mmd, no encontró una flecha directa UI → Infrastructure y validó alternativas/consecuencias en el ADR."
     }
+  ],
+  "followUpDecisions": [
+    {
+      "week": 8,
+      "issue": 44,
+      "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+      "requirement": "Motor merge/dedupe compartido sin invertir dependencias.",
+      "decision": "Application implementa funciones puras; evaluación las reexporta y Composition Root las compone. Domain conserva SyncRecord.",
+      "verification": {
+        "command": "npm run test:week-08",
+        "result": "exit 0; motor 24 tests y público W08 3 tests pasan, además de baseline/probe.",
+        "evidence": "reports/week-08/sync/week08-aggregate.log"
+      },
+      "engineeringEvidence": "evidence/week-08/sync-engineering.json",
+      "scope": "Extensión W08; no reescribe la decisión, verificaciones ni SHA históricos de W02."
+    }
   ]
 }

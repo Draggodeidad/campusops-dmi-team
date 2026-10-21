@@ -32,5 +32,17 @@
       "command": "npm run test:incidents",
       "evidence": "PASS course-tests/incidents.test.tsx: 2 pruebas exitosas. Se abrió INC-001 desde la lista, se verificó su detalle y se regresó; además GetIncidents/GetIncidentById funcionaron con un repositorio sustituto que implementa IncidentRepository."
     }
+  ],
+  "followUpValidations": [
+    {
+      "week": 8,
+      "issue": 44,
+      "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+      "generatedAt": "2026-10-21T06:59:09.886413+00:00",
+      "command": "npm run check:architecture",
+      "status": "pass",
+      "evidence": "reports/week-08/sync/architecture.log; tests del detector en reports/week-08/sync/architecture-tests.log.",
+      "scope": "Extensión de trazabilidad W08; observaciones y commitSha originales de W02 se conservan sin alteraciones."
+    }
   ]
 }

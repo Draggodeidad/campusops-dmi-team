@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+  "generatedAt": "2026-10-21T06:59:09.886413+00:00",
+  "scope": "Issue #44 shared merge/deduplication engine and composition only; not full W08 delivery.",
+  "nodeVersion": "v22.22.0",
+  "npmVersion": "10.9.4",
+  "checks": [
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "evidence": "reports/week-08/sync/setup.log",
+      "exitCode": 0,
+      "durationSeconds": 12.65
+    },
+    {
+      "id": "types",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run typecheck",
+      "evidence": "reports/week-08/sync/types.log",
+      "exitCode": 0,
+      "durationSeconds": 1.49
+    },
+    {
+      "id": "lint",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run lint",
+      "evidence": "reports/week-08/sync/lint.log",
+      "exitCode": 0,
+      "durationSeconds": 2.39
+    },
+    {
+      "id": "smoke",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:smoke",
+      "evidence": "reports/week-08/sync/smoke.log",
+      "exitCode": 0,
+      "durationSeconds": 1.73
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "reports/week-08/sync/incidents.log",
+      "exitCode": 0,
+      "durationSeconds": 1.29
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-08/sync/architecture-tests.log",
+      "exitCode": 0,
+      "durationSeconds": 0.98
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-08/sync/architecture.log",
+      "exitCode": 0,
+      "durationSeconds": 0.1
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-08/sync/session.log",
+      "exitCode": 0,
+      "durationSeconds": 2.66
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-08/sync/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.43
+    },
+    {
+      "id": "sync-module",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:module -- course-tests/week-08-sync.test.ts",
+      "evidence": "reports/week-08/sync/sync-module.log",
+      "exitCode": 0,
+      "durationSeconds": 0.86
+    },
+    {
+      "id": "week08-aggregate",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-08/sync/week08-aggregate.log",
+      "exitCode": 0,
+      "durationSeconds": 3.32
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-08/sync/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 14.93
+    },
+    {
+      "id": "verify-w08",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-08",
+      "evidence": "reports/week-08/sync/verify-w08.log",
+      "exitCode": 0,
+      "durationSeconds": 6.99
+    },
+    {
+      "id": "public-w08",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "evidence": "reports/week-08/sync/public-w08.log",
+      "exitCode": 2,
+      "durationSeconds": 8.67
+    },
+    {
+      "id": "preserve-history",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code caadd9b9a256a551e7b7e50488043c2dc36739e4 -- course-tests/public src/application/session src/infrastructure/session src/infrastructure/http reports/week-08/baseline reports/week-01 reports/week-03 reports/week-04 reports/week-05 reports/week-06 evidence/week-01 evidence/week-03 evidence/week-04 evidence/week-05 evidence/week-06 package-lock.json",
+      "evidence": "reports/week-08/sync/preserve-history.log",
+      "exitCode": 0,
+      "durationSeconds": 0.0
+    }
+  ],
+  "status": "fail",
+  "aiAssistance": "Codex implemented and validated at user request; human review and individual evidence remain pending.",
+  "scopeStatus": "pass",
+  "interpretation": {
+    "issue44": "All applicable engine, composition, public behavior, regression, architecture and reproducibility checks passed.",
+    "publicWeek08Gate": "Exit 2: tests/toolchain pass (20 suites/90 tests), but four full-week deliverables are absent: docs/data-model.md, reports/week-08/migration-tests.json, evidence/week-08/engineering.json, evidence/week-08/individual.json.",
+    "tests": {
+      "engineUnit": 22,
+      "engineComposition": 2,
+      "publicWeek08": 3,
+      "sessionWeek06": 31,
+      "accumulatedFeedback": 87,
+      "accumulatedWithPublicWeek08": 90
+    },
+    "limits": [
+      "App UI offline flow, durable queue, migrations and remote confirmation remain #43/#45/#47.",
+      "Auxiliary engineering evidence is scoped to #44 and does not replace full-week engineering/individual records.",
+      "Human review remains pending. No final tag or Classroom delivery."
+    ]
+  }
+}
