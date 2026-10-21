@@ -1,0 +1,14 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08:integration
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx
+
+(node:22819) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-integration.test.tsx
+PASS course-tests/week-08-gateway.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       24 passed, 24 total
+Snapshots:   0 total
+Time:        2.905 s, estimated 4 s
+Ran all test suites within paths "course-tests/week-08-gateway.test.ts", "course-tests/week-08-integration.test.tsx".

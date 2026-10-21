@@ -1,0 +1,137 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08
+> npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:persistence && npm run test:week-08:sync && npm run test:week-08:integration && npm run test:week-08:public
+
+
+> dmi-react-native-starter@1.0.0 test:week-08:baseline
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-baseline.test.ts
+
+PASS course-tests/week-08-baseline.test.ts
+  ✓ shared fixture preserves the required actor, base, stable operation and reassignment (2 ms)
+  ✓ temporary factory reopens a real file with a new handle and cleans only its own resource (13 ms)
+  ✓ transaction failure injection targets one named point once without touching files (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.318 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-08-baseline.test.ts".
+
+> dmi-react-native-starter@1.0.0 check:week-08-provider
+> node tools/check-week-08-provider.mjs
+
+{
+  "scope": "SQLite engine on disk + Expo compatibility metadata; not an Android adapter test",
+  "node": "v22.22.0",
+  "expo": "57.0.16",
+  "recommendedExpoSqlite": "~57.0.1",
+  "checks": [
+    "new-process-reopen",
+    "transaction-rollback-schema-data-version",
+    "migration-preserves-content",
+    "durable-synthetic-file"
+  ],
+  "observed": {
+    "before": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "afterFailure": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "after": {
+      "version": 2,
+      "columns": [
+        "id",
+        "content",
+        "migrated"
+      ],
+      "rows": 1
+    }
+  }
+}
+(node:23052) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> dmi-react-native-starter@1.0.0 test:week-08:persistence
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-workspace-owner.test.ts
+
+(node:23112) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23125) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-workspace-owner.test.ts
+  ✓ disk reopen preserves exact author, base, notes, file and original operation order; a second process reads it (41 ms)
+  ✓ v1 to v2 rolls back schema, rows, order and version at migration.afterSchema, then recovers (18 ms)
+  ✓ v1 to v2 rolls back schema, rows, order and version at migration.afterCopy, then recovers (11 ms)
+  ✓ failed automatic upgrade closes connection; a new current-version instance recovers the same v1 resource (6 ms)
+  ✓ snapshot and queue roll back together, copy is removed, existing photo stays usable (8 ms)
+  ✓ enqueue failure rolls back; confirmation deletes only its operation and failure restores it (9 ms)
+  ✓ same JSON identity is a no-op; changed body rejects atomically and a replay cannot regress snapshot (10 ms)
+  ✓ rejects non-JSON/secret payload undefined without any partial write (7 ms)
+  ✓ rejects non-JSON/secret payload NaN without any partial write (5 ms)
+  ✓ rejects non-JSON/secret payload Infinity without any partial write (6 ms)
+  ✓ rejects non-JSON/secret payload [Function anonymous] without any partial write (5 ms)
+  ✓ rejects non-JSON/secret payload 2026-10-21T19:12:25.377Z without any partial write (5 ms)
+  ✓ rejects non-JSON/secret payload {"token": "synthetic-forbidden"} without any partial write (5 ms)
+  ✓ rejects non-JSON/secret payload [undefined] without any partial write (5 ms)
+  ✓ rejects cyclic payload, mismatched IDs/base, orphan operations and missing attachments (10 ms)
+  ✓ serializes concurrent writes and lifecycle, supports isolated files, rejects closed calls (15 ms)
+  ✓ captures enqueue input at invocation and recovered reads cannot mutate storage (6 ms)
+  ✓ unknown future schema rejects without overwriting its rows or version (9 ms)
+  ✓ corrupt previous-schema data blocks migration and leaves all previous rows intact (9 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        0.836 s
+Ran all test suites within paths "course-tests/week-08-workspace-owner.test.ts".
+
+> dmi-react-native-starter@1.0.0 test:week-08:sync
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts
+
+PASS course-tests/week-08-sync.test.ts
+PASS course-tests/week-08-sync-composition.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       24 passed, 24 total
+Snapshots:   0 total
+Time:        0.71 s
+Ran all test suites within paths "course-tests/week-08-sync.test.ts", "course-tests/week-08-sync-composition.test.ts".
+
+> dmi-react-native-starter@1.0.0 test:week-08:integration
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx
+
+(node:23167) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-integration.test.tsx
+PASS course-tests/week-08-gateway.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       24 passed, 24 total
+Snapshots:   0 total
+Time:        2.842 s, estimated 3 s
+Ran all test suites within paths "course-tests/week-08-gateway.test.ts", "course-tests/week-08-integration.test.tsx".
+
+> dmi-react-native-starter@1.0.0 test:week-08:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-08.test.ts
+
+PASS course-tests/public/week-08.test.ts
+  ✓ CampusOps detects offline start versus remote reassignment without mutating either record (2 ms)
+  ✓ merges independent field changes and reports same-field conflict (1 ms)
+  ✓ deduplicates a replayed operation by stable identity
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.324 s, estimated 1 s
+Ran all test suites within paths "course-tests/public/week-08.test.ts".
