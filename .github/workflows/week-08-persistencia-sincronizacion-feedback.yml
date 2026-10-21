@@ -42,6 +42,8 @@ jobs:
         run: npm run test:week-08:baseline && npm run check:week-08-provider
       - name: W08 durable workspace and transactional migration
         run: npm run test:week-08:persistence
+      - name: W08 shared sync engine and composition
+        run: npm run test:week-08:sync
       - name: AC-01 — reproducibility
         run: make verify-week-08
       - name: AC-02 — public behavior

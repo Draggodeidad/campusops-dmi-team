@@ -1,9 +1,7 @@
 import type {
   AuthEvent,
-  JsonObject,
   PermissionEvent,
   RemoteResponse,
-  SyncRecord,
 } from './contracts';
 import type { IncidentLocation } from '../campusops/contracts';
 
@@ -18,6 +16,8 @@ function pending(name: string): never {
 }
 
 export { redactForTelemetry, parseRemoteResource };
+export { resolveSync } from '../application/sync/resolveSync';
+export { deduplicateOperations } from '../application/sync/deduplicateOperations';
 
 export function coordinateRefresh(events: readonly AuthEvent[]): Readonly<{
   status: 'anonymous' | 'authenticated';
@@ -50,20 +50,6 @@ export function coordinateRefresh(events: readonly AuthEvent[]): Readonly<{
     }
   }
   return coordinator.getSummary();
-}
-
-export function resolveSync(
-  _base: SyncRecord,
-  _local: SyncRecord,
-  _remote: SyncRecord,
-): Readonly<{ kind: 'merged'; fields: JsonObject } | { kind: 'conflict'; fields: readonly string[] }> {
-  return pending('resolveSync');
-}
-
-export function deduplicateOperations<T extends Readonly<{ operationId: string }>>(
-  _operations: readonly T[],
-): readonly T[] {
-  return pending('deduplicateOperations');
 }
 
 export function planRetry(_input: Readonly<{

@@ -43,5 +43,21 @@
     "result": "Both exit 0; 2 architecture tests pass and import checker reports no violations.",
     "evidence": "reports/week-08/persistence/architecture-tests.log and architecture.log",
     "decision": "docs/adr/ADR-001-architecture.md — #43 appendix; docs/data-model.md"
-  }
+  },
+  "followUpDecisions": [
+    {
+      "week": 8,
+      "issue": 44,
+      "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+      "requirement": "Motor merge/dedupe compartido sin invertir dependencias.",
+      "decision": "Application implementa funciones puras; evaluación las reexporta y Composition Root las compone. Domain conserva SyncRecord.",
+      "verification": {
+        "command": "npm run test:week-08",
+        "result": "exit 0; motor 24 tests y público W08 3 tests pasan, además de baseline/probe.",
+        "evidence": "reports/week-08/sync/week08-aggregate.log"
+      },
+      "engineeringEvidence": "evidence/week-08/sync-engineering.json",
+      "scope": "Extensión W08; no reescribe la decisión, verificaciones ni SHA históricos de W02."
+    }
+  ]
 }

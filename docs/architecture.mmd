@@ -30,6 +30,8 @@ flowchart TB
     WorkspacePort["LocalWorkspace — puerto W08"]
     PendingPort["PendingOperationStore — contrato W08"]
     LocalSnapshot["LocalIncidentSnapshot — contrato W08"]
+    SyncMerge["resolveSync — merge JSON por campo W08"]
+    SyncDedupe["deduplicateOperations — primera identidad W08"]
   end
 
   subgraph Domain["Domain — src/domain + vocabulario src/campusops"]
@@ -115,6 +117,8 @@ flowchart TB
   Root --> NativeWorkspace
   NativeWorkspace --> LocalDB
   LocalDB --> WorkspacePort
+  Root --> SyncMerge
+  Root --> SyncDedupe
 
   Evaluation["course-evaluation.coordinateRefresh — adaptador de política compartida"]
   Evaluation --> RefreshPolicy
@@ -129,11 +133,18 @@ flowchart TB
   LocalSnapshot --> SyncRecord
   PendingPort --> PendingOperation
   EvaluationTypes["course-evaluation/contracts — reexport de tipo"] --> SyncRecord
+  SyncMerge --> SyncRecord
+  SyncEvaluation["course-evaluation — reexports W08"] --> SyncMerge
+  SyncEvaluation --> SyncDedupe
+  SyncTests["Suites W08 sync y composición"] --> Root
+  SyncTests --> SyncEvaluation
 
   subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
-    SyncEngine["Motor y flujo sync W08 — issues 44 y 45"]
+    SyncFlow["Flujo offline/sync W08 — issue 45"]
     Location["Ubicación / proveedor externo"]
   end
 
-  SyncEngine -. "usará" .-> WorkspacePort
+  SyncFlow -. "usará" .-> WorkspacePort
+  SyncFlow -. "usará" .-> SyncMerge
+  SyncFlow -. "usará" .-> SyncDedupe
   Location -. "adaptador futuro dependerá de contrato interno" .-> Domain

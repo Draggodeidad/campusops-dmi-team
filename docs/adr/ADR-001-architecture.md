@@ -259,3 +259,36 @@ entrada de prueba del mismo proyecto y dos procesos Android. Disponibilidad
 del comando no significa ejecución exitosa: resultados y límites realmente
 observados están en reports/week-08/persistence/validation.json. No sustituye
 revisión humana, #47 ni entrega semanal completa.
+## Anexo W08 — motor compartido #44 (21-10-2026)
+
+**Contexto.** #42 dejó contratos y fixtures; #44 requiere merge/dedupe reales
+conservando las firmas evaluables. La reasignación remota y el inicio local no
+pueden combinarse recursivamente dentro de `work` sin romper autorización.
+
+**Alternativas.** Last-write-wins por versión/reloj perdería una intención o
+una asignación. Merge recursivo de subcampos produciría un estado iniciado por
+un actor que no lo solicitó. Rechazar toda concurrencia impediría cambios
+independientes válidos. Elegimos merge de tres vías por campo completo con
+comparación JSON estructural, conflictos ordenados y decisión explícita.
+
+**Decisión implementada.** `resolveSync` y `deduplicateOperations` viven en
+Application; el primero importa únicamente el tipo `SyncRecord` de Domain.
+Evaluación reexporta exactamente esas funciones; `App.tsx/createGraph` las
+expone como `syncEngine`. No hay dos algoritmos ni dependencia de Application
+en evaluación. El motor se invoca desde el grafo real en la suite de composición;
+la UI todavía no consume sync y el flujo con workspace/envío sigue en #45.
+La política, precondiciones y límites están en `docs/sync-policy.md`.
+
+**Consecuencias.** El merge conserva entradas y trata `work` como indivisible;
+los valores anidados retornados se consumen readonly. Dedupe conserva el primer
+objeto/orden por ID, sin garantizar idempotencia remota. El beneficio es una
+regla determinista reutilizable sin HTTP o almacenamiento; el costo es retener
+base/local/remoto y resolver explícitamente los conflictos. Una confirmación
+de servidor será precondición del retiro de cola en #45. No hay reintentos,
+persistencia, resolución UI ni implementación de `planRetry` W09 en este motor.
+
+**Verificación.** `test:week-08:sync` incluye las suites de comportamiento y
+composición; `test:week-08:public` conserva los tres tests oficiales intactos.
+El agregado W08 y su workflow ejecutan la suite nueva sin omitir gates. Los
+resultados reales y su SHA se registran en `reports/week-08/sync/`; el histórico
+del baseline conserva los fallos observados antes de implementar #44.

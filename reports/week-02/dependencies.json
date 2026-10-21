@@ -40,5 +40,17 @@
     "result": "Both exit 0; 2 architecture tests pass and import checker reports no violations.",
     "evidence": "reports/week-08/persistence/architecture-tests.log and architecture.log",
     "decision": "docs/adr/ADR-001-architecture.md — #43 appendix; docs/data-model.md"
-  }
+  },
+  "followUpValidations": [
+    {
+      "week": 8,
+      "issue": 44,
+      "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+      "generatedAt": "2026-10-21T06:59:09.886413+00:00",
+      "command": "npm run check:architecture",
+      "status": "pass",
+      "evidence": "reports/week-08/sync/architecture.log; tests del detector en reports/week-08/sync/architecture-tests.log.",
+      "scope": "Extensión de trazabilidad W08; observaciones y commitSha originales de W02 se conservan sin alteraciones."
+    }
+  ]
 }
