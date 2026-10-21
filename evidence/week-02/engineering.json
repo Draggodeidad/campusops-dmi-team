@@ -35,5 +35,13 @@
       "result": "Test Suites: 1 passed, 1 total; Tests: 1 passed, 1 total",
       "evidence": "La prueba pública encontró UI, Application, Domain e Infrastructure en docs/architecture.mmd, no encontró una flecha directa UI → Infrastructure y validó alternativas/consecuencias en el ADR."
     }
-  ]
+  ],
+  "followUpValidationW08": {
+    "commitSha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
+    "scope": "Additive architecture validation for #43; original W02 claims and SHA above remain historical.",
+    "command": "npm run test:architecture; npm run check:architecture",
+    "result": "Both exit 0; 2 architecture tests pass and import checker reports no violations.",
+    "evidence": "reports/week-08/persistence/architecture-tests.log and architecture.log",
+    "decision": "docs/adr/ADR-001-architecture.md — #43 appendix; docs/data-model.md"
+  }
 }

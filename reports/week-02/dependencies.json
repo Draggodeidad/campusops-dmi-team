@@ -32,5 +32,13 @@
       "command": "npm run test:incidents",
       "evidence": "PASS course-tests/incidents.test.tsx: 2 pruebas exitosas. Se abrió INC-001 desde la lista, se verificó su detalle y se regresó; además GetIncidents/GetIncidentById funcionaron con un repositorio sustituto que implementa IncidentRepository."
     }
-  ]
+  ],
+  "followUpValidationW08": {
+    "commitSha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
+    "scope": "Additive architecture validation for #43; original W02 claims and SHA above remain historical.",
+    "command": "npm run test:architecture; npm run check:architecture",
+    "result": "Both exit 0; 2 architecture tests pass and import checker reports no violations.",
+    "evidence": "reports/week-08/persistence/architecture-tests.log and architecture.log",
+    "decision": "docs/adr/ADR-001-architecture.md — #43 appendix; docs/data-model.md"
+  }
 }

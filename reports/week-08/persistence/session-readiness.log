@@ -1,0 +1,73 @@
+
+> dmi-react-native-starter@1.0.0 check:week-06-readiness
+> node tools/check-week-06-readiness.cjs
+
+{
+  "week": 6,
+  "purpose": "independent-readiness-review",
+  "checks": [
+    {
+      "id": "repository-uses-active-session-actor",
+      "status": "pass",
+      "observed": {
+        "activeActorMatchesOutgoingActor": true
+      }
+    },
+    {
+      "id": "anonymous-repository-does-not-send-fixture-authorization",
+      "status": "pass",
+      "observed": {
+        "anonymous": true,
+        "sentAuthorization": false
+      }
+    },
+    {
+      "id": "old-401-is-not-replayed-as-new-actor",
+      "status": "pass",
+      "observed": {
+        "attempts": 1,
+        "replayedUnderNewActor": false
+      }
+    },
+    {
+      "id": "evaluation-rejects-refresh-success-after-logout",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous",
+        "retainedToken": false
+      }
+    },
+    {
+      "id": "expired-request-refreshes-before-send",
+      "status": "pass",
+      "observed": {
+        "expired": true,
+        "refreshCallsBeforeSend": 1
+      }
+    },
+    {
+      "id": "restore-rejects-invalid-role-and-empty-tokens",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous",
+        "clearCalls": 1
+      }
+    },
+    {
+      "id": "restore-completion-cannot-resurrect-after-logout",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous"
+      }
+    },
+    {
+      "id": "refresh-cleanup-reports-storage-delete-failure",
+      "status": "pass",
+      "observed": {
+        "errorCode": "SECURE_STORAGE_UNAVAILABLE",
+        "persistedRecordRemains": true,
+        "state": "anonymous"
+      }
+    }
+  ]
+}
