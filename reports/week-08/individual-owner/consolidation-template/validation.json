@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "3e8346bb53460acd3e381e7f774d6933cc3855e1",
+  "generatedAt": "2026-10-21T19:28:54.900845+00:00",
+  "checks": [
+    {
+      "id": "official-public-w08",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "exitCode": 2,
+      "durationSeconds": 13.35,
+      "evidence": "reports/week-08/individual-owner/consolidation-template/public-w08.log"
+    }
+  ],
+  "template": "evidence/week-08/individual.json",
+  "formatReference": "evidence/week-05/individual.json",
+  "formatObserved": "Same four root keys and same twelve member keys as W05; three member objects, one existing owner record and two empty records explicitly requested by the user.",
+  "pending": "Companions must fill their own data/evidence; owner human review remains pending. No fabricated identities or contributions. This template is not a valid final delivery.",
+  "officialFailedChecks": [
+    {
+      "id": "required_evidence",
+      "status": "fail",
+      "detail": "missing/empty=['reports/week-08/migration-tests.json', 'evidence/week-08/engineering.json']"
+    },
+    {
+      "id": "schema:evidence/week-08/individual.json",
+      "status": "fail",
+      "detail": "studentId values must be unique"
+    }
+  ]
+}
