@@ -71,6 +71,16 @@ Los índices de resultados están en `reports/week-05/contract-tests.json` y `re
 
 ## Actividades semanales
 
+### Semana 08 — baseline de persistencia/sync
+
+La preparación de #42 está en [docs/week-08-baseline.md](docs/week-08-baseline.md):
+inventario del kit, puertos, fixtures, proveedor y matriz de issues/pruebas.
+`npm run test:week-08:baseline` y `npm run check:week-08-provider` comprueban
+esa preparación. `npm run test:week-08:public` ejecuta únicamente W08 y revela
+los stubs pendientes de #44; `npm test` todavía selecciona sólo regresiones
+anteriores. La implementación durable y el flujo sync corresponden a #43–#45.
+La actividad y rúbrica oficiales se conservan en `docs/assignments/week-08*.md`.
+
 Cada paquete semanal agrega el enunciado dirigido al alumno, su test público y un workflow de feedback. Copia únicamente los archivos indicados por el paquete y ejecuta:
 
 ```bash

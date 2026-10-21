@@ -174,3 +174,44 @@ Los logs y SHA de validación final se indexan en
 observaciones históricas conservan procedencia; los workflows revalidan el
 checkout desechable y comprueban tags históricos en su propia versión, sin
 mover etiquetas ni reemplazar SHA como atajo.
+
+## Anexo W08 — contratos del baseline #42 (21-10-2026)
+
+**Contexto.** El kit W08 exige datos y cola durables, migración recuperable y
+conflicto por reasignación. La app todavía compone únicamente el flujo online
+W06: no tiene adaptador local ni motor sync. `SyncRecord` estaba declarado en
+el módulo de evaluación, que no debe convertirse en dependencia de Application.
+
+**Alternativas.** (1) Usar memoria global o SecureStore como cola: la primera
+no sobrevive al proceso y el segundo está destinado a secretos, sin la
+transacción conjunta de snapshot/cola requerida. (2) Introducir una DB y
+conectar toda la app en el baseline: mezclaría #42 con #43–#45 y bloquearía
+publicar las interfaces antes de implementar. (3) Publicar puertos mínimos y
+fixtures, verificar capacidad del proveedor y reservar implementación para
+sus issues. Se elige la tercera.
+
+**Decisión presente.** `LocalWorkspace`, `PendingOperationStore` y
+`LocalIncidentSnapshot` son contratos en Application. `commitChange` exige
+confirmar snapshot y operación juntos; notas y referencias durables conservan
+autor e identidad; tokens permanecen en el puerto SecureStore W06.
+`SyncRecord` pasa como tipo a Domain y se reexporta desde evaluación,
+conservando su forma pública. No hay adaptador local ni nueva dependencia en
+`App.tsx`. El diagrama muestra estos contratos sin presentarlos como flujo activo.
+
+**Proveedor para #43.** El manifiesto de Expo 57 instalado recomienda
+expo-sqlite `~57.0.1`; se inspecciona la implementación publicada 57.0.4 y su
+transacción exclusiva con rollback. Un probe SQLite de Node comprueba
+reapertura entre procesos y reversión de esquema/datos/versiones sobre disco.
+Se selecciona ese proveedor para Android; la instalación y comprobación del
+adaptador Expo nativo siguen pendientes en #43. No se equipara el probe del
+motor con una prueba de la app o del SDK nativo.
+
+**Consecuencias y comprobación.** La preparación permite construir pruebas en
+paralelo con una factory de recursos aislados y puntos de falla dentro de la
+transacción; el costo es mantener el contrato al implementar adaptadores.
+Los tres tests del baseline comprueban fixtures/lifecycle, no migración de la
+app. `test:week-08:public` conserva los fallos de los stubs hasta #44. Las
+observaciones y SHA W08 se indexan en `reports/week-08/baseline/validation.json`;
+los reportes/evidencias W02–W06 conservan su procedencia histórica sin reescribir
+resultados sobre otro SHA. Alcance, esquema acordado y límites del proveedor:
+`docs/week-08-baseline.md`.

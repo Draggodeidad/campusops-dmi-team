@@ -11,7 +11,7 @@ export type AuthEvent = Readonly<{
   token?: string;
 }>;
 
-export type SyncRecord = Readonly<{ id: string; version: number; fields: JsonObject }>;
+export type { SyncRecord } from '../domain/sync/SyncRecord';
 
 export type RemoteResponse = Readonly<{ requestId: string; value?: unknown; error?: string }>;
 

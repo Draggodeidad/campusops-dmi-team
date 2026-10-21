@@ -27,11 +27,16 @@ flowchart TB
     SessionContext["SessionAuthorizationContext"]
     PerformAction["PerformIncidentAction"]
     SafeFailure["ApplicationFailure"]
+    WorkspacePort["LocalWorkspace — contrato W08, sin adaptador"]
+    PendingPort["PendingOperationStore — contrato W08"]
+    LocalSnapshot["LocalIncidentSnapshot — contrato W08"]
   end
 
   subgraph Domain["Domain — src/domain + vocabulario src/campusops"]
     Incident["Incident"]
     IncidentPort["IncidentRepository"]
+    SyncRecord["SyncRecord — tipo compartido W08"]
+    PendingOperation["PendingIncidentOperation — vocabulario de dominio"]
   end
 
   subgraph Infrastructure["Infrastructure — src/infrastructure"]
@@ -112,10 +117,19 @@ flowchart TB
   SessionTests --> ParallelTransport
   SessionTests --> Evaluation
 
-  subgraph Planned["Flujos futuros fuera de W06"]
-    Persistence["Persistencia"]
+  WorkspacePort --> PendingPort
+  WorkspacePort --> LocalSnapshot
+  WorkspacePort --> PendingOperation
+  LocalSnapshot --> SyncRecord
+  PendingPort --> PendingOperation
+  EvaluationTypes["course-evaluation/contracts — reexport de tipo"] --> SyncRecord
+
+  subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
+    Persistence["Adaptador persistente W08 — issue 43"]
+    SyncEngine["Motor y flujo sync W08 — issues 44 y 45"]
     Location["Ubicación / proveedor externo"]
   end
 
-  Persistence -. "adaptador futuro dependerá de contrato interno" .-> Domain
+  Persistence -. "implementará" .-> WorkspacePort
+  SyncEngine -. "usará" .-> WorkspacePort
   Location -. "adaptador futuro dependerá de contrato interno" .-> Domain
