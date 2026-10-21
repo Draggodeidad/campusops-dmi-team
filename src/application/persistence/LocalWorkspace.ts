@@ -8,6 +8,7 @@ export interface LocalWorkspace {
   close(): Promise<void>;
   migrate(targetVersion: number): Promise<void>;
   readonly pending: PendingOperationStore;
+  listSnapshots(): Promise<readonly LocalIncidentSnapshot[]>;
   getSnapshot(incidentId: string): Promise<LocalIncidentSnapshot | null>;
   /** Cache a snapshot without creating a pending action. */
   saveSnapshot(snapshot: LocalIncidentSnapshot): Promise<void>;

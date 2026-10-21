@@ -60,9 +60,26 @@ export function mapDtoToIncident(envelope: RemoteIncidentEnvelopeDto): Incident 
     return null;
   }
 
+  const assigned = payload.assignedTechnicianId;
+  const reporter = payload.reporterId;
+  if (assigned !== undefined && assigned !== null && typeof assigned !== 'string') return null;
+  if (reporter !== undefined && typeof reporter !== 'string') return null;
+  const notes = payload.notes;
+  const evidence = payload.evidence;
+  if (notes !== undefined && (!Array.isArray(notes) || !notes.every(item => item && typeof item === 'object'
+    && typeof item.actorId === 'string' && typeof item.text === 'string'))) return null;
+  if (evidence !== undefined && (!Array.isArray(evidence) || !evidence.every(item => item && typeof item === 'object'
+    && typeof item.actorId === 'string' && typeof item.evidenceId === 'string'))) return null;
+  if (payload.priority !== undefined && typeof payload.priority !== 'string') return null;
+
   return {
     id: envelope.id,
     version: envelope.version,
+    ...(assigned === undefined ? {} : { assignedTechnicianId: assigned }),
+    ...(reporter === undefined ? {} : { reporterId: reporter }),
+    ...(notes === undefined ? {} : { notes: notes as readonly Readonly<{ actorId: string; text: string }>[] }),
+    ...(evidence === undefined ? {} : { evidence: evidence as readonly Readonly<{ actorId: string; evidenceId: string }>[] }),
+    ...(payload.priority === undefined ? {} : { priority: payload.priority as string }),
     title: deriveTitle(description, envelope.id),
     description,
     category: category as IncidentCategory,

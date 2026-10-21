@@ -18,8 +18,23 @@ export type PendingPhotoReference = Readonly<{
 }>;
 
 export type LocalIncidentSnapshot = Readonly<{
+  /** Cache and local intentions are visible only to the identity that saved them. */
+  ownerActorId?: string;
   base: SyncRecord;
   local: SyncRecord;
   notes: readonly LocalIncidentNote[];
   photos: readonly PendingPhotoReference[];
+  remote?: SyncRecord;
+  remoteReaderActorId?: string;
+  operationStates?: Readonly<Record<string, Readonly<{
+    state: 'pending' | 'retry' | 'conflict' | 'forbidden' | 'reviewed' | 'superseded';
+    fields?: readonly string[];
+    replacementOperationId?: string;
+  }>>>;
+  resolutions?: readonly Readonly<{
+    operationId: string;
+    actorId: string;
+    decision: 'keep_remote' | 'reformulate';
+    replacementOperationId?: string;
+  }>[];
 }>;

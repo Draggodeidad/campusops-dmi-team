@@ -137,6 +137,13 @@ export class SqliteLocalWorkspace implements LocalWorkspace {
     });
   }
 
+  listSnapshots(): Promise<readonly LocalIncidentSnapshot[]> {
+    return this.serial(async () => {
+      const rows = await this.database().getAllAsync<{ snapshot_json: string }>('SELECT snapshot_json FROM snapshots ORDER BY incident_id');
+      return rows.map(row => JSON.parse(row.snapshot_json) as LocalIncidentSnapshot);
+    });
+  }
+
   saveSnapshot(snapshot: LocalIncidentSnapshot): Promise<void> { return this.write(snapshot); }
 
   commitChange(snapshot: LocalIncidentSnapshot, operation: PendingIncidentOperation): Promise<void> {
