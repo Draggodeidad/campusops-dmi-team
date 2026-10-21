@@ -319,3 +319,17 @@ test('caller-provided start identity survives pending replay and confirmed repla
   await expect(app.performIncidentAction.execute({ ...input, baseVersion: 2 })).rejects.toMatchObject({ code: 'INVALID_INCIDENT_INPUT' });
   expect((await remote()).version).toBe(2);
 });
+
+test('confirming an old lost receipt does not roll back a newer remote state already read by the graph', async () => {
+  const app = await prepared(); await app.incidentSync.record('campus-inc-001', { action: 'start' });
+  network.loseNextCommit = true; network.disconnectAfterTimeout = true;
+  await app.incidentSync.synchronize();
+  await remoteAction({ action: 'prioritize', baseVersion: 2, priority: 'high' }, 'w08-after-lost-response');
+  network.offline = false;
+  await app.incidentSync.synchronize();
+  const snapshot = (await app.localWorkspace.getSnapshot('campus-inc-001'))!;
+  expect(snapshot.base.version).toBe(3);
+  expect(snapshot.local.fields.priority).toBe('high');
+  expect(await app.localWorkspace.pending.listPending()).toEqual([]);
+  expect((await remote()).payload.history).toHaveLength(2);
+});

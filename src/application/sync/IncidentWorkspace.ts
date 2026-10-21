@@ -246,11 +246,13 @@ export class IncidentWorkspace {
           }
           this.check(identity);
           if (!confirmed) throw new ApplicationFailure('SYNC_CONFIRMATION_INVALID', 'No se recibió confirmación.');
+          // An idempotent replay may return the old receipt, while GET already saw a newer authorized state.
+          const latest = remote.record.version > confirmed.record.version ? remote.record : confirmed.record;
           const remaining = (await this.workspace.pending.listPending()).filter(op => op.incidentId === operation.incidentId
             && op.operationId !== operation.operationId && active(snapshot, op));
-          snapshot = { ...snapshot, remote: confirmed.record, remoteReaderActorId: identity.actorId,
+          snapshot = { ...snapshot, remote: latest, remoteReaderActorId: identity.actorId,
             confirmedOperations: deduplicateOperations([...(snapshot.confirmedOperations ?? []), operation]),
-            ...(remaining.length === 0 ? { base: confirmed.record, local: confirmed.record } : {}),
+            ...(remaining.length === 0 ? { base: latest, local: latest } : {}),
           };
           // Save first: if this write or acknowledge fails, replay remains possible with the original body.
           await this.workspace.saveSnapshot(snapshot);
