@@ -271,3 +271,21 @@ y no cierra #43–#52.** Revisión humana y evidencia individual quedan pendient
 
 Asistencia material: Codex para inspección, contratos, fixtures, scripts,
 documentación y ejecución. La revisión humana no se atribuye ni se simula.
+
+
+## Actualización posterior del contrato — #43
+
+El estado anterior describe el SHA del baseline, no el estado actual de #43.
+El adaptador y esquema reales se documentan en `docs/data-model.md`.
+Comando owner publicado: `npm run test:week-08:persistence`
+(`course-tests/week-08-workspace-owner.test.ts`, mismo adaptador SQL con driver
+SQLite Node real sobre disco). No ocupa el nombre de la suite independiente
+`week-08-persistence.test.ts` de #47. Factory Node publicada en
+`course-tests/fixtures/week-08/nodeWorkspace.ts`; acepta las opciones y hooks
+definitivos de #42. Factory nativa: `createExpoWorkspace(options)` con paths
+Android y los mismos puntos de falla. `npm run test:week-08:native` comprueba
+Expo SQLite/FileSystem en un APK debug aislado del mismo proyecto, con dos
+procesos. Los resultados reales de #43 se indexan por separado en
+`reports/week-08/persistence/validation.json`. El agregado `test:week-08`
+ahora incluye la suite owner antes de los tests públicos; no elimina sus
+fallos de #44 ni acredita integración #45 o revisión humana.

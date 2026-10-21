@@ -215,3 +215,47 @@ observaciones y SHA W08 se indexan en `reports/week-08/baseline/validation.json`
 los reportes/evidencias W02–W06 conservan su procedencia histórica sin reescribir
 resultados sobre otro SHA. Alcance, esquema acordado y límites del proveedor:
 `docs/week-08-baseline.md`.
+
+
+## Anexo W08 — adaptador durable y migración #43 (21-10-2026)
+
+**Contexto.** Tras publicar #42, hace falta conservar base/asignación local,
+notas, fotos y cola con identidad estable. Guardar JSON mediante el mapper
+HTTP perdería la asignación. Se mantiene el vocabulario SyncRecord y los
+puertos publicados; el motor y el flujo de pantalla siguen en #44–#45.
+
+**Alternativas.** (1) Memoria global y URI de caché: menor costo, pero pérdida
+tras reinicio. (2) Archivos JSON o preferencias separadas para snapshot/cola:
+durables, pero sin transacción común de filas, esquema y versión.
+(3) SQLite transaccional y copias en documentos privados para fotos: más
+manejo de ciclo de vida/errores, con commit o rollback comprobable. Elegimos
+la tercera con expo-sqlite y expo-file-system compatibles con Expo 57.
+
+**Decisión real.** SqliteLocalWorkspace implementa LocalWorkspace y su cola;
+createExpoWorkspace carga los SDKs al abrir/guardar, y App.tsx lo construye
+como localWorkspace inyectable, sin efectos durante composición. Su consumo
+por los casos de uso offline queda en #45. Cada escritura y migración usa
+el objeto txn de una transacción exclusiva. JSON canónico impide reutilizar
+una identidad con contenido distinto; replay no sobrescribe un snapshot
+más reciente. v2 añade autor/versión base indexados a la cola de v1 sin
+regenerar JSON, secuencias ni identidades. El proveedor nativo copia fotos
+antes de publicar la referencia; ante rollback limpia sólo copias nuevas.
+Tokens permanecen en SecureStore. No hay imports nuevos desde UI.
+
+**Consecuencias.** Hay una transacción para estado+cola, migración reversible
+y sustitución de driver para pruebas sobre disco. SQL y archivos no comparten
+transacción: un cierre abrupto puede dejar huérfanos, que se retienen para
+no perder referencias compartidas; no se acredita recolección de basura,
+carga al servidor ni cifrado adicional. El caller de acknowledge debe
+verificar confirmación remota exacta (#45). Android es la referencia; no se
+promete web. Costos: DB nativa, serialización, copia de archivos y pruebas
+de lifecycle y fallas. El esquema, pasos y límites están en docs/data-model.md.
+
+**Verificación.** test:week-08:persistence ejecuta el mismo adaptador con
+SQLite real de Node sobre disco y una factory compatible con #42; incluye
+reapertura, lectura en proceso separado, ambos puntos de rollback y errores
+de datos/versiones. test:week-08:native usa el proveedor Expo real en una
+entrada de prueba del mismo proyecto y dos procesos Android. Disponibilidad
+del comando no significa ejecución exitosa: resultados y límites realmente
+observados están en reports/week-08/persistence/validation.json. No sustituye
+revisión humana, #47 ni entrega semanal completa.

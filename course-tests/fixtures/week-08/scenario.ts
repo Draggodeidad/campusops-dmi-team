@@ -37,7 +37,7 @@ export function createWeek08Scenario(durablePhotoUri: string) {
     photos: [{
       evidenceId: 'w08-photo-001', operationId: photoOperation.operationId,
       actorId: operation.actorId, localUri: durablePhotoUri,
-      mediaType: 'image/svg+xml', byteLength: Buffer.byteLength(SYNTHETIC_PHOTO),
+      mediaType: 'image/svg+xml', byteLength: SYNTHETIC_PHOTO.length,
     }],
   };
   return { base, local, remote, operation, noteOperation, photoOperation, snapshot };

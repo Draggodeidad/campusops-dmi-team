@@ -4,6 +4,8 @@ import { CreateIncident } from './src/application/incidents/CreateIncident';
 import { GetIncidentById } from './src/application/incidents/GetIncidentById';
 import { GetIncidents } from './src/application/incidents/GetIncidents';
 import { PerformIncidentAction } from './src/application/incidents/PerformIncidentAction';
+import type { LocalWorkspace } from './src/application/persistence/LocalWorkspace';
+import { createExpoWorkspace } from './src/infrastructure/persistence/createExpoWorkspace';
 import type { SessionClock } from './src/application/session/SessionClock';
 import type { SessionSecretStore } from './src/application/session/SessionSecretStore';
 import type { IncidentTransport } from './src/infrastructure/http/IncidentTransport';
@@ -28,6 +30,7 @@ export function createGraph(options: Readonly<{
   transport?: IncidentTransport;
   secretStore?: SessionSecretStore;
   clock?: SessionClock;
+  localWorkspace?: LocalWorkspace;
 }> = {}) {
   const isTest = options.useHttp !== true && process.env.NODE_ENV === 'test' && !process.env.EXPO_PUBLIC_USE_HTTP;
   const baseTransport = options.transport ?? new FetchIncidentTransport(BACKEND_URL);
@@ -46,9 +49,11 @@ export function createGraph(options: Readonly<{
   const createIncident = new CreateIncident(repository);
   const performIncidentAction = new PerformIncidentAction(repository);
   const getBackendStatus = new GetBackendStatus(new CourseBackendHealthAdapter());
+  const localWorkspace = options.localWorkspace ?? createExpoWorkspace();
 
   return {
     repository,
+    localWorkspace,
     useSession: !isTest,
     sessionController,
     getIncidents,

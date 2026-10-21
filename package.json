@@ -33,11 +33,15 @@
     "test:week-08:public": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-08.test.ts",
     "test:week-08:module": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath",
     "check:week-08-provider": "node tools/check-week-08-provider.mjs",
-    "test:week-08": "npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:public"
+    "test:week-08": "npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:persistence && npm run test:week-08:public",
+    "test:week-08:persistence": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-workspace-owner.test.ts",
+    "test:week-08:native": "node tools/test-week-08-native.mjs"
   },
   "dependencies": {
     "expo": "~57.0.9",
+    "expo-file-system": "~57.0.7",
     "expo-secure-store": "~57.0.4",
+    "expo-sqlite": "~57.0.1",
     "expo-status-bar": "~57.0.1",
     "react": "19.2.3",
     "react-native": "0.86.2"
