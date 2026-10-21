@@ -1,4 +1,4 @@
-# W08 — política compartida de sincronización (#44)
+# W08 — política compartida e integración de sincronización (#44–#45)
 
 ## Decisión, alternativas y costo
 
@@ -49,7 +49,7 @@ Local v1: mismo asignado con `status: 'in_progress'`. Remoto v2: asignado
 `{ kind: 'conflict', fields: ['work'] }`. Ni el remoto, ni la intención local,
 ni las operaciones originales se modifican o descartan por esta decisión.
 
-En el flujo que implementará #45 se conservarán base, local, remoto y operación
+El flujo `IncidentWorkspace` de #45 conserva base, local, remoto y operación
 pendiente. Se informará la versión/asignación actual, la intención original y
 por qué ya no es aplicable. Un usuario autorizado decidirá explícitamente
 revisar/reformular la intención sobre el estado actual o descartarla de forma
@@ -79,7 +79,7 @@ nunca cambiar cuerpo/baseVersion conservando una clave ya enviada.
 
 Sólo retirar de la cola tras comprobar confirmación inequívoca del servidor
 para esa operación exacta. Un timeout puede ocurrir después del commit remoto;
-error de red, 401/403, 409 o conflicto mantienen el pendiente. #45 implementará
+error de red, 401/403, 409 o conflicto mantienen el pendiente. #45 implementa
 el envío y la confirmación antes de llamar `PendingOperationStore.acknowledge`.
 
 Política acordada para el ciclo W08 de #45: como máximo **dos envíos** por
@@ -116,3 +116,89 @@ Resultados, SHA comprobado y comandos observados: `reports/week-08/sync/`.
 Este cambio no certifica persistencia, reinicio, migración, idempotencia de extremo
 a extremo, revisión humana ni entrega W08. Asistencia material de Codex en código,
 pruebas, documentación y ejecución; revisión humana pendiente.
+
+
+## Integración ejecutable #45
+
+`PerformIncidentAction.start` delega al `IncidentWorkspace` inyectado. Guarda
+la operación antes de intentar sync; una falla de almacenamiento impide enviar.
+La UI permite además guardar inicio sin intentar red, añadir nota y referencia
+sintética y recuperar copias de la misma cuenta. Al fallar consultas por red o
+timeout puede mostrar la copia propia; no sustituye rechazos de autorización
+o contrato con caché. Mientras hay intención activa se bloquean otras acciones
+online sobre esa incidencia. Resolve/close/reopen conservan su flujo W06.
+
+El ciclo explícito «Sincronizar con mi sesión» lee la base remota antes de
+enviar, aplica las funciones compartidas y conserva campos compatibles en el
+snapshot local. No modifica el cuerpo o baseVersion de ninguna operación.
+Se procesa por orden, deteniendo esa incidencia al fallar; una reformulación
+ocupa la posición lógica de su original. Otras incidencias pueden avanzar.
+Sólo timeout y desconexión admiten un segundo envío idéntico en ese ciclo;
+403/409/respuesta inválida no disparan reintento automático. Los replays 401
+acotados por el decorador W06 siguen siendo renovación de sesión, no un ciclo
+de reintentos de proveedor W09. No hay observador de conectividad: al recuperar
+la conexión el usuario inicia otro ciclo mediante el control accesible.
+
+El gateway usa el transporte autenticado W06, fijando actor y generación en
+cada solicitud. El decorador comprueba esa vinculación antes de renovar,
+enviar y repetir. Un cambio de cuenta conserva las operaciones del autor
+previo, limpia las vistas privadas y no permite enviarlas como el nuevo actor.
+Los tokens no se guardan en el workspace ni aparecen en los logs de #45.
+
+La respuesta 200/201 debe contener el mismo operationId, duplicate booleano,
+la misma incidencia y un evento de historial con autor/acción/ID originales,
+versión base + 1 y efecto coherente (estado/asignado o nota/evidenceId).
+El gateway rechaza confirmaciones incompletas o de otra operación. Cuando una
+respuesta perdida ya dejó ese evento remoto, el ciclo permite el **replay de
+la petición original** para obtener su recibo, aunque la versión haya avanzado.
+No usa una lectura GET como autorización para acknowledge. Si el replay devuelve
+un recibo antiguo, conserva el estado remoto más reciente ya leído en la caché. Timeout, 403, 409,
+401, fallas SQL y recibos inválidos conservan la fila.
+
+### Reasignación y decisión humana
+
+El backend real devuelve 403 al técnico anterior incluso en GET. Se informa
+«Acceso denegado: requiere revisión autorizada» conservando el inicio, nota,
+archivo y cola, sin mostrar la nueva asignación a quien no puede leerla.
+No se deduce una asignación concreta de ese 403. Coordinación abre el detalle
+remoto y pulsa «Consultar servidor y revisar conflicto»: una lectura autorizada
+permite mostrar intención local y estado/asignación/version remotos. El merge
+exacto del escenario produce `['work']`.
+
+La decisión «Conservar asignación remota y archivar intención sin borrarla»
+revalida la versión esperada, registra actor/decisión y marca reviewed. Mantiene
+los originales y no llama acknowledge ni envía el inicio previo. Una versión
+que cambió desde la inspección exige volver a revisarla. El actor original sólo
+puede reformular cuando sigue autorizado; nunca recupera la antigua asignación
+por elegir una resolución local. La UI y la suite prueban estos controles.
+
+### Tres acciones con base 1
+
+Inicio, nota y foto sobre base 1 son válidos como conservación offline.
+Después de confirmar inicio en v2, la nota original obtiene 409 y se conserva;
+no se envían tres escrituras supuestamente consecutivas sobre v1. El autor
+inspecciona y elige reformular la nota sobre v2 con otro ID. Una vez confirmada
+en v3, hace lo mismo con la foto. Los originales permanecen superseded en
+la cola/auditoría y la foto conserva su evidenceId/archivo. La reformulación
+rechaza un original presente en historial: una respuesta ambigua exige replay,
+no otra operación que duplique el efecto. No hay rebase automático.
+
+### Verificación y límites
+
+`npm run test:week-08:integration` ejecuta gateway y flujo/UI. Prueba el grafo
+real de App.tsx, SQLite en disco con la factory #42/#43, backend didáctico por
+HTTP local, socket abortado en timeout_after_commit, reapertura del recurso,
+conflicto/revisión, reformulación, identidad y rollback. El transporte Node
+sustituye fetch y el driver Node sustituye Expo; no sustituye el adaptador SQL,
+el controlador de sesión, los casos de uso, el mapper ni el motor compartido.
+El runner `test:week-08:module` sigue disponible para la suite por ruta. El
+agregado W08 y el workflow oficial incorporan esta suite sin quitar gates.
+
+Las notas/operaciones archivadas y los recibos se retienen sin purga. El
+backend sigue en memoria y sólo confirma metadatos de evidencia; su reinicio
+pierde historial remoto, por lo que una operación ambigua requiere revisión,
+no inventar una confirmación. No se implementa captura/carga de imágenes,
+GPS, infraestructura productiva ni los stubs futuros de W09/W10. Los logs y
+SHA realmente comprobados quedan en `reports/week-08/app-integration/`.
+La revisión humana y la evidencia individual completa del equipo siguen
+pendientes y no se atribuyen a esta ejecución asistida por Codex.

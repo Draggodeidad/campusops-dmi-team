@@ -111,6 +111,18 @@ fuera de alcance. `npm run check:week-06-readiness` conserva las ocho regresione
 y debe fallar si cualquiera reaparece. RefreshCoordinator comparte la política
 de generación entre el controlador real y coordinateRefresh.
 
+### Estado acumulado W08
+
+#43 aporta SQLite/archivos durables, #44 el motor compartido y #45 integra
+`IncidentWorkspace` y confirmación de operaciones con la sesión W06. El inicio
+habitual persiste antes de enviar; la UI permite notas/referencias sintéticas,
+recuperación y revisión/reformulación explícita. Consultar docs/data-model.md,
+docs/sync-policy.md y el anexo #45 del ADR. `npm run test:week-08:integration`
+prueba el grafo/UI con disco y backend local. Las operaciones archivadas se
+conservan: reviewed/superseded no autorizan acknowledge. GPS, captura/carga
+real de fotos y política W09 siguen fuera de alcance. La implementación no
+acredita por sí sola revisión humana, evidencia individual o entrega semanal.
+
 La funcionalidad implementada en Week 02 es deliberadamente pequeña:
 
 ```text

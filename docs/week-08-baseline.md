@@ -309,3 +309,18 @@ la validación conjunta posterior se registra en
 `reports/week-08/persistence-integration/validation.json`. La integración de
 pantallas, autorización y envío/confirmación sigue en #45; no se acredita
 entrega semanal completa ni revisión humana.
+
+
+## Integración posterior #45
+
+`IncidentWorkspace`, el gateway verificado y el panel local ya consumen los
+contratos del baseline en el grafo real. Se amplía LocalWorkspace únicamente
+con listSnapshots; metadatos opcionales no cambian el esquema v2. El inicio
+habitual usa persistencia antes de red y notas/foto se conservan con identidad.
+Política y límites actuales: docs/data-model.md y docs/sync-policy.md.
+Runner publicado: `npm run test:week-08:integration` y ruta real
+`npm run test:week-08:module -- course-tests/week-08-integration.test.tsx`.
+La suite se incorpora al agregado y workflow existentes sin duplicarlos.
+Las observaciones anteriores conservan sus SHA; las de #45 se indexan en
+reports/week-08/app-integration/validation.json. La revisión humana y #52
+siguen pendientes. No se crea tag ni se envía Classroom.

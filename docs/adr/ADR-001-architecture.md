@@ -292,3 +292,57 @@ composición; `test:week-08:public` conserva los tres tests oficiales intactos.
 El agregado W08 y su workflow ejecutan la suite nueva sin omitir gates. Los
 resultados reales y su SHA se registran en `reports/week-08/sync/`; el histórico
 del baseline conserva los fallos observados antes de implementar #44.
+
+
+## Anexo W08 — flujo real, confirmación y revisión #45 (21-10-2026)
+
+**Contexto.** #43 y #44 están integrados; exponer un workspace y funciones
+puras no conecta el inicio real, la sesión y la confirmación. El mapper perdía
+asignación. Además, el técnico reasignado no puede consultar el remoto y un
+timeout puede ocurrir tras el commit. Los anexos anteriores conservan su
+contexto histórico; este anexo describe el grafo actual.
+
+**Alternativas.** (1) Enviar online y guardar después deja un efecto remoto
+sin intención recuperable. (2) Usar el merge para reescribir las versiones de
+operaciones ya enviadas rompe idempotencia. (3) Persistir primero, verificar
+recibos y pedir una reformulación explícita con otro ID conserva integridad.
+Elegimos la tercera, con el costo de almacenar intenciones archivadas y pedir
+intervención al cambiar la base; no incorporamos un contenedor DI o backend.
+
+**Decisión.** `IncidentWorkspace` orquesta caché propia, registro transaccional,
+recuperación, sync y resolución mediante LocalWorkspace, SessionController y
+los nuevos puertos IncidentSyncGateway/SyntheticPhotoSource. Domain conserva
+asignado/reportante; Infrastructure valida/mappea y confirma la respuesta HTTP.
+`PerformIncidentAction` recibe un colaborador mínimo para el inicio durable;
+los otros cambios de estado siguen el caso W06. App.tsx construye e inyecta
+los adaptadores; OfflineWorkspacePanel sólo conoce Application/Domain.
+El motor compartido se invoca directamente, sin copiarlo en la UI o gateway.
+
+La confirmación comprueba operación/actor/acción/recurso/versión/efecto y se
+persiste antes de acknowledge. El decorador W06 acepta el contexto esperado
+de sesión para impedir que una renovación asíncrona use otra identidad.
+Un conflicto no confirma nada. Coordinación debe leer el remoto autorizado,
+comparar work y elegir mantener la asignación; esa decisión queda registrada
+sin eliminar el original. Reformular crea un ID sobre una base recién leída
+y conserva el original superseded. Snapshot/cola siguen atómicos mediante el
+contrato #42. listSnapshots es la única ampliación del puerto durable; los
+metadatos opcionales usan JSON compatible con esquema v2.
+
+**Consecuencias.** Datos por identidad sin préstamos de sesión; serialización
+del flujo evita sobrescribir cambios locales concurrentes. El costo es retener
+recibos/auditoría y hacer explícita la revisión. No hay atomicidad entre red
+y SQL: replay estable resuelve el fallo entre confirmación y retiro. Una
+sesión expirada sigue las reglas W06; no se habilita acceso anónimo a la cola.
+El backend limita el ejercicio a metadatos sintéticos y memoria. Consulta
+revocada requiere coordinación; no se muestra su asignación a otro perfil.
+Se conserva sincronización manual acotada, sin monitor de red ni política W09.
+
+**Verificación.** test:week-08:integration usa createGraph/UI, la factory
+publicada, el adaptador SQL real sobre archivo y backend loopback. Incluye
+socket timeout_after_commit y replay, reapertura, fallos transaccionales,
+recibo incorrecto, 403/409, cambios de cuenta y revisión/reformulación desde UI.
+La suite W06 conserva todas sus aserciones: sólo se inyecta la nueva dependencia
+SQLite real en sus fixtures. El workflow W08 añade el gate de integración al
+existente; los anteriores permanecen. Resultados y SHA observados:
+reports/week-08/app-integration/validation.json. No acredita revisión humana,
+recopilación #52, etiqueta final ni entrega Classroom.

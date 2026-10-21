@@ -143,6 +143,8 @@ test('remote reassignment denies the former technician, preserves every intentio
   expect(await app.incidentSync.recover()).toEqual([]);
   const review = await app.incidentSync.inspect('campus-inc-001');
   expect(review).toMatchObject({ fields: ['work'], originalStatus: 'in_progress', incident: { assignedTechnicianId: 'technician-2', status: 'assigned', version: 2 } });
+  await expect(app.incidentSync.keepRemote('campus-inc-001', 1)).rejects.toMatchObject({ code: 'VERSION_CONFLICT' });
+  expect(await app.localWorkspace.pending.listPending()).toEqual(pending);
   await app.incidentSync.keepRemote('campus-inc-001', 2);
   await app.incidentSync.synchronize();
   expect(network.writes).toHaveLength(0);

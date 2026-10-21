@@ -11,6 +11,7 @@ flowchart TB
     CampusApp["CampusOpsApp"]
     ListScreen["IncidentListScreen"]
     DetailScreen["IncidentDetailScreen"]
+    OfflinePanel["OfflineWorkspacePanel"]
   end
 
   subgraph Application["Application — src/application"]
@@ -32,6 +33,8 @@ flowchart TB
     LocalSnapshot["LocalIncidentSnapshot — contrato W08"]
     SyncMerge["resolveSync — merge JSON por campo W08"]
     SyncDedupe["deduplicateOperations — primera identidad W08"]
+    SyncFlow["IncidentWorkspace — caché, cola, sync y resolución W08"]
+    SyncGateway["IncidentSyncGateway / SyntheticPhotoSource — puertos"]
   end
 
   subgraph Domain["Domain — src/domain + vocabulario src/campusops"]
@@ -55,6 +58,8 @@ flowchart TB
     NativeSecret["expo-secure-store"]
     LocalDB["SqliteLocalWorkspace"]
     NativeWorkspace["createExpoWorkspace / expo-sqlite + expo-file-system"]
+    HttpSync["HttpIncidentSyncGateway — confirmación verificable"]
+    SyntheticPhoto["ExpoSyntheticPhotoSource — SVG sintético en caché"]
   end
 
   Reporter --> CampusApp
@@ -62,6 +67,24 @@ flowchart TB
   Coordinator --> CampusApp
   CampusApp --> ListScreen
   CampusApp --> DetailScreen
+  CampusApp --> OfflinePanel
+  CampusApp --> SyncFlow
+  OfflinePanel --> SyncFlow
+  PerformAction --> SyncFlow
+  SyncFlow --> WorkspacePort
+  SyncFlow --> SyncGateway
+  SyncFlow --> SessionController
+  SyncFlow --> SyncMerge
+  SyncFlow --> SyncDedupe
+  SyncFlow --> Incident
+  SyncFlow --> SafeFailure
+  Root --> SyncFlow
+  Root --> HttpSync
+  Root --> SyntheticPhoto
+  HttpSync --> SyncGateway
+  HttpSync --> SessionTransport
+  HttpSync --> DtoMapper
+  SyntheticPhoto --> SyncGateway
   CampusApp --> GetAll
   CampusApp --> GetOne
   CampusApp --> CreateOne
@@ -140,11 +163,7 @@ flowchart TB
   SyncTests --> SyncEvaluation
 
   subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
-    SyncFlow["Flujo offline/sync W08 — issue 45"]
     Location["Ubicación / proveedor externo"]
   end
 
-  SyncFlow -. "usará" .-> WorkspacePort
-  SyncFlow -. "usará" .-> SyncMerge
-  SyncFlow -. "usará" .-> SyncDedupe
   Location -. "adaptador futuro dependerá de contrato interno" .-> Domain
