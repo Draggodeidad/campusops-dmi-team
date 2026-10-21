@@ -1,4 +1,5 @@
 import type { SyncRecord } from '../../domain/sync/SyncRecord';
+import type { PendingIncidentOperation } from '../../campusops/contracts';
 
 export type LocalIncidentNote = Readonly<{
   noteId: string;
@@ -37,4 +38,6 @@ export type LocalIncidentSnapshot = Readonly<{
     decision: 'keep_remote' | 'reformulate';
     replacementOperationId?: string;
   }>[];
+  /** Verified receipts retain the original request identity after queue removal. */
+  confirmedOperations?: readonly PendingIncidentOperation[];
 }>;

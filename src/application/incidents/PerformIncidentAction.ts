@@ -18,7 +18,10 @@ const TECHNICIAN_ACTIONS = new Set<AllowedIncidentAction>(['start', 'resolve']);
 const COORDINATOR_ACTIONS = new Set<AllowedIncidentAction>(['close', 'reopen']);
 
 export class PerformIncidentAction {
-  constructor(private readonly repository: IncidentRepository) {}
+  constructor(
+    private readonly repository: IncidentRepository,
+    private readonly localStart?: { start(incidentId: string, baseVersion: number, operationId?: string): Promise<Incident> },
+  ) {}
 
   async execute(input: PerformIncidentActionInput): Promise<Incident> {
     if (!input || typeof input !== 'object') {
@@ -81,6 +84,9 @@ export class PerformIncidentAction {
       ...(input.idempotencyKey ? { idempotencyKey: input.idempotencyKey.trim() } : {}),
     };
 
+    if (input.action === 'start' && this.localStart) {
+      return this.localStart.start(actionData.incidentId, actionData.baseVersion, actionData.idempotencyKey);
+    }
     return await this.repository.performAction(actionData);
   }
 }

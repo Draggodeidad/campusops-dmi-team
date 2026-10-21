@@ -1,6 +1,9 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 
 import { createGraph } from '../App';
+import { createTemporaryWorkspace } from './fixtures/week-08/temporaryWorkspace';
+import { createNodeWorkspace } from './fixtures/week-08/nodeWorkspace';
+import type { LocalWorkspace } from '../src/application/persistence/LocalWorkspace';
 import { ApplicationFailure } from '../src/application/errors/ApplicationFailure';
 import { DefaultSessionController } from '../src/application/session/DefaultSessionController';
 import type { SessionSecretStore } from '../src/application/session/SessionSecretStore';
@@ -28,6 +31,16 @@ let backend: LocalBackend;
 beforeAll(async () => { backend = await startLocalBackend(); });
 afterAll(async () => { await backend.stop(); });
 
+// W08 adds a durable dependency to the same graph: retain every W06 assertion
+// and inject the production SQL adapter with a real file in place of Expo's driver.
+let workspaceFixture: Awaited<ReturnType<typeof createTemporaryWorkspace<ReturnType<typeof createNodeWorkspace>>>>;
+let localWorkspace: LocalWorkspace;
+beforeEach(async () => {
+  workspaceFixture = await createTemporaryWorkspace(createNodeWorkspace);
+  localWorkspace = await workspaceFixture.reopen();
+});
+afterEach(async () => { await workspaceFixture.cleanup(); });
+
 function localTransport(): IncidentTransport {
   return {
     async send(request) {
@@ -46,7 +59,7 @@ function localTransport(): IncidentTransport {
 
 test('real composition and UI use the current actor, successive versions, and hide incidents after logout', async () => {
   const store = new MemoryStore();
-  const graph = createGraph({ useHttp: true, transport: localTransport(), secretStore: store });
+  const graph = createGraph({ useHttp: true, localWorkspace, transport: localTransport(), secretStore: store });
   const view = await render(<CampusOpsApp {...graph} />);
   await waitFor(() => expect(view.getByTestId('login-technician')).toBeTruthy());
   expect(view.queryByTestId('incident-campus-inc-001')).toBeNull();
@@ -85,9 +98,9 @@ test('real composition and UI use the current actor, successive versions, and hi
 
 test('session UI restores at startup and exposes deletion failure without keeping private views', async () => {
   const store = new MemoryStore();
-  const graph = createGraph({ useHttp: true, transport: localTransport(), secretStore: store });
+  const graph = createGraph({ useHttp: true, localWorkspace, transport: localTransport(), secretStore: store });
   await graph.sessionController.login('reporter-1');
-  const restoredGraph = createGraph({ useHttp: true, transport: localTransport(), secretStore: store });
+  const restoredGraph = createGraph({ useHttp: true, localWorkspace, transport: localTransport(), secretStore: store });
   const view = await render(<CampusOpsApp {...restoredGraph} />);
   await waitFor(() => expect(view.getByTestId('incident-campus-inc-001')).toBeTruthy());
   expect(restoredGraph.sessionController.getSnapshot().actorId).toBe('reporter-1');
@@ -107,7 +120,7 @@ test('login error is visible and expired refresh failure returns to login with a
   let now = 0;
   let failLogin = true;
   const network = localTransport();
-  const graph = createGraph({ useHttp: true, secretStore: store, clock: { now: () => now }, transport: {
+  const graph = createGraph({ useHttp: true, localWorkspace, secretStore: store, clock: { now: () => now }, transport: {
     send: async (request) => {
       if (request.path.endsWith('/login') && failLogin) throw new Error('synthetic-private-provider-error');
       if (request.path.endsWith('/refresh')) return { status: 401, headers: {}, bodyText: '{}' };

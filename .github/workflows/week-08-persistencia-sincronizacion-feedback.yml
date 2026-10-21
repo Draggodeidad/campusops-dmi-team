@@ -44,6 +44,8 @@ jobs:
         run: npm run test:week-08:persistence
       - name: W08 shared sync engine and composition
         run: npm run test:week-08:sync
+      - name: W08 real offline flow, session and verified replay
+        run: npm run test:week-08:integration
       - name: AC-01 — reproducibility
         run: make verify-week-08
       - name: AC-02 — public behavior
