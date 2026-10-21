@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "498f4cff5db105dd9aaf5c2138897ffe5b1a2ea1",
+  "generatedAt": "2026-10-21T19:22:37.204492+00:00",
+  "checks": [
+    {
+      "id": "official-public-w08",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "exitCode": 2,
+      "durationSeconds": 14.49,
+      "evidence": "reports/week-08/individual-owner/public-w08.log"
+    }
+  ],
+  "inspection": {
+    "memberFields": "complete",
+    "registeredIdentity": "matches prior consolidated record; identifiers omitted from this log",
+    "verifiedW08Commits": 17,
+    "technicalFiles": 57,
+    "historicalObservations": 14,
+    "historicalLogs": "unchanged tracked blobs",
+    "humanValidation": "pending",
+    "officialConsolidatedValidator": {
+      "status": "rejects auxiliary as expected",
+      "detail": "week must match and members must contain exactly three entries"
+    },
+    "consolidationTarget": "pending two other real W08 members; no placeholders created"
+  },
+  "inspectionEvidence": "reports/week-08/individual-owner/provenance-inspection.log",
+  "scope": "Owner auxiliary evidence only; existing W08 commands/results reused with their historical SHA, not rerun as new individual work. Read-only local contract/provenance inspection is not an official draft validator.",
+  "aiAssistance": "Codex assembled this record from verified Git/log artifacts at the owner request. No human review or contributions of other members invented.",
+  "status": "fail",
+  "ownerRecordStatus": "complete_fields_pending_human_validation_and_consolidation",
+  "pending": [
+    "Official individual.json needs exactly three real W08 member records; only owner record is provided here.",
+    "Human review/explanation remains pending.",
+    "Canonical team artifacts and final delivery remain #52. No tag or Classroom action."
+  ],
+  "officialObservedResult": {
+    "status": "fail",
+    "failedChecks": [
+      {
+        "id": "required_evidence",
+        "status": "fail",
+        "detail": "missing/empty=['reports/week-08/migration-tests.json', 'evidence/week-08/engineering.json', 'evidence/week-08/individual.json']"
+      }
+    ],
+    "interpretation": "Toolchain/tests pass; consolidated required evidence remains missing. The auxiliary does not satisfy the three-member official artifact."
+  }
+}
