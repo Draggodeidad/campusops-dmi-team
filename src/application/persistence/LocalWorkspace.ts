@@ -2,7 +2,7 @@ import type { PendingIncidentOperation } from '../../campusops/contracts';
 import type { LocalIncidentSnapshot } from './LocalIncidentSnapshot';
 import type { PendingOperationStore } from './PendingOperationStore';
 
-/** Contract only in #42; the durable adapter and migrations belong to #43. */
+/** Durable state and pending changes share one transactional resource. */
 export interface LocalWorkspace {
   open(): Promise<void>;
   close(): Promise<void>;
