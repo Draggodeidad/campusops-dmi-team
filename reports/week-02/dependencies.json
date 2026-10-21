@@ -52,5 +52,11 @@
       "evidence": "reports/week-08/sync/architecture.log; tests del detector en reports/week-08/sync/architecture-tests.log.",
       "scope": "Extensión de trazabilidad W08; observaciones y commitSha originales de W02 se conservan sin alteraciones."
     }
-  ]
+  ],
+  "followUpIntegrationW08": {
+    "commitSha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+    "scope": "Combined #43/#44 architecture validation; all previous entries retain their original SHA and observations.",
+    "result": "Architecture tests and checker exit 0; combined W08 aggregate exit 0.",
+    "evidence": "reports/week-08/persistence-integration/validation.json"
+  }
 }

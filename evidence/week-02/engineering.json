@@ -59,5 +59,11 @@
       "engineeringEvidence": "evidence/week-08/sync-engineering.json",
       "scope": "Extensión W08; no reescribe la decisión, verificaciones ni SHA históricos de W02."
     }
-  ]
+  ],
+  "followUpIntegrationW08": {
+    "commitSha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+    "scope": "Combined #43/#44 architecture validation; all previous entries retain their original SHA and observations.",
+    "result": "Architecture tests and checker exit 0; combined W08 aggregate exit 0.",
+    "evidence": "reports/week-08/persistence-integration/validation.json"
+  }
 }

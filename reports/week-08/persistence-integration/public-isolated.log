@@ -1,0 +1,14 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-08.test.ts
+
+PASS course-tests/public/week-08.test.ts
+  ✓ CampusOps detects offline start versus remote reassignment without mutating either record (2 ms)
+  ✓ merges independent field changes and reports same-field conflict
+  ✓ deduplicates a replayed operation by stable identity
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.301 s, estimated 1 s
+Ran all test suites within paths "course-tests/public/week-08.test.ts".

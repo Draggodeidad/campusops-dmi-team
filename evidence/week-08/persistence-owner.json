@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "week": 8,
-  "commitSha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
-  "generatedAt": "2026-10-21T07:17:03.987791+00:00",
+  "commitSha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+  "generatedAt": "2026-10-21T07:21:31.294701+00:00",
   "scope": "Auxiliary #43 owner module evidence; does not replace team engineering.json or individual.json.",
   "decision": "Use the published LocalWorkspace/PendingOperationStore ports, exclusive SQLite transactions for snapshot+queue and v1→v2 migration, and copy photos into private durable documents before publishing references.",
   "alternatives": [
@@ -22,92 +22,87 @@
     {
       "command": "make setup",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/setup.log"
+      "evidence": "reports/week-08/persistence-integration/setup.log"
     },
     {
       "command": "npm run test:week-08:native",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/native.log"
+      "evidence": "reports/week-08/persistence-integration/native.log"
     },
     {
       "command": "npm run typecheck",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/types.log"
+      "evidence": "reports/week-08/persistence-integration/types.log"
     },
     {
       "command": "npm run lint",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/lint.log"
+      "evidence": "reports/week-08/persistence-integration/lint.log"
     },
     {
       "command": "npm run test:smoke",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/smoke.log"
+      "evidence": "reports/week-08/persistence-integration/smoke.log"
     },
     {
       "command": "npm run test:incidents",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/incidents.log"
+      "evidence": "reports/week-08/persistence-integration/incidents.log"
     },
     {
       "command": "npm run test:architecture",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/architecture-tests.log"
+      "evidence": "reports/week-08/persistence-integration/architecture-tests.log"
     },
     {
       "command": "npm run check:architecture",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/architecture.log"
+      "evidence": "reports/week-08/persistence-integration/architecture.log"
     },
     {
       "command": "npm run test:week-06",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/session.log"
+      "evidence": "reports/week-08/persistence-integration/session.log"
     },
     {
       "command": "npm run check:week-06-readiness",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/session-readiness.log"
+      "evidence": "reports/week-08/persistence-integration/session-readiness.log"
     },
     {
-      "command": "npm run test:week-08:baseline",
+      "command": "npm run test:week-08",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/baseline.log"
-    },
-    {
-      "command": "npm run check:week-08-provider",
-      "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/provider-probe.log"
-    },
-    {
-      "command": "npm run test:week-08:persistence",
-      "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/persistence.log"
+      "evidence": "reports/week-08/persistence-integration/week08-aggregate.log"
     },
     {
       "command": "make feedback",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/feedback.log"
+      "evidence": "reports/week-08/persistence-integration/feedback.log"
     },
     {
       "command": "make verify-week-08",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/verify-w08.log"
+      "evidence": "reports/week-08/persistence-integration/verify-w08.log"
     },
     {
       "command": "npm run test:week-08:public",
-      "result": "fail (exit 1)",
-      "evidence": "reports/week-08/persistence/public-isolated.log"
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/public-isolated.log"
     },
     {
       "command": "make public-test-week-08",
       "result": "fail (exit 2)",
-      "evidence": "reports/week-08/persistence/public-w08.log"
+      "evidence": "reports/week-08/persistence-integration/public-w08.log"
     },
     {
-      "command": "git diff --exit-code caadd9b9a256a551e7b7e50488043c2dc36739e4 -- src/ui src/application/session src/infrastructure/session src/course-evaluation course-tests/public",
+      "command": "git diff --exit-code caadd9b9a256a551e7b7e50488043c2dc36739e4 -- src/ui src/application/session src/infrastructure/session course-tests/public",
       "result": "pass (exit 0)",
-      "evidence": "reports/week-08/persistence/preserve-previous-behavior.log"
+      "evidence": "reports/week-08/persistence-integration/preserve-previous-behavior.log"
+    },
+    {
+      "command": "git diff --exit-code f2be0c9 -- src/application/sync src/course-evaluation course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts docs/sync-policy.md reports/week-08/sync evidence/week-08/sync-engineering.json",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/preserve-remote-sync.log"
     }
   ],
   "nativeObserved": {
@@ -136,12 +131,14 @@
       "native-identity-mismatch",
       "native-only-confirmed-operation-deleted"
     ],
-    "firstPid": "2432",
-    "secondPid": "2521",
+    "firstPid": "2657",
+    "secondPid": "2743",
     "device": "35"
   },
   "contribution": "Code, native/disk checks and documentation implemented with Codex at user request; no student roster, personal contribution or review is asserted.",
   "humanReview": "pending",
-  "weeklyDelivery": "pending #44/#45/#47/#52; no final tag or Classroom delivery",
-  "aiAssistance": "Codex implemented code/docs/tests and ran recorded commands at user request. No human review or individual team contributions invented."
+  "weeklyDelivery": "pending #45/#47/#52 and human review; no tag or Classroom delivery",
+  "aiAssistance": "Codex implemented code/docs/tests and ran recorded commands at user request. No human review or individual team contributions invented.",
+  "historicalValidation": "reports/week-08/persistence/validation.json",
+  "integratedRemote": "Remote sync implementation #44 is preserved; see reports/week-08/sync/validation.json and preserve-remote-sync.log. No contribution attribution added."
 }
