@@ -12,7 +12,9 @@ export type ApplicationFailureCode =
   | 'SESSION_EXPIRED'
   | 'UNAUTHORIZED_ACTION'
   | 'UPDATE_INCIDENT_FAILED'
-  | 'VERSION_CONFLICT';
+  | 'VERSION_CONFLICT'
+  | 'LOCAL_STORAGE_UNAVAILABLE'
+  | 'SYNC_CONFIRMATION_INVALID';
 
 export type ApplicationFailureReason = 'contract' | 'server' | 'payload_unavailable';
 

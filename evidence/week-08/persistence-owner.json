@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+  "generatedAt": "2026-10-21T07:21:31.294701+00:00",
+  "scope": "Auxiliary #43 owner module evidence; does not replace team engineering.json or individual.json.",
+  "decision": "Use the published LocalWorkspace/PendingOperationStore ports, exclusive SQLite transactions for snapshot+queue and v1→v2 migration, and copy photos into private durable documents before publishing references.",
+  "alternatives": [
+    "Memory + cache-only file references: simpler, but cannot survive process restart.",
+    "Separate durable JSON files/preferences: persists, but cannot atomically commit schema, snapshots and queue.",
+    "SQLite transactions plus durable private files, with copy cleanup on rollback: chosen."
+  ],
+  "tradeoff": "Native dependencies and lifecycle/migration tests cost more than memory. SQL/FS are not jointly atomic: abrupt death can leave harmless unreferenced copies; no automatic photo garbage collection. Tokens remain in SecureStore. Confirmation and authorization policies remain the sync caller responsibility.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "make setup",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/setup.log"
+    },
+    {
+      "command": "npm run test:week-08:native",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/native.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/types.log"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/lint.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/smoke.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/incidents.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/architecture-tests.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/architecture.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/session.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/session-readiness.log"
+    },
+    {
+      "command": "npm run test:week-08",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/week08-aggregate.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/feedback.log"
+    },
+    {
+      "command": "make verify-week-08",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/verify-w08.log"
+    },
+    {
+      "command": "npm run test:week-08:public",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/public-isolated.log"
+    },
+    {
+      "command": "make public-test-week-08",
+      "result": "fail (exit 2)",
+      "evidence": "reports/week-08/persistence-integration/public-w08.log"
+    },
+    {
+      "command": "git diff --exit-code caadd9b9a256a551e7b7e50488043c2dc36739e4 -- src/ui src/application/session src/infrastructure/session course-tests/public",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/preserve-previous-behavior.log"
+    },
+    {
+      "command": "git diff --exit-code f2be0c9 -- src/application/sync src/course-evaluation course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts docs/sync-policy.md reports/week-08/sync evidence/week-08/sync-engineering.json",
+      "result": "pass (exit 0)",
+      "evidence": "reports/week-08/persistence-integration/preserve-remote-sync.log"
+    }
+  ],
+  "nativeObserved": {
+    "status": "pass",
+    "provider": "expo-sqlite / expo-file-system on Android",
+    "checks": [
+      "native-copy-to-documents",
+      "native-copy-content",
+      "native-new-process-snapshot-author-base-notes",
+      "native-new-process-operation-order-identity",
+      "native-new-process-photo-without-cache",
+      "native-migration.afterSchema-rejects",
+      "native-migration.afterSchema-rollback-schema-data-version",
+      "native-migration.afterCopy-rejects",
+      "native-migration.afterCopy-rollback-schema-data-version",
+      "native-enqueue-failure",
+      "native-enqueue-rollback",
+      "native-change-failure",
+      "native-change-rollback",
+      "native-failed-copy-cleanup",
+      "native-acknowledge-failure",
+      "native-acknowledge-rollback",
+      "native-migration-version-two",
+      "native-migration-preserves-snapshot",
+      "native-migration-preserves-queue",
+      "native-identity-mismatch",
+      "native-only-confirmed-operation-deleted"
+    ],
+    "firstPid": "2657",
+    "secondPid": "2743",
+    "device": "35"
+  },
+  "contribution": "Code, native/disk checks and documentation implemented with Codex at user request; no student roster, personal contribution or review is asserted.",
+  "humanReview": "pending",
+  "weeklyDelivery": "pending #45/#47/#52 and human review; no tag or Classroom delivery",
+  "aiAssistance": "Codex implemented code/docs/tests and ran recorded commands at user request. No human review or individual team contributions invented.",
+  "historicalValidation": "reports/week-08/persistence/validation.json",
+  "integratedRemote": "Remote sync implementation #44 is preserved; see reports/week-08/sync/validation.json and preserve-remote-sync.log. No contribution attribution added."
+}

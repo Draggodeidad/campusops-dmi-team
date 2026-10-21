@@ -1,0 +1,148 @@
+{
+  "archiveName": "week-08-persistencia-sincronizacion.zip",
+  "archiveSha256": "421692f125e4a164d714bf4d5113c06fc2bdb5b30bc3a08ca5e50fbf634de205",
+  "baseCommitSha": "a57c8de8878f3a5a946244f2fecab81a869e78ba",
+  "extractionDirectory": "/tmp/campusops-w08-reviewed-extraction",
+  "entries": [
+    {
+      "path": "week-08-persistencia-sincronizacion/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/ACTIVITY_STUDENT_FACING.md",
+      "bytes": 12942,
+      "kind": "text",
+      "sha256": "12d8ffad9e11bcd8bdd146a4d87e2e8d6d32ebb69d5e0d0da2ac97691bc394bf",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/RUBRIC_PUBLIC.md",
+      "bytes": 5987,
+      "kind": "text",
+      "sha256": "71e956753e44727ca32fca5734c554e232714b6f98b148df4d72232deb9ecbdb",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/CAMPUSOPS.md",
+      "bytes": 9454,
+      "kind": "text",
+      "sha256": "9a992d73aaab3f1e3d14b42f09aac1c44beb53e9eb20d9c194149fbf13bbe578",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/CAMPUSOPS_API.md",
+      "bytes": 6957,
+      "kind": "text",
+      "sha256": "86a103f8f64f77885ea0a87f12d4126bd94a31936e7fc6b57546b8af0b44ea08",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/STARTER_AND_REPOSITORY.md",
+      "bytes": 6264,
+      "kind": "text",
+      "sha256": "736288f26a155db1b672dabf95d0ed743a22b35003d7354354ade34bab51536a",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/.github/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/.github/workflows/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/.github/workflows/week-08-persistencia-sincronizacion-feedback.yml",
+      "bytes": 1276,
+      "kind": "text",
+      "sha256": "58f57632bb4a73559a8192bf31c93667b517d1a088a33c2d8fceec1015f18279",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/INSTALL.md",
+      "bytes": 594,
+      "kind": "text",
+      "sha256": "fa5970339ea9a1b5e6f2de0e3373c049188a364b6c4acd243dcdca971380e96f",
+      "comparisonAtBase": "different"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/course-tests/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/course-tests/public/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/course-tests/public/week-08.test.ts",
+      "bytes": 1730,
+      "kind": "text",
+      "sha256": "86585346aed86ce5988a26906fd90344dfefd72435d9dca23da1c204be1df896",
+      "comparisonAtBase": "identical"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/CAMPUSOPS.md",
+      "bytes": 9454,
+      "kind": "text",
+      "sha256": "9a992d73aaab3f1e3d14b42f09aac1c44beb53e9eb20d9c194149fbf13bbe578",
+      "comparisonAtBase": "identical"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/CAMPUSOPS_API.md",
+      "bytes": 6957,
+      "kind": "text",
+      "sha256": "86a103f8f64f77885ea0a87f12d4126bd94a31936e7fc6b57546b8af0b44ea08",
+      "comparisonAtBase": "identical"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/assignments/",
+      "bytes": 0,
+      "kind": "directory",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comparisonAtBase": "not_applicable"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/assignments/week-08-repository.md",
+      "bytes": 6264,
+      "kind": "text",
+      "sha256": "736288f26a155db1b672dabf95d0ed743a22b35003d7354354ade34bab51536a",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/assignments/week-08-rubric.md",
+      "bytes": 5987,
+      "kind": "text",
+      "sha256": "71e956753e44727ca32fca5734c554e232714b6f98b148df4d72232deb9ecbdb",
+      "comparisonAtBase": "new"
+    },
+    {
+      "path": "week-08-persistencia-sincronizacion/docs/assignments/week-08.md",
+      "bytes": 12942,
+      "kind": "text",
+      "sha256": "12d8ffad9e11bcd8bdd146a4d87e2e8d6d32ebb69d5e0d0da2ac97691bc394bf",
+      "comparisonAtBase": "new"
+    }
+  ]
+}

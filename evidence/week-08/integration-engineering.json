@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "issue": 45,
+  "commitSha": "99dd0dea54c60a1ac13ee074fb70a8ae751f7147",
+  "generatedAt": "2026-10-21T19:13:11.469989+00:00",
+  "decision": "Persistir snapshot e intención antes de la red, vincular actor/generación y retirar sólo tras recibo verificable. Conservar reasignación e intención en conflicto; una reformulación humana crea otra identidad y archiva el original sin acknowledge.",
+  "alternatives": [
+    "Persistir primero y verificar recibos mediante gateway autenticado, guardando resolución explícita y originales durables.",
+    "Enviar online y guardar la intención después: puede dejar un efecto remoto sin recuperación cuando se pierde la respuesta.",
+    "Reescribir baseVersion/cuerpo bajo la misma identidad o imponer last-write-wins: rompe idempotencia o pierde asignación/intención."
+  ],
+  "tradeoff": "Beneficio: disco/cola atómicos, replay estable, ningún préstamo de identidad y decisión de conflicto visible. Costo: retención de recibos/intenciones archivadas, serialización del flujo e intervención al cambiar la base. No hay transacción distribuida ni purga automática; el backend conserva sólo metadatos sintéticos y estado en memoria.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "make setup",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/setup.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/types.log"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/lint.log"
+    },
+    {
+      "command": "npm run test:smoke",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/smoke.log"
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/incidents.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/architecture-tests.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/architecture.log"
+    },
+    {
+      "command": "npm run test:week-08:module -- course-tests/week-08-integration.test.tsx",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/integration-module.log"
+    },
+    {
+      "command": "npm run test:week-08:integration",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/integration.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/session.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/session-readiness.log"
+    },
+    {
+      "command": "npm run test:week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/week08-aggregate.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/feedback.log"
+    },
+    {
+      "command": "make verify-week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/verify-w08.log"
+    },
+    {
+      "command": "make public-test-week-08",
+      "result": "fail; exit 2",
+      "evidence": "reports/week-08/app-integration/public-w08.log"
+    },
+    {
+      "command": "git diff --exit-code 17db4b4 -- course-tests/public src/application/session src/infrastructure/session src/application/sync/resolveSync.ts src/application/sync/deduplicateOperations.ts reports/week-08/baseline reports/week-08/persistence reports/week-08/persistence-integration reports/week-08/sync",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/public-and-history-preserved.log"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/app-integration/patch-hygiene.log"
+    }
+  ],
+  "technicalCommits": [
+    "99dd0dea54c60a1ac13ee074fb70a8ae751f7147 docs(w08): document real sync flow and explicit conflict resolution",
+    "cad06b75dc416cef682f55e7920343074cef737e fix(w08): preserve newer remote state when confirming an old receipt",
+    "8d502f9cdd5322ef28e61050750eceab83f8f460 feat(w08): integrate durable local actions and authenticated idempotent sync",
+    "10dc2b86fa9ccdaaffb56fdc7cedf87361cce66a feat(w08): verify queued operation receipts and pin session identity"
+  ],
+  "traceability": [
+    {
+      "requirement": "W08 1–2: inicio, nota y referencia durable recuperables",
+      "implementation": "IncidentWorkspace.record/start/recover + LocalWorkspace.commitChange/listSnapshots",
+      "test": "course-tests/week-08-integration.test.tsx — composed graph creates offline start/note/photo; real UI stores offline changes",
+      "evidence": "reports/week-08/app-integration/integration-module.log"
+    },
+    {
+      "requirement": "W08 3: falla sin pérdida ni retiro parcial",
+      "implementation": "SqliteLocalWorkspace rollback + guardar recibo antes de acknowledge",
+      "test": "course-tests/week-08-integration.test.tsx — storage rollback; original action persists before sending",
+      "evidence": "reports/week-08/app-integration/integration.log; week08-aggregate.log preserva suite #43"
+    },
+    {
+      "requirement": "W08 4–5: reasignación, combinación y decisión humana",
+      "implementation": "resolveSync compartido + inspect/keepRemote/reformulate",
+      "test": "course-tests/week-08-integration.test.tsx — remote reassignment; coordinator UI; compatible priority",
+      "evidence": "reports/week-08/app-integration/integration-module.log"
+    },
+    {
+      "requirement": "W08 6: sesión e idempotencia completas",
+      "implementation": "HttpIncidentSyncGateway + SessionTransportDecorator con actor/generación esperados",
+      "test": "course-tests/week-08-gateway.test.ts; week-08-integration.test.tsx — timeout_after_commit/replay, changed account and newer remote state",
+      "evidence": "reports/week-08/app-integration/integration.log; session.log; session-readiness.log"
+    }
+  ],
+  "contribution": "Implementación, pruebas, documentación y comandos de #45 realizados con asistencia material de Codex a solicitud del usuario. Los SHAs identifican cambios reales; no se atribuye autoría humana independiente ni aportaciones a otros integrantes.",
+  "humanReview": "pending",
+  "pending": [
+    "AC-05: evidencia y explicación humana de los integrantes, sin matrículas/roster/revisiones inventados.",
+    "missing/empty=['reports/week-08/migration-tests.json', 'evidence/week-08/engineering.json', 'evidence/week-08/individual.json']",
+    "Validación nativa de #45 no ejecutada: sin dispositivo/emulador conectado; el export Android no equivale a APK.",
+    "No se crea tag ni se realiza entrega Classroom."
+  ]
+}

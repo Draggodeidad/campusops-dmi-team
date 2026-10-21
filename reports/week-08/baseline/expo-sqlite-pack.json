@@ -1,0 +1,1156 @@
+[
+  {
+    "id": "expo-sqlite@57.0.4",
+    "name": "expo-sqlite",
+    "version": "57.0.4",
+    "size": 33077143,
+    "unpackedSize": 78077744,
+    "shasum": "00e12504a878aba7b038ef59f60fcc11839b9506",
+    "integrity": "sha512-3N/bnDx4+kWEC9GABxKPLe/6RHTZJR/7DNT5tz/cYi8f7emign3ooavXnJn0+JPBA0JhHmsdDPrmC+CtT86Jzg==",
+    "filename": "expo-sqlite-57.0.4.tgz",
+    "files": [
+      {
+        "path": ".babelrc",
+        "size": 39,
+        "mode": 420
+      },
+      {
+        "path": ".eslintrc.js",
+        "size": 103,
+        "mode": 420
+      },
+      {
+        "path": "CHANGELOG.md",
+        "size": 34454,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 1106,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 2069,
+        "mode": 420
+      },
+      {
+        "path": "android/build.gradle",
+        "size": 3002,
+        "mode": 420
+      },
+      {
+        "path": "android/CMakeLists.txt",
+        "size": 1310,
+        "mode": 420
+      },
+      {
+        "path": "android/libsql/arm64-v8a/libsql_experimental.so",
+        "size": 8158680,
+        "mode": 420
+      },
+      {
+        "path": "android/libsql/armeabi-v7a/libsql_experimental.so",
+        "size": 5985336,
+        "mode": 420
+      },
+      {
+        "path": "android/libsql/libsql.h",
+        "size": 5507,
+        "mode": 420
+      },
+      {
+        "path": "android/libsql/x86_64/libsql_experimental.so",
+        "size": 9171168,
+        "mode": 420
+      },
+      {
+        "path": "android/libsql/x86/libsql_experimental.so",
+        "size": 9408924,
+        "mode": 420
+      },
+      {
+        "path": "android/shouldUsePublication.groovy",
+        "size": 214,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/AndroidManifest.xml",
+        "size": 24,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/Exceptions.h",
+        "size": 1681,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/Exceptions.h",
+        "size": 2780,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/NativeDatabaseBinding.cpp",
+        "size": 7952,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/NativeDatabaseBinding.h",
+        "size": 2548,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/NativeSessionBinding.cpp",
+        "size": 3012,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/NativeSessionBinding.h",
+        "size": 1426,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/NativeStatementBinding.cpp",
+        "size": 7919,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/NativeStatementBinding.h",
+        "size": 1413,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/libsql/SQLite3Main.cpp",
+        "size": 460,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/NativeDatabaseBinding.cpp",
+        "size": 8492,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/NativeDatabaseBinding.h",
+        "size": 2355,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/NativeSessionBinding.cpp",
+        "size": 4752,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/NativeSessionBinding.h",
+        "size": 1480,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/NativeStatementBinding.cpp",
+        "size": 6211,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/NativeStatementBinding.h",
+        "size": 1303,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/cpp/SQLite3Main.cpp",
+        "size": 460,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/NativeDatabase.kt",
+        "size": 844,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/NativeDatabaseBinding.kt",
+        "size": 2898,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/NativeSession.kt",
+        "size": 512,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/NativeSessionBinding.kt",
+        "size": 1178,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/NativeStatement.kt",
+        "size": 875,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/NativeStatementBinding.kt",
+        "size": 1211,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/SQLExceptions.kt",
+        "size": 1473,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/SQLiteHelpers.kt",
+        "size": 684,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/SQLiteModule.kt",
+        "size": 27885,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/SQLiteOptions.kt",
+        "size": 613,
+        "mode": 420
+      },
+      {
+        "path": "android/src/main/java/expo/modules/sqlite/SQLRecords.kt",
+        "size": 730,
+        "mode": 420
+      },
+      {
+        "path": "android/vec/arm64-v8a/vec.so",
+        "size": 135200,
+        "mode": 420
+      },
+      {
+        "path": "android/vec/armeabi-v7a/vec.so",
+        "size": 120056,
+        "mode": 420
+      },
+      {
+        "path": "android/vec/x86_64/vec.so",
+        "size": 131960,
+        "mode": 420
+      },
+      {
+        "path": "android/vec/x86/vec.so",
+        "size": 133460,
+        "mode": 420
+      },
+      {
+        "path": "app.plugin.js",
+        "size": 55,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.d.ts",
+        "size": 94,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.d.ts.map",
+        "size": 126,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.js",
+        "size": 132,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.js.map",
+        "size": 309,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.web.d.ts",
+        "size": 100,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.web.d.ts.map",
+        "size": 171,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.web.js",
+        "size": 411,
+        "mode": 420
+      },
+      {
+        "path": "build/ExpoSQLite.web.js.map",
+        "size": 884,
+        "mode": 420
+      },
+      {
+        "path": "build/hooks.d.ts",
+        "size": 3374,
+        "mode": 420
+      },
+      {
+        "path": "build/hooks.d.ts.map",
+        "size": 1217,
+        "mode": 420
+      },
+      {
+        "path": "build/hooks.js",
+        "size": 7906,
+        "mode": 420
+      },
+      {
+        "path": "build/hooks.js.map",
+        "size": 17340,
+        "mode": 420
+      },
+      {
+        "path": "build/index.d.ts",
+        "size": 199,
+        "mode": 420
+      },
+      {
+        "path": "build/index.d.ts.map",
+        "size": 215,
+        "mode": 420
+      },
+      {
+        "path": "build/index.js",
+        "size": 197,
+        "mode": 420
+      },
+      {
+        "path": "build/index.js.map",
+        "size": 404,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeDatabase.d.ts",
+        "size": 2804,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeDatabase.d.ts.map",
+        "size": 1743,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeDatabase.js",
+        "size": 523,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeDatabase.js.map",
+        "size": 3784,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeSession.d.ts",
+        "size": 1419,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeSession.d.ts.map",
+        "size": 1229,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeSession.js",
+        "size": 52,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeSession.js.map",
+        "size": 1777,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeStatement.d.ts",
+        "size": 3581,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeStatement.d.ts.map",
+        "size": 1692,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeStatement.js",
+        "size": 54,
+        "mode": 420
+      },
+      {
+        "path": "build/NativeStatement.js.map",
+        "size": 3935,
+        "mode": 420
+      },
+      {
+        "path": "build/paramUtils.d.ts",
+        "size": 1142,
+        "mode": 420
+      },
+      {
+        "path": "build/paramUtils.d.ts.map",
+        "size": 606,
+        "mode": 420
+      },
+      {
+        "path": "build/paramUtils.js",
+        "size": 3594,
+        "mode": 420
+      },
+      {
+        "path": "build/paramUtils.js.map",
+        "size": 7134,
+        "mode": 420
+      },
+      {
+        "path": "build/pathUtils.d.ts",
+        "size": 468,
+        "mode": 420
+      },
+      {
+        "path": "build/pathUtils.d.ts.map",
+        "size": 260,
+        "mode": 420
+      },
+      {
+        "path": "build/pathUtils.js",
+        "size": 1297,
+        "mode": 420
+      },
+      {
+        "path": "build/pathUtils.js.map",
+        "size": 2301,
+        "mode": 420
+      },
+      {
+        "path": "build/queryUtils.d.ts",
+        "size": 969,
+        "mode": 420
+      },
+      {
+        "path": "build/queryUtils.d.ts.map",
+        "size": 256,
+        "mode": 420
+      },
+      {
+        "path": "build/queryUtils.js",
+        "size": 1987,
+        "mode": 420
+      },
+      {
+        "path": "build/queryUtils.js.map",
+        "size": 3046,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDatabase.d.ts",
+        "size": 23185,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDatabase.d.ts.map",
+        "size": 5375,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDatabase.js",
+        "size": 22408,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDatabase.js.map",
+        "size": 42149,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDevToolsClient.d.ts",
+        "size": 444,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDevToolsClient.d.ts.map",
+        "size": 385,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDevToolsClient.js",
+        "size": 7931,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteDevToolsClient.js.map",
+        "size": 15994,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteSession.d.ts",
+        "size": 4868,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteSession.d.ts.map",
+        "size": 1190,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteSession.js",
+        "size": 6163,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteSession.js.map",
+        "size": 8781,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteStatement.d.ts",
+        "size": 11044,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteStatement.d.ts.map",
+        "size": 2382,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteStatement.js",
+        "size": 16253,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteStatement.js.map",
+        "size": 37118,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteTaggedQuery.d.ts",
+        "size": 4546,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteTaggedQuery.d.ts.map",
+        "size": 1399,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteTaggedQuery.js",
+        "size": 5547,
+        "mode": 420
+      },
+      {
+        "path": "build/SQLiteTaggedQuery.js.map",
+        "size": 8809,
+        "mode": 420
+      },
+      {
+        "path": "build/Storage.d.ts",
+        "size": 5420,
+        "mode": 420
+      },
+      {
+        "path": "build/Storage.d.ts.map",
+        "size": 2348,
+        "mode": 420
+      },
+      {
+        "path": "build/Storage.js",
+        "size": 15042,
+        "mode": 420
+      },
+      {
+        "path": "build/Storage.js.map",
+        "size": 26949,
+        "mode": 420
+      },
+      {
+        "path": "build/WebStorage.d.ts",
+        "size": 854,
+        "mode": 420
+      },
+      {
+        "path": "build/WebStorage.d.ts.map",
+        "size": 587,
+        "mode": 420
+      },
+      {
+        "path": "build/WebStorage.js",
+        "size": 2815,
+        "mode": 420
+      },
+      {
+        "path": "build/WebStorage.js.map",
+        "size": 5562,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/_expo/.routes.json",
+        "size": 21,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/_expo/static/css/global-907315ee35d4ca59dd590c0671386803.css",
+        "size": 39949,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/_expo/static/js/web/entry-6b462075328bf796a095088ecb34b129.js",
+        "size": 3378233,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/_expo/static/js/web/worker-aaddcc908d9758af99bee8e068c81a7f.js",
+        "size": 132552,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/_sitemap.html",
+        "size": 17417,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/+not-found.html",
+        "size": 17417,
+        "mode": 420
+      },
+      {
+        "path": "dev-plugin-dist/index.html",
+        "size": 21968,
+        "mode": 420
+      },
+      {
+        "path": "expo-module.config.json",
+        "size": 484,
+        "mode": 420
+      },
+      {
+        "path": "ios/AtomicInteger.swift",
+        "size": 678,
+        "mode": 420
+      },
+      {
+        "path": "ios/Exceptions.swift",
+        "size": 2253,
+        "mode": 420
+      },
+      {
+        "path": "ios/ExpoSQLite.podspec",
+        "size": 3430,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/Info.plist",
+        "size": 1143,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Headers/libsql-umbrella.h",
+        "size": 19,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Headers/libsql.h",
+        "size": 5507,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Info.plist",
+        "size": 723,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/libsql",
+        "size": 7823064,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64-simulator/libsql.framework/Modules/module.modulemap",
+        "size": 101,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64/libsql.framework/Headers/libsql-umbrella.h",
+        "size": 19,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64/libsql.framework/Headers/libsql.h",
+        "size": 5507,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64/libsql.framework/Info.plist",
+        "size": 723,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64/libsql.framework/libsql",
+        "size": 7778804,
+        "mode": 420
+      },
+      {
+        "path": "ios/libsql.xcframework/ios-arm64/libsql.framework/Modules/module.modulemap",
+        "size": 101,
+        "mode": 420
+      },
+      {
+        "path": "ios/NativeDatabase.swift",
+        "size": 947,
+        "mode": 420
+      },
+      {
+        "path": "ios/NativeSession.swift",
+        "size": 308,
+        "mode": 420
+      },
+      {
+        "path": "ios/NativeStatement.swift",
+        "size": 425,
+        "mode": 420
+      },
+      {
+        "path": "ios/SQLAction.swift",
+        "size": 402,
+        "mode": 420
+      },
+      {
+        "path": "ios/SQLiteModule.swift",
+        "size": 33783,
+        "mode": 420
+      },
+      {
+        "path": "ios/SQLiteModuleLibSQL.swift",
+        "size": 28680,
+        "mode": 420
+      },
+      {
+        "path": "ios/SQLiteOptions.swift",
+        "size": 891,
+        "mode": 420
+      },
+      {
+        "path": "ios/URL+FilePath.swift",
+        "size": 232,
+        "mode": 420
+      },
+      {
+        "path": "kv-store.d.ts",
+        "size": 76,
+        "mode": 420
+      },
+      {
+        "path": "kv-store.js",
+        "size": 45,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar",
+        "size": 11596,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.md5",
+        "size": 32,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.sha1",
+        "size": 40,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.sha256",
+        "size": 64,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4-sources.jar.sha512",
+        "size": 128,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar",
+        "size": 3823428,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.md5",
+        "size": 32,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.sha1",
+        "size": 40,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.sha256",
+        "size": 64,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.aar.sha512",
+        "size": 128,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module",
+        "size": 3282,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.md5",
+        "size": 32,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.sha1",
+        "size": 40,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.sha256",
+        "size": 64,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.module.sha512",
+        "size": 128,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom",
+        "size": 2214,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.md5",
+        "size": 32,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.sha1",
+        "size": 40,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.sha256",
+        "size": 64,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/57.0.4/expo.modules.sqlite-57.0.4.pom.sha512",
+        "size": 128,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml",
+        "size": 346,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.md5",
+        "size": 32,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.sha1",
+        "size": 40,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.sha256",
+        "size": 64,
+        "mode": 420
+      },
+      {
+        "path": "local-maven-repo/host/exp/exponent/expo.modules.sqlite/maven-metadata.xml.sha512",
+        "size": 128,
+        "mode": 420
+      },
+      {
+        "path": "localStorage/install.js",
+        "size": 118,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 2038,
+        "mode": 420
+      },
+      {
+        "path": "plugin/babel.config.js",
+        "size": 69,
+        "mode": 420
+      },
+      {
+        "path": "plugin/build/index.d.ts",
+        "size": 123,
+        "mode": 420
+      },
+      {
+        "path": "plugin/build/index.js",
+        "size": 135,
+        "mode": 420
+      },
+      {
+        "path": "plugin/build/withSQLite.d.ts",
+        "size": 704,
+        "mode": 420
+      },
+      {
+        "path": "plugin/build/withSQLite.js",
+        "size": 3320,
+        "mode": 420
+      },
+      {
+        "path": "plugin/index.d.ts",
+        "size": 35,
+        "mode": 420
+      },
+      {
+        "path": "plugin/index.js",
+        "size": 37,
+        "mode": 420
+      },
+      {
+        "path": "plugin/src/index.ts",
+        "size": 118,
+        "mode": 420
+      },
+      {
+        "path": "plugin/src/withSQLite.ts",
+        "size": 4165,
+        "mode": 420
+      },
+      {
+        "path": "plugin/tsconfig.json",
+        "size": 229,
+        "mode": 420
+      },
+      {
+        "path": "plugin/tsconfig.tsbuildinfo",
+        "size": 50,
+        "mode": 420
+      },
+      {
+        "path": "spm.config.json",
+        "size": 2291,
+        "mode": 420
+      },
+      {
+        "path": "src/ExpoSQLite.ts",
+        "size": 94,
+        "mode": 420
+      },
+      {
+        "path": "src/ExpoSQLite.web.ts",
+        "size": 366,
+        "mode": 420
+      },
+      {
+        "path": "src/hooks.tsx",
+        "size": 10544,
+        "mode": 420
+      },
+      {
+        "path": "src/index.ts",
+        "size": 164,
+        "mode": 420
+      },
+      {
+        "path": "src/NativeDatabase.ts",
+        "size": 3179,
+        "mode": 420
+      },
+      {
+        "path": "src/NativeSession.ts",
+        "size": 1590,
+        "mode": 420
+      },
+      {
+        "path": "src/NativeStatement.ts",
+        "size": 3696,
+        "mode": 420
+      },
+      {
+        "path": "src/paramUtils.ts",
+        "size": 3956,
+        "mode": 420
+      },
+      {
+        "path": "src/pathUtils.ts",
+        "size": 1322,
+        "mode": 420
+      },
+      {
+        "path": "src/queryUtils.ts",
+        "size": 2039,
+        "mode": 420
+      },
+      {
+        "path": "src/SQLiteDatabase.ts",
+        "size": 31182,
+        "mode": 420
+      },
+      {
+        "path": "src/SQLiteDevToolsClient.ts",
+        "size": 8874,
+        "mode": 420
+      },
+      {
+        "path": "src/SQLiteSession.ts",
+        "size": 6322,
+        "mode": 420
+      },
+      {
+        "path": "src/SQLiteStatement.ts",
+        "size": 25440,
+        "mode": 420
+      },
+      {
+        "path": "src/SQLiteTaggedQuery.ts",
+        "size": 6208,
+        "mode": 420
+      },
+      {
+        "path": "src/Storage.ts",
+        "size": 15322,
+        "mode": 420
+      },
+      {
+        "path": "src/ts-declarations/whatwg-url-without-unicode.d.ts",
+        "size": 284,
+        "mode": 420
+      },
+      {
+        "path": "src/WebStorage.ts",
+        "size": 2800,
+        "mode": 420
+      },
+      {
+        "path": "tsconfig.json",
+        "size": 263,
+        "mode": 420
+      },
+      {
+        "path": "vendor/sqlcipher/sqlite3.c",
+        "size": 9486677,
+        "mode": 420
+      },
+      {
+        "path": "vendor/sqlcipher/sqlite3.h",
+        "size": 666696,
+        "mode": 420
+      },
+      {
+        "path": "vendor/sqlite3/sqlite3.c",
+        "size": 9306729,
+        "mode": 420
+      },
+      {
+        "path": "vendor/sqlite3/sqlite3.h",
+        "size": 667756,
+        "mode": 420
+      },
+      {
+        "path": "web/Deferred.ts",
+        "size": 666,
+        "mode": 420
+      },
+      {
+        "path": "web/SQLAction.ts",
+        "size": 362,
+        "mode": 420
+      },
+      {
+        "path": "web/SQLiteModule.node.ts",
+        "size": 5852,
+        "mode": 420
+      },
+      {
+        "path": "web/SQLiteModule.ts",
+        "size": 14306,
+        "mode": 420
+      },
+      {
+        "path": "web/SQLiteOptions.ts",
+        "size": 1157,
+        "mode": 420
+      },
+      {
+        "path": "web/SyncSerializer.ts",
+        "size": 992,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/AccessHandlePoolVFS.js",
+        "size": 14398,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/FacadeVFS.js",
+        "size": 13620,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/MemoryVFS.js",
+        "size": 4548,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/sqlite-api.js",
+        "size": 35511,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/sqlite-constants.js",
+        "size": 11605,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/types/globals.d.ts",
+        "size": 1651,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/types/index.d.ts",
+        "size": 48597,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/types/tsconfig.json",
+        "size": 80,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/VFS.js",
+        "size": 4445,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/wa-sqlite.js",
+        "size": 109108,
+        "mode": 420
+      },
+      {
+        "path": "web/wa-sqlite/wa-sqlite.wasm",
+        "size": 621492,
+        "mode": 420
+      },
+      {
+        "path": "web/web.types.ts",
+        "size": 6779,
+        "mode": 420
+      },
+      {
+        "path": "web/worker.ts",
+        "size": 25342,
+        "mode": 420
+      },
+      {
+        "path": "web/WorkerChannel.ts",
+        "size": 4116,
+        "mode": 420
+      }
+    ],
+    "entryCount": 228,
+    "bundled": []
+  }
+]

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import type { CreateIncident, CreateIncidentInput } from '../application/incidents/CreateIncident';
@@ -14,6 +14,8 @@ import type { SessionController } from '../application/session/SessionController
 import type { SessionSnapshot } from '../application/session/SessionSnapshot';
 import type { BackendStatus, GetBackendStatus } from '../application/system/GetBackendStatus';
 import type { Incident } from '../domain/incidents/Incident';
+import type { IncidentWorkspace } from '../application/sync/IncidentWorkspace';
+import { OfflineWorkspacePanel } from './incidents/OfflineWorkspacePanel';
 import { CreateIncidentScreen } from './incidents/CreateIncidentScreen';
 import { IncidentDetailScreen } from './incidents/IncidentDetailScreen';
 import { IncidentListScreen } from './incidents/IncidentListScreen';
@@ -25,6 +27,7 @@ type Props = Readonly<{
   createIncident?: CreateIncident;
   sessionController?: SessionController;
   performIncidentAction?: PerformIncidentAction;
+  incidentSync?: IncidentWorkspace;
 }>;
 
 type ActiveView = 'list' | 'detail' | 'create';
@@ -50,6 +53,7 @@ export function CampusOpsApp({
   createIncident,
   sessionController,
   performIncidentAction,
+  incidentSync,
 }: Props) {
   const [backendStatus, setBackendStatus] = useState<BackendStatus | 'checking'>('checking');
   const [incidents, setIncidents] = useState<readonly Incident[]>([]);
@@ -71,6 +75,7 @@ export function CampusOpsApp({
   const isCurrent = (generation: number | undefined) => !sessionController || generation === sessionController.getSnapshot().generation;
   const [actionLoading, setActionLoading] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
+  const [hasLocalPending, setHasLocalPending] = useState(false);
 
   useEffect(() => {
     if (!sessionController) return;
@@ -87,6 +92,7 @@ export function CampusOpsApp({
         setDetailError(null);
         setActionError(null);
         setActionLoading(false);
+        setHasLocalPending(false);
         setCreateLoading(false);
         setListLoading(snapshot.state === 'authenticated');
       }
@@ -112,10 +118,18 @@ export function CampusOpsApp({
     if (!sessionUsable) return;
     void getIncidents.execute()
       .then((items) => { if (active) setIncidents(items); })
-      .catch((error: unknown) => { if (active) setListError(presentIncidentFailure(error, 'list')); })
+      .catch(async (error: unknown) => {
+        if (active) setListError(presentIncidentFailure(error, 'list'));
+        if (incidentSync && error instanceof ApplicationFailure && ['REMOTE_COMMUNICATION_ERROR', 'INCIDENT_TIMEOUT'].includes(error.code)) {
+          try {
+            const local = await incidentSync.recover();
+            if (active) setIncidents(local.map(item => item.incident));
+          } catch { /* The workspace panel exposes the controlled storage/session failure. */ }
+        }
+      })
       .finally(() => { if (active) setListLoading(false); });
     return () => { active = false; };
-  }, [getIncidents, session?.generation, sessionUsable]);
+  }, [getIncidents, incidentSync, session?.generation, sessionUsable]);
 
   const refreshIncidents = async () => {
     const generation = sessionController?.getSnapshot().generation;
@@ -144,6 +158,12 @@ export function CampusOpsApp({
       if (incident === null) setDetailError('La incidencia solicitada no existe.');
     } catch (error: unknown) {
       if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
+      if (incidentSync && error instanceof ApplicationFailure && ['REMOTE_COMMUNICATION_ERROR', 'INCIDENT_TIMEOUT'].includes(error.code)) {
+        try {
+          const local = (await incidentSync.recover()).find(item => item.incident.id === id);
+          if (local && isCurrent(generation)) { setSelectedIncident(local.incident); setDetailError('Sin conexión: copia local de esta cuenta.'); }
+        } catch { /* The workspace panel exposes the controlled failure. */ }
+      }
     } finally {
       if (isCurrent(generation)) setDetailLoading(false);
     }
@@ -246,7 +266,7 @@ export function CampusOpsApp({
   };
 
   return (
-    <View style={styles.screen}>
+    <ScrollView contentContainerStyle={styles.screen}>
       <View accessibilityRole="summary" style={styles.header}>
         <Text style={styles.brand}>CampusOps</Text>
         <Text>Incidencias del campus · entorno académico ficticio</Text>
@@ -317,6 +337,7 @@ export function CampusOpsApp({
         <IncidentDetailScreen
           actionError={actionError}
           actionLoading={actionLoading}
+          actionsBlocked={hasLocalPending}
           currentRole={session?.role ?? null}
           error={detailError}
           incident={selectedIncident}
@@ -336,13 +357,25 @@ export function CampusOpsApp({
         />
       )}
 
+      {sessionController && sessionUsable && incidentSync ? (
+        <OfflineWorkspacePanel
+          key={session?.generation}
+          workspace={incidentSync}
+          incident={activeView === 'detail' ? selectedIncident : null}
+          onPendingChanged={setHasLocalPending}
+          onRecovered={(incident) => {
+            if (isCurrent(session?.generation)) { setSelectedIncident(incident); setDetailError(null); setActiveView('detail'); }
+          }}
+        />
+      ) : null}
+
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, gap: 20, padding: 24 },
+  screen: { flexGrow: 1, gap: 20, padding: 24 },
   header: { gap: 6 },
   brand: { fontSize: 26, fontWeight: '700' },
   sessionBox: {

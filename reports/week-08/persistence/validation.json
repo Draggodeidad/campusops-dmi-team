@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
+  "generatedAt": "2026-10-21T07:17:03.987791+00:00",
+  "checks": [
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "evidence": "reports/week-08/persistence/setup.log",
+      "exitCode": 0,
+      "durationSeconds": 5.21
+    },
+    {
+      "id": "native",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:native",
+      "evidence": "reports/week-08/persistence/native.log",
+      "exitCode": 0,
+      "durationSeconds": 26.15
+    },
+    {
+      "id": "types",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run typecheck",
+      "evidence": "reports/week-08/persistence/types.log",
+      "exitCode": 0,
+      "durationSeconds": 1.41
+    },
+    {
+      "id": "lint",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run lint",
+      "evidence": "reports/week-08/persistence/lint.log",
+      "exitCode": 0,
+      "durationSeconds": 2.32
+    },
+    {
+      "id": "smoke",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:smoke",
+      "evidence": "reports/week-08/persistence/smoke.log",
+      "exitCode": 0,
+      "durationSeconds": 0.96
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "reports/week-08/persistence/incidents.log",
+      "exitCode": 0,
+      "durationSeconds": 0.97
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-08/persistence/architecture-tests.log",
+      "exitCode": 0,
+      "durationSeconds": 0.71
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-08/persistence/architecture.log",
+      "exitCode": 0,
+      "durationSeconds": 0.1
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-08/persistence/session.log",
+      "exitCode": 0,
+      "durationSeconds": 1.75
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-08/persistence/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.34
+    },
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:baseline",
+      "evidence": "reports/week-08/persistence/baseline.log",
+      "exitCode": 0,
+      "durationSeconds": 0.82
+    },
+    {
+      "id": "provider-probe",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-08-provider",
+      "evidence": "reports/week-08/persistence/provider-probe.log",
+      "exitCode": 0,
+      "durationSeconds": 0.31
+    },
+    {
+      "id": "persistence",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/persistence/persistence.log",
+      "exitCode": 0,
+      "durationSeconds": 0.88
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-08/persistence/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 11.78
+    },
+    {
+      "id": "verify-w08",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-08",
+      "evidence": "reports/week-08/persistence/verify-w08.log",
+      "exitCode": 0,
+      "durationSeconds": 6.78
+    },
+    {
+      "id": "public-isolated",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:public",
+      "evidence": "reports/week-08/persistence/public-isolated.log",
+      "exitCode": 1,
+      "durationSeconds": 0.71
+    },
+    {
+      "id": "public-w08",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "evidence": "reports/week-08/persistence/public-w08.log",
+      "exitCode": 2,
+      "durationSeconds": 8.28
+    },
+    {
+      "id": "preserve-previous-behavior",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code caadd9b9a256a551e7b7e50488043c2dc36739e4 -- src/ui src/application/session src/infrastructure/session src/course-evaluation course-tests/public",
+      "evidence": "reports/week-08/persistence/preserve-previous-behavior.log",
+      "exitCode": 0,
+      "durationSeconds": 0.02
+    }
+  ],
+  "scope": "Issue #43 durable persistence module, not complete W08 delivery or #44/#45 integration.",
+  "status": "fail",
+  "moduleStatus": "pass",
+  "nodeVersion": "v22.22.0",
+  "nativeObserved": {
+    "status": "pass",
+    "provider": "expo-sqlite / expo-file-system on Android",
+    "checks": [
+      "native-copy-to-documents",
+      "native-copy-content",
+      "native-new-process-snapshot-author-base-notes",
+      "native-new-process-operation-order-identity",
+      "native-new-process-photo-without-cache",
+      "native-migration.afterSchema-rejects",
+      "native-migration.afterSchema-rollback-schema-data-version",
+      "native-migration.afterCopy-rejects",
+      "native-migration.afterCopy-rollback-schema-data-version",
+      "native-enqueue-failure",
+      "native-enqueue-rollback",
+      "native-change-failure",
+      "native-change-rollback",
+      "native-failed-copy-cleanup",
+      "native-acknowledge-failure",
+      "native-acknowledge-rollback",
+      "native-migration-version-two",
+      "native-migration-preserves-snapshot",
+      "native-migration-preserves-queue",
+      "native-identity-mismatch",
+      "native-only-confirmed-operation-deleted"
+    ],
+    "firstPid": "2432",
+    "secondPid": "2521",
+    "device": "35"
+  },
+  "observations": {
+    "persistence": "19 adapter assertions pass on real disk SQLite: new handle/process recovery, notes/file/author/base/identity/order, both migration failure points, atomic change/enqueue/acknowledge rollback, successful v2 preservation, corrupt/future schema rejection and isolation.",
+    "migration": "Both injected v1-to-v2 failures restore schema, all rows and user_version to their exact before state after reopen. Recovery asserts user_version=2, unchanged snapshots/queue, original sequence and actor/base_version columns.",
+    "regression": "31 W06 tests, eight readiness checks, 87 accumulated feedback tests, architecture and Android export pass.",
+    "nativeEnvironment": "Android API35 AOSP x86_64, temporary isolated AVD, emulator 37.2.12 with host GPU, temporary Temurin JDK21. Installed emulator 37.1.11 and SwiftShader crashed before app execution; JDK25 failed CMake configuration. No project stack versions changed.",
+    "remainingFailures": "Public isolated W08: 3 failures at existing resolveSync/deduplicateOperations stubs (#44). Public gate: same three failures and four missing official artifacts owned by #44/#52. No checks bypassed."
+  },
+  "pending": [
+    "Human review/validation of this PR and personal explanation; not attributed to anyone.",
+    "Conflict/sync engine #44 and app flow integration #45.",
+    "Independent persistence review/tests #47 and complete team artifacts #52.",
+    "No tag, Classroom submission or W08 final delivery."
+  ],
+  "aiAssistance": "Codex implemented code/docs/tests and ran recorded commands at user request. No human review or individual team contributions invented."
+}

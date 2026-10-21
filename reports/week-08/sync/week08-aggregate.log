@@ -1,0 +1,89 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08
+> npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:sync && npm run test:week-08:public
+
+
+> dmi-react-native-starter@1.0.0 test:week-08:baseline
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-baseline.test.ts
+
+PASS course-tests/week-08-baseline.test.ts
+  ✓ shared fixture preserves the required actor, base, stable operation and reassignment (3 ms)
+  ✓ temporary factory reopens a real file with a new handle and cleans only its own resource (13 ms)
+  ✓ transaction failure injection targets one named point once without touching files (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.659 s
+Ran all test suites within paths "course-tests/week-08-baseline.test.ts".
+
+> dmi-react-native-starter@1.0.0 check:week-08-provider
+> node tools/check-week-08-provider.mjs
+
+{
+  "scope": "SQLite engine on disk + Expo compatibility metadata; not an Android adapter test",
+  "node": "v22.22.0",
+  "expo": "57.0.16",
+  "recommendedExpoSqlite": "~57.0.1",
+  "checks": [
+    "new-process-reopen",
+    "transaction-rollback-schema-data-version",
+    "migration-preserves-content",
+    "durable-synthetic-file"
+  ],
+  "observed": {
+    "before": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "afterFailure": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "after": {
+      "version": 2,
+      "columns": [
+        "id",
+        "content",
+        "migrated"
+      ],
+      "rows": 1
+    }
+  }
+}
+(node:55066) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> dmi-react-native-starter@1.0.0 test:week-08:sync
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts
+
+PASS course-tests/week-08-sync-composition.test.ts
+PASS course-tests/week-08-sync.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       24 passed, 24 total
+Snapshots:   0 total
+Time:        0.467 s, estimated 2 s
+Ran all test suites within paths "course-tests/week-08-sync.test.ts", "course-tests/week-08-sync-composition.test.ts".
+
+> dmi-react-native-starter@1.0.0 test:week-08:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-08.test.ts
+
+PASS course-tests/public/week-08.test.ts
+  ✓ CampusOps detects offline start versus remote reassignment without mutating either record (2 ms)
+  ✓ merges independent field changes and reports same-field conflict
+  ✓ deduplicates a replayed operation by stable identity (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.336 s, estimated 1 s
+Ran all test suites within paths "course-tests/public/week-08.test.ts".

@@ -8,7 +8,13 @@
     "Clean/Hexagonal completa con puertos de entrada y salida, interactores, DTO, mappers y un contenedor de inyección de dependencias"
   ],
   "tradeoff": "Beneficio: los casos de uso y la UI se prueban sin backend, los imports se verifican automáticamente y cambiar de fake a API queda localizado en Infrastructure y Composition Root. Costo: aparecen más contratos y archivos que en una pantalla monolítica, la composición manual crecerá con nuevas dependencias y la UI todavía comparte tipos de dominio; se evita por ahora el costo adicional de DTO, mappers y un contenedor porque no existe una divergencia real que los justifique.",
-  "requirementIds": ["AC-01", "AC-02", "AC-03", "AC-04", "AC-05"],
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
   "verification": [
     {
       "command": "make feedback",
@@ -35,5 +41,50 @@
       "result": "Test Suites: 1 passed, 1 total; Tests: 1 passed, 1 total",
       "evidence": "La prueba pública encontró UI, Application, Domain e Infrastructure en docs/architecture.mmd, no encontró una flecha directa UI → Infrastructure y validó alternativas/consecuencias en el ADR."
     }
-  ]
+  ],
+  "followUpValidationW08": {
+    "commitSha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
+    "scope": "Additive architecture validation for #43; original W02 claims and SHA above remain historical.",
+    "command": "npm run test:architecture; npm run check:architecture",
+    "result": "Both exit 0; 2 architecture tests pass and import checker reports no violations.",
+    "evidence": "reports/week-08/persistence/architecture-tests.log and architecture.log",
+    "decision": "docs/adr/ADR-001-architecture.md — #43 appendix; docs/data-model.md"
+  },
+  "followUpDecisions": [
+    {
+      "week": 8,
+      "issue": 44,
+      "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+      "requirement": "Motor merge/dedupe compartido sin invertir dependencias.",
+      "decision": "Application implementa funciones puras; evaluación las reexporta y Composition Root las compone. Domain conserva SyncRecord.",
+      "verification": {
+        "command": "npm run test:week-08",
+        "result": "exit 0; motor 24 tests y público W08 3 tests pasan, además de baseline/probe.",
+        "evidence": "reports/week-08/sync/week08-aggregate.log"
+      },
+      "engineeringEvidence": "evidence/week-08/sync-engineering.json",
+      "scope": "Extensión W08; no reescribe la decisión, verificaciones ni SHA históricos de W02."
+    }
+  ],
+  "followUpIntegrationW08": {
+    "commitSha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+    "scope": "Combined #43/#44 architecture validation; all previous entries retain their original SHA and observations.",
+    "result": "Architecture tests and checker exit 0; combined W08 aggregate exit 0.",
+    "evidence": "reports/week-08/persistence-integration/validation.json"
+  },
+  "followUpIssue45": {
+    "week": 8,
+    "issue": 45,
+    "commitSha": "99dd0dea54c60a1ac13ee074fb70a8ae751f7147",
+    "generatedAt": "2026-10-21T19:13:11.469989+00:00",
+    "scope": "Extensión aditiva de #45; conserva los valores/SHA históricos de W02 y de #43/#44.",
+    "requirement": "Conectar persistencia, sesión y sync sin invertir dependencias ni perder intención.",
+    "decision": "UI consume IncidentWorkspace; Application orquesta puertos, motor y sesión; Infrastructure implementa gateway verificado y recursos; App.tsx compone.",
+    "verification": {
+      "command": "npm run test:architecture; npm run check:architecture; npm run test:week-08:integration",
+      "result": "exit 0 en los tres comandos; detector sin violaciones, 2 pruebas de arquitectura y 24 de integración/gateway pasan.",
+      "evidence": "reports/week-08/app-integration/validation.json"
+    },
+    "engineeringEvidence": "evidence/week-08/integration-engineering.json"
+  }
 }

@@ -10,6 +10,7 @@ export class SessionTransportDecorator implements IncidentTransport {
   ) {}
 
   async send(request: TransportRequest): Promise<TransportResponse> {
+    if (!this.matchesSession(request)) return sessionChanged();
     const generation = this.sessionContext.getGeneration();
     const authEndpoint = /^\/?v1\/session\/(login|refresh)(?:\?|$)/.test(request.path);
     if (authEndpoint) return this.baseTransport.send(this.authorize(request, false));
@@ -17,7 +18,7 @@ export class SessionTransportDecorator implements IncidentTransport {
     const state = this.sessionContext.getSnapshot().state;
     const renewedBeforeSend = state === 'expired' || state === 'refreshing';
     if (renewedBeforeSend) await this.sessionContext.refresh(generation);
-    if (generation !== this.sessionContext.getGeneration()) return sessionChanged();
+    if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request)) return sessionChanged();
 
     const sentAuthorization = this.sessionContext.getAuthorizationHeader();
     const response = await this.baseTransport.send(this.authorize(request, true));
@@ -38,11 +39,16 @@ export class SessionTransportDecorator implements IncidentTransport {
       if (error instanceof ApplicationFailure && error.code === 'SECURE_STORAGE_UNAVAILABLE') throw error;
       return response;
     }
-    if (generation !== this.sessionContext.getGeneration() || !this.sessionContext.getAuthorizationHeader()) return response;
+    if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request) || !this.sessionContext.getAuthorizationHeader()) return response;
     const retried = await this.baseTransport.send(this.authorize(request, true));
     if (generation !== this.sessionContext.getGeneration()) return sessionChanged();
     if (retried.status === 401) await this.sessionContext.invalidate(generation);
     return retried;
+  }
+
+  private matchesSession(request: TransportRequest): boolean {
+    return !request.session || (request.session.generation === this.sessionContext.getGeneration()
+      && request.session.actorId === this.sessionContext.getActorId());
   }
 
   private authorize(request: TransportRequest, protectedRequest: boolean): TransportRequest {

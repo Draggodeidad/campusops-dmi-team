@@ -1,0 +1,45 @@
+
+> dmi-react-native-starter@1.0.0 check:week-08-provider
+> node tools/check-week-08-provider.mjs
+
+{
+  "scope": "SQLite engine on disk + Expo compatibility metadata; not an Android adapter test",
+  "node": "v22.22.0",
+  "expo": "57.0.16",
+  "recommendedExpoSqlite": "~57.0.1",
+  "checks": [
+    "new-process-reopen",
+    "transaction-rollback-schema-data-version",
+    "migration-preserves-content",
+    "durable-synthetic-file"
+  ],
+  "observed": {
+    "before": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "afterFailure": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "after": {
+      "version": 2,
+      "columns": [
+        "id",
+        "content",
+        "migrated"
+      ],
+      "rows": 1
+    }
+  }
+}
+(node:73630) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

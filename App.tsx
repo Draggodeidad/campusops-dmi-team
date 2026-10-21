@@ -4,12 +4,20 @@ import { CreateIncident } from './src/application/incidents/CreateIncident';
 import { GetIncidentById } from './src/application/incidents/GetIncidentById';
 import { GetIncidents } from './src/application/incidents/GetIncidents';
 import { PerformIncidentAction } from './src/application/incidents/PerformIncidentAction';
+import type { LocalWorkspace } from './src/application/persistence/LocalWorkspace';
+import { createExpoWorkspace } from './src/infrastructure/persistence/createExpoWorkspace';
 import type { SessionClock } from './src/application/session/SessionClock';
 import type { SessionSecretStore } from './src/application/session/SessionSecretStore';
 import type { IncidentTransport } from './src/infrastructure/http/IncidentTransport';
 import { DefaultSessionController } from './src/application/session/DefaultSessionController';
 import { SystemClock } from './src/application/session/SessionClock';
 import { GetBackendStatus } from './src/application/system/GetBackendStatus';
+import { resolveSync } from './src/application/sync/resolveSync';
+import { deduplicateOperations } from './src/application/sync/deduplicateOperations';
+import { IncidentWorkspace } from './src/application/sync/IncidentWorkspace';
+import type { SyntheticPhotoSource } from './src/application/sync/IncidentSyncGateway';
+import { HttpIncidentSyncGateway } from './src/infrastructure/sync/HttpIncidentSyncGateway';
+import { ExpoSyntheticPhotoSource } from './src/infrastructure/sync/ExpoSyntheticPhotoSource';
 import type { IncidentRepository } from './src/domain/incidents/IncidentRepository';
 import { FetchIncidentTransport } from './src/infrastructure/http/FetchIncidentTransport';
 import { SessionTransportDecorator } from './src/infrastructure/http/SessionTransportDecorator';
@@ -28,6 +36,9 @@ export function createGraph(options: Readonly<{
   transport?: IncidentTransport;
   secretStore?: SessionSecretStore;
   clock?: SessionClock;
+  localWorkspace?: LocalWorkspace;
+  syntheticPhotos?: SyntheticPhotoSource;
+  operationId?: () => string;
 }> = {}) {
   const isTest = options.useHttp !== true && process.env.NODE_ENV === 'test' && !process.env.EXPO_PUBLIC_USE_HTTP;
   const baseTransport = options.transport ?? new FetchIncidentTransport(BACKEND_URL);
@@ -44,11 +55,18 @@ export function createGraph(options: Readonly<{
   const getIncidents = new GetIncidents(repository);
   const getIncidentById = new GetIncidentById(repository);
   const createIncident = new CreateIncident(repository);
-  const performIncidentAction = new PerformIncidentAction(repository);
   const getBackendStatus = new GetBackendStatus(new CourseBackendHealthAdapter());
+  const localWorkspace = options.localWorkspace ?? createExpoWorkspace();
+  const incidentSync = new IncidentWorkspace(localWorkspace, sessionController,
+    new HttpIncidentSyncGateway(sessionTransport), options.syntheticPhotos ?? new ExpoSyntheticPhotoSource(),
+    options.operationId ?? (() => `campus-op-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`));
+  const performIncidentAction = new PerformIncidentAction(repository, isTest ? undefined : incidentSync);
 
   return {
     repository,
+    localWorkspace,
+    incidentSync,
+    syncEngine: { resolveSync, deduplicateOperations },
     useSession: !isTest,
     sessionController,
     getIncidents,
@@ -73,7 +91,7 @@ export default function App() {
       getIncidentById={defaultGraph.getIncidentById}
       getIncidents={defaultGraph.getIncidents}
       performIncidentAction={defaultGraph.performIncidentAction}
-      {...(defaultGraph.useSession ? { sessionController: defaultGraph.sessionController } : {})}
+      {...(defaultGraph.useSession ? { sessionController: defaultGraph.sessionController, incidentSync: defaultGraph.incidentSync } : {})}
     />
   );
 }

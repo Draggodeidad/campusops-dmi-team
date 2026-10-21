@@ -1,0 +1,125 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08
+> npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:public
+
+
+> dmi-react-native-starter@1.0.0 test:week-08:baseline
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-baseline.test.ts
+
+PASS course-tests/week-08-baseline.test.ts
+  ✓ shared fixture preserves the required actor, base, stable operation and reassignment (2 ms)
+  ✓ temporary factory reopens a real file with a new handle and cleans only its own resource (11 ms)
+  ✓ transaction failure injection targets one named point once without touching files (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.296 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-08-baseline.test.ts".
+
+> dmi-react-native-starter@1.0.0 check:week-08-provider
+> node tools/check-week-08-provider.mjs
+
+{
+  "scope": "SQLite engine on disk + Expo compatibility metadata; not an Android adapter test",
+  "node": "v22.22.0",
+  "expo": "57.0.16",
+  "recommendedExpoSqlite": "~57.0.1",
+  "checks": [
+    "new-process-reopen",
+    "transaction-rollback-schema-data-version",
+    "migration-preserves-content",
+    "durable-synthetic-file"
+  ],
+  "observed": {
+    "before": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "afterFailure": {
+      "version": 1,
+      "columns": [
+        "id",
+        "content"
+      ],
+      "rows": 1
+    },
+    "after": {
+      "version": 2,
+      "columns": [
+        "id",
+        "content",
+        "migrated"
+      ],
+      "rows": 1
+    }
+  }
+}
+(node:34345) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> dmi-react-native-starter@1.0.0 test:week-08:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-08.test.ts
+
+FAIL course-tests/public/week-08.test.ts
+  ✕ CampusOps detects offline start versus remote reassignment without mutating either record (1 ms)
+  ✕ merges independent field changes and reports same-field conflict
+  ✕ deduplicates a replayed operation by stable identity
+
+  ● CampusOps detects offline start versus remote reassignment without mutating either record
+
+    resolveSync must be implemented in the assigned week
+
+      15 |
+      16 | function pending(name: string): never {
+    > 17 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      18 | }
+      19 |
+      20 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:17:9)
+      at pending (src/course-evaluation/index.ts:60:10)
+      at Object.<anonymous> (course-tests/public/week-08.test.ts:8:21)
+
+  ● merges independent field changes and reports same-field conflict
+
+    resolveSync must be implemented in the assigned week
+
+      15 |
+      16 | function pending(name: string): never {
+    > 17 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      18 | }
+      19 |
+      20 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:17:9)
+      at pending (src/course-evaluation/index.ts:60:10)
+      at Object.<anonymous> (course-tests/public/week-08.test.ts:15:16)
+
+  ● deduplicates a replayed operation by stable identity
+
+    deduplicateOperations must be implemented in the assigned week
+
+      15 |
+      16 | function pending(name: string): never {
+    > 17 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      18 | }
+      19 |
+      20 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:17:9)
+      at pending (src/course-evaluation/index.ts:66:10)
+      at Object.<anonymous> (course-tests/public/week-08.test.ts:32:31)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 3 total
+Snapshots:   0 total
+Time:        0.314 s, estimated 1 s
+Ran all test suites within paths "course-tests/public/week-08.test.ts".

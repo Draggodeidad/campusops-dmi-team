@@ -1,0 +1,28 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-integration.test.tsx
+
+(node:22669) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-integration.test.tsx
+  ✓ composed graph creates offline start/note/photo, reopens the actual resource, and synchronizes with explicit version reformulation (177 ms)
+  ✓ timeout_after_commit, resource reopen and exact replay produce one history effect and only then acknowledge (226 ms)
+  ✓ one bounded immediate retry can confirm a lost response without duplicating the effect (203 ms)
+  ✓ remote reassignment denies the former technician, preserves every intention and permits informed coordinator resolution without replay (153 ms)
+  ✓ HTTP 403 preserves the queued body and never triggers a retry or acknowledge (99 ms)
+  ✓ HTTP 409 preserves the queued body and never triggers a retry or acknowledge (106 ms)
+  ✓ a forged successful receipt is not an acknowledgement, even when the backend applied the change (81 ms)
+  ✓ storage rollback preserves snapshot/queue and an acknowledge failure recovers by exact replay (90 ms)
+  ✓ changing account during a remote read prevents replay and hides the original local cache (97 ms)
+  ✓ compatible remote priority is merged, while stale operations require a new explicit identity (104 ms)
+  ✓ real UI stores offline changes, restores them after remount and clears private views on account change (400 ms)
+  ✓ coordinator UI explains both versions and explicitly preserves the new assignment without clearing the original queue (187 ms)
+  ✓ the original action use case persists before sending and never sends after a local transaction failure (95 ms)
+  ✓ caller-provided start identity survives pending replay and confirmed replay, rejecting changed content (94 ms)
+  ✓ confirming an old lost receipt does not roll back a newer remote state already read by the graph (222 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       15 passed, 15 total
+Snapshots:   0 total
+Time:        3.133 s, estimated 4 s
+Ran all test suites within paths "course-tests/week-08-integration.test.tsx".

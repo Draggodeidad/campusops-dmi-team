@@ -1,0 +1,33 @@
+
+> dmi-react-native-starter@1.0.0 test:week-08:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts
+
+PASS course-tests/week-08-sync.test.ts
+  ✓ empty records (frozen inputs, both branch orders) (2 ms)
+  ✓ no changes despite nested object key order and new references (frozen inputs, both branch orders) (1 ms)
+  ✓ local-only change (frozen inputs, both branch orders)
+  ✓ remote-only change (frozen inputs, both branch orders) (1 ms)
+  ✓ independent changes (frozen inputs, both branch orders)
+  ✓ same structural change with different key order (frozen inputs, both branch orders)
+  ✓ different array order conflicts (frozen inputs, both branch orders)
+  ✓ array and object are different JSON values (frozen inputs, both branch orders)
+  ✓ scalar types are distinct (frozen inputs, both branch orders) (1 ms)
+  ✓ null differs from an empty object (frozen inputs, both branch orders)
+  ✓ independent additions (frozen inputs, both branch orders) (1 ms)
+  ✓ local deletion and remote addition (frozen inputs, both branch orders) (3 ms)
+  ✓ remote deletion (frozen inputs, both branch orders)
+  ✓ both delete the same field (frozen inputs, both branch orders) (1 ms)
+  ✓ delete versus edit conflicts (frozen inputs, both branch orders)
+  ✓ null is a value, not deletion (frozen inputs, both branch orders)
+  ✓ conflicts are sorted by field name; compatible fields are not conflicts (frozen inputs, both branch orders)
+  ✓ nested siblings in the same field remain atomic (frozen inputs, both branch orders) (1 ms)
+  ✓ all own JSON keys, including __proto__, survive without changing prototypes
+  ✓ required reassignment conflicts only on work and preserves the original pending intention (1 ms)
+  ✓ dedupe keeps first objects, exact IDs and insertion order even for divergent replay content
+  ✓ dedupe accepts an empty readonly list (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       22 passed, 22 total
+Snapshots:   0 total
+Time:        0.389 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-08-sync.test.ts".

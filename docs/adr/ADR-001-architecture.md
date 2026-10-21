@@ -174,3 +174,175 @@ Los logs y SHA de validación final se indexan en
 observaciones históricas conservan procedencia; los workflows revalidan el
 checkout desechable y comprueban tags históricos en su propia versión, sin
 mover etiquetas ni reemplazar SHA como atajo.
+
+## Anexo W08 — contratos del baseline #42 (21-10-2026)
+
+**Contexto.** El kit W08 exige datos y cola durables, migración recuperable y
+conflicto por reasignación. La app todavía compone únicamente el flujo online
+W06: no tiene adaptador local ni motor sync. `SyncRecord` estaba declarado en
+el módulo de evaluación, que no debe convertirse en dependencia de Application.
+
+**Alternativas.** (1) Usar memoria global o SecureStore como cola: la primera
+no sobrevive al proceso y el segundo está destinado a secretos, sin la
+transacción conjunta de snapshot/cola requerida. (2) Introducir una DB y
+conectar toda la app en el baseline: mezclaría #42 con #43–#45 y bloquearía
+publicar las interfaces antes de implementar. (3) Publicar puertos mínimos y
+fixtures, verificar capacidad del proveedor y reservar implementación para
+sus issues. Se elige la tercera.
+
+**Decisión presente.** `LocalWorkspace`, `PendingOperationStore` y
+`LocalIncidentSnapshot` son contratos en Application. `commitChange` exige
+confirmar snapshot y operación juntos; notas y referencias durables conservan
+autor e identidad; tokens permanecen en el puerto SecureStore W06.
+`SyncRecord` pasa como tipo a Domain y se reexporta desde evaluación,
+conservando su forma pública. No hay adaptador local ni nueva dependencia en
+`App.tsx`. El diagrama muestra estos contratos sin presentarlos como flujo activo.
+
+**Proveedor para #43.** El manifiesto de Expo 57 instalado recomienda
+expo-sqlite `~57.0.1`; se inspecciona la implementación publicada 57.0.4 y su
+transacción exclusiva con rollback. Un probe SQLite de Node comprueba
+reapertura entre procesos y reversión de esquema/datos/versiones sobre disco.
+Se selecciona ese proveedor para Android; la instalación y comprobación del
+adaptador Expo nativo siguen pendientes en #43. No se equipara el probe del
+motor con una prueba de la app o del SDK nativo.
+
+**Consecuencias y comprobación.** La preparación permite construir pruebas en
+paralelo con una factory de recursos aislados y puntos de falla dentro de la
+transacción; el costo es mantener el contrato al implementar adaptadores.
+Los tres tests del baseline comprueban fixtures/lifecycle, no migración de la
+app. `test:week-08:public` conserva los fallos de los stubs hasta #44. Las
+observaciones y SHA W08 se indexan en `reports/week-08/baseline/validation.json`;
+los reportes/evidencias W02–W06 conservan su procedencia histórica sin reescribir
+resultados sobre otro SHA. Alcance, esquema acordado y límites del proveedor:
+`docs/week-08-baseline.md`.
+
+
+## Anexo W08 — adaptador durable y migración #43 (21-10-2026)
+
+**Contexto.** Tras publicar #42, hace falta conservar base/asignación local,
+notas, fotos y cola con identidad estable. Guardar JSON mediante el mapper
+HTTP perdería la asignación. Se mantiene el vocabulario SyncRecord y los
+puertos publicados; el motor y el flujo de pantalla siguen en #44–#45.
+
+**Alternativas.** (1) Memoria global y URI de caché: menor costo, pero pérdida
+tras reinicio. (2) Archivos JSON o preferencias separadas para snapshot/cola:
+durables, pero sin transacción común de filas, esquema y versión.
+(3) SQLite transaccional y copias en documentos privados para fotos: más
+manejo de ciclo de vida/errores, con commit o rollback comprobable. Elegimos
+la tercera con expo-sqlite y expo-file-system compatibles con Expo 57.
+
+**Decisión real.** SqliteLocalWorkspace implementa LocalWorkspace y su cola;
+createExpoWorkspace carga los SDKs al abrir/guardar, y App.tsx lo construye
+como localWorkspace inyectable, sin efectos durante composición. Su consumo
+por los casos de uso offline queda en #45. Cada escritura y migración usa
+el objeto txn de una transacción exclusiva. JSON canónico impide reutilizar
+una identidad con contenido distinto; replay no sobrescribe un snapshot
+más reciente. v2 añade autor/versión base indexados a la cola de v1 sin
+regenerar JSON, secuencias ni identidades. El proveedor nativo copia fotos
+antes de publicar la referencia; ante rollback limpia sólo copias nuevas.
+Tokens permanecen en SecureStore. No hay imports nuevos desde UI.
+
+**Consecuencias.** Hay una transacción para estado+cola, migración reversible
+y sustitución de driver para pruebas sobre disco. SQL y archivos no comparten
+transacción: un cierre abrupto puede dejar huérfanos, que se retienen para
+no perder referencias compartidas; no se acredita recolección de basura,
+carga al servidor ni cifrado adicional. El caller de acknowledge debe
+verificar confirmación remota exacta (#45). Android es la referencia; no se
+promete web. Costos: DB nativa, serialización, copia de archivos y pruebas
+de lifecycle y fallas. El esquema, pasos y límites están en docs/data-model.md.
+
+**Verificación.** test:week-08:persistence ejecuta el mismo adaptador con
+SQLite real de Node sobre disco y una factory compatible con #42; incluye
+reapertura, lectura en proceso separado, ambos puntos de rollback y errores
+de datos/versiones. test:week-08:native usa el proveedor Expo real en una
+entrada de prueba del mismo proyecto y dos procesos Android. Disponibilidad
+del comando no significa ejecución exitosa: resultados y límites realmente
+observados están en reports/week-08/persistence/validation.json. No sustituye
+revisión humana, #47 ni entrega semanal completa.
+## Anexo W08 — motor compartido #44 (21-10-2026)
+
+**Contexto.** #42 dejó contratos y fixtures; #44 requiere merge/dedupe reales
+conservando las firmas evaluables. La reasignación remota y el inicio local no
+pueden combinarse recursivamente dentro de `work` sin romper autorización.
+
+**Alternativas.** Last-write-wins por versión/reloj perdería una intención o
+una asignación. Merge recursivo de subcampos produciría un estado iniciado por
+un actor que no lo solicitó. Rechazar toda concurrencia impediría cambios
+independientes válidos. Elegimos merge de tres vías por campo completo con
+comparación JSON estructural, conflictos ordenados y decisión explícita.
+
+**Decisión implementada.** `resolveSync` y `deduplicateOperations` viven en
+Application; el primero importa únicamente el tipo `SyncRecord` de Domain.
+Evaluación reexporta exactamente esas funciones; `App.tsx/createGraph` las
+expone como `syncEngine`. No hay dos algoritmos ni dependencia de Application
+en evaluación. El motor se invoca desde el grafo real en la suite de composición;
+la UI todavía no consume sync y el flujo con workspace/envío sigue en #45.
+La política, precondiciones y límites están en `docs/sync-policy.md`.
+
+**Consecuencias.** El merge conserva entradas y trata `work` como indivisible;
+los valores anidados retornados se consumen readonly. Dedupe conserva el primer
+objeto/orden por ID, sin garantizar idempotencia remota. El beneficio es una
+regla determinista reutilizable sin HTTP o almacenamiento; el costo es retener
+base/local/remoto y resolver explícitamente los conflictos. Una confirmación
+de servidor será precondición del retiro de cola en #45. No hay reintentos,
+persistencia, resolución UI ni implementación de `planRetry` W09 en este motor.
+
+**Verificación.** `test:week-08:sync` incluye las suites de comportamiento y
+composición; `test:week-08:public` conserva los tres tests oficiales intactos.
+El agregado W08 y su workflow ejecutan la suite nueva sin omitir gates. Los
+resultados reales y su SHA se registran en `reports/week-08/sync/`; el histórico
+del baseline conserva los fallos observados antes de implementar #44.
+
+
+## Anexo W08 — flujo real, confirmación y revisión #45 (21-10-2026)
+
+**Contexto.** #43 y #44 están integrados; exponer un workspace y funciones
+puras no conecta el inicio real, la sesión y la confirmación. El mapper perdía
+asignación. Además, el técnico reasignado no puede consultar el remoto y un
+timeout puede ocurrir tras el commit. Los anexos anteriores conservan su
+contexto histórico; este anexo describe el grafo actual.
+
+**Alternativas.** (1) Enviar online y guardar después deja un efecto remoto
+sin intención recuperable. (2) Usar el merge para reescribir las versiones de
+operaciones ya enviadas rompe idempotencia. (3) Persistir primero, verificar
+recibos y pedir una reformulación explícita con otro ID conserva integridad.
+Elegimos la tercera, con el costo de almacenar intenciones archivadas y pedir
+intervención al cambiar la base; no incorporamos un contenedor DI o backend.
+
+**Decisión.** `IncidentWorkspace` orquesta caché propia, registro transaccional,
+recuperación, sync y resolución mediante LocalWorkspace, SessionController y
+los nuevos puertos IncidentSyncGateway/SyntheticPhotoSource. Domain conserva
+asignado/reportante; Infrastructure valida/mappea y confirma la respuesta HTTP.
+`PerformIncidentAction` recibe un colaborador mínimo para el inicio durable;
+los otros cambios de estado siguen el caso W06. App.tsx construye e inyecta
+los adaptadores; OfflineWorkspacePanel sólo conoce Application/Domain.
+El motor compartido se invoca directamente, sin copiarlo en la UI o gateway.
+
+La confirmación comprueba operación/actor/acción/recurso/versión/efecto y se
+persiste antes de acknowledge. El decorador W06 acepta el contexto esperado
+de sesión para impedir que una renovación asíncrona use otra identidad.
+Un conflicto no confirma nada. Coordinación debe leer el remoto autorizado,
+comparar work y elegir mantener la asignación; esa decisión queda registrada
+sin eliminar el original. Reformular crea un ID sobre una base recién leída
+y conserva el original superseded. Snapshot/cola siguen atómicos mediante el
+contrato #42. listSnapshots es la única ampliación del puerto durable; los
+metadatos opcionales usan JSON compatible con esquema v2.
+
+**Consecuencias.** Datos por identidad sin préstamos de sesión; serialización
+del flujo evita sobrescribir cambios locales concurrentes. El costo es retener
+recibos/auditoría y hacer explícita la revisión. No hay atomicidad entre red
+y SQL: replay estable resuelve el fallo entre confirmación y retiro. Una
+sesión expirada sigue las reglas W06; no se habilita acceso anónimo a la cola.
+El backend limita el ejercicio a metadatos sintéticos y memoria. Consulta
+revocada requiere coordinación; no se muestra su asignación a otro perfil.
+Se conserva sincronización manual acotada, sin monitor de red ni política W09.
+
+**Verificación.** test:week-08:integration usa createGraph/UI, la factory
+publicada, el adaptador SQL real sobre archivo y backend loopback. Incluye
+socket timeout_after_commit y replay, reapertura, fallos transaccionales,
+recibo incorrecto, 403/409, cambios de cuenta y revisión/reformulación desde UI.
+La suite W06 conserva todas sus aserciones: sólo se inyecta la nueva dependencia
+SQLite real en sus fixtures. El workflow W08 añade el gate de integración al
+existente; los anteriores permanecen. Resultados y SHA observados:
+reports/week-08/app-integration/validation.json. No acredita revisión humana,
+recopilación #52, etiqueta final ni entrega Classroom.

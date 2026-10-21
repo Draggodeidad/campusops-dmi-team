@@ -11,6 +11,7 @@ flowchart TB
     CampusApp["CampusOpsApp"]
     ListScreen["IncidentListScreen"]
     DetailScreen["IncidentDetailScreen"]
+    OfflinePanel["OfflineWorkspacePanel"]
   end
 
   subgraph Application["Application — src/application"]
@@ -27,11 +28,20 @@ flowchart TB
     SessionContext["SessionAuthorizationContext"]
     PerformAction["PerformIncidentAction"]
     SafeFailure["ApplicationFailure"]
+    WorkspacePort["LocalWorkspace — puerto W08"]
+    PendingPort["PendingOperationStore — contrato W08"]
+    LocalSnapshot["LocalIncidentSnapshot — contrato W08"]
+    SyncMerge["resolveSync — merge JSON por campo W08"]
+    SyncDedupe["deduplicateOperations — primera identidad W08"]
+    SyncFlow["IncidentWorkspace — caché, cola, sync y resolución W08"]
+    SyncGateway["IncidentSyncGateway / SyntheticPhotoSource — puertos"]
   end
 
   subgraph Domain["Domain — src/domain + vocabulario src/campusops"]
     Incident["Incident"]
     IncidentPort["IncidentRepository"]
+    SyncRecord["SyncRecord — tipo compartido W08"]
+    PendingOperation["PendingIncidentOperation — vocabulario de dominio"]
   end
 
   subgraph Infrastructure["Infrastructure — src/infrastructure"]
@@ -46,6 +56,10 @@ flowchart TB
     BackendHelper["courseBackend / fetch"]
     SecretAdapter["ExpoSecureSessionSecretStore"]
     NativeSecret["expo-secure-store"]
+    LocalDB["SqliteLocalWorkspace"]
+    NativeWorkspace["createExpoWorkspace / expo-sqlite + expo-file-system"]
+    HttpSync["HttpIncidentSyncGateway — confirmación verificable"]
+    SyntheticPhoto["ExpoSyntheticPhotoSource — SVG sintético en caché"]
   end
 
   Reporter --> CampusApp
@@ -53,6 +67,24 @@ flowchart TB
   Coordinator --> CampusApp
   CampusApp --> ListScreen
   CampusApp --> DetailScreen
+  CampusApp --> OfflinePanel
+  CampusApp --> SyncFlow
+  OfflinePanel --> SyncFlow
+  PerformAction --> SyncFlow
+  SyncFlow --> WorkspacePort
+  SyncFlow --> SyncGateway
+  SyncFlow --> SessionController
+  SyncFlow --> SyncMerge
+  SyncFlow --> SyncDedupe
+  SyncFlow --> Incident
+  SyncFlow --> SafeFailure
+  Root --> SyncFlow
+  Root --> HttpSync
+  Root --> SyntheticPhoto
+  HttpSync --> SyncGateway
+  HttpSync --> SessionTransport
+  HttpSync --> DtoMapper
+  SyntheticPhoto --> SyncGateway
   CampusApp --> GetAll
   CampusApp --> GetOne
   CampusApp --> CreateOne
@@ -104,6 +136,12 @@ flowchart TB
   Root --> SecretAdapter
   Root --> SessionTransport
   Root --> PerformAction
+  Root --> WorkspacePort
+  Root --> NativeWorkspace
+  NativeWorkspace --> LocalDB
+  LocalDB --> WorkspacePort
+  Root --> SyncMerge
+  Root --> SyncDedupe
 
   Evaluation["course-evaluation.coordinateRefresh — adaptador de política compartida"]
   Evaluation --> RefreshPolicy
@@ -112,10 +150,20 @@ flowchart TB
   SessionTests --> ParallelTransport
   SessionTests --> Evaluation
 
-  subgraph Planned["Flujos futuros fuera de W06"]
-    Persistence["Persistencia"]
+  WorkspacePort --> PendingPort
+  WorkspacePort --> LocalSnapshot
+  WorkspacePort --> PendingOperation
+  LocalSnapshot --> SyncRecord
+  PendingPort --> PendingOperation
+  EvaluationTypes["course-evaluation/contracts — reexport de tipo"] --> SyncRecord
+  SyncMerge --> SyncRecord
+  SyncEvaluation["course-evaluation — reexports W08"] --> SyncMerge
+  SyncEvaluation --> SyncDedupe
+  SyncTests["Suites W08 sync y composición"] --> Root
+  SyncTests --> SyncEvaluation
+
+  subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
     Location["Ubicación / proveedor externo"]
   end
 
-  Persistence -. "adaptador futuro dependerá de contrato interno" .-> Domain
   Location -. "adaptador futuro dependerá de contrato interno" .-> Domain

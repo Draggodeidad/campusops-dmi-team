@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "issue": 45,
+  "commitSha": "99dd0dea54c60a1ac13ee074fb70a8ae751f7147",
+  "generatedAt": "2026-10-21T19:13:11.469989+00:00",
+  "checks": [
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "evidence": "reports/week-08/app-integration/setup.log",
+      "exitCode": 0,
+      "durationSeconds": 8.28
+    },
+    {
+      "id": "types",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run typecheck",
+      "evidence": "reports/week-08/app-integration/types.log",
+      "exitCode": 0,
+      "durationSeconds": 1.82
+    },
+    {
+      "id": "lint",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run lint",
+      "evidence": "reports/week-08/app-integration/lint.log",
+      "exitCode": 0,
+      "durationSeconds": 3.12
+    },
+    {
+      "id": "smoke",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:smoke",
+      "evidence": "reports/week-08/app-integration/smoke.log",
+      "exitCode": 0,
+      "durationSeconds": 1.13
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "reports/week-08/app-integration/incidents.log",
+      "exitCode": 0,
+      "durationSeconds": 1.15
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-08/app-integration/architecture-tests.log",
+      "exitCode": 0,
+      "durationSeconds": 0.77
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-08/app-integration/architecture.log",
+      "exitCode": 0,
+      "durationSeconds": 0.14
+    },
+    {
+      "id": "integration-module",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:module -- course-tests/week-08-integration.test.tsx",
+      "evidence": "reports/week-08/app-integration/integration-module.log",
+      "exitCode": 0,
+      "durationSeconds": 3.67
+    },
+    {
+      "id": "integration",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:integration",
+      "evidence": "reports/week-08/app-integration/integration.log",
+      "exitCode": 0,
+      "durationSeconds": 3.45
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-08/app-integration/session.log",
+      "exitCode": 0,
+      "durationSeconds": 2.38
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-08/app-integration/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.37
+    },
+    {
+      "id": "week08-aggregate",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-08/app-integration/week08-aggregate.log",
+      "exitCode": 0,
+      "durationSeconds": 8.38
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-08/app-integration/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 20.33
+    },
+    {
+      "id": "verify-w08",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-08",
+      "evidence": "reports/week-08/app-integration/verify-w08.log",
+      "exitCode": 0,
+      "durationSeconds": 9.65
+    },
+    {
+      "id": "public-w08",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "evidence": "reports/week-08/app-integration/public-w08.log",
+      "exitCode": 2,
+      "durationSeconds": 10.19
+    },
+    {
+      "id": "public-and-history-preserved",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code 17db4b4 -- course-tests/public src/application/session src/infrastructure/session src/application/sync/resolveSync.ts src/application/sync/deduplicateOperations.ts reports/week-08/baseline reports/week-08/persistence reports/week-08/persistence-integration reports/week-08/sync",
+      "evidence": "reports/week-08/app-integration/public-and-history-preserved.log",
+      "exitCode": 0,
+      "durationSeconds": 0.01
+    },
+    {
+      "id": "patch-hygiene",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --check",
+      "evidence": "reports/week-08/app-integration/patch-hygiene.log",
+      "exitCode": 0,
+      "durationSeconds": 0.01
+    }
+  ],
+  "nodeVersion": "v22.22.0",
+  "status": "fail",
+  "moduleStatus": "pass",
+  "scope": "Issue #45 real graph/UI integration of durable #43 workspace, shared #44 engine and W06 session. This is not the complete W08 delivery.",
+  "nativeValidation": "No connected Android device/emulator in this run. Expo Android export is checked by feedback; prior #43 native results keep their original SHA and do not certify #45.",
+  "pending": [
+    "Human review and explanation are not simulated.",
+    "Team #52 canonical migration-tests.json, engineering.json and individual.json remain outside this individual implementation; inspect the real public-w08 log.",
+    "No final tag or Classroom submission."
+  ],
+  "aiAssistance": "Codex implemented code, tests, documentation and ran commands at the user request; no individual student contribution or human review is fabricated.",
+  "observations": {
+    "integration": "24 tests pass across gateway and real graph/UI suites; route-specific integration module has 15 tests. SQLite files and a deleted temporary photo source are recovered by a new graph.",
+    "lostResponse": "Actual loopback HTTP timeout_after_commit plus socket abort and exact replay yields one history event. A concurrent newer remote version is preserved when the old receipt is confirmed.",
+    "conflict": "Actual backend GET 403 for reassigned technician preserves start/note/photo/queue. Authorized coordinator UI compares work and records keep_remote without acknowledge; stale resolution version rejects.",
+    "baseOneBatch": "Three offline intentions keep their original base 1. Start confirms; stale note/photo require explicit new IDs. Original requests remain superseded and retain content/author/files.",
+    "authorization": "Account change during a held response cannot replay as another actor. Recover filters owner; session generation is pinned through refresh. Original W06 assertions retained with the new real SQLite dependency.",
+    "regression": "31 W06 tests, 8 independent readiness checks, 87 accumulated feedback tests and 90 public-toolchain tests pass; types, lint, smoke/incidents, architecture, W08 aggregate, secret scan, configured audit threshold and Expo Android export pass.",
+    "remainingFailure": "missing/empty=['reports/week-08/migration-tests.json', 'evidence/week-08/engineering.json', 'evidence/week-08/individual.json']",
+    "audit": "Configured critical threshold passes; existing high/moderate findings remain visible in feedback/public logs. No package upgrades or stack substitutions."
+  },
+  "deliveryStatus": "incomplete"
+}

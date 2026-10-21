@@ -13,6 +13,7 @@ type Props = Readonly<{
     | ((action: 'start' | 'resolve' | 'close' | 'reopen', diagnosis?: string | undefined) => Promise<void>)
     | undefined;
   actionLoading?: boolean | undefined;
+  actionsBlocked?: boolean | undefined;
   actionError?: string | null | undefined;
 }>;
 
@@ -24,6 +25,7 @@ export function IncidentDetailScreen({
   currentRole,
   onAction,
   actionLoading = false,
+  actionsBlocked = false,
   actionError = null,
 }: Props) {
   return (
@@ -47,11 +49,12 @@ export function IncidentDetailScreen({
           {onAction && currentRole && (
             <View style={styles.actionsContainer}>
               <Text style={styles.actionsTitle}>Acciones disponibles ({currentRole}):</Text>
+              {actionsBlocked ? <Text>Sincroniza o revisa los cambios locales antes de otra acción.</Text> : null}
 
               {currentRole === 'technician' && incident.status === 'assigned' && (
                 <Pressable
                   accessibilityRole="button"
-                  disabled={actionLoading}
+                  disabled={actionLoading || actionsBlocked}
                   onPress={() => onAction('start')}
                   style={styles.actionButton}
                   testID="action-start"
@@ -65,7 +68,7 @@ export function IncidentDetailScreen({
               {currentRole === 'technician' && incident.status === 'in_progress' && (
                 <Pressable
                   accessibilityRole="button"
-                  disabled={actionLoading}
+                  disabled={actionLoading || actionsBlocked}
                   onPress={() => onAction('resolve', 'Atención técnica completada.')}
                   style={styles.actionButton}
                   testID="action-resolve"
@@ -79,7 +82,7 @@ export function IncidentDetailScreen({
               {currentRole === 'coordinator' && incident.status === 'resolved' && (
                 <Pressable
                   accessibilityRole="button"
-                  disabled={actionLoading}
+                  disabled={actionLoading || actionsBlocked}
                   onPress={() => onAction('close')}
                   style={styles.actionButton}
                   testID="action-close"
@@ -94,7 +97,7 @@ export function IncidentDetailScreen({
                 (incident.status === 'closed' || incident.status === 'resolved') && (
                   <Pressable
                     accessibilityRole="button"
-                    disabled={actionLoading}
+                    disabled={actionLoading || actionsBlocked}
                     onPress={() => onAction('reopen')}
                     style={styles.actionButton}
                     testID="action-reopen"

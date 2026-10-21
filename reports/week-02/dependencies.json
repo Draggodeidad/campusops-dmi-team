@@ -32,5 +32,46 @@
       "command": "npm run test:incidents",
       "evidence": "PASS course-tests/incidents.test.tsx: 2 pruebas exitosas. Se abrió INC-001 desde la lista, se verificó su detalle y se regresó; además GetIncidents/GetIncidentById funcionaron con un repositorio sustituto que implementa IncidentRepository."
     }
-  ]
+  ],
+  "followUpValidationW08": {
+    "commitSha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
+    "scope": "Additive architecture validation for #43; original W02 claims and SHA above remain historical.",
+    "command": "npm run test:architecture; npm run check:architecture",
+    "result": "Both exit 0; 2 architecture tests pass and import checker reports no violations.",
+    "evidence": "reports/week-08/persistence/architecture-tests.log and architecture.log",
+    "decision": "docs/adr/ADR-001-architecture.md — #43 appendix; docs/data-model.md"
+  },
+  "followUpValidations": [
+    {
+      "week": 8,
+      "issue": 44,
+      "commitSha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+      "generatedAt": "2026-10-21T06:59:09.886413+00:00",
+      "command": "npm run check:architecture",
+      "status": "pass",
+      "evidence": "reports/week-08/sync/architecture.log; tests del detector en reports/week-08/sync/architecture-tests.log.",
+      "scope": "Extensión de trazabilidad W08; observaciones y commitSha originales de W02 se conservan sin alteraciones."
+    }
+  ],
+  "followUpIntegrationW08": {
+    "commitSha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+    "scope": "Combined #43/#44 architecture validation; all previous entries retain their original SHA and observations.",
+    "result": "Architecture tests and checker exit 0; combined W08 aggregate exit 0.",
+    "evidence": "reports/week-08/persistence-integration/validation.json"
+  },
+  "followUpIssue45": {
+    "week": 8,
+    "issue": 45,
+    "commitSha": "99dd0dea54c60a1ac13ee074fb70a8ae751f7147",
+    "generatedAt": "2026-10-21T19:13:11.469989+00:00",
+    "scope": "Extensión aditiva de #45; conserva los valores/SHA históricos de W02 y de #43/#44.",
+    "requirement": "Conectar persistencia, sesión y sync sin invertir dependencias ni perder intención.",
+    "decision": "UI consume IncidentWorkspace; Application orquesta puertos, motor y sesión; Infrastructure implementa gateway verificado y recursos; App.tsx compone.",
+    "verification": {
+      "command": "npm run test:architecture; npm run check:architecture; npm run test:week-08:integration",
+      "result": "exit 0 en los tres comandos; detector sin violaciones, 2 pruebas de arquitectura y 24 de integración/gateway pasan.",
+      "evidence": "reports/week-08/app-integration/validation.json"
+    },
+    "engineeringEvidence": "evidence/week-08/integration-engineering.json"
+  }
 }
