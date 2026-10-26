@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "c90067719fa44fb4ef4cb932aaa0750fbe41b2f4",
+  "generatedAt": "2026-10-26T18:58:17.118265+00:00",
+  "checks": [
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-08/pr-review-integrated/architecture-tests.log; exit 0; Jest passed/total by invocation=[('2', '2')]",
+      "exitCode": 0,
+      "durationSeconds": 1.373
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-08/pr-review-integrated/architecture.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 0.216
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-08/pr-review-integrated/feedback.log; exit 0; Jest passed/total by invocation=[('87', '87')]",
+      "exitCode": 0,
+      "durationSeconds": 21.988
+    },
+    {
+      "id": "individual-contract-before-consolidation",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "python3 reports/week-08/pr56-review/validate-individual.py",
+      "evidence": "reports/week-08/pr-review-integrated/individual-contract-before-consolidation.log; exit 1",
+      "exitCode": 1,
+      "durationSeconds": 0.054
+    },
+    {
+      "id": "individual-contract",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 reports/week-08/pr56-review/validate-individual.py",
+      "evidence": "reports/week-08/pr-review-integrated/individual-contract.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 0.077
+    },
+    {
+      "id": "lint",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run lint",
+      "evidence": "reports/week-08/pr-review-integrated/lint.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 4.801
+    },
+    {
+      "id": "persistence",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]",
+      "exitCode": 0,
+      "durationSeconds": 2.183
+    },
+    {
+      "id": "preserved-boundaries",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code 129694e0544b9857a4ed52a3101aa24bb2bddf2b -- src course-tests/public course-tests/week-08-workspace-owner.test.ts course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts .github/workflows package-lock.json",
+      "evidence": "reports/week-08/pr-review-integrated/preserved-boundaries.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 0.004
+    },
+    {
+      "id": "provenance-audit",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 reports/week-08/pr56-review/audit.py",
+      "evidence": "reports/week-08/pr-review-integrated/provenance-audit.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 0.103
+    },
+    {
+      "id": "public-w08-before-consolidation",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "evidence": "reports/week-08/pr-review-integrated/public-w08-before-consolidation.log; exit 2; Jest passed/total by invocation=[('90', '90')]",
+      "exitCode": 2,
+      "durationSeconds": 17.087
+    },
+    {
+      "id": "public-w08",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "make public-test-week-08",
+      "evidence": "reports/week-08/pr-review-integrated/public-w08.log; exit 0; Jest passed/total by invocation=[('90', '90')]",
+      "exitCode": 0,
+      "durationSeconds": 18.364
+    },
+    {
+      "id": "runner-routing",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "python3 /tmp/campusops-w08-review/check-runners.py /home/dragodeidad/.codex/worktrees/w08-integrated-verification/campusops-dmi-team",
+      "evidence": "reports/week-08/pr-review-integrated/runner-routing.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 0.037
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-08/pr-review-integrated/session-readiness.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 0.74
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-08/pr-review-integrated/session.log; exit 0; Jest passed/total by invocation=[('31', '31')]",
+      "exitCode": 0,
+      "durationSeconds": 3.302
+    },
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "evidence": "reports/week-08/pr-review-integrated/setup.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 12.908
+    },
+    {
+      "id": "sync",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:sync",
+      "evidence": "reports/week-08/pr-review-integrated/sync.log; exit 0; Jest passed/total by invocation=[('47', '47')]",
+      "exitCode": 0,
+      "durationSeconds": 1.765
+    },
+    {
+      "id": "typecheck",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run typecheck",
+      "evidence": "reports/week-08/pr-review-integrated/typecheck.log; exit 0",
+      "exitCode": 0,
+      "durationSeconds": 3.074
+    },
+    {
+      "id": "verify-w08",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-08",
+      "evidence": "reports/week-08/pr-review-integrated/verify-w08.log; exit 0; Jest passed/total by invocation=[('1', '1')]",
+      "exitCode": 0,
+      "durationSeconds": 14.135
+    },
+    {
+      "id": "week08-aggregate",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-08/pr-review-integrated/week08-aggregate.log; exit 0; Jest passed/total by invocation=[('3', '3'), ('30', '30'), ('47', '47'), ('24', '24'), ('3', '3')]",
+      "exitCode": 0,
+      "durationSeconds": 12.315
+    },
+    {
+      "id": "restart",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]; course-tests/week-08-persistence.test.ts A1: author/baseVersion, note/photo and exact FIFO survive reopening and child-process read"
+    },
+    {
+      "id": "migration-success",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]; B1: nonempty v1 to v2 retains snapshots, operations and indexed actor/base; user_version=2"
+    },
+    {
+      "id": "migration-version-boundary",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]; B2: repeated v2 no-op; downgrade and future v3 reject without modification"
+    },
+    {
+      "id": "migration-rollback",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]; C1 each: migration.afterSchema and migration.afterCopy roll back schema/rows/order/version and then recover"
+    },
+    {
+      "id": "write-rollback",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]; D1/D2/D3: change.afterSnapshot, enqueue.afterWrite and acknowledge.afterDelete leave no partial state"
+    },
+    {
+      "id": "identity-content",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:persistence",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]; E1/E2/E3: JSON key reorder replay is idempotent, changed body rejects, invalid/cyclic data rejects atomically, fixtures isolated"
+    },
+    {
+      "id": "same-field-equivalent-json",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:sync",
+      "evidence": "reports/week-08/pr-review-integrated/sync.log; exit 0; Jest passed/total by invocation=[('47', '47')]; E4 local/remote and remote/local: both branches replace old payload with distinct deeply equivalent objects with permuted nested keys, expected merged; frozen inputs and before/after snapshots preserved"
+    },
+    {
+      "id": "independent-merge",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-08:sync",
+      "evidence": "reports/week-08/pr-review-integrated/sync.log; exit 0; Jest passed/total by invocation=[('47', '47')]; D1/D2 independent changes merge; E2 local-only array reorder correctly merges"
+    },
+    {
+      "id": "reassignment-conflict",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:sync",
+      "evidence": "reports/week-08/pr-review-integrated/sync.log; exit 0; Jest passed/total by invocation=[('47', '47')]; H1 campus-inc-001 keeps work indivisible and all original inputs unchanged"
+    },
+    {
+      "id": "deduplication",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08:sync",
+      "evidence": "reports/week-08/pr-review-integrated/sync.log; exit 0; Jest passed/total by invocation=[('47', '47')]; J1/J2/J3: first exact identity and reference/FIFO preserved without mutation"
+    },
+    {
+      "id": "confirmed-replay",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-08/pr-review-integrated/week08-aggregate.log; exit 0; Jest passed/total by invocation=[('3', '3'), ('30', '30'), ('47', '47'), ('24', '24'), ('3', '3')]; week-08-integration.test.tsx: timeout_after_commit + reopen + exact replay gives one history effect before acknowledge; storage failure, 403/409, account change and newer remote state preserved"
+    }
+  ],
+  "composition": {
+    "base": "129694e0544b9857a4ed52a3101aa24bb2bddf2b",
+    "prHeads": {
+      "54": "e0577ed20044268bbfa037412d069023b263327b",
+      "55": "6c9e469151876b0f0eb2461102d020876a59ad93",
+      "56": "d29333a50d72d9f98e90acc4f8a9e01273bd050e"
+    },
+    "description": "Normal local merges of corrected PR54, PR55 and PR56; no GitHub PR merge."
+  },
+  "environment": {
+    "node": "v22.22.0",
+    "npm": "10.9.4",
+    "NODE_OPTIONS": "--experimental-sqlite",
+    "dependencies": "npm ci from unchanged package-lock.json"
+  },
+  "executor": "Codex technical reproduction at user request; no execution attributed to a student",
+  "moduleStatus": "pass",
+  "deliveryStatus": "incomplete",
+  "pending": [
+    "Third record recovered from JulianDele commit d7f388c8e2bd467e755048ea3be94710e0385bee: personal fields retained verbatim, incorrect owner SHA corrected and slot collision resolved. Provenance annotates the pre-commit explanation without inventing another. Structural validity is not personal corroboration; human review remains pending.",
+    "Original personal local logs for Osbaldo were not found in versioned reports/history or the three original CI artifacts; 4.416 s and 1.369 s remain uncorroborated claims. New runs are by Codex, not personal evidence.",
+    "Human review and explanations of contributions, including AI assistance, remain pending. Passing technical tests does not satisfy AC-05.",
+    "No final tag, GitHub merge, approval or Classroom submission. Delivery documented for 2026-10-26 23:59 America/Mexico_City.",
+    "Native Android integration not rerun here; Node SQLite on disk and Expo Android export do not certify installation/APK or native integration. Historical native evidence retains its source SHA."
+  ],
+  "negativeControl": {
+    "evidence": "reports/week-08/pr55-review/negative-json.log",
+    "sourceCommitSha": "7c06d0352e0af1becf8dfc5e285fbba6bdf441af",
+    "scope": "Historical controlled temporary mutation, not validation of this integrated SHA",
+    "observed": "2 failures in new E4 orders, 21 original cases pass; real implementation 23/23",
+    "productionUnchanged": true
+  },
+  "humanReview": "pending",
+  "aiAssistance": "Codex performed corrections, audit, execution and report preparation; Git authorship of original commits is preserved."
+}

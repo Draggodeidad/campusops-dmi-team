@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "c90067719fa44fb4ef4cb932aaa0750fbe41b2f4",
+  "generatedAt": "2026-10-26T18:58:17.118265+00:00",
+  "decision": "Conservar SQLite transaccional para snapshot y cola, archivos sintéticos durables y operaciones con autor/baseVersion/identidad estables. IncidentWorkspace persiste antes de enviar, verifica el recibo exacto y sólo entonces confirma/retiro; timeout, 403/409 o reasignación conservan la intención. resolveSync compara JSON por contenido profundo sin depender del orden de claves, mantiene el orden de arrays y trata work como un campo indivisible. Cambios independientes o concurrentes equivalentes se combinan; los incompatibles requieren lectura autorizada y decisión explícita. Reformular usa otro ID y conserva el original reviewed/superseded sin acknowledge. Los scripts por rutas explícitas incorporan las suites independientes sin modificar owner/públicas ni duplicarlas dentro del agregado/workflow.",
+  "alternatives": [
+    "Last-write-wins por reloj/versión simplificaría reconciliación, pero puede borrar intención offline o imponer una asignación obsoleta; se descarta.",
+    "Merge recursivo de work permitiría mezclar status local y técnico remoto en un estado nunca autorizado; se descarta a favor de conflicto del campo entero.",
+    "Enviar antes de persistir o separar snapshot/cola en preferencias reduciría orquestación, pero arriesga pérdida tras timeout o escrituras parciales; se conserva la transacción local y replay con recibo."
+  ],
+  "tradeoff": "Beneficio: rollback observable, recuperación después de reiniciar y replay estable sin pérdida silenciosa, duplicación remota o préstamo de identidad. Costo: almacenar base/local/remoto, copias durables y recibos; retener intenciones archivadas; pedir intervención al cambiar base/asignación. SQL y archivos/red no comparten transacción distribuida: pueden quedar archivos huérfanos, y no se implementa purga automática. La prueba en Node sustituye driver/archivos, no acredita por sí sola Expo nativo. Comparar JSON por contenido requiere recorrer su estructura; comparación por serialización sería más simple pero es incorrecta ante claves permutadas.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "npm run check:architecture",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/architecture.log; exit 0"
+    },
+    {
+      "command": "make feedback",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/feedback.log; exit 0; Jest passed/total by invocation=[('87', '87')]"
+    },
+    {
+      "command": "python3 reports/week-08/pr56-review/validate-individual.py",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/individual-contract.log; exit 0"
+    },
+    {
+      "command": "npm run test:week-08:persistence",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/persistence.log; exit 0; Jest passed/total by invocation=[('30', '30')]"
+    },
+    {
+      "command": "make public-test-week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/public-w08.log; exit 0; Jest passed/total by invocation=[('90', '90')]"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/session-readiness.log; exit 0"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/session.log; exit 0; Jest passed/total by invocation=[('31', '31')]"
+    },
+    {
+      "command": "make setup",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/setup.log; exit 0"
+    },
+    {
+      "command": "npm run test:week-08:sync",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/sync.log; exit 0; Jest passed/total by invocation=[('47', '47')]"
+    },
+    {
+      "command": "make verify-week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/verify-w08.log; exit 0; Jest passed/total by invocation=[('1', '1')]"
+    },
+    {
+      "command": "npm run test:week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/pr-review-integrated/week08-aggregate.log; exit 0; Jest passed/total by invocation=[('3', '3'), ('30', '30'), ('47', '47'), ('24', '24'), ('3', '3')]"
+    }
+  ],
+  "implementation": [
+    "src/infrastructure/persistence/SqliteLocalWorkspace.ts",
+    "src/application/sync/IncidentWorkspace.ts",
+    "src/application/sync/resolveSync.ts",
+    "src/infrastructure/sync/HttpIncidentSyncGateway.ts",
+    "App.tsx"
+  ],
+  "negativeControl": "reports/week-08/pr55-review/validation.json documenta un control histórico en una copia temporal (dos órdenes E4 fallan con JSON.stringify, 23/23 pasan con implementación real); no se aplica el mutante a este código.",
+  "humanReview": "pending",
+  "deliveryStatus": "incomplete",
+  "pending": [
+    "Third record recovered from JulianDele commit d7f388c8e2bd467e755048ea3be94710e0385bee: personal fields retained verbatim, incorrect owner SHA corrected and slot collision resolved. Provenance annotates the pre-commit explanation without inventing another. Structural validity is not personal corroboration; human review remains pending.",
+    "Original personal local logs for Osbaldo were not found in versioned reports/history or the three original CI artifacts; 4.416 s and 1.369 s remain uncorroborated claims. New runs are by Codex, not personal evidence.",
+    "Human review and explanations of contributions, including AI assistance, remain pending. Passing technical tests does not satisfy AC-05.",
+    "No final tag, GitHub merge, approval or Classroom submission. Delivery documented for 2026-10-26 23:59 America/Mexico_City.",
+    "Native Android integration not rerun here; Node SQLite on disk and Expo Android export do not certify installation/APK or native integration. Historical native evidence retains its source SHA."
+  ],
+  "aiAssistance": "Decisión basada en código/ADR existentes y nuevas verificaciones de Codex; no se atribuye comprensión ni ejecución personal a integrantes."
+}

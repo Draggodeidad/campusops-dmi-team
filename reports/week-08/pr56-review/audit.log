@@ -1,0 +1,10 @@
+{"command": ["python3", "reports/week-08/pr56-review/audit.py"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-pr56-fix/campusops-dmi-team", "commitSha": "da4b762aa28bb38c7fbfd5eada82032e681ca7e6", "startedAt": "2026-10-26T18:49:05.904805+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "?? reports/week-08/pr56-review/audit.py\n?? reports/week-08/pr56-review/validate-individual.py"}
+Auxiliary and consolidated Osbaldo records equal; other two records unchanged.
+{"sha": "300cd24123206448367bf9902766acb1c7f0f440", "author": "osbaldoXxC", "files": ["course-tests/week-08-persistence.test.ts"]}
+{"sha": "12189435eb1e59f4684efe237051186bc6abcb84", "author": "osbaldoXxC", "files": ["course-tests/week-08-sync-validation.test.ts"]}
+Julian candidate: d7f388c8e2bd467e755048ea3be94710e0385bee JulianDele week-08: checklist documental y evidencia individual
+Candidate wrongly references: f3bb0c9f5dfb86cf4987c207ecc08349597804e8 Draggodeidad docs(w08): use weekly individual format with blank companion sections
+Third record remains pending; no personal prediction/explanation invented.
+Scope: attribution and record equality only; original local logs and human corroboration remain pending.
+
+{"exitCode": 0, "durationSeconds": 0.095}
