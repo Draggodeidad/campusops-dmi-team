@@ -5,7 +5,8 @@ Rama fix/w08-final-evidence-issue-52 desde origin/main
 Draggodeidad <antonioimanol7@gmail.com> para autor y committer. No se cambia
 configuración, se reescribe historial ni se añade coautoría automática.
 
-Commit técnico evaluado: **8ed7bae94b91229f4399b3a85c13bf01054751e9**.
+Código/documentación: **8ed7bae94b91229f4399b3a85c13bf01054751e9**.
+SHA realmente evaluado después de archivar: **d7d28522da8c3e13bd189a9539fafde077cd214b**.
 validation.json y cada log identifican ese HEAD, fuente/documentos sin cambios
 locales, Node 22.22.0, npm 10.9.4, NODE_OPTIONS, checkout, tiempos y exits reales.
 Sólo se registran cambios en reports/evidence. Los 20 comandos pasan, incluido
@@ -22,7 +23,7 @@ capture-validation.py es el script utilizado para los 20 comandos. Recibe
 repositorio y directorio de salida. regenerate-observed.py verifica SHA actual,
 fuente limpia, comandos requeridos y exits reales antes de actualizar los dos
 índices canónicos. No actualiza evidencia individual ni crea referencias Git.
-previous-* son copias históricas de los índices anteriores; precommit/ conserva
+previous-* son copias históricas de los índices anteriores; el archivo histórico conserva
 la ejecución anterior a autorizar la identidad y comprometer los documentos,
 con hashes de cambios locales. Sus resultados no se reutilizan como actuales.
 
@@ -58,3 +59,8 @@ se encuentra dentro de ese archivo, además de permanecer en el historial Git.
 Se repite la validación sobre el commit que archiva esos registros y se genera
 un último commit exclusivo de evidencia con una lista de rutas menor.
 No se modifica ni debilita el evaluador, el workflow o la regla HEAD/padre.
+
+La repetición final también conservó un intento fallido de formato en
+retry-history.json (espacios finales del stdout de Jest); tras normalizar sólo
+las copias legibles, el mismo git diff --check pasó. Los bytes originales y
+las salidas del fallo quedan disponibles; no se eliminan aserciones ni controles.

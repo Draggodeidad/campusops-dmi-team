@@ -146,6 +146,7 @@
     "email": "antonioimanol7@gmail.com",
     "status": "authorized"
   },
-  "commitPushStatus": "Identity authorized; technical SHA validated; evidence-only commit prepared for PR. Publication state is recorded by actual GitHub PR, not inferred here.",
-  "technicalSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9"
+  "commitPushStatus": "Authorized human identity verified before commits; complete final capture observed; final evidence-only commit prepared for owner-reviewed PR.",
+  "technicalSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "codeDocumentationSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9"
 }

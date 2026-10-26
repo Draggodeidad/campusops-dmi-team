@@ -46,6 +46,8 @@ checks=[]
 for identifier, command, scenario in commands:
     if git('rev-parse','HEAD').strip() != sha:
         raise RuntimeError('HEAD changed while capturing; do not mix SHAs')
+    if identifier == 'patch-hygiene':
+        subprocess.run(['python3','reports/week-08/issue-52/format-logs.py'],cwd=repo,check=True)
     if identifier == 'public-w08':
         subprocess.run(['python3','reports/week-08/issue-52/regenerate-observed.py'],cwd=repo,check=True)
     started=dt.datetime.now(dt.timezone.utc).isoformat(); t=time.monotonic()

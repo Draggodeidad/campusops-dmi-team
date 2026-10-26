@@ -2,7 +2,7 @@
 
 **Entrega incompleta; no lista para etiquetar.** Preparación técnica para PR
 y revisión del owner. La identidad Git fue autorizada expresamente en este chat.
-El commit técnico es 8ed7bae94b91229f4399b3a85c13bf01054751e9; el siguiente
+El SHA realmente evaluado es d7d28522da8c3e13bd189a9539fafde077cd214b; el siguiente
 commit de entrega sólo contiene reports/ y evidence/. No fusionar ni etiquetar
 automáticamente. La URL y el SHA del PR se consultan en GitHub.
 
@@ -48,7 +48,7 @@ La nueva guía docs/week-08-delivery.md desarrolla el procedimiento manual compl
 Node v22.22.0, npm 10.9.4, NODE_OPTIONS=--experimental-sqlite, npm ci y lockfile
 intacto. validation.json incluye ruta, fechas, duración, entorno, HEAD,
 estado limpio de fuente/documentos, comando y exit de cada ejecución.
-La reproducción precommit anterior permanece en precommit/ con sus hashes;
+La reproducción precommit anterior permanece dentro de before-final-capture.tar.gz;
 no se presenta como validación del SHA técnico.
 Todos los comandos siguientes terminaron con **exit 0**:
 
@@ -93,7 +93,8 @@ asistencia material de IA queda declarada y no se atribuyen nuevas ejecuciones
 personales a estudiantes. Se conservan historial, tags y trabajo local ajeno.
 
 Base origin/main inspeccionada: **749b171b1c57a6215810dca5da376b0f288bd732**.
-SHA técnico realmente evaluado: **8ed7bae94b91229f4399b3a85c13bf01054751e9**.
+SHA de código/documentación: **8ed7bae94b91229f4399b3a85c13bf01054751e9**.
+SHA realmente evaluado tras archivar: **d7d28522da8c3e13bd189a9539fafde077cd214b**.
 Los reportes y engineering registran ese SHA. El commit posterior exclusivo de
 reports/evidence lo conserva como padre directo; su propio SHA se obtiene de
 Git, evitando una autorreferencia imposible en los archivos comprometidos.
@@ -102,7 +103,7 @@ Todavía no existe SHA definitivo de main tras revisión y merge de este PR.
 El índice anterior referenciaba ee37a64408b05fd910b51e350e45c6c2bfc38f6b,
 padre inmediato de 749b171, una relación válida en el main inspeccionado.
 Las copias previous-* conservan esos resultados históricos. Los logs actuales
-son ejecuciones nuevas sobre 8ed7bae en este checkout, sin documentos ni código
+son ejecuciones nuevas sobre d7d2852 en este checkout, sin documentos ni código
 sin commit; sólo se modifican reportes/evidencias para registrar resultados.
 
 Publicar la rama sin force y abrir el PR con el título pedido; no fusionarlo ni
@@ -150,3 +151,8 @@ se encuentra dentro de ese archivo, además de permanecer en el historial Git.
 Se repite la validación sobre el commit que archiva esos registros y se genera
 un último commit exclusivo de evidencia con una lista de rutas menor.
 No se modifica ni debilita el evaluador, el workflow o la regla HEAD/padre.
+
+La repetición final también conservó un intento fallido de formato en
+retry-history.json (espacios finales del stdout de Jest); tras normalizar sólo
+las copias legibles, el mismo git diff --check pasó. Los bytes originales y
+las salidas del fallo quedan disponibles; no se eliminan aserciones ni controles.

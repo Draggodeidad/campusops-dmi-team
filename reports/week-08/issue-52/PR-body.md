@@ -6,7 +6,7 @@ contrato académico ni pruebas.
 
 Se corrige documentación que aún presentaba #43–#45 como trabajo futuro y se
 añade el procedimiento manual de congelación. Los índices oficiales enlazan
-nuevas ejecuciones sobre el commit técnico `8ed7bae94b91229f4399b3a85c13bf01054751e9`,
+nuevas ejecuciones sobre el SHA `d7d28522da8c3e13bd189a9539fafde077cd214b`,
 con fuente/documentos sin cambios locales. El commit posterior sólo contiene
 reports/evidence y conserva ese SHA como padre directo. Los resultados
 precommit y los índices anteriores se archivan con su procedencia.
@@ -40,3 +40,11 @@ pero informa 8 high; no se cambian versiones ni umbrales para ocultarlos.
 Relacionado con #52; **no cerrar automáticamente**. Entrega incompleta hasta
 revisión humana y congelación real. Guía: docs/week-08-delivery.md e informe
 reports/week-08/issue-52/final-report.md.
+
+La validación posterior al primer commit de evidencias encontró un límite real
+del evaluador: recorta a 3000 caracteres la lista de rutas, que ocupaba 3330 y
+partía un nombre. Se preserva el fallo en sha-path-diagnosis.json y se agrupan
+69 artefactos históricos byte por byte en before-final-capture.tar.gz, con
+manifest de hashes y commits anteriores intactos. Se repiten todos los checks
+en el SHA posterior al archivo; el último commit sólo cambia evidencias y su
+lista de rutas cabe completa en el evaluador original. No se modifica el gate.

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "week": 8,
-  "commitSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9",
-  "generatedAt": "2026-10-26T19:42:54.521790+00:00",
+  "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "generatedAt": "2026-10-26T19:50:07.142787+00:00",
   "decision": "Conservar SQLite transaccional para snapshot y cola, archivos sintéticos durables y operaciones con autor/baseVersion/identidad estables. IncidentWorkspace persiste antes de enviar, verifica el recibo exacto y sólo entonces confirma/retiro; timeout, 403/409 o reasignación conservan la intención. resolveSync compara JSON por contenido profundo sin depender del orden de claves, mantiene el orden de arrays y trata work como un campo indivisible. Cambios independientes o concurrentes equivalentes se combinan; los incompatibles requieren lectura autorizada y decisión explícita. Reformular usa otro ID y conserva el original reviewed/superseded sin acknowledge. Los scripts por rutas explícitas incorporan las suites independientes sin modificar owner/públicas ni duplicarlas dentro del agregado/workflow.",
   "alternatives": [
     "Last-write-wins por reloj/versión simplificaría reconciliación, pero puede borrar intención offline o imponer una asignación obsoleta; se descarta.",
@@ -111,12 +111,12 @@
     {
       "command": "git diff --check",
       "result": "pass; exit 0",
-      "evidence": "reports/week-08/issue-52/patch-hygiene.log; exit 0; Jest passed/total per invocation=[]"
+      "evidence": "reports/week-08/issue-52/patch-hygiene.log; exit 0 after readable log whitespace normalization; original failure preserved in retry-history.json and raw gzip"
     },
     {
       "command": "make public-test-week-08",
       "result": "pass; exit 0",
-      "evidence": "reports/week-08/issue-52/public-w08.log; exit 0; Jest passed/total per invocation=[('90', '90')]"
+      "evidence": "reports/week-08/issue-52/public-w08.log; official public run after consolidating actual SHA evidence"
     }
   ],
   "implementation": [

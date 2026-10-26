@@ -1,4 +1,4 @@
-{"command": ["npm", "run", "test:week-08:sync"], "startedAt": "2026-10-26T19:41:38.106559+00:00", "schemaVersion": 1, "week": 8, "commitSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
+{"command": ["npm", "run", "test:week-08:sync"], "startedAt": "2026-10-26T19:47:35.928010+00:00", "schemaVersion": 1, "week": 8, "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
 
 > dmi-react-native-starter@1.0.0 test:week-08:sync
 > jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts course-tests/week-08-sync-validation.test.ts
@@ -10,7 +10,7 @@ PASS course-tests/week-08-sync.test.ts
 Test Suites: 3 passed, 3 total
 Tests:       47 passed, 47 total
 Snapshots:   0 total
-Time:        1.003 s
+Time:        1.122 s
 Ran all test suites within paths "course-tests/week-08-sync.test.ts", "course-tests/week-08-sync-composition.test.ts", "course-tests/week-08-sync-validation.test.ts".
 
-{"exitCode": 0, "durationSeconds": 1.86}
+{"exitCode": 0, "durationSeconds": 2.204}
