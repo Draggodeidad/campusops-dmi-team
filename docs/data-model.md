@@ -98,7 +98,9 @@ preservan filas y requieren diagnóstico; no se "reparan" eliminando cola.
 ## Factory y comprobación reproducible
 
 Node **22.22.0**, `make setup` y `npm run test:week-08:persistence` ejecutan
-`course-tests/week-08-workspace-owner.test.ts`. La factory de #42 recibe
+`course-tests/week-08-workspace-owner.test.ts` y la suite independiente
+`course-tests/week-08-persistence.test.ts` de #47, con rutas explícitas.
+El agregado W08 y su workflow invocan ese mismo script. La factory de #42 recibe
 `createNodeWorkspace(options)`: el **mismo adaptador SQL de producción** sobre
 SQLite Node en disco, cambiando únicamente driver y operaciones de archivos.
 `reopen` crea instancia nueva sobre el mismo recurso; `cleanup` sólo retira
