@@ -1,0 +1,1895 @@
+﻿2026-10-24T05:13:36.2797242Z Current runner version: '2.338.0'
+2026-10-24T05:13:36.2823718Z ##[group]Runner Image Provisioner
+2026-10-24T05:13:36.2824955Z Hosted Compute Agent
+2026-10-24T05:13:36.2825638Z Version: 20261012.601
+2026-10-24T05:13:36.2826374Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-24T05:13:36.2827106Z Build Date: 2026-10-12T17:48:21Z
+2026-10-24T05:13:36.2827863Z Worker ID: {eb9d2e73-a0e1-4c1a-bd8c-7003eda51371}
+2026-10-24T05:13:36.2828601Z Region: centralus
+2026-10-24T05:13:36.2829197Z Cloud: Azure
+2026-10-24T05:13:36.2829778Z ##[endgroup]
+2026-10-24T05:13:36.2831346Z ##[group]Operating System
+2026-10-24T05:13:36.2831990Z Ubuntu
+2026-10-24T05:13:36.2832609Z 24.04.5
+2026-10-24T05:13:36.2833163Z LTS
+2026-10-24T05:13:36.2833710Z ##[endgroup]
+2026-10-24T05:13:36.2834291Z ##[group]Runner Image
+2026-10-24T05:13:36.2835262Z Image: ubuntu-24.04
+2026-10-24T05:13:36.2835935Z Version: 20261012.334.1
+2026-10-24T05:13:36.2837250Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-24T05:13:36.2838852Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-24T05:13:36.2839848Z ##[endgroup]
+2026-10-24T05:13:36.2841035Z ##[group]GITHUB_TOKEN Permissions
+2026-10-24T05:13:36.2843368Z Contents: read
+2026-10-24T05:13:36.2844095Z Metadata: read
+2026-10-24T05:13:36.2845042Z ##[endgroup]
+2026-10-24T05:13:36.2847453Z Secret source: Actions
+2026-10-24T05:13:36.2848524Z Cache mode: write
+2026-10-24T05:13:36.2849354Z Prepare workflow directory
+2026-10-24T05:13:36.3301381Z Prepare all required actions
+2026-10-24T05:13:36.3377556Z Getting action download info
+2026-10-24T05:13:36.5861918Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-24T05:13:36.7015602Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-24T05:13:36.8031442Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-24T05:13:37.0152956Z Complete job name: evaluate
+2026-10-24T05:13:37.1159873Z ##[group]Run actions/checkout@v4
+2026-10-24T05:13:37.1161225Z with:
+2026-10-24T05:13:37.1161949Z   ref: 12189435eb1e59f4684efe237051186bc6abcb84
+2026-10-24T05:13:37.1162891Z   fetch-depth: 0
+2026-10-24T05:13:37.1163613Z   fetch-tags: true
+2026-10-24T05:13:37.1164130Z   repository: Draggodeidad/campusops-dmi-team
+2026-10-24T05:13:37.1168456Z   token: ***
+2026-10-24T05:13:37.1168894Z   ssh-strict: true
+2026-10-24T05:13:37.1169329Z   ssh-user: git
+2026-10-24T05:13:37.1169772Z   persist-credentials: true
+2026-10-24T05:13:37.1170259Z   clean: true
+2026-10-24T05:13:37.1170712Z   sparse-checkout-cone-mode: true
+2026-10-24T05:13:37.1171232Z   show-progress: true
+2026-10-24T05:13:37.1171674Z   lfs: false
+2026-10-24T05:13:37.1172080Z   submodules: false
+2026-10-24T05:13:37.1172535Z   set-safe-directory: true
+2026-10-24T05:13:37.1173037Z   allow-unsafe-pr-checkout: false
+2026-10-24T05:13:37.1174007Z ##[endgroup]
+2026-10-24T05:13:37.2268356Z Syncing repository: Draggodeidad/campusops-dmi-team
+2026-10-24T05:13:37.2270362Z ##[group]Getting Git version info
+2026-10-24T05:13:37.2271201Z Working directory is '/home/runner/work/campusops-dmi-team/campusops-dmi-team'
+2026-10-24T05:13:37.2272643Z [command]/usr/bin/git version
+2026-10-24T05:13:37.2393855Z git version 2.55.0
+2026-10-24T05:13:37.2429444Z ##[endgroup]
+2026-10-24T05:13:37.2459476Z Temporarily overriding HOME='/home/runner/work/_temp/9eb0c55d-7151-4611-b51d-7ee2324c2451' before making global git config changes
+2026-10-24T05:13:37.2478796Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-24T05:13:37.2481112Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/campusops-dmi-team/campusops-dmi-team
+2026-10-24T05:13:37.2528547Z Deleting the contents of '/home/runner/work/campusops-dmi-team/campusops-dmi-team'
+2026-10-24T05:13:37.2536844Z ##[group]Initializing the repository
+2026-10-24T05:13:37.2539476Z [command]/usr/bin/git init /home/runner/work/campusops-dmi-team/campusops-dmi-team
+2026-10-24T05:13:37.2679672Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-24T05:13:37.2699024Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-24T05:13:37.2700699Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-24T05:13:37.2702337Z hint: call:
+2026-10-24T05:13:37.2702974Z hint:
+2026-10-24T05:13:37.2703773Z hint: 	git config --global init.defaultBranch <name>
+2026-10-24T05:13:37.2704964Z hint:
+2026-10-24T05:13:37.2705960Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-24T05:13:37.2707502Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-24T05:13:37.2708732Z hint:
+2026-10-24T05:13:37.2709466Z hint: 	git branch -m <name>
+2026-10-24T05:13:37.2710259Z hint:
+2026-10-24T05:13:37.2711259Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-24T05:13:37.2713192Z Initialized empty Git repository in /home/runner/work/campusops-dmi-team/campusops-dmi-team/.git/
+2026-10-24T05:13:37.2716573Z [command]/usr/bin/git remote add origin https://github.com/Draggodeidad/campusops-dmi-team
+2026-10-24T05:13:37.2769312Z ##[endgroup]
+2026-10-24T05:13:37.2770620Z ##[group]Disabling automatic garbage collection
+2026-10-24T05:13:37.2774064Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-24T05:13:37.2820480Z ##[endgroup]
+2026-10-24T05:13:37.2821671Z ##[group]Setting up auth
+2026-10-24T05:13:37.2831038Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-24T05:13:37.2891033Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-24T05:13:37.3380487Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-24T05:13:37.3423924Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-24T05:13:37.3688838Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-24T05:13:37.3806525Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-24T05:13:37.3984451Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-24T05:13:37.4030609Z ##[endgroup]
+2026-10-24T05:13:37.4031515Z ##[group]Fetching the repository
+2026-10-24T05:13:37.4041679Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+2026-10-24T05:13:38.0997081Z From https://github.com/Draggodeidad/campusops-dmi-team
+2026-10-24T05:13:38.0998284Z  * [new branch]      ci-fix                  -> origin/ci-fix
+2026-10-24T05:13:38.0999284Z  * [new branch]      codex/week-06-main-recovery -> origin/codex/week-06-main-recovery
+2026-10-24T05:13:38.1000303Z  * [new branch]      evidencia-final         -> origin/evidencia-final
+2026-10-24T05:13:38.1001208Z  * [new branch]      feat/fetch-depth        -> origin/feat/fetch-depth
+2026-10-24T05:13:38.1002133Z  * [new branch]      feat/week-01            -> origin/feat/week-01
+2026-10-24T05:13:38.1003090Z  * [new branch]      feat/week-01-JulianDele -> origin/feat/week-01-JulianDele
+2026-10-24T05:13:38.1004157Z  * [new branch]      feat/week-01-cierre     -> origin/feat/week-01-cierre
+2026-10-24T05:13:38.1005707Z  * [new branch]      feat/week-01-evidencias -> origin/feat/week-01-evidencias
+2026-10-24T05:13:38.1007891Z  * [new branch]      feat/week-01-guide      -> origin/feat/week-01-guide
+2026-10-24T05:13:38.1009115Z  * [new branch]      feat/week-01-juliandele -> origin/feat/week-01-juliandele
+2026-10-24T05:13:38.1010380Z  * [new branch]      feat/week-01-osbaldoXxC -> origin/feat/week-01-osbaldoXxC
+2026-10-24T05:13:38.1011513Z  * [new branch]      feat/week-02-arquitectura-justificable -> origin/feat/week-02-arquitectura-justificable
+2026-10-24T05:13:38.1012750Z  * [new branch]      feat/week-03-ci-secret-scanning -> origin/feat/week-03-ci-secret-scanning
+2026-10-24T05:13:38.1013891Z  * [new branch]      feat/week-03-failure-path -> origin/feat/week-03-failure-path
+2026-10-24T05:13:38.1015571Z  * [new branch]      feat/week-04-seguridad-privacidad -> origin/feat/week-04-seguridad-privacidad
+2026-10-24T05:13:38.1017232Z  * [new branch]      feat/week-04-validacion-seguridad-juliandele -> origin/feat/week-04-validacion-seguridad-juliandele
+2026-10-24T05:13:38.1018826Z  * [new branch]      feat/week-05-baseline-contracts-issue-27 -> origin/feat/week-05-baseline-contracts-issue-27
+2026-10-24T05:13:38.1020291Z  * [new branch]      feat/week-05-juliandele-contract-validation -> origin/feat/week-05-juliandele-contract-validation
+2026-10-24T05:13:38.1021595Z  * [new branch]      feat/week-06-baseline-interfaces -> origin/feat/week-06-baseline-interfaces
+2026-10-24T05:13:38.1022816Z  * [new branch]      feat/week-08-baseline-persistencia-sync -> origin/feat/week-08-baseline-persistencia-sync
+2026-10-24T05:13:38.1024285Z  * [new branch]      feat/week-08-evidence-osbaldoxxc-issue-49 -> origin/feat/week-08-evidence-osbaldoxxc-issue-49
+2026-10-24T05:13:38.1026106Z  * [new branch]      feat/week-08-persistence-tests-issue-47 -> origin/feat/week-08-persistence-tests-issue-47
+2026-10-24T05:13:38.1027329Z  * [new branch]      feat/week-08-sync-tests-issue-48 -> origin/feat/week-08-sync-tests-issue-48
+2026-10-24T05:13:38.1028444Z  * [new branch]      fix/week-02-evidence-after-merge -> origin/fix/week-02-evidence-after-merge
+2026-10-24T05:13:38.1030212Z  * [new branch]      fix/week-02-final-sha-align -> origin/fix/week-02-final-sha-align
+2026-10-24T05:13:38.1031954Z  * [new branch]      fix/week-02-tag-ref-checkout -> origin/fix/week-02-tag-ref-checkout
+2026-10-24T05:13:38.1033671Z  * [new branch]      fix/week-04-evidence-ci -> origin/fix/week-04-evidence-ci
+2026-10-24T05:13:38.1035368Z  * [new branch]      main                    -> origin/main
+2026-10-24T05:13:38.1036743Z  * [new branch]      prueba                  -> origin/prueba
+2026-10-24T05:13:38.1038302Z  * [new branch]      week4/security-audit-Imanol -> origin/week4/security-audit-Imanol
+2026-10-24T05:13:38.1040069Z  * [new branch]      week4/security-audit-osbaldo -> origin/week4/security-audit-osbaldo
+2026-10-24T05:13:38.1041683Z  * [new tag]         week-01-final           -> week-01-final
+2026-10-24T05:13:38.1042988Z  * [new tag]         week-02-final           -> week-02-final
+2026-10-24T05:13:38.1044271Z  * [new tag]         week-03-final           -> week-03-final
+2026-10-24T05:13:38.1045772Z  * [new tag]         week-04-final           -> week-04-final
+2026-10-24T05:13:38.1046964Z  * [new tag]         week-05-final           -> week-05-final
+2026-10-24T05:13:38.1048102Z  * [new tag]         week-06-final           -> week-06-final
+2026-10-24T05:13:38.1051018Z [command]/usr/bin/git rev-parse --verify --quiet 12189435eb1e59f4684efe237051186bc6abcb84^{object}
+2026-10-24T05:13:38.1059358Z 12189435eb1e59f4684efe237051186bc6abcb84
+2026-10-24T05:13:38.1067217Z ##[endgroup]
+2026-10-24T05:13:38.1068421Z ##[group]Determining the checkout info
+2026-10-24T05:13:38.1069825Z ##[endgroup]
+2026-10-24T05:13:38.1077828Z [command]/usr/bin/git sparse-checkout disable
+2026-10-24T05:13:38.1144064Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-24T05:13:38.1188454Z ##[group]Checking out the ref
+2026-10-24T05:13:38.1194087Z [command]/usr/bin/git checkout --progress --force 12189435eb1e59f4684efe237051186bc6abcb84
+2026-10-24T05:13:38.1534114Z Note: switching to '12189435eb1e59f4684efe237051186bc6abcb84'.
+2026-10-24T05:13:38.1535255Z 
+2026-10-24T05:13:38.1535871Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-24T05:13:38.1537648Z changes and commit them, and you can discard any commits you make in this
+2026-10-24T05:13:38.1539054Z state without impacting any branches by switching back to a branch.
+2026-10-24T05:13:38.1539866Z 
+2026-10-24T05:13:38.1540424Z If you want to create a new branch to retain commits you create, you may
+2026-10-24T05:13:38.1541743Z do so (now or later) by using -c with the switch command. Example:
+2026-10-24T05:13:38.1542568Z 
+2026-10-24T05:13:38.1542933Z   git switch -c <new-branch-name>
+2026-10-24T05:13:38.1543501Z 
+2026-10-24T05:13:38.1543868Z Or undo this operation with:
+2026-10-24T05:13:38.1544395Z 
+2026-10-24T05:13:38.1545001Z   git switch -
+2026-10-24T05:13:38.1545727Z 
+2026-10-24T05:13:38.1546881Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-24T05:13:38.1548592Z 
+2026-10-24T05:13:38.1549837Z HEAD is now at 1218943 test(w08): validate sync merge conflicts and deduplication (#48)
+2026-10-24T05:13:38.1561784Z ##[endgroup]
+2026-10-24T05:13:38.1609065Z [command]/usr/bin/git log -1 --format=%H
+2026-10-24T05:13:38.1638177Z 12189435eb1e59f4684efe237051186bc6abcb84
+2026-10-24T05:13:38.2030183Z ##[group]Run actions/setup-node@v4
+2026-10-24T05:13:38.2031480Z with:
+2026-10-24T05:13:38.2032412Z   node-version: 22.22.0
+2026-10-24T05:13:38.2033462Z   cache: npm
+2026-10-24T05:13:38.2034439Z   always-auth: false
+2026-10-24T05:13:38.2035872Z   check-latest: false
+2026-10-24T05:13:38.2047345Z   token: ***
+2026-10-24T05:13:38.2048322Z ##[endgroup]
+2026-10-24T05:13:38.3534131Z Attempting to download 22.22.0...
+2026-10-24T05:13:38.3652880Z (node:2362) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-24T05:13:38.3658231Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-24T05:13:39.1117350Z Acquiring 22.22.0 - x64 from https://github.com/actions/node-versions/releases/download/22.22.0-20981702931/node-22.22.0-linux-x64.tar.gz
+2026-10-24T05:13:39.6843803Z Extracting ...
+2026-10-24T05:13:39.6990387Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/c3efb233-4eca-4003-bd67-e5c48fbdab1c -f /home/runner/work/_temp/6f6dbb84-db69-47e7-8823-368b735d5dd2
+2026-10-24T05:13:40.9096551Z Adding to the cache ...
+2026-10-24T05:13:42.9906445Z ##[group]Environment details
+2026-10-24T05:13:43.2354155Z node: v22.22.0
+2026-10-24T05:13:43.2355111Z npm: 10.9.4
+2026-10-24T05:13:43.2355552Z yarn: 1.22.22
+2026-10-24T05:13:43.2356698Z ##[endgroup]
+2026-10-24T05:13:43.2376692Z [command]/opt/hostedtoolcache/node/22.22.0/x64/bin/npm config get cache
+2026-10-24T05:13:43.3371698Z /home/runner/.npm
+2026-10-24T05:13:43.4915408Z Cache hit for: node-cache-Linux-x64-npm-64939143e8744547ec39b2ab447a545135364e2116c127c46d4bdc4cdf2b061c
+2026-10-24T05:13:43.5041562Z (node:2362) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-24T05:13:44.6351572Z Received 104857600 of 169593150 (61.8%), 99.9 MBs/sec
+2026-10-24T05:13:45.1099100Z Received 169593150 of 169593150 (100.0%), 109.6 MBs/sec
+2026-10-24T05:13:45.1099826Z Cache Size: ~162 MB (169593150 B)
+2026-10-24T05:13:45.1133292Z [command]/usr/bin/tar -xf /home/runner/work/_temp/4742746d-fb48-4350-8f09-618a68dfb87d/cache.tzst -P -C /home/runner/work/campusops-dmi-team/campusops-dmi-team --use-compress-program unzstd
+2026-10-24T05:13:45.5261161Z Cache restored successfully
+2026-10-24T05:13:45.5347527Z Cache restored from key: node-cache-Linux-x64-npm-64939143e8744547ec39b2ab447a545135364e2116c127c46d4bdc4cdf2b061c
+2026-10-24T05:13:45.5580855Z ##[group]Run make setup
+2026-10-24T05:13:45.5581192Z [36;1mmake setup[0m
+2026-10-24T05:13:45.5887565Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:13:45.5887958Z ##[endgroup]
+2026-10-24T05:13:45.6040331Z npm ci
+2026-10-24T05:13:49.7108578Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-10-24T05:13:49.9224158Z npm warn deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+2026-10-24T05:13:49.9499095Z npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+2026-10-24T05:13:50.0921125Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-24T05:13:50.0961474Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-24T05:13:50.0970083Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-24T05:13:50.1024413Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-24T05:13:50.1948996Z npm warn deprecated domexception@4.0.0: Use your platform's native DOMException instead
+2026-10-24T05:13:53.1625546Z npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-10-24T05:13:57.2476514Z 
+2026-10-24T05:13:57.2477419Z added 975 packages, and audited 976 packages in 12s
+2026-10-24T05:13:57.2477899Z 
+2026-10-24T05:13:57.2478183Z 185 packages are looking for funding
+2026-10-24T05:13:57.2478699Z   run `npm fund` for details
+2026-10-24T05:13:57.2727717Z 
+2026-10-24T05:13:57.2728946Z 8 high severity vulnerabilities
+2026-10-24T05:13:57.2729241Z 
+2026-10-24T05:13:57.2729488Z To address issues that do not require attention, run:
+2026-10-24T05:13:57.2729832Z   npm audit fix
+2026-10-24T05:13:57.2729963Z 
+2026-10-24T05:13:57.2730196Z To address all issues (including breaking changes), run:
+2026-10-24T05:13:57.2730547Z   npm audit fix --force
+2026-10-24T05:13:57.2730702Z 
+2026-10-24T05:13:57.2730831Z Run `npm audit` for details.
+2026-10-24T05:13:57.3768498Z ##[group]Run npm run bundle:release
+2026-10-24T05:13:57.3768847Z [36;1mnpm run bundle:release[0m
+2026-10-24T05:13:57.3838194Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:13:57.3838491Z ##[endgroup]
+2026-10-24T05:13:57.4883293Z 
+2026-10-24T05:13:57.4884106Z > dmi-react-native-starter@1.0.0 bundle:release
+2026-10-24T05:13:57.4885067Z > expo export --platform android --output-dir dist/export
+2026-10-24T05:13:57.4885505Z 
+2026-10-24T05:13:58.1852968Z Starting Metro Bundler
+2026-10-24T05:13:58.1853371Z 
+2026-10-24T05:14:10.5695625Z Android Bundled 12118ms index.ts (667 modules)
+2026-10-24T05:14:10.5731889Z 
+2026-10-24T05:14:10.5747143Z › android bundles (1):
+2026-10-24T05:14:10.6032736Z _expo/static/js/android/index-2f1f522ff20ff78262282600960cee81.hbc (1.8MB)
+2026-10-24T05:14:10.6033454Z 
+2026-10-24T05:14:10.6167720Z › Files (1):
+2026-10-24T05:14:10.6169711Z metadata.json (150B)
+2026-10-24T05:14:10.6233759Z 
+2026-10-24T05:14:10.6240057Z Exported: dist/export
+2026-10-24T05:14:10.6776269Z ##[group]Run npm run test:week-06
+2026-10-24T05:14:10.6776672Z [36;1mnpm run test:week-06[0m
+2026-10-24T05:14:10.6867973Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:10.6868469Z ##[endgroup]
+2026-10-24T05:14:10.7974168Z 
+2026-10-24T05:14:10.7975582Z > dmi-react-native-starter@1.0.0 test:week-06
+2026-10-24T05:14:10.7977657Z > jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-06.test.ts course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/week-06-integration-regression.test.tsx
+2026-10-24T05:14:10.7979613Z 
+2026-10-24T05:14:14.1262112Z PASS course-tests/week-06-session-validation.test.ts
+2026-10-24T05:14:15.7815965Z (node:2482) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-10-24T05:14:15.7817803Z (Use `node --trace-warnings ...` to show where the warning was created)
+2026-10-24T05:14:19.8743421Z PASS course-tests/week-06-integration-regression.test.tsx (5.723 s)
+2026-10-24T05:14:20.0168763Z   ● Console
+2026-10-24T05:14:20.0169191Z 
+2026-10-24T05:14:20.0169366Z     console.error
+2026-10-24T05:14:20.0170086Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0170730Z       
+2026-10-24T05:14:20.0171500Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0172246Z       
+2026-10-24T05:14:20.0172596Z       act(() => {
+2026-10-24T05:14:20.0173069Z         /* fire events that update state */
+2026-10-24T05:14:20.0173596Z       });
+2026-10-24T05:14:20.0174024Z       /* assert on the output */
+2026-10-24T05:14:20.0174461Z       
+2026-10-24T05:14:20.0176971Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0177934Z 
+2026-10-24T05:14:20.0179152Z     [0m [90m 83 |[39m     [36mlet[39m previousGeneration [33m=[39m sessionController[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0180968Z      [90m 84 |[39m     [36mconst[39m unsubscribe [33m=[39m sessionController[33m.[39msubscribe((snapshot) [33m=>[39m {
+2026-10-24T05:14:20.0182254Z     [31m[1m>[22m[39m[90m 85 |[39m       setSession(snapshot)[33m;[39m
+2026-10-24T05:14:20.0183063Z      [90m    |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0184129Z      [90m 86 |[39m       [36mif[39m (snapshot[33m.[39mgeneration [33m!==[39m previousGeneration) {
+2026-10-24T05:14:20.0185867Z      [90m 87 |[39m         previousGeneration [33m=[39m snapshot[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0187037Z      [90m 88 |[39m         setSelectedIncident([36mnull[39m)[33m;[39m[0m
+2026-10-24T05:14:20.0187557Z 
+2026-10-24T05:14:20.0188097Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0189419Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0190998Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0192580Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0194101Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0196028Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0197223Z       at setSession (src/ui/CampusOpsApp.tsx:85:7)
+2026-10-24T05:14:20.0198391Z       at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+2026-10-24T05:14:20.0199846Z       at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+2026-10-24T05:14:20.0201714Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0202931Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0203484Z 
+2026-10-24T05:14:20.0203659Z     console.error
+2026-10-24T05:14:20.0204320Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0205727Z       
+2026-10-24T05:14:20.0206482Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0207249Z       
+2026-10-24T05:14:20.0207600Z       act(() => {
+2026-10-24T05:14:20.0208054Z         /* fire events that update state */
+2026-10-24T05:14:20.0208568Z       });
+2026-10-24T05:14:20.0208979Z       /* assert on the output */
+2026-10-24T05:14:20.0209418Z       
+2026-10-24T05:14:20.0210502Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0211430Z 
+2026-10-24T05:14:20.0212443Z     [0m [90m 155 |[39m       [36mconst[39m incident [33m=[39m [36mawait[39m getIncidentById[33m.[39mexecute(id)[33m;[39m
+2026-10-24T05:14:20.0213904Z      [90m 156 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m
+2026-10-24T05:14:20.0215354Z     [31m[1m>[22m[39m[90m 157 |[39m       setSelectedIncident(incident)[33m;[39m
+2026-10-24T05:14:20.0216259Z      [90m     |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0217744Z      [90m 158 |[39m       [36mif[39m (incident [33m===[39m [36mnull[39m) setDetailError([32m'La incidencia solicitada no existe.'[39m)[33m;[39m
+2026-10-24T05:14:20.0219235Z      [90m 159 |[39m     } [36mcatch[39m (error[33m:[39m unknown) {
+2026-10-24T05:14:20.0220965Z      [90m 160 |[39m       [36mif[39m (isCurrent(generation)) setDetailError(presentIncidentFailure(error[33m,[39m [32m'detail'[39m))[33m;[39m[0m
+2026-10-24T05:14:20.0221941Z 
+2026-10-24T05:14:20.0222545Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0223930Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0235619Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0236627Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0237504Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0238341Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0238981Z       at setSelectedIncident (src/ui/CampusOpsApp.tsx:157:7)
+2026-10-24T05:14:20.0239579Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0240238Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0240558Z 
+2026-10-24T05:14:20.0240685Z     console.error
+2026-10-24T05:14:20.0241111Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0241534Z       
+2026-10-24T05:14:20.0241989Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0242460Z       
+2026-10-24T05:14:20.0242695Z       act(() => {
+2026-10-24T05:14:20.0243017Z         /* fire events that update state */
+2026-10-24T05:14:20.0243355Z       });
+2026-10-24T05:14:20.0243634Z       /* assert on the output */
+2026-10-24T05:14:20.0243933Z       
+2026-10-24T05:14:20.0244879Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0245465Z 
+2026-10-24T05:14:20.0245715Z     [0m [90m 166 |[39m       }
+2026-10-24T05:14:20.0246408Z      [90m 167 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0247169Z     [31m[1m>[22m[39m[90m 168 |[39m       [36mif[39m (isCurrent(generation)) setDetailLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0247868Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0248288Z      [90m 169 |[39m     }
+2026-10-24T05:14:20.0248639Z      [90m 170 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0249137Z      [90m 171 |[39m[0m
+2026-10-24T05:14:20.0249309Z 
+2026-10-24T05:14:20.0249634Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0250378Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0251264Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0252164Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0253014Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0253840Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0254458Z       at setDetailLoading (src/ui/CampusOpsApp.tsx:168:34)
+2026-10-24T05:14:20.0255333Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0255999Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0256314Z 
+2026-10-24T05:14:20.0256443Z     console.error
+2026-10-24T05:14:20.0256854Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0257271Z       
+2026-10-24T05:14:20.0257711Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0258173Z       
+2026-10-24T05:14:20.0258413Z       act(() => {
+2026-10-24T05:14:20.0258723Z         /* fire events that update state */
+2026-10-24T05:14:20.0259051Z       });
+2026-10-24T05:14:20.0259330Z       /* assert on the output */
+2026-10-24T05:14:20.0259640Z       
+2026-10-24T05:14:20.0260292Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0260856Z 
+2026-10-24T05:14:20.0261478Z     [0m [90m 252 |[39m       [36mconst[39m updated [33m=[39m [36mawait[39m performIncidentAction[33m.[39mexecute(actionPayload)[33m;[39m
+2026-10-24T05:14:20.0262387Z      [90m 253 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m
+2026-10-24T05:14:20.0263064Z     [31m[1m>[22m[39m[90m 254 |[39m       setSelectedIncident(updated)[33m;[39m
+2026-10-24T05:14:20.0263584Z      [90m     |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0264078Z      [90m 255 |[39m       [36mawait[39m refreshIncidents()[33m;[39m
+2026-10-24T05:14:20.0264792Z      [90m 256 |[39m     } [36mcatch[39m (err[33m:[39m unknown) {
+2026-10-24T05:14:20.0265668Z      [90m 257 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m[0m
+2026-10-24T05:14:20.0266042Z 
+2026-10-24T05:14:20.0266365Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0267116Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0268006Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0268898Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0269755Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0270721Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0271353Z       at setSelectedIncident (src/ui/CampusOpsApp.tsx:254:7)
+2026-10-24T05:14:20.0271946Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0272602Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0272916Z 
+2026-10-24T05:14:20.0273150Z     console.error
+2026-10-24T05:14:20.0273551Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0273964Z       
+2026-10-24T05:14:20.0274395Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0275197Z       
+2026-10-24T05:14:20.0275438Z       act(() => {
+2026-10-24T05:14:20.0275750Z         /* fire events that update state */
+2026-10-24T05:14:20.0276070Z       });
+2026-10-24T05:14:20.0276339Z       /* assert on the output */
+2026-10-24T05:14:20.0276637Z       
+2026-10-24T05:14:20.0277281Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0277818Z 
+2026-10-24T05:14:20.0278253Z     [0m [90m 134 |[39m   [36mconst[39m refreshIncidents [33m=[39m [36masync[39m () [33m=>[39m {
+2026-10-24T05:14:20.0279244Z      [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0280082Z     [31m[1m>[22m[39m[90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0280589Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0281062Z      [90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0281500Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0282177Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m[0m
+2026-10-24T05:14:20.0282656Z 
+2026-10-24T05:14:20.0282969Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0283767Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0284797Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0285702Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0286584Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0287396Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0288014Z       at setListLoading (src/ui/CampusOpsApp.tsx:136:5)
+2026-10-24T05:14:20.0288595Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0289233Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0289790Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0290321Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0290782Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0291221Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0291805Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0292435Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0292935Z 
+2026-10-24T05:14:20.0293055Z     console.error
+2026-10-24T05:14:20.0293457Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0293863Z       
+2026-10-24T05:14:20.0294301Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0295064Z       
+2026-10-24T05:14:20.0295313Z       act(() => {
+2026-10-24T05:14:20.0295629Z         /* fire events that update state */
+2026-10-24T05:14:20.0295958Z       });
+2026-10-24T05:14:20.0296232Z       /* assert on the output */
+2026-10-24T05:14:20.0296535Z       
+2026-10-24T05:14:20.0297182Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0297849Z 
+2026-10-24T05:14:20.0298470Z     [0m [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0299252Z      [90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0299834Z     [31m[1m>[22m[39m[90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0300332Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0300736Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0301401Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0302189Z      [90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m[0m
+2026-10-24T05:14:20.0302552Z 
+2026-10-24T05:14:20.0302867Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0303604Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0304482Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0305686Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0306540Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0307364Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0307961Z       at setListError (src/ui/CampusOpsApp.tsx:137:5)
+2026-10-24T05:14:20.0308527Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0309167Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0309724Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0310257Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0310717Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0311145Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0311726Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0312355Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0312671Z 
+2026-10-24T05:14:20.0312786Z     console.error
+2026-10-24T05:14:20.0313196Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0313608Z       
+2026-10-24T05:14:20.0314039Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0314503Z       
+2026-10-24T05:14:20.0315000Z       act(() => {
+2026-10-24T05:14:20.0315315Z         /* fire events that update state */
+2026-10-24T05:14:20.0315633Z       });
+2026-10-24T05:14:20.0315913Z       /* assert on the output */
+2026-10-24T05:14:20.0316202Z       
+2026-10-24T05:14:20.0316844Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0317383Z 
+2026-10-24T05:14:20.0317600Z     [0m [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0318268Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0319251Z     [31m[1m>[22m[39m[90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m
+2026-10-24T05:14:20.0319910Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0320440Z      [90m 141 |[39m     } [36mcatch[39m (error[33m:[39m unknown) {
+2026-10-24T05:14:20.0321312Z      [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0322173Z      [90m 143 |[39m     } [36mfinally[39m {[0m
+2026-10-24T05:14:20.0322404Z 
+2026-10-24T05:14:20.0322701Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0323441Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0324329Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0325485Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0326357Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0327171Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0327786Z       at setIncidents (src/ui/CampusOpsApp.tsx:140:34)
+2026-10-24T05:14:20.0328353Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0328992Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0329310Z 
+2026-10-24T05:14:20.0329428Z     console.error
+2026-10-24T05:14:20.0329832Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0330240Z       
+2026-10-24T05:14:20.0330687Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0331191Z       
+2026-10-24T05:14:20.0331513Z       act(() => {
+2026-10-24T05:14:20.0331944Z         /* fire events that update state */
+2026-10-24T05:14:20.0332280Z       });
+2026-10-24T05:14:20.0332550Z       /* assert on the output */
+2026-10-24T05:14:20.0332840Z       
+2026-10-24T05:14:20.0333487Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0334025Z 
+2026-10-24T05:14:20.0334942Z     [0m [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0335706Z      [90m 143 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0336416Z     [31m[1m>[22m[39m[90m 144 |[39m       [36mif[39m (isCurrent(generation)) setListLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0337102Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0337514Z      [90m 145 |[39m     }
+2026-10-24T05:14:20.0337861Z      [90m 146 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0338192Z      [90m 147 |[39m[0m
+2026-10-24T05:14:20.0338365Z 
+2026-10-24T05:14:20.0338680Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0339411Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0340295Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0341190Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0342047Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0343078Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0343929Z       at setListLoading (src/ui/CampusOpsApp.tsx:144:34)
+2026-10-24T05:14:20.0345290Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0346413Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0346951Z 
+2026-10-24T05:14:20.0347125Z     console.error
+2026-10-24T05:14:20.0348022Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0348726Z       
+2026-10-24T05:14:20.0349452Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0350216Z       
+2026-10-24T05:14:20.0350557Z       act(() => {
+2026-10-24T05:14:20.0351042Z         /* fire events that update state */
+2026-10-24T05:14:20.0351545Z       });
+2026-10-24T05:14:20.0351948Z       /* assert on the output */
+2026-10-24T05:14:20.0352393Z       
+2026-10-24T05:14:20.0353480Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0354420Z 
+2026-10-24T05:14:20.0354983Z     [0m [90m 262 |[39m       }
+2026-10-24T05:14:20.0355631Z      [90m 263 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0356855Z     [31m[1m>[22m[39m[90m 264 |[39m       [36mif[39m (isCurrent(generation)) setActionLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0358061Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0358719Z      [90m 265 |[39m     }
+2026-10-24T05:14:20.0359258Z      [90m 266 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0359783Z      [90m 267 |[39m[0m
+2026-10-24T05:14:20.0360052Z 
+2026-10-24T05:14:20.0360580Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0361876Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0363421Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0375599Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0377261Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0378775Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0379849Z       at setActionLoading (src/ui/CampusOpsApp.tsx:264:34)
+2026-10-24T05:14:20.0380809Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0381897Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0382454Z 
+2026-10-24T05:14:20.0382633Z     console.error
+2026-10-24T05:14:20.0383331Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0384003Z       
+2026-10-24T05:14:20.0384974Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0385807Z       
+2026-10-24T05:14:20.0386143Z       act(() => {
+2026-10-24T05:14:20.0386625Z         /* fire events that update state */
+2026-10-24T05:14:20.0387130Z       });
+2026-10-24T05:14:20.0387558Z       /* assert on the output */
+2026-10-24T05:14:20.0388007Z       
+2026-10-24T05:14:20.0389109Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0390061Z 
+2026-10-24T05:14:20.0391256Z     [0m [90m 252 |[39m       [36mconst[39m updated [33m=[39m [36mawait[39m performIncidentAction[33m.[39mexecute(actionPayload)[33m;[39m
+2026-10-24T05:14:20.0392873Z      [90m 253 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m
+2026-10-24T05:14:20.0394391Z     [31m[1m>[22m[39m[90m 254 |[39m       setSelectedIncident(updated)[33m;[39m
+2026-10-24T05:14:20.0395592Z      [90m     |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0396446Z      [90m 255 |[39m       [36mawait[39m refreshIncidents()[33m;[39m
+2026-10-24T05:14:20.0397356Z      [90m 256 |[39m     } [36mcatch[39m (err[33m:[39m unknown) {
+2026-10-24T05:14:20.0398090Z      [90m 257 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m[0m
+2026-10-24T05:14:20.0398891Z 
+2026-10-24T05:14:20.0399227Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0399979Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0400870Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0401766Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0402621Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0403885Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0405132Z       at setSelectedIncident (src/ui/CampusOpsApp.tsx:254:7)
+2026-10-24T05:14:20.0406111Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0407162Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0407682Z 
+2026-10-24T05:14:20.0407840Z     console.error
+2026-10-24T05:14:20.0408329Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0408739Z       
+2026-10-24T05:14:20.0409175Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0409645Z       
+2026-10-24T05:14:20.0409889Z       act(() => {
+2026-10-24T05:14:20.0410202Z         /* fire events that update state */
+2026-10-24T05:14:20.0410530Z       });
+2026-10-24T05:14:20.0410827Z       /* assert on the output */
+2026-10-24T05:14:20.0411130Z       
+2026-10-24T05:14:20.0411786Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0412322Z 
+2026-10-24T05:14:20.0412794Z     [0m [90m 134 |[39m   [36mconst[39m refreshIncidents [33m=[39m [36masync[39m () [33m=>[39m {
+2026-10-24T05:14:20.0413758Z      [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0414878Z     [31m[1m>[22m[39m[90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0415426Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0415907Z      [90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0416368Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0417058Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m[0m
+2026-10-24T05:14:20.0417480Z 
+2026-10-24T05:14:20.0417790Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0418529Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0419405Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0420286Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0421137Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0421946Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0423004Z       at setListLoading (src/ui/CampusOpsApp.tsx:136:5)
+2026-10-24T05:14:20.0423640Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0424297Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0425150Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0425837Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0426301Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0426737Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0427311Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0427936Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0428258Z 
+2026-10-24T05:14:20.0428378Z     console.error
+2026-10-24T05:14:20.0428796Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0429209Z       
+2026-10-24T05:14:20.0429653Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0430108Z       
+2026-10-24T05:14:20.0430337Z       act(() => {
+2026-10-24T05:14:20.0430643Z         /* fire events that update state */
+2026-10-24T05:14:20.0430966Z       });
+2026-10-24T05:14:20.0431252Z       /* assert on the output */
+2026-10-24T05:14:20.0431542Z       
+2026-10-24T05:14:20.0432193Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0432720Z 
+2026-10-24T05:14:20.0433360Z     [0m [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0434140Z      [90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0434977Z     [31m[1m>[22m[39m[90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0435506Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0435911Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0436562Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0437907Z      [90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m[0m
+2026-10-24T05:14:20.0438513Z 
+2026-10-24T05:14:20.0439043Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0440296Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0441856Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0443462Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0445289Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0446798Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0447879Z       at setListError (src/ui/CampusOpsApp.tsx:137:5)
+2026-10-24T05:14:20.0448864Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0449949Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0450885Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0451782Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0452564Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0453284Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0454532Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0455891Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0456446Z 
+2026-10-24T05:14:20.0456612Z     console.error
+2026-10-24T05:14:20.0457264Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0457934Z       
+2026-10-24T05:14:20.0458927Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0459685Z       
+2026-10-24T05:14:20.0460026Z       act(() => {
+2026-10-24T05:14:20.0460485Z         /* fire events that update state */
+2026-10-24T05:14:20.0460980Z       });
+2026-10-24T05:14:20.0461390Z       /* assert on the output */
+2026-10-24T05:14:20.0461825Z       
+2026-10-24T05:14:20.0462918Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0463857Z 
+2026-10-24T05:14:20.0464298Z     [0m [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0465744Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0467200Z     [31m[1m>[22m[39m[90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m
+2026-10-24T05:14:20.0468250Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0469123Z      [90m 141 |[39m     } [36mcatch[39m (error[33m:[39m unknown) {
+2026-10-24T05:14:20.0470656Z      [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0471957Z      [90m 143 |[39m     } [36mfinally[39m {[0m
+2026-10-24T05:14:20.0472338Z 
+2026-10-24T05:14:20.0472845Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0474115Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0475873Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0477409Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0478884Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0480306Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0481312Z       at setIncidents (src/ui/CampusOpsApp.tsx:140:34)
+2026-10-24T05:14:20.0482280Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0483377Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0483916Z 
+2026-10-24T05:14:20.0484088Z     console.error
+2026-10-24T05:14:20.0484935Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0485683Z       
+2026-10-24T05:14:20.0486401Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0487157Z       
+2026-10-24T05:14:20.0487491Z       act(() => {
+2026-10-24T05:14:20.0487948Z         /* fire events that update state */
+2026-10-24T05:14:20.0488549Z       });
+2026-10-24T05:14:20.0488962Z       /* assert on the output */
+2026-10-24T05:14:20.0489409Z       
+2026-10-24T05:14:20.0490546Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0491448Z 
+2026-10-24T05:14:20.0492673Z     [0m [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0493931Z      [90m 143 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0495776Z     [31m[1m>[22m[39m[90m 144 |[39m       [36mif[39m (isCurrent(generation)) setListLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0496992Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0497637Z      [90m 145 |[39m     }
+2026-10-24T05:14:20.0498194Z      [90m 146 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0498949Z      [90m 147 |[39m[0m
+2026-10-24T05:14:20.0499204Z 
+2026-10-24T05:14:20.0499740Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0501033Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0502598Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0504186Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0505961Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0507424Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0508480Z       at setListLoading (src/ui/CampusOpsApp.tsx:144:34)
+2026-10-24T05:14:20.0509458Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0510562Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0511116Z 
+2026-10-24T05:14:20.0511283Z     console.error
+2026-10-24T05:14:20.0511940Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0512616Z       
+2026-10-24T05:14:20.0513334Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0514093Z       
+2026-10-24T05:14:20.0514421Z       act(() => {
+2026-10-24T05:14:20.0515167Z         /* fire events that update state */
+2026-10-24T05:14:20.0515671Z       });
+2026-10-24T05:14:20.0516077Z       /* assert on the output */
+2026-10-24T05:14:20.0516536Z       
+2026-10-24T05:14:20.0517649Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0518594Z 
+2026-10-24T05:14:20.0518903Z     [0m [90m 262 |[39m       }
+2026-10-24T05:14:20.0519531Z      [90m 263 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0520751Z     [31m[1m>[22m[39m[90m 264 |[39m       [36mif[39m (isCurrent(generation)) setActionLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0521911Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0522358Z      [90m 265 |[39m     }
+2026-10-24T05:14:20.0522708Z      [90m 266 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0523044Z      [90m 267 |[39m[0m
+2026-10-24T05:14:20.0523220Z 
+2026-10-24T05:14:20.0523551Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0524311Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0525536Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0526458Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0527316Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0528133Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0528749Z       at setActionLoading (src/ui/CampusOpsApp.tsx:264:34)
+2026-10-24T05:14:20.0529330Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0530201Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0530529Z 
+2026-10-24T05:14:20.0530653Z     console.error
+2026-10-24T05:14:20.0531063Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0531482Z       
+2026-10-24T05:14:20.0531926Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0532385Z       
+2026-10-24T05:14:20.0532795Z       act(() => {
+2026-10-24T05:14:20.0533105Z         /* fire events that update state */
+2026-10-24T05:14:20.0533431Z       });
+2026-10-24T05:14:20.0533710Z       /* assert on the output */
+2026-10-24T05:14:20.0534008Z       
+2026-10-24T05:14:20.0535041Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0535610Z 
+2026-10-24T05:14:20.0536248Z     [0m [90m 83 |[39m     [36mlet[39m previousGeneration [33m=[39m sessionController[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0537283Z      [90m 84 |[39m     [36mconst[39m unsubscribe [33m=[39m sessionController[33m.[39msubscribe((snapshot) [33m=>[39m {
+2026-10-24T05:14:20.0538060Z     [31m[1m>[22m[39m[90m 85 |[39m       setSession(snapshot)[33m;[39m
+2026-10-24T05:14:20.0538557Z      [90m    |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0539200Z      [90m 86 |[39m       [36mif[39m (snapshot[33m.[39mgeneration [33m!==[39m previousGeneration) {
+2026-10-24T05:14:20.0539967Z      [90m 87 |[39m         previousGeneration [33m=[39m snapshot[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0540629Z      [90m 88 |[39m         setSelectedIncident([36mnull[39m)[33m;[39m[0m
+2026-10-24T05:14:20.0540924Z 
+2026-10-24T05:14:20.0541246Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0541978Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0542871Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0543765Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0544872Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0545840Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0546458Z       at setSession (src/ui/CampusOpsApp.tsx:85:7)
+2026-10-24T05:14:20.0547144Z       at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+2026-10-24T05:14:20.0547990Z       at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+2026-10-24T05:14:20.0548734Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0549374Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0549689Z 
+2026-10-24T05:14:20.0549813Z     console.error
+2026-10-24T05:14:20.0550222Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0550638Z       
+2026-10-24T05:14:20.0551075Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0551540Z       
+2026-10-24T05:14:20.0551776Z       act(() => {
+2026-10-24T05:14:20.0552078Z         /* fire events that update state */
+2026-10-24T05:14:20.0552399Z       });
+2026-10-24T05:14:20.0552678Z       /* assert on the output */
+2026-10-24T05:14:20.0552967Z       
+2026-10-24T05:14:20.0553609Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0554144Z 
+2026-10-24T05:14:20.0555182Z     [0m [90m 155 |[39m       [36mconst[39m incident [33m=[39m [36mawait[39m getIncidentById[33m.[39mexecute(id)[33m;[39m
+2026-10-24T05:14:20.0556074Z      [90m 156 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m
+2026-10-24T05:14:20.0556750Z     [31m[1m>[22m[39m[90m 157 |[39m       setSelectedIncident(incident)[33m;[39m
+2026-10-24T05:14:20.0557265Z      [90m     |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0558208Z      [90m 158 |[39m       [36mif[39m (incident [33m===[39m [36mnull[39m) setDetailError([32m'La incidencia solicitada no existe.'[39m)[33m;[39m
+2026-10-24T05:14:20.0558981Z      [90m 159 |[39m     } [36mcatch[39m (error[33m:[39m unknown) {
+2026-10-24T05:14:20.0559884Z      [90m 160 |[39m       [36mif[39m (isCurrent(generation)) setDetailError(presentIncidentFailure(error[33m,[39m [32m'detail'[39m))[33m;[39m[0m
+2026-10-24T05:14:20.0560438Z 
+2026-10-24T05:14:20.0560742Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0561477Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0562351Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0563239Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0564098Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0565113Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0565746Z       at setSelectedIncident (src/ui/CampusOpsApp.tsx:157:7)
+2026-10-24T05:14:20.0566340Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0566967Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0567287Z 
+2026-10-24T05:14:20.0567417Z     console.error
+2026-10-24T05:14:20.0567831Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0568369Z       
+2026-10-24T05:14:20.0568809Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0569268Z       
+2026-10-24T05:14:20.0569500Z       act(() => {
+2026-10-24T05:14:20.0569806Z         /* fire events that update state */
+2026-10-24T05:14:20.0570139Z       });
+2026-10-24T05:14:20.0570418Z       /* assert on the output */
+2026-10-24T05:14:20.0570707Z       
+2026-10-24T05:14:20.0571349Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0571881Z 
+2026-10-24T05:14:20.0572064Z     [0m [90m 166 |[39m       }
+2026-10-24T05:14:20.0572450Z      [90m 167 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0573169Z     [31m[1m>[22m[39m[90m 168 |[39m       [36mif[39m (isCurrent(generation)) setDetailLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0573860Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0574262Z      [90m 169 |[39m     }
+2026-10-24T05:14:20.0574897Z      [90m 170 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0575276Z      [90m 171 |[39m[0m
+2026-10-24T05:14:20.0575456Z 
+2026-10-24T05:14:20.0575772Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0576518Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0577399Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0578295Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0579298Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0580116Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0580732Z       at setDetailLoading (src/ui/CampusOpsApp.tsx:168:34)
+2026-10-24T05:14:20.0581313Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0581950Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0582393Z 
+2026-10-24T05:14:20.0582514Z     console.error
+2026-10-24T05:14:20.0582917Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0583328Z       
+2026-10-24T05:14:20.0583765Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0584228Z       
+2026-10-24T05:14:20.0584456Z       act(() => {
+2026-10-24T05:14:20.0584912Z         /* fire events that update state */
+2026-10-24T05:14:20.0585262Z       });
+2026-10-24T05:14:20.0585540Z       /* assert on the output */
+2026-10-24T05:14:20.0585831Z       
+2026-10-24T05:14:20.0586478Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0587017Z 
+2026-10-24T05:14:20.0587615Z     [0m [90m 252 |[39m       [36mconst[39m updated [33m=[39m [36mawait[39m performIncidentAction[33m.[39mexecute(actionPayload)[33m;[39m
+2026-10-24T05:14:20.0588513Z      [90m 253 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m
+2026-10-24T05:14:20.0589180Z     [31m[1m>[22m[39m[90m 254 |[39m       setSelectedIncident(updated)[33m;[39m
+2026-10-24T05:14:20.0589687Z      [90m     |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0590191Z      [90m 255 |[39m       [36mawait[39m refreshIncidents()[33m;[39m
+2026-10-24T05:14:20.0590730Z      [90m 256 |[39m     } [36mcatch[39m (err[33m:[39m unknown) {
+2026-10-24T05:14:20.0591390Z      [90m 257 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m[0m
+2026-10-24T05:14:20.0591765Z 
+2026-10-24T05:14:20.0592076Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0592810Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0593695Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0594813Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0595698Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0596516Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0597144Z       at setSelectedIncident (src/ui/CampusOpsApp.tsx:254:7)
+2026-10-24T05:14:20.0597742Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0598380Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0598699Z 
+2026-10-24T05:14:20.0598815Z     console.error
+2026-10-24T05:14:20.0599219Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0599633Z       
+2026-10-24T05:14:20.0600066Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0600523Z       
+2026-10-24T05:14:20.0600760Z       act(() => {
+2026-10-24T05:14:20.0601062Z         /* fire events that update state */
+2026-10-24T05:14:20.0601388Z       });
+2026-10-24T05:14:20.0601664Z       /* assert on the output */
+2026-10-24T05:14:20.0601952Z       
+2026-10-24T05:14:20.0602736Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0603279Z 
+2026-10-24T05:14:20.0603721Z     [0m [90m 134 |[39m   [36mconst[39m refreshIncidents [33m=[39m [36masync[39m () [33m=>[39m {
+2026-10-24T05:14:20.0604823Z      [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0605649Z     [31m[1m>[22m[39m[90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0606292Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0606759Z      [90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0607204Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0607892Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m[0m
+2026-10-24T05:14:20.0608321Z 
+2026-10-24T05:14:20.0608624Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0609364Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0610239Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0611151Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0612203Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0613151Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0614075Z       at setListLoading (src/ui/CampusOpsApp.tsx:136:5)
+2026-10-24T05:14:20.0615087Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0615959Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0616658Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0617348Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0617926Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0618462Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0619213Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0633941Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0634774Z 
+2026-10-24T05:14:20.0634977Z     console.error
+2026-10-24T05:14:20.0635619Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0636077Z       
+2026-10-24T05:14:20.0636540Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0637018Z       
+2026-10-24T05:14:20.0637256Z       act(() => {
+2026-10-24T05:14:20.0637595Z         /* fire events that update state */
+2026-10-24T05:14:20.0637930Z       });
+2026-10-24T05:14:20.0638206Z       /* assert on the output */
+2026-10-24T05:14:20.0638512Z       
+2026-10-24T05:14:20.0639169Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0639712Z 
+2026-10-24T05:14:20.0640434Z     [0m [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0641216Z      [90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0641815Z     [31m[1m>[22m[39m[90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0642325Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0642734Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0643731Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0644821Z      [90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m[0m
+2026-10-24T05:14:20.0645256Z 
+2026-10-24T05:14:20.0645581Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0646325Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0647388Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0648292Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0649142Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0649946Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0650549Z       at setListError (src/ui/CampusOpsApp.tsx:137:5)
+2026-10-24T05:14:20.0651113Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0651746Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0652296Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0652825Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0653288Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0653722Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0654297Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0655291Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0655616Z 
+2026-10-24T05:14:20.0655731Z     console.error
+2026-10-24T05:14:20.0656153Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0656564Z       
+2026-10-24T05:14:20.0656993Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0657454Z       
+2026-10-24T05:14:20.0657683Z       act(() => {
+2026-10-24T05:14:20.0657980Z         /* fire events that update state */
+2026-10-24T05:14:20.0658299Z       });
+2026-10-24T05:14:20.0658573Z       /* assert on the output */
+2026-10-24T05:14:20.0658860Z       
+2026-10-24T05:14:20.0659505Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0660045Z 
+2026-10-24T05:14:20.0660284Z     [0m [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0660960Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0661814Z     [31m[1m>[22m[39m[90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m
+2026-10-24T05:14:20.0662469Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0663001Z      [90m 141 |[39m     } [36mcatch[39m (error[33m:[39m unknown) {
+2026-10-24T05:14:20.0663882Z      [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0664761Z      [90m 143 |[39m     } [36mfinally[39m {[0m
+2026-10-24T05:14:20.0665004Z 
+2026-10-24T05:14:20.0665306Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0666050Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0666924Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0667975Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0668840Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0669656Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0670261Z       at setIncidents (src/ui/CampusOpsApp.tsx:140:34)
+2026-10-24T05:14:20.0670834Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0671605Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0671928Z 
+2026-10-24T05:14:20.0672050Z     console.error
+2026-10-24T05:14:20.0672458Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0672866Z       
+2026-10-24T05:14:20.0673308Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0673762Z       
+2026-10-24T05:14:20.0674000Z       act(() => {
+2026-10-24T05:14:20.0674307Z         /* fire events that update state */
+2026-10-24T05:14:20.0674917Z       });
+2026-10-24T05:14:20.0675207Z       /* assert on the output */
+2026-10-24T05:14:20.0675498Z       
+2026-10-24T05:14:20.0676150Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0676683Z 
+2026-10-24T05:14:20.0677339Z     [0m [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0678089Z      [90m 143 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0678791Z     [31m[1m>[22m[39m[90m 144 |[39m       [36mif[39m (isCurrent(generation)) setListLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0679468Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0679878Z      [90m 145 |[39m     }
+2026-10-24T05:14:20.0680226Z      [90m 146 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0680562Z      [90m 147 |[39m[0m
+2026-10-24T05:14:20.0680735Z 
+2026-10-24T05:14:20.0681047Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0681777Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0682657Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0683551Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0684394Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0685408Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0686019Z       at setListLoading (src/ui/CampusOpsApp.tsx:144:34)
+2026-10-24T05:14:20.0686600Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0687236Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0687543Z 
+2026-10-24T05:14:20.0687664Z     console.error
+2026-10-24T05:14:20.0688065Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0688493Z       
+2026-10-24T05:14:20.0688921Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0689376Z       
+2026-10-24T05:14:20.0689608Z       act(() => {
+2026-10-24T05:14:20.0689912Z         /* fire events that update state */
+2026-10-24T05:14:20.0690231Z       });
+2026-10-24T05:14:20.0690501Z       /* assert on the output */
+2026-10-24T05:14:20.0690800Z       
+2026-10-24T05:14:20.0691434Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0691985Z 
+2026-10-24T05:14:20.0692332Z     [0m [90m 262 |[39m       }
+2026-10-24T05:14:20.0692755Z      [90m 263 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0693481Z     [31m[1m>[22m[39m[90m 264 |[39m       [36mif[39m (isCurrent(generation)) setActionLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0694999Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0695935Z      [90m 265 |[39m     }
+2026-10-24T05:14:20.0696449Z      [90m 266 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0696922Z      [90m 267 |[39m[0m
+2026-10-24T05:14:20.0697161Z 
+2026-10-24T05:14:20.0697639Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0698781Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0700175Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0701683Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0703085Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0704441Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0705705Z       at setActionLoading (src/ui/CampusOpsApp.tsx:264:34)
+2026-10-24T05:14:20.0706614Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0707645Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0708151Z 
+2026-10-24T05:14:20.0708310Z     console.error
+2026-10-24T05:14:20.0708904Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0709523Z       
+2026-10-24T05:14:20.0710214Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0710943Z       
+2026-10-24T05:14:20.0711288Z       act(() => {
+2026-10-24T05:14:20.0711780Z         /* fire events that update state */
+2026-10-24T05:14:20.0712268Z       });
+2026-10-24T05:14:20.0712668Z       /* assert on the output */
+2026-10-24T05:14:20.0713122Z       
+2026-10-24T05:14:20.0714201Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0715355Z 
+2026-10-24T05:14:20.0716469Z     [0m [90m 252 |[39m       [36mconst[39m updated [33m=[39m [36mawait[39m performIncidentAction[33m.[39mexecute(actionPayload)[33m;[39m
+2026-10-24T05:14:20.0717945Z      [90m 253 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m
+2026-10-24T05:14:20.0719013Z     [31m[1m>[22m[39m[90m 254 |[39m       setSelectedIncident(updated)[33m;[39m
+2026-10-24T05:14:20.0719816Z      [90m     |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0720591Z      [90m 255 |[39m       [36mawait[39m refreshIncidents()[33m;[39m
+2026-10-24T05:14:20.0721473Z      [90m 256 |[39m     } [36mcatch[39m (err[33m:[39m unknown) {
+2026-10-24T05:14:20.0722165Z      [90m 257 |[39m       [36mif[39m ([33m![39misCurrent(generation)) [36mreturn[39m[33m;[39m[0m
+2026-10-24T05:14:20.0722535Z 
+2026-10-24T05:14:20.0722921Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0723686Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0724789Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0725744Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0726935Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0727765Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0728390Z       at setSelectedIncident (src/ui/CampusOpsApp.tsx:254:7)
+2026-10-24T05:14:20.0728998Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0729638Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0730106Z 
+2026-10-24T05:14:20.0730222Z     console.error
+2026-10-24T05:14:20.0730644Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0731057Z       
+2026-10-24T05:14:20.0731501Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0731967Z       
+2026-10-24T05:14:20.0732198Z       act(() => {
+2026-10-24T05:14:20.0732503Z         /* fire events that update state */
+2026-10-24T05:14:20.0732824Z       });
+2026-10-24T05:14:20.0733110Z       /* assert on the output */
+2026-10-24T05:14:20.0733403Z       
+2026-10-24T05:14:20.0734044Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0734757Z 
+2026-10-24T05:14:20.0735238Z     [0m [90m 134 |[39m   [36mconst[39m refreshIncidents [33m=[39m [36masync[39m () [33m=>[39m {
+2026-10-24T05:14:20.0736204Z      [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0737037Z     [31m[1m>[22m[39m[90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0737545Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0738013Z      [90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0738460Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0739148Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m[0m
+2026-10-24T05:14:20.0739579Z 
+2026-10-24T05:14:20.0739892Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0740664Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0741553Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0742454Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0743302Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0744113Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0744869Z       at setListLoading (src/ui/CampusOpsApp.tsx:136:5)
+2026-10-24T05:14:20.0745457Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0746098Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0746662Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0747189Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0747658Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0748091Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0748660Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0749286Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0749606Z 
+2026-10-24T05:14:20.0749725Z     console.error
+2026-10-24T05:14:20.0750128Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0750538Z       
+2026-10-24T05:14:20.0751133Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0751590Z       
+2026-10-24T05:14:20.0751825Z       act(() => {
+2026-10-24T05:14:20.0752129Z         /* fire events that update state */
+2026-10-24T05:14:20.0752447Z       });
+2026-10-24T05:14:20.0752718Z       /* assert on the output */
+2026-10-24T05:14:20.0753008Z       
+2026-10-24T05:14:20.0753792Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0754336Z 
+2026-10-24T05:14:20.0755078Z     [0m [90m 135 |[39m     [36mconst[39m generation [33m=[39m sessionController[33m?[39m[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0755877Z      [90m 136 |[39m     setListLoading([36mtrue[39m)[33m;[39m
+2026-10-24T05:14:20.0756463Z     [31m[1m>[22m[39m[90m 137 |[39m     setListError([36mnull[39m)[33m;[39m
+2026-10-24T05:14:20.0756963Z      [90m     |[39m     [31m[1m^[22m[39m
+2026-10-24T05:14:20.0757367Z      [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0758051Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0758831Z      [90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m[0m
+2026-10-24T05:14:20.0759196Z 
+2026-10-24T05:14:20.0759510Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0760255Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0761147Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0762044Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0762902Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0763726Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0764333Z       at setListError (src/ui/CampusOpsApp.tsx:137:5)
+2026-10-24T05:14:20.0765284Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0765948Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0766509Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+2026-10-24T05:14:20.0767047Z       at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+2026-10-24T05:14:20.0767527Z       at apply (src/ui/CampusOpsApp.tsx:134:25)
+2026-10-24T05:14:20.0767963Z       at refreshIncidents (src/ui/CampusOpsApp.tsx:255:13)
+2026-10-24T05:14:20.0768545Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0769187Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0769511Z 
+2026-10-24T05:14:20.0769624Z     console.error
+2026-10-24T05:14:20.0770030Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0770438Z       
+2026-10-24T05:14:20.0770872Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0771329Z       
+2026-10-24T05:14:20.0771567Z       act(() => {
+2026-10-24T05:14:20.0771865Z         /* fire events that update state */
+2026-10-24T05:14:20.0772188Z       });
+2026-10-24T05:14:20.0772471Z       /* assert on the output */
+2026-10-24T05:14:20.0772766Z       
+2026-10-24T05:14:20.0773409Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0773948Z 
+2026-10-24T05:14:20.0774158Z     [0m [90m 138 |[39m     [36mtry[39m {
+2026-10-24T05:14:20.0775119Z      [90m 139 |[39m       [36mconst[39m items [33m=[39m [36mawait[39m getIncidents[33m.[39mexecute()[33m;[39m
+2026-10-24T05:14:20.0775966Z     [31m[1m>[22m[39m[90m 140 |[39m       [36mif[39m (isCurrent(generation)) setIncidents(items)[33m;[39m
+2026-10-24T05:14:20.0776612Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0777141Z      [90m 141 |[39m     } [36mcatch[39m (error[33m:[39m unknown) {
+2026-10-24T05:14:20.0778126Z      [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0778860Z      [90m 143 |[39m     } [36mfinally[39m {[0m
+2026-10-24T05:14:20.0779097Z 
+2026-10-24T05:14:20.0779397Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0780137Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0781031Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0781921Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0782777Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0783593Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0784204Z       at setIncidents (src/ui/CampusOpsApp.tsx:140:34)
+2026-10-24T05:14:20.0784976Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0785614Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0785935Z 
+2026-10-24T05:14:20.0786055Z     console.error
+2026-10-24T05:14:20.0786456Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0786870Z       
+2026-10-24T05:14:20.0787308Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0787767Z       
+2026-10-24T05:14:20.0788001Z       act(() => {
+2026-10-24T05:14:20.0788305Z         /* fire events that update state */
+2026-10-24T05:14:20.0788627Z       });
+2026-10-24T05:14:20.0788892Z       /* assert on the output */
+2026-10-24T05:14:20.0789182Z       
+2026-10-24T05:14:20.0789818Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0790346Z 
+2026-10-24T05:14:20.0790976Z     [0m [90m 142 |[39m       [36mif[39m (isCurrent(generation)) setListError(presentIncidentFailure(error[33m,[39m [32m'list'[39m))[33m;[39m
+2026-10-24T05:14:20.0791708Z      [90m 143 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0792407Z     [31m[1m>[22m[39m[90m 144 |[39m       [36mif[39m (isCurrent(generation)) setListLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0793088Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0793487Z      [90m 145 |[39m     }
+2026-10-24T05:14:20.0793829Z      [90m 146 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0794158Z      [90m 147 |[39m[0m
+2026-10-24T05:14:20.0794330Z 
+2026-10-24T05:14:20.0794764Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0795515Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0796396Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0797290Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0798142Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0799121Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0799747Z       at setListLoading (src/ui/CampusOpsApp.tsx:144:34)
+2026-10-24T05:14:20.0800322Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0800959Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0801449Z 
+2026-10-24T05:14:20.0801568Z     console.error
+2026-10-24T05:14:20.0801972Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0802379Z       
+2026-10-24T05:14:20.0802815Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0803269Z       
+2026-10-24T05:14:20.0803498Z       act(() => {
+2026-10-24T05:14:20.0803805Z         /* fire events that update state */
+2026-10-24T05:14:20.0804124Z       });
+2026-10-24T05:14:20.0804397Z       /* assert on the output */
+2026-10-24T05:14:20.0805051Z       
+2026-10-24T05:14:20.0805723Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0806267Z 
+2026-10-24T05:14:20.0806463Z     [0m [90m 262 |[39m       }
+2026-10-24T05:14:20.0806855Z      [90m 263 |[39m     } [36mfinally[39m {
+2026-10-24T05:14:20.0807569Z     [31m[1m>[22m[39m[90m 264 |[39m       [36mif[39m (isCurrent(generation)) setActionLoading([36mfalse[39m)[33m;[39m
+2026-10-24T05:14:20.0808267Z      [90m     |[39m                                  [31m[1m^[22m[39m
+2026-10-24T05:14:20.0808685Z      [90m 265 |[39m     }
+2026-10-24T05:14:20.0809024Z      [90m 266 |[39m   }[33m;[39m
+2026-10-24T05:14:20.0809356Z      [90m 267 |[39m[0m
+2026-10-24T05:14:20.0809525Z 
+2026-10-24T05:14:20.0809837Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0810577Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0811455Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0812353Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0813209Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0814051Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0814820Z       at setActionLoading (src/ui/CampusOpsApp.tsx:264:34)
+2026-10-24T05:14:20.0815398Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0816033Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0816350Z 
+2026-10-24T05:14:20.0816461Z     console.error
+2026-10-24T05:14:20.0816873Z       An update to CampusOpsApp inside a test was not wrapped in act(...).
+2026-10-24T05:14:20.0817275Z       
+2026-10-24T05:14:20.0817708Z       When testing, code that causes React state updates should be wrapped into act(...):
+2026-10-24T05:14:20.0818161Z       
+2026-10-24T05:14:20.0818392Z       act(() => {
+2026-10-24T05:14:20.0818688Z         /* fire events that update state */
+2026-10-24T05:14:20.0819006Z       });
+2026-10-24T05:14:20.0819280Z       /* assert on the output */
+2026-10-24T05:14:20.0819569Z       
+2026-10-24T05:14:20.0820202Z       This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+2026-10-24T05:14:20.0820737Z 
+2026-10-24T05:14:20.0821349Z     [0m [90m 83 |[39m     [36mlet[39m previousGeneration [33m=[39m sessionController[33m.[39mgetSnapshot()[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0822572Z      [90m 84 |[39m     [36mconst[39m unsubscribe [33m=[39m sessionController[33m.[39msubscribe((snapshot) [33m=>[39m {
+2026-10-24T05:14:20.0823321Z     [31m[1m>[22m[39m[90m 85 |[39m       setSession(snapshot)[33m;[39m
+2026-10-24T05:14:20.0823805Z      [90m    |[39m       [31m[1m^[22m[39m
+2026-10-24T05:14:20.0824425Z      [90m 86 |[39m       [36mif[39m (snapshot[33m.[39mgeneration [33m!==[39m previousGeneration) {
+2026-10-24T05:14:20.0825330Z      [90m 87 |[39m         previousGeneration [33m=[39m snapshot[33m.[39mgeneration[33m;[39m
+2026-10-24T05:14:20.0826123Z      [90m 88 |[39m         setSelectedIncident([36mnull[39m)[33m;[39m[0m
+2026-10-24T05:14:20.0826415Z 
+2026-10-24T05:14:20.0826722Z       at node_modules/react-reconciler/cjs/react-reconciler.development.js:16307:19
+2026-10-24T05:14:20.0827465Z       at runWithFiberInDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:2508:13)
+2026-10-24T05:14:20.0828349Z       at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-reconciler/cjs/react-reconciler.development.js:16306:9)
+2026-10-24T05:14:20.0829248Z       at scheduleUpdateOnFiber (node_modules/react-reconciler/cjs/react-reconciler.development.js:14070:11)
+2026-10-24T05:14:20.0830116Z       at dispatchSetStateInternal (node_modules/react-reconciler/cjs/react-reconciler.development.js:6784:13)
+2026-10-24T05:14:20.0830942Z       at dispatchSetState (node_modules/react-reconciler/cjs/react-reconciler.development.js:6741:7)
+2026-10-24T05:14:20.0831546Z       at setSession (src/ui/CampusOpsApp.tsx:85:7)
+2026-10-24T05:14:20.0832218Z       at DefaultSessionController.listener [as notify] (src/application/session/DefaultSessionController.ts:78:7)
+2026-10-24T05:14:20.0833066Z       at DefaultSessionController.notify (src/application/session/DefaultSessionController.ts:154:12)
+2026-10-24T05:14:20.0833825Z       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+2026-10-24T05:14:20.0834472Z       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+2026-10-24T05:14:20.0835062Z 
+2026-10-24T05:14:20.2147394Z PASS course-tests/week-06-session.test.ts
+2026-10-24T05:14:20.2277485Z   ● Console
+2026-10-24T05:14:20.2277879Z 
+2026-10-24T05:14:20.2278096Z     console.log
+2026-10-24T05:14:20.2278581Z       [A] REQUEST
+2026-10-24T05:14:20.2278810Z 
+2026-10-24T05:14:20.2279415Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2280089Z 
+2026-10-24T05:14:20.2280238Z     console.log
+2026-10-24T05:14:20.2280567Z       [A] REQUEST
+2026-10-24T05:14:20.2280756Z 
+2026-10-24T05:14:20.2281261Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2281798Z 
+2026-10-24T05:14:20.2281938Z     console.log
+2026-10-24T05:14:20.2282246Z       [B] REQUEST
+2026-10-24T05:14:20.2282425Z 
+2026-10-24T05:14:20.2282990Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2283583Z 
+2026-10-24T05:14:20.2283737Z     console.log
+2026-10-24T05:14:20.2284049Z       [B] REQUEST
+2026-10-24T05:14:20.2284231Z 
+2026-10-24T05:14:20.2285117Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2285715Z 
+2026-10-24T05:14:20.2285836Z     console.log
+2026-10-24T05:14:20.2286093Z       [C] REQUEST
+2026-10-24T05:14:20.2286242Z 
+2026-10-24T05:14:20.2286737Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2287261Z 
+2026-10-24T05:14:20.2287375Z     console.log
+2026-10-24T05:14:20.2287623Z       [C] REQUEST
+2026-10-24T05:14:20.2287776Z 
+2026-10-24T05:14:20.2288197Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2288663Z 
+2026-10-24T05:14:20.2288774Z     console.log
+2026-10-24T05:14:20.2289025Z       [A] 401
+2026-10-24T05:14:20.2289171Z 
+2026-10-24T05:14:20.2290012Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2290546Z 
+2026-10-24T05:14:20.2290654Z     console.log
+2026-10-24T05:14:20.2290904Z       [A] 401
+2026-10-24T05:14:20.2291050Z 
+2026-10-24T05:14:20.2291470Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2291939Z 
+2026-10-24T05:14:20.2292202Z     console.log
+2026-10-24T05:14:20.2292473Z       [AUTH] REFRESH START
+2026-10-24T05:14:20.2292659Z 
+2026-10-24T05:14:20.2293144Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2293670Z 
+2026-10-24T05:14:20.2293776Z     console.log
+2026-10-24T05:14:20.2294045Z       [AUTH] REFRESH START
+2026-10-24T05:14:20.2294225Z 
+2026-10-24T05:14:20.2294801Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2295278Z 
+2026-10-24T05:14:20.2295385Z     console.log
+2026-10-24T05:14:20.2295644Z       [B] 401
+2026-10-24T05:14:20.2295781Z 
+2026-10-24T05:14:20.2296261Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2296718Z 
+2026-10-24T05:14:20.2296826Z     console.log
+2026-10-24T05:14:20.2297076Z       [B] 401
+2026-10-24T05:14:20.2297208Z 
+2026-10-24T05:14:20.2297583Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2298008Z 
+2026-10-24T05:14:20.2298119Z     console.log
+2026-10-24T05:14:20.2298357Z       [C] 401
+2026-10-24T05:14:20.2298494Z 
+2026-10-24T05:14:20.2298912Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2299376Z 
+2026-10-24T05:14:20.2299484Z     console.log
+2026-10-24T05:14:20.2299719Z       [C] 401
+2026-10-24T05:14:20.2299853Z 
+2026-10-24T05:14:20.2300222Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2300635Z 
+2026-10-24T05:14:20.2300745Z     console.log
+2026-10-24T05:14:20.2301000Z       [AUTH] REFRESH SUCCESS
+2026-10-24T05:14:20.2301182Z 
+2026-10-24T05:14:20.2301602Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2302064Z 
+2026-10-24T05:14:20.2302176Z     console.log
+2026-10-24T05:14:20.2302434Z       [AUTH] REFRESH SUCCESS
+2026-10-24T05:14:20.2302611Z 
+2026-10-24T05:14:20.2302980Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2303391Z 
+2026-10-24T05:14:20.2303501Z     console.log
+2026-10-24T05:14:20.2303742Z       [A] RETRY
+2026-10-24T05:14:20.2303881Z 
+2026-10-24T05:14:20.2304302Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2305089Z 
+2026-10-24T05:14:20.2305207Z     console.log
+2026-10-24T05:14:20.2305468Z       [A] RETRY
+2026-10-24T05:14:20.2305615Z 
+2026-10-24T05:14:20.2306005Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2306422Z 
+2026-10-24T05:14:20.2306534Z     console.log
+2026-10-24T05:14:20.2306779Z       [B] RETRY
+2026-10-24T05:14:20.2306921Z 
+2026-10-24T05:14:20.2307355Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2307876Z 
+2026-10-24T05:14:20.2307990Z     console.log
+2026-10-24T05:14:20.2308231Z       [B] RETRY
+2026-10-24T05:14:20.2308371Z 
+2026-10-24T05:14:20.2308759Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2309177Z 
+2026-10-24T05:14:20.2309282Z     console.log
+2026-10-24T05:14:20.2309522Z       [C] RETRY
+2026-10-24T05:14:20.2309663Z 
+2026-10-24T05:14:20.2310088Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2310757Z 
+2026-10-24T05:14:20.2310891Z     console.log
+2026-10-24T05:14:20.2311151Z       [C] RETRY
+2026-10-24T05:14:20.2311288Z 
+2026-10-24T05:14:20.2311666Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2312085Z 
+2026-10-24T05:14:20.2312193Z     console.log
+2026-10-24T05:14:20.2312441Z       [A] RESULT
+2026-10-24T05:14:20.2312722Z 
+2026-10-24T05:14:20.2313147Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2313608Z 
+2026-10-24T05:14:20.2313715Z     console.log
+2026-10-24T05:14:20.2313972Z       [A] RESULT
+2026-10-24T05:14:20.2314113Z 
+2026-10-24T05:14:20.2314491Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2315212Z 
+2026-10-24T05:14:20.2315329Z     console.log
+2026-10-24T05:14:20.2315589Z       [B] RESULT
+2026-10-24T05:14:20.2315729Z 
+2026-10-24T05:14:20.2316164Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2316630Z 
+2026-10-24T05:14:20.2316740Z     console.log
+2026-10-24T05:14:20.2316978Z       [B] RESULT
+2026-10-24T05:14:20.2317119Z 
+2026-10-24T05:14:20.2317485Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2317903Z 
+2026-10-24T05:14:20.2318012Z     console.log
+2026-10-24T05:14:20.2318250Z       [C] RESULT
+2026-10-24T05:14:20.2318391Z 
+2026-10-24T05:14:20.2318807Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2319268Z 
+2026-10-24T05:14:20.2319378Z     console.log
+2026-10-24T05:14:20.2319616Z       [C] RESULT
+2026-10-24T05:14:20.2319757Z 
+2026-10-24T05:14:20.2320121Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:112:17)
+2026-10-24T05:14:20.2320535Z 
+2026-10-24T05:14:20.2320648Z     console.log
+2026-10-24T05:14:20.2320892Z       [A] REQUEST
+2026-10-24T05:14:20.2321038Z 
+2026-10-24T05:14:20.2321456Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2321924Z 
+2026-10-24T05:14:20.2322033Z     console.log
+2026-10-24T05:14:20.2322273Z       [A] REQUEST
+2026-10-24T05:14:20.2322421Z 
+2026-10-24T05:14:20.2322797Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2323205Z 
+2026-10-24T05:14:20.2323317Z     console.log
+2026-10-24T05:14:20.2323558Z       [B] REQUEST
+2026-10-24T05:14:20.2323700Z 
+2026-10-24T05:14:20.2324125Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2324745Z 
+2026-10-24T05:14:20.2324899Z     console.log
+2026-10-24T05:14:20.2325144Z       [B] REQUEST
+2026-10-24T05:14:20.2325289Z 
+2026-10-24T05:14:20.2325668Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2326079Z 
+2026-10-24T05:14:20.2326193Z     console.log
+2026-10-24T05:14:20.2326435Z       [C] REQUEST
+2026-10-24T05:14:20.2326581Z 
+2026-10-24T05:14:20.2327009Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2327475Z 
+2026-10-24T05:14:20.2327586Z     console.log
+2026-10-24T05:14:20.2327829Z       [C] REQUEST
+2026-10-24T05:14:20.2327973Z 
+2026-10-24T05:14:20.2328365Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2328786Z 
+2026-10-24T05:14:20.2328898Z     console.log
+2026-10-24T05:14:20.2329137Z       [A] 401
+2026-10-24T05:14:20.2329276Z 
+2026-10-24T05:14:20.2329692Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2330158Z 
+2026-10-24T05:14:20.2330271Z     console.log
+2026-10-24T05:14:20.2330672Z       [A] 401
+2026-10-24T05:14:20.2330827Z 
+2026-10-24T05:14:20.2331200Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2331607Z 
+2026-10-24T05:14:20.2331718Z     console.log
+2026-10-24T05:14:20.2331970Z       [AUTH] REFRESH START
+2026-10-24T05:14:20.2332145Z 
+2026-10-24T05:14:20.2332567Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2333146Z 
+2026-10-24T05:14:20.2333257Z     console.log
+2026-10-24T05:14:20.2333505Z       [AUTH] REFRESH START
+2026-10-24T05:14:20.2333678Z 
+2026-10-24T05:14:20.2334056Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2334470Z 
+2026-10-24T05:14:20.2334720Z     console.log
+2026-10-24T05:14:20.2334966Z       [B] 401
+2026-10-24T05:14:20.2335104Z 
+2026-10-24T05:14:20.2335534Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2335998Z 
+2026-10-24T05:14:20.2336110Z     console.log
+2026-10-24T05:14:20.2336347Z       [B] 401
+2026-10-24T05:14:20.2336483Z 
+2026-10-24T05:14:20.2336859Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2337337Z 
+2026-10-24T05:14:20.2337441Z     console.log
+2026-10-24T05:14:20.2337687Z       [C] 401
+2026-10-24T05:14:20.2337817Z 
+2026-10-24T05:14:20.2338242Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2338707Z 
+2026-10-24T05:14:20.2338813Z     console.log
+2026-10-24T05:14:20.2339062Z       [C] 401
+2026-10-24T05:14:20.2339193Z 
+2026-10-24T05:14:20.2339564Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2339981Z 
+2026-10-24T05:14:20.2340086Z     console.log
+2026-10-24T05:14:20.2340352Z       [AUTH] REFRESH FAIL
+2026-10-24T05:14:20.2340585Z 
+2026-10-24T05:14:20.2341014Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2341479Z 
+2026-10-24T05:14:20.2341599Z     console.log
+2026-10-24T05:14:20.2341853Z       [AUTH] REFRESH FAIL
+2026-10-24T05:14:20.2342021Z 
+2026-10-24T05:14:20.2342397Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2342819Z 
+2026-10-24T05:14:20.2342933Z     console.log
+2026-10-24T05:14:20.2343185Z       [SESSION] CLEAR
+2026-10-24T05:14:20.2343348Z 
+2026-10-24T05:14:20.2343776Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2344235Z 
+2026-10-24T05:14:20.2344350Z     console.log
+2026-10-24T05:14:20.2344714Z       [SESSION] CLEAR
+2026-10-24T05:14:20.2344875Z 
+2026-10-24T05:14:20.2345259Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2345679Z 
+2026-10-24T05:14:20.2345792Z     console.log
+2026-10-24T05:14:20.2346043Z       [AUTH] ANONYMOUS
+2026-10-24T05:14:20.2346205Z 
+2026-10-24T05:14:20.2346633Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2347094Z 
+2026-10-24T05:14:20.2347212Z     console.log
+2026-10-24T05:14:20.2347467Z       [AUTH] ANONYMOUS
+2026-10-24T05:14:20.2347634Z 
+2026-10-24T05:14:20.2348009Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2348424Z 
+2026-10-24T05:14:20.2348530Z     console.log
+2026-10-24T05:14:20.2348773Z       [LOGIN] REQUIRED
+2026-10-24T05:14:20.2348930Z 
+2026-10-24T05:14:20.2349354Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2349818Z 
+2026-10-24T05:14:20.2349924Z     console.log
+2026-10-24T05:14:20.2350180Z       [LOGIN] REQUIRED
+2026-10-24T05:14:20.2350473Z 
+2026-10-24T05:14:20.2350853Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2351268Z 
+2026-10-24T05:14:20.2351373Z     console.log
+2026-10-24T05:14:20.2351624Z       [A] RESULT
+2026-10-24T05:14:20.2351764Z 
+2026-10-24T05:14:20.2352190Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2352929Z           at Generator.throw (<anonymous>)
+2026-10-24T05:14:20.2353156Z 
+2026-10-24T05:14:20.2353267Z     console.log
+2026-10-24T05:14:20.2353515Z       [A] RESULT
+2026-10-24T05:14:20.2353663Z 
+2026-10-24T05:14:20.2354031Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2354761Z           at Generator.throw (<anonymous>)
+2026-10-24T05:14:20.2355068Z 
+2026-10-24T05:14:20.2355190Z     console.log
+2026-10-24T05:14:20.2355434Z       [B] RESULT
+2026-10-24T05:14:20.2355577Z 
+2026-10-24T05:14:20.2356013Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2356620Z           at Generator.throw (<anonymous>)
+2026-10-24T05:14:20.2356836Z 
+2026-10-24T05:14:20.2356948Z     console.log
+2026-10-24T05:14:20.2357187Z       [B] RESULT
+2026-10-24T05:14:20.2357332Z 
+2026-10-24T05:14:20.2357698Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2358270Z           at Generator.throw (<anonymous>)
+2026-10-24T05:14:20.2358474Z 
+2026-10-24T05:14:20.2358587Z     console.log
+2026-10-24T05:14:20.2358826Z       [C] RESULT
+2026-10-24T05:14:20.2358966Z 
+2026-10-24T05:14:20.2359393Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2360005Z           at Generator.throw (<anonymous>)
+2026-10-24T05:14:20.2360219Z 
+2026-10-24T05:14:20.2360324Z     console.log
+2026-10-24T05:14:20.2360581Z       [C] RESULT
+2026-10-24T05:14:20.2360719Z 
+2026-10-24T05:14:20.2361092Z       at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)
+2026-10-24T05:14:20.2361649Z           at Generator.throw (<anonymous>)
+2026-10-24T05:14:20.2361861Z 
+2026-10-24T05:14:20.2361973Z     console.log
+2026-10-24T05:14:20.2362216Z       [A] REQUEST
+2026-10-24T05:14:20.2362369Z 
+2026-10-24T05:14:20.2362787Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2363255Z 
+2026-10-24T05:14:20.2363369Z     console.log
+2026-10-24T05:14:20.2363612Z       [A] 401
+2026-10-24T05:14:20.2363760Z 
+2026-10-24T05:14:20.2364187Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2364836Z 
+2026-10-24T05:14:20.2364968Z     console.log
+2026-10-24T05:14:20.2365234Z       [AUTH] REFRESH START
+2026-10-24T05:14:20.2365413Z 
+2026-10-24T05:14:20.2365845Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2366307Z 
+2026-10-24T05:14:20.2366419Z     console.log
+2026-10-24T05:14:20.2366675Z       [AUTH] REFRESH SUCCESS
+2026-10-24T05:14:20.2366860Z 
+2026-10-24T05:14:20.2367288Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2367750Z 
+2026-10-24T05:14:20.2367864Z     console.log
+2026-10-24T05:14:20.2368105Z       [A] RETRY
+2026-10-24T05:14:20.2368246Z 
+2026-10-24T05:14:20.2368671Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2369130Z 
+2026-10-24T05:14:20.2369242Z     console.log
+2026-10-24T05:14:20.2369481Z       [A] RESULT
+2026-10-24T05:14:20.2369627Z 
+2026-10-24T05:14:20.2370045Z       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
+2026-10-24T05:14:20.2370508Z 
+2026-10-24T05:14:20.3598089Z PASS course-tests/week-06-session-controller.test.ts
+2026-10-24T05:14:20.5716075Z PASS course-tests/week-06-authorization.test.tsx
+2026-10-24T05:14:20.6611544Z PASS course-tests/public/week-06.test.ts
+2026-10-24T05:14:20.6626592Z 
+2026-10-24T05:14:20.6636699Z Test Suites: 6 passed, 6 total
+2026-10-24T05:14:20.6637302Z Tests:       31 passed, 31 total
+2026-10-24T05:14:20.6638054Z Snapshots:   0 total
+2026-10-24T05:14:20.6638337Z Time:        9.194 s
+2026-10-24T05:14:20.6640147Z Ran all test suites within paths "course-tests/public/week-06.test.ts", "course-tests/week-06-session.test.ts", "course-tests/week-06-session-controller.test.ts", "course-tests/week-06-session-validation.test.ts", "course-tests/week-06-authorization.test.tsx", "course-tests/week-06-integration-regression.test.tsx".
+2026-10-24T05:14:20.7319432Z ##[group]Run npm run check:architecture
+2026-10-24T05:14:20.7319820Z [36;1mnpm run check:architecture[0m
+2026-10-24T05:14:20.7386696Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:20.7387278Z ##[endgroup]
+2026-10-24T05:14:20.8468829Z 
+2026-10-24T05:14:20.8469884Z > dmi-react-native-starter@1.0.0 check:architecture
+2026-10-24T05:14:20.8470448Z > node tools/check-architecture.cjs
+2026-10-24T05:14:20.8470694Z 
+2026-10-24T05:14:20.8819771Z {
+2026-10-24T05:14:20.8820255Z   "status": "pass",
+2026-10-24T05:14:20.8820715Z   "root": "src",
+2026-10-24T05:14:20.8821121Z   "violations": []
+2026-10-24T05:14:20.8821541Z }
+2026-10-24T05:14:20.8950325Z ##[group]Run npm run test:week-08:baseline && npm run check:week-08-provider
+2026-10-24T05:14:20.8950906Z [36;1mnpm run test:week-08:baseline && npm run check:week-08-provider[0m
+2026-10-24T05:14:20.9014362Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:20.9014905Z ##[endgroup]
+2026-10-24T05:14:21.0069575Z 
+2026-10-24T05:14:21.0070682Z > dmi-react-native-starter@1.0.0 test:week-08:baseline
+2026-10-24T05:14:21.0072234Z > jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-baseline.test.ts
+2026-10-24T05:14:21.0073174Z 
+2026-10-24T05:14:22.4910086Z PASS course-tests/week-08-baseline.test.ts
+2026-10-24T05:14:22.4926261Z   ✓ shared fixture preserves the required actor, base, stable operation and reassignment (4 ms)
+2026-10-24T05:14:22.4927922Z   ✓ temporary factory reopens a real file with a new handle and cleans only its own resource (17 ms)
+2026-10-24T05:14:22.4929694Z   ✓ transaction failure injection targets one named point once without touching files (6 ms)
+2026-10-24T05:14:22.4930550Z 
+2026-10-24T05:14:22.4948498Z Test Suites: 1 passed, 1 total
+2026-10-24T05:14:22.4949050Z Tests:       3 passed, 3 total
+2026-10-24T05:14:22.4949515Z Snapshots:   0 total
+2026-10-24T05:14:22.4949822Z Time:        0.926 s
+2026-10-24T05:14:22.4950259Z Ran all test suites within paths "course-tests/week-08-baseline.test.ts".
+2026-10-24T05:14:22.7110195Z 
+2026-10-24T05:14:22.7110930Z > dmi-react-native-starter@1.0.0 check:week-08-provider
+2026-10-24T05:14:22.7111479Z > node tools/check-week-08-provider.mjs
+2026-10-24T05:14:22.7111734Z 
+2026-10-24T05:14:22.9466114Z {
+2026-10-24T05:14:22.9467041Z   "scope": "SQLite engine on disk + Expo compatibility metadata; not an Android adapter test",
+2026-10-24T05:14:22.9467863Z   "node": "v22.22.0",
+2026-10-24T05:14:22.9468253Z   "expo": "57.0.16",
+2026-10-24T05:14:22.9468708Z   "recommendedExpoSqlite": "~57.0.1",
+2026-10-24T05:14:22.9469169Z   "checks": [
+2026-10-24T05:14:22.9469600Z     "new-process-reopen",
+2026-10-24T05:14:22.9469968Z     "transaction-rollback-schema-data-version",
+2026-10-24T05:14:22.9470335Z     "migration-preserves-content",
+2026-10-24T05:14:22.9470625Z     "durable-synthetic-file"
+2026-10-24T05:14:22.9470874Z   ],
+2026-10-24T05:14:22.9471066Z   "observed": {
+2026-10-24T05:14:22.9471270Z     "before": {
+2026-10-24T05:14:22.9471473Z       "version": 1,
+2026-10-24T05:14:22.9471690Z       "columns": [
+2026-10-24T05:14:22.9471891Z         "id",
+2026-10-24T05:14:22.9472109Z         "content"
+2026-10-24T05:14:22.9472316Z       ],
+2026-10-24T05:14:22.9472506Z       "rows": 1
+2026-10-24T05:14:22.9472698Z     },
+2026-10-24T05:14:22.9472899Z     "afterFailure": {
+2026-10-24T05:14:22.9473124Z       "version": 1,
+2026-10-24T05:14:22.9473336Z       "columns": [
+2026-10-24T05:14:22.9473538Z         "id",
+2026-10-24T05:14:22.9473736Z         "content"
+2026-10-24T05:14:22.9473929Z       ],
+2026-10-24T05:14:22.9474121Z       "rows": 1
+2026-10-24T05:14:22.9474320Z     },
+2026-10-24T05:14:22.9475398Z     "after": {
+2026-10-24T05:14:22.9475652Z       "version": 2,
+2026-10-24T05:14:22.9475868Z       "columns": [
+2026-10-24T05:14:22.9476078Z         "id",
+2026-10-24T05:14:22.9476274Z         "content",
+2026-10-24T05:14:22.9476477Z         "migrated"
+2026-10-24T05:14:22.9476679Z       ],
+2026-10-24T05:14:22.9476864Z       "rows": 1
+2026-10-24T05:14:22.9477057Z     }
+2026-10-24T05:14:22.9477244Z   }
+2026-10-24T05:14:22.9477421Z }
+2026-10-24T05:14:22.9478873Z (node:2573) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-10-24T05:14:22.9479708Z (Use `node --trace-warnings ...` to show where the warning was created)
+2026-10-24T05:14:22.9601238Z ##[group]Run npm run test:week-08:persistence
+2026-10-24T05:14:22.9601651Z [36;1mnpm run test:week-08:persistence[0m
+2026-10-24T05:14:22.9667332Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:22.9667620Z ##[endgroup]
+2026-10-24T05:14:23.0732878Z 
+2026-10-24T05:14:23.0733711Z > dmi-react-native-starter@1.0.0 test:week-08:persistence
+2026-10-24T05:14:23.0735255Z > jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-workspace-owner.test.ts
+2026-10-24T05:14:23.0735912Z 
+2026-10-24T05:14:24.5402961Z (node:2635) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-10-24T05:14:24.5404227Z (Use `node --trace-warnings ...` to show where the warning was created)
+2026-10-24T05:14:24.5842966Z (node:2648) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-10-24T05:14:24.5844509Z (Use `node --trace-warnings ...` to show where the warning was created)
+2026-10-24T05:14:24.8414920Z PASS course-tests/week-08-workspace-owner.test.ts
+2026-10-24T05:14:24.8419732Z   ✓ disk reopen preserves exact author, base, notes, file and original operation order; a second process reads it (48 ms)
+2026-10-24T05:14:24.8421176Z   ✓ v1 to v2 rolls back schema, rows, order and version at migration.afterSchema, then recovers (16 ms)
+2026-10-24T05:14:24.8422749Z   ✓ v1 to v2 rolls back schema, rows, order and version at migration.afterCopy, then recovers (16 ms)
+2026-10-24T05:14:24.8424439Z   ✓ failed automatic upgrade closes connection; a new current-version instance recovers the same v1 resource (12 ms)
+2026-10-24T05:14:24.8426094Z   ✓ snapshot and queue roll back together, copy is removed, existing photo stays usable (14 ms)
+2026-10-24T05:14:24.8427073Z   ✓ enqueue failure rolls back; confirmation deletes only its operation and failure restores it (11 ms)
+2026-10-24T05:14:24.8428142Z   ✓ same JSON identity is a no-op; changed body rejects atomically and a replay cannot regress snapshot (11 ms)
+2026-10-24T05:14:24.8429065Z   ✓ rejects non-JSON/secret payload undefined without any partial write (5 ms)
+2026-10-24T05:14:24.8429807Z   ✓ rejects non-JSON/secret payload NaN without any partial write (5 ms)
+2026-10-24T05:14:24.8430550Z   ✓ rejects non-JSON/secret payload Infinity without any partial write (6 ms)
+2026-10-24T05:14:24.8431391Z   ✓ rejects non-JSON/secret payload [Function anonymous] without any partial write (5 ms)
+2026-10-24T05:14:24.8432280Z   ✓ rejects non-JSON/secret payload 2026-10-24T05:14:24.521Z without any partial write (6 ms)
+2026-10-24T05:14:24.8433062Z   ✓ rejects non-JSON/secret payload {"token": "synthetic-forbidden"} without any partial write (5 ms)
+2026-10-24T05:14:24.8433801Z   ✓ rejects non-JSON/secret payload [undefined] without any partial write (6 ms)
+2026-10-24T05:14:24.8434778Z   ✓ rejects cyclic payload, mismatched IDs/base, orphan operations and missing attachments (9 ms)
+2026-10-24T05:14:24.8435635Z   ✓ serializes concurrent writes and lifecycle, supports isolated files, rejects closed calls (18 ms)
+2026-10-24T05:14:24.8436390Z   ✓ captures enqueue input at invocation and recovered reads cannot mutate storage (6 ms)
+2026-10-24T05:14:24.8437052Z   ✓ unknown future schema rejects without overwriting its rows or version (9 ms)
+2026-10-24T05:14:24.8437736Z   ✓ corrupt previous-schema data blocks migration and leaves all previous rows intact (8 ms)
+2026-10-24T05:14:24.8438504Z 
+2026-10-24T05:14:24.8447913Z Test Suites: 1 passed, 1 total
+2026-10-24T05:14:24.8448470Z Tests:       19 passed, 19 total
+2026-10-24T05:14:24.8448887Z Snapshots:   0 total
+2026-10-24T05:14:24.8449131Z Time:        1.214 s
+2026-10-24T05:14:24.8449584Z Ran all test suites within paths "course-tests/week-08-workspace-owner.test.ts".
+2026-10-24T05:14:24.9668397Z ##[group]Run npm run test:week-08:sync
+2026-10-24T05:14:24.9668744Z [36;1mnpm run test:week-08:sync[0m
+2026-10-24T05:14:24.9734318Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:24.9734886Z ##[endgroup]
+2026-10-24T05:14:25.0783038Z 
+2026-10-24T05:14:25.0783747Z > dmi-react-native-starter@1.0.0 test:week-08:sync
+2026-10-24T05:14:25.0785530Z > jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts
+2026-10-24T05:14:25.0786406Z 
+2026-10-24T05:14:26.5348793Z PASS course-tests/week-08-sync.test.ts
+2026-10-24T05:14:26.8052934Z PASS course-tests/week-08-sync-composition.test.ts
+2026-10-24T05:14:26.8069385Z 
+2026-10-24T05:14:26.8079998Z Test Suites: 2 passed, 2 total
+2026-10-24T05:14:26.8080704Z Tests:       24 passed, 24 total
+2026-10-24T05:14:26.8081238Z Snapshots:   0 total
+2026-10-24T05:14:26.8081684Z Time:        1.182 s
+2026-10-24T05:14:26.8082948Z Ran all test suites within paths "course-tests/week-08-sync.test.ts", "course-tests/week-08-sync-composition.test.ts".
+2026-10-24T05:14:26.9342584Z ##[group]Run npm run test:week-08:integration
+2026-10-24T05:14:26.9343009Z [36;1mnpm run test:week-08:integration[0m
+2026-10-24T05:14:26.9407370Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:26.9407705Z ##[endgroup]
+2026-10-24T05:14:27.0454734Z 
+2026-10-24T05:14:27.0455248Z > dmi-react-native-starter@1.0.0 test:week-08:integration
+2026-10-24T05:14:27.0456652Z > jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx
+2026-10-24T05:14:27.0457478Z 
+2026-10-24T05:14:28.9248165Z (node:2694) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-10-24T05:14:28.9249507Z (Use `node --trace-warnings ...` to show where the warning was created)
+2026-10-24T05:14:31.2139003Z PASS course-tests/week-08-integration.test.tsx
+2026-10-24T05:14:31.3540187Z PASS course-tests/week-08-gateway.test.ts
+2026-10-24T05:14:31.3554321Z 
+2026-10-24T05:14:31.3563998Z Test Suites: 2 passed, 2 total
+2026-10-24T05:14:31.3564754Z Tests:       24 passed, 24 total
+2026-10-24T05:14:31.3565115Z Snapshots:   0 total
+2026-10-24T05:14:31.3565415Z Time:        3.735 s
+2026-10-24T05:14:31.3566183Z Ran all test suites within paths "course-tests/week-08-gateway.test.ts", "course-tests/week-08-integration.test.tsx".
+2026-10-24T05:14:31.4883316Z ##[group]Run make verify-week-08
+2026-10-24T05:14:31.4883652Z [36;1mmake verify-week-08[0m
+2026-10-24T05:14:31.4947582Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:31.4947868Z ##[endgroup]
+2026-10-24T05:14:31.5054888Z python3 tools/course_public_evaluator.py --week 08 --mode verify --execute-toolchain
+2026-10-24T05:14:44.7021931Z {
+2026-10-24T05:14:44.7022389Z   "schemaVersion": 1,
+2026-10-24T05:14:44.7022748Z   "week": 8,
+2026-10-24T05:14:44.7022974Z   "mode": "verify",
+2026-10-24T05:14:44.7023328Z   "commitSha": "12189435eb1e59f4684efe237051186bc6abcb84",
+2026-10-24T05:14:44.7023751Z   "evaluatedAt": "2026-10-24T05:14:44.701245+00:00",
+2026-10-24T05:14:44.7024078Z   "status": "pass",
+2026-10-24T05:14:44.7024304Z   "checks": [
+2026-10-24T05:14:44.7024860Z     {
+2026-10-24T05:14:44.7025113Z       "id": "base_files",
+2026-10-24T05:14:44.7025381Z       "status": "pass",
+2026-10-24T05:14:44.7025631Z       "detail": "missing=[]"
+2026-10-24T05:14:44.7025886Z     },
+2026-10-24T05:14:44.7026155Z     {
+2026-10-24T05:14:44.7026407Z       "id": "react_native_profile",
+2026-10-24T05:14:44.7026697Z       "status": "pass",
+2026-10-24T05:14:44.7026983Z       "detail": "missing packages=[]"
+2026-10-24T05:14:44.7027531Z     },
+2026-10-24T05:14:44.7027717Z     {
+2026-10-24T05:14:44.7027970Z       "id": "toolchain_scripts",
+2026-10-24T05:14:44.7028242Z       "status": "pass",
+2026-10-24T05:14:44.7028520Z       "detail": "missing scripts=[]"
+2026-10-24T05:14:44.7028796Z     },
+2026-10-24T05:14:44.7028995Z     {
+2026-10-24T05:14:44.7029227Z       "id": "workflow_integrity",
+2026-10-24T05:14:44.7029498Z       "status": "pass",
+2026-10-24T05:14:44.7029766Z       "detail": "bypass markers=[]"
+2026-10-24T05:14:44.7030037Z     },
+2026-10-24T05:14:44.7030224Z     {
+2026-10-24T05:14:44.7030419Z       "id": "secret_scan",
+2026-10-24T05:14:44.7030665Z       "status": "pass",
+2026-10-24T05:14:44.7030897Z       "detail": "hits=[]"
+2026-10-24T05:14:44.7031123Z     },
+2026-10-24T05:14:44.7043079Z     {
+2026-10-24T05:14:44.7043344Z       "id": "toolchain_1",
+2026-10-24T05:14:44.7043692Z       "status": "pass",
+2026-10-24T05:14:44.7044487Z       "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+2026-10-24T05:14:44.7045678Z     },
+2026-10-24T05:14:44.7045988Z     {
+2026-10-24T05:14:44.7046401Z       "id": "toolchain_2",
+2026-10-24T05:14:44.7046874Z       "status": "pass",
+2026-10-24T05:14:44.7047509Z       "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+2026-10-24T05:14:44.7048153Z     },
+2026-10-24T05:14:44.7048441Z     {
+2026-10-24T05:14:44.7048745Z       "id": "toolchain_3",
+2026-10-24T05:14:44.7049125Z       "status": "pass",
+2026-10-24T05:14:44.7063477Z       "detail": "npm run audit:ci\nv --audit-level=critical\n\n# npm audit report\n\nbrace-expansion  <=1.1.20 || 4.0.0 - 5.0.11\nSeverity: high\nbrace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service - https://github.com/advisories/GHSA-q2hr-2g5m-vwhr\nbrace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service - https://github.com/advisories/GHSA-q2hr-2g5m-vwhr\nbrace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion - https://github.com/advisories/GHSA-qhr7-859c-m2p7\nbrace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion - https://github.com/advisories/GHSA-qhr7-859c-m2p7\nbrace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nbrace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nfix available via `npm audit fix`\nnode_modules/@expo/fingerprint/node_modules/brace-expansion\nnode_modules/brace-expansion\nnode_modules/glob/node_modules/brace-expansion\n\ncompression  <1.8.2\nSeverity: high\ncompression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95\nfix available via `npm audit fix`\nnode_modules/compression\n\nnode-forge  *\nSeverity: high\nnode-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv\nfix available via `npm audit fix --force`\nWill install expo@54.0.38, which is a breaking change\nnode_modules/node-forge\n  @expo/cli  <=0.0.0-canary-20231123-1b19f96-4 || >=0.0.1-canary-20231125-d600e44\n  Depends on vulnerable versions of @expo/code-signing-certificates\n  Depends on vulnerable versions of node-forge\n  Depends on vulnerable versions of zod\n  node_modules/expo/node_modules/@expo/cli\n    expo  52.0.0-canary-20240625-2333e70 - 52.0.0-canary-20241018-f71b3e0 || >=55.0.0-canary-20250912-b5ce2a8\n    Depends on vulnerable versions of @expo/cli\n    node_modules/expo\n  @expo/code-signing-certificates  *\n  Depends on vulnerable versions of node-forge\n  node_modules/@expo/code-signing-certificates\n\nsource-map-js  1.0.0 - 1.2.1\nSeverity: high\nsource-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q\nfix available via `npm audit fix`\nnode_modules/source-map-js\n\nzod  <4.6.6\nSeverity: high\nZod can exhaust memory while validating oversized constrained collections - https://github.com/advisories/GHSA-mrhx-c7xc-m3w5\nfix available via `npm audit fix --force`\nWill install expo@54.0.38, which is a breaking change\nnode_modules/expo/node_modules/zod\n\n8 high severity vulnerabilities\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force"
+2026-10-24T05:14:44.7074820Z     },
+2026-10-24T05:14:44.7075074Z     {
+2026-10-24T05:14:44.7075289Z       "id": "toolchain_4",
+2026-10-24T05:14:44.7075542Z       "status": "pass",
+2026-10-24T05:14:44.7077893Z       "detail": "npm run test:smoke\n> dmi-react-native-starter@1.0.0 test:smoke\n> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx\n\n\nPASS course-tests/smoke.test.tsx\n  ✓ renders the reproducible baseline and resolves backend state (230 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       1 passed, 1 total\nSnapshots:   0 total\nTime:        1.225 s\nRan all test suites matching /course-tests\\/smoke.test.tsx/i."
+2026-10-24T05:14:44.7079522Z     },
+2026-10-24T05:14:44.7079706Z     {
+2026-10-24T05:14:44.7079910Z       "id": "toolchain_5",
+2026-10-24T05:14:44.7080155Z       "status": "pass",
+2026-10-24T05:14:44.7081385Z       "detail": "npm run backend:self-test\n> dmi-react-native-starter@1.0.0 backend:self-test\n> node course-backend/self-test.mjs\n\nCampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS.\nControlled backend self-test passed."
+2026-10-24T05:14:44.7082475Z     }
+2026-10-24T05:14:44.7082652Z   ]
+2026-10-24T05:14:44.7082836Z }
+2026-10-24T05:14:44.7155999Z ##[group]Run make public-test-week-08
+2026-10-24T05:14:44.7156374Z [36;1mmake public-test-week-08[0m
+2026-10-24T05:14:44.7221069Z shell: /usr/bin/bash -e {0}
+2026-10-24T05:14:44.7221390Z ##[endgroup]
+2026-10-24T05:14:44.7329622Z python3 tools/course_public_evaluator.py --week 08 --mode public --execute-toolchain
+2026-10-24T05:15:00.5997657Z {
+2026-10-24T05:15:00.5997982Z   "schemaVersion": 1,
+2026-10-24T05:15:00.5998255Z   "week": 8,
+2026-10-24T05:15:00.5998481Z   "mode": "public",
+2026-10-24T05:15:00.5998819Z   "commitSha": "12189435eb1e59f4684efe237051186bc6abcb84",
+2026-10-24T05:15:00.5999234Z   "evaluatedAt": "2026-10-24T05:15:00.598880+00:00",
+2026-10-24T05:15:00.5999536Z   "status": "fail",
+2026-10-24T05:15:00.5999744Z   "checks": [
+2026-10-24T05:15:00.5999940Z     {
+2026-10-24T05:15:00.6000136Z       "id": "base_files",
+2026-10-24T05:15:00.6000375Z       "status": "pass",
+2026-10-24T05:15:00.6000609Z       "detail": "missing=[]"
+2026-10-24T05:15:00.6000846Z     },
+2026-10-24T05:15:00.6001092Z     {
+2026-10-24T05:15:00.6001318Z       "id": "react_native_profile",
+2026-10-24T05:15:00.6001589Z       "status": "pass",
+2026-10-24T05:15:00.6001857Z       "detail": "missing packages=[]"
+2026-10-24T05:15:00.6002133Z     },
+2026-10-24T05:15:00.6002311Z     {
+2026-10-24T05:15:00.6002533Z       "id": "toolchain_scripts",
+2026-10-24T05:15:00.6002791Z       "status": "pass",
+2026-10-24T05:15:00.6003061Z       "detail": "missing scripts=[]"
+2026-10-24T05:15:00.6003317Z     },
+2026-10-24T05:15:00.6003504Z     {
+2026-10-24T05:15:00.6003720Z       "id": "workflow_integrity",
+2026-10-24T05:15:00.6004021Z       "status": "pass",
+2026-10-24T05:15:00.6004282Z       "detail": "bypass markers=[]"
+2026-10-24T05:15:00.6004899Z     },
+2026-10-24T05:15:00.6005222Z     {
+2026-10-24T05:15:00.6005560Z       "id": "secret_scan",
+2026-10-24T05:15:00.6005977Z       "status": "pass",
+2026-10-24T05:15:00.6006353Z       "detail": "hits=[]"
+2026-10-24T05:15:00.6006679Z     },
+2026-10-24T05:15:00.6006863Z     {
+2026-10-24T05:15:00.6007095Z       "id": "required_evidence",
+2026-10-24T05:15:00.6007350Z       "status": "fail",
+2026-10-24T05:15:00.6008020Z       "detail": "missing/empty=['reports/week-08/migration-tests.json', 'evidence/week-08/engineering.json']"
+2026-10-24T05:15:00.6008814Z     },
+2026-10-24T05:15:00.6008996Z     {
+2026-10-24T05:15:00.6009280Z       "id": "schema:evidence/week-08/individual.json",
+2026-10-24T05:15:00.6009602Z       "status": "fail",
+2026-10-24T05:15:00.6009888Z       "detail": "studentId values must be unique"
+2026-10-24T05:15:00.6010180Z     },
+2026-10-24T05:15:00.6010355Z     {
+2026-10-24T05:15:00.6010546Z       "id": "toolchain_1",
+2026-10-24T05:15:00.6010788Z       "status": "pass",
+2026-10-24T05:15:00.6011255Z       "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+2026-10-24T05:15:00.6011700Z     },
+2026-10-24T05:15:00.6011885Z     {
+2026-10-24T05:15:00.6012081Z       "id": "toolchain_2",
+2026-10-24T05:15:00.6012326Z       "status": "pass",
+2026-10-24T05:15:00.6012711Z       "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+2026-10-24T05:15:00.6013100Z     },
+2026-10-24T05:15:00.6013274Z     {
+2026-10-24T05:15:00.6013465Z       "id": "toolchain_3",
+2026-10-24T05:15:00.6013712Z       "status": "pass",
+2026-10-24T05:15:00.6027205Z       "detail": "npm run audit:ci\nv --audit-level=critical\n\n# npm audit report\n\nbrace-expansion  <=1.1.20 || 4.0.0 - 5.0.11\nSeverity: high\nbrace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service - https://github.com/advisories/GHSA-q2hr-2g5m-vwhr\nbrace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service - https://github.com/advisories/GHSA-q2hr-2g5m-vwhr\nbrace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion - https://github.com/advisories/GHSA-qhr7-859c-m2p7\nbrace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion - https://github.com/advisories/GHSA-qhr7-859c-m2p7\nbrace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nbrace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nfix available via `npm audit fix`\nnode_modules/@expo/fingerprint/node_modules/brace-expansion\nnode_modules/brace-expansion\nnode_modules/glob/node_modules/brace-expansion\n\ncompression  <1.8.2\nSeverity: high\ncompression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95\nfix available via `npm audit fix`\nnode_modules/compression\n\nnode-forge  *\nSeverity: high\nnode-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv\nfix available via `npm audit fix --force`\nWill install expo@54.0.38, which is a breaking change\nnode_modules/node-forge\n  @expo/cli  <=0.0.0-canary-20231123-1b19f96-4 || >=0.0.1-canary-20231125-d600e44\n  Depends on vulnerable versions of @expo/code-signing-certificates\n  Depends on vulnerable versions of node-forge\n  Depends on vulnerable versions of zod\n  node_modules/expo/node_modules/@expo/cli\n    expo  52.0.0-canary-20240625-2333e70 - 52.0.0-canary-20241018-f71b3e0 || >=55.0.0-canary-20250912-b5ce2a8\n    Depends on vulnerable versions of @expo/cli\n    node_modules/expo\n  @expo/code-signing-certificates  *\n  Depends on vulnerable versions of node-forge\n  node_modules/@expo/code-signing-certificates\n\nsource-map-js  1.0.0 - 1.2.1\nSeverity: high\nsource-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q\nfix available via `npm audit fix`\nnode_modules/source-map-js\n\nzod  <4.6.6\nSeverity: high\nZod can exhaust memory while validating oversized constrained collections - https://github.com/advisories/GHSA-mrhx-c7xc-m3w5\nfix available via `npm audit fix --force`\nWill install expo@54.0.38, which is a breaking change\nnode_modules/expo/node_modules/zod\n\n8 high severity vulnerabilities\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force"
+2026-10-24T05:15:00.6038268Z     },
+2026-10-24T05:15:00.6038470Z     {
+2026-10-24T05:15:00.6038672Z       "id": "toolchain_4",
+2026-10-24T05:15:00.6038926Z       "status": "pass",
+2026-10-24T05:15:00.6051576Z       "detail": "npm test -- --ci --runInBand course-tests/public/week-08.test.ts\nthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [A] RESULT\n\n      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [B] RESULT\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [B] RESULT\n\n      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [C] RESULT\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [C] RESULT\n\n      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [A] REQUEST\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [A] 401\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [AUTH] REFRESH START\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [AUTH] REFRESH SUCCESS\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [A] RETRY\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [A] RESULT\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\nPASS course-tests/week-06-session-controller.test.ts\nPASS course-tests/public/week-06.test.ts\n\nTest Suites: 20 passed, 20 total\nTests:       90 passed, 90 total\nSnapshots:   0 total\nTime:        5.053 s, estimated 9 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/week-05-client.test.tsx|course-tests\\/week-05-transport-validation.test.tsx|course-tests\\/week-05-ui-failure.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-05.test.ts|course-tests\\/public\\/week-06.test.ts|course-tests\\/week-06-session.test.ts|course-tests\\/week-06-session-controller.test.ts|course-tests\\/week-06-session-validation.test.ts|course-tests\\/week-06-authorization.test.tsx|course-tests\\/week-06-integration-regression.test.tsx|course-tests\\/public\\/week-08.test.ts/i."
+2026-10-24T05:15:00.6062694Z     }
+2026-10-24T05:15:00.6062885Z   ]
+2026-10-24T05:15:00.6063076Z }
+2026-10-24T05:15:00.6071215Z make: *** [Makefile:36: public-test-week-08] Error 1
+2026-10-24T05:15:00.6083944Z ##[error]Process completed with exit code 2.
+2026-10-24T05:15:00.6171989Z ##[group]Run actions/upload-artifact@v4
+2026-10-24T05:15:00.6172293Z with:
+2026-10-24T05:15:00.6172588Z   name: academic-evidence-week-08-persistencia-sincronizacion
+2026-10-24T05:15:00.6172958Z   if-no-files-found: warn
+2026-10-24T05:15:00.6173233Z   path: reports/week-08/**
+evidence/week-08/**
+
+2026-10-24T05:15:00.6173710Z   compression-level: 6
+2026-10-24T05:15:00.6173934Z   overwrite: false
+2026-10-24T05:15:00.6174156Z   include-hidden-files: false
+2026-10-24T05:15:00.6174397Z ##[endgroup]
+2026-10-24T05:15:00.7966637Z (node:3049) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-24T05:15:00.7968218Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-24T05:15:00.8232654Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-24T05:15:00.8236659Z The least common ancestor is /home/runner/work/campusops-dmi-team/campusops-dmi-team. This will be the root directory of the artifact
+2026-10-24T05:15:00.8238401Z With the provided path, there will be 114 files uploaded
+2026-10-24T05:15:00.8243470Z Artifact name is valid!
+2026-10-24T05:15:00.8246281Z Root directory input is valid!
+2026-10-24T05:15:01.0941725Z Beginning upload of artifact content to blob storage
+2026-10-24T05:15:01.2316469Z (node:3049) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-24T05:15:01.5189978Z Uploaded bytes 166355
+2026-10-24T05:15:01.5701188Z Finished uploading artifact content to blob storage!
+2026-10-24T05:15:01.5702391Z SHA256 digest of uploaded artifact zip is 99563a2ef939c615495dcf9702a7ffd49bcd723e66238f1e455453424ac168e3
+2026-10-24T05:15:01.5703382Z Finalizing artifact upload
+2026-10-24T05:15:01.9879723Z Artifact academic-evidence-week-08-persistencia-sincronizacion.zip successfully finalized. Artifact ID 12549047771
+2026-10-24T05:15:01.9882416Z Artifact academic-evidence-week-08-persistencia-sincronizacion has been successfully uploaded! Final size is 166355 bytes. Artifact ID is 12549047771
+2026-10-24T05:15:01.9888069Z Artifact download URL: https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/40065373567/artifacts/12549047771
+2026-10-24T05:15:02.0112179Z Post job cleanup.
+2026-10-24T05:15:02.1099538Z [command]/usr/bin/git version
+2026-10-24T05:15:02.1152306Z git version 2.55.0
+2026-10-24T05:15:02.1196839Z Temporarily overriding HOME='/home/runner/work/_temp/9a55df34-aef1-4dd0-8996-de4136a3527f' before making global git config changes
+2026-10-24T05:15:02.1198991Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-24T05:15:02.1203911Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/campusops-dmi-team/campusops-dmi-team
+2026-10-24T05:15:02.1258766Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-24T05:15:02.1310172Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-24T05:15:02.1587557Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-24T05:15:02.1632338Z http.https://github.com/.extraheader
+2026-10-24T05:15:02.1663174Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-24T05:15:02.1723538Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-24T05:15:02.1999974Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-24T05:15:02.2051233Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-24T05:15:02.2549517Z Cleaning up orphan processes
+2026-10-24T05:15:02.2925648Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

@@ -1,0 +1,20 @@
+{
+  "studentId": "3522110437",
+  "githubLogin": "JulianDele",
+  "commitShas": [
+    "f3bb0c9f5dfb86cf4987c207ecc08349597804e8"
+  ],
+  "files": [
+    "docs/reviews/week-08-juliandele-checklist.md",
+    "evidence/week-08/individual.json"
+  ],
+  "tests": [],
+  "reviews": [
+    "Revisión documental W08 de requisitos de identidad/autor/baseVersion, reinicio nota/foto, migración/rollback, conflicto start/reassignment, merge independiente, repetición y acknowledge; checklist creado en docs/reviews/week-08-juliandele-checklist.md."
+  ],
+  "prediction": "Predicción redactada durante esta revisión: esperaba distinguir los requisitos definidos por contrato de los comportamientos realmente acreditados por el reporte baseline, y marcar como Pendiente todo lo que sólo tuviera descripción o firma de interfaz sin prueba del adaptador/flujo.",
+  "command": "No se ejecutó comando automatizado; revisión documental manual de docs/week-08-baseline.md, docs/CAMPUSOPS.md, docs/CAMPUSOPS_API.md, docs/EVIDENCE_CONTRACT.md, course-contracts.json, reports/week-08/baseline/validation.json y src/application/persistence/LocalWorkspace.ts.",
+  "observedResult": "Se creó el checklist con siete requisitos. El reporte baseline corresponde al SHA 9f56862e269221ff96a5789b77d32162c8d57d24 y registra fallos de los tests públicos/aggregate W08 por stubs sync; distingue el probe/harness del adaptador de la app. Los requisitos cuya implementación o prueba no se acredita en las fuentes autorizadas quedaron como Pendiente.",
+  "explanation": "Como JulianDele (studentId 3522110437), realicé una revisión documental acotada a las fuentes indicadas y preparé el checklist para revisión. No ejecuté pruebas ni revisé código adicional. No encontré un commit Week 08 propio en el historial consultado, así que dejo commitShas vacío en lugar de usar un SHA ajeno o de otra semana. Este registro documenta el trabajo local y requiere el SHA del commit que lo incluya antes de la entrega final.",
+  "aiAssistance": "Se utilizó asistencia de IA para estructurar el checklist y el borrador de evidencia; las observaciones se contrastaron con las fuentes autorizadas. La revisión humana final de JulianDele sigue pendiente."
+}
