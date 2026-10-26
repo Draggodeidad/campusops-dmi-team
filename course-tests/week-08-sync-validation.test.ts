@@ -162,7 +162,39 @@ describe('CampusOps W08 — Issue #48: Pruebas de merge, conflictos y deduplicac
       }
     });
 
-    test('E2: arrays con mismo contenido pero distinto orden producen conflicto (orden estricto)', () => {
+    test.each(['local/remote', 'remote/local'] as const)(
+      'E4: cambios concurrentes a JSON equivalente con claves anidadas permutadas (%s)',
+      order => {
+        const base = deepFreeze(createRecord({ payload: { revision: 'anterior' } }, 1));
+        const localPayload = {
+          revision: 'nueva',
+          details: { enabled: true, nested: { label: 'sintético', count: 2 } },
+          items: [{ code: 'A', meta: { x: 1, y: [true, null] } }],
+        };
+        const remotePayload = {
+          items: [{ meta: { y: [true, null], x: 1 }, code: 'A' }],
+          details: { nested: { count: 2, label: 'sintético' }, enabled: true },
+          revision: 'nueva',
+        };
+        // Referencias separadas y orden diferente incluso dentro de arrays/objetos.
+        expect(localPayload).not.toBe(remotePayload);
+        expect(localPayload.details.nested).not.toBe(remotePayload.details.nested);
+        expect(localPayload.items[0]?.meta).not.toBe(remotePayload.items[0]?.meta);
+        expect(JSON.stringify(localPayload)).not.toBe(JSON.stringify(remotePayload));
+        const local = deepFreeze(createRecord({ payload: localPayload }, 1));
+        const remote = deepFreeze(createRecord({ payload: remotePayload }, 2));
+        const before = JSON.stringify([base, local, remote]);
+        const [left, right] = order === 'local/remote' ? [local, remote] : [remote, local];
+
+        expect(resolveSync(base, left, right)).toEqual({
+          kind: 'merged',
+          fields: { payload: localPayload },
+        });
+        expect(JSON.stringify([base, local, remote])).toBe(before);
+      },
+    );
+
+    test('E2: reordenar un array sólo en local conserva ese orden en el merge', () => {
       const base = deepFreeze(createRecord({ tags: ['urgent', 'electric'] }, 1));
       const local = deepFreeze(createRecord({ tags: ['electric', 'urgent'] }, 1));
       const remote = deepFreeze(createRecord({ tags: ['urgent', 'electric'] }, 2));
