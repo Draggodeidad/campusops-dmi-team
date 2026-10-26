@@ -105,7 +105,7 @@ implementados por exponer funciones en el grafo.
 |---|---|
 | Sin cambios, independientes, mismo cambio, JSON estructural, arrays ordenados, altas/bajas/null | `npm run test:week-08:module -- course-tests/week-08-sync.test.ts` |
 | Conflictos ordenados y `work` indivisible, reasignación exacta, entradas congeladas, primera identidad | Misma suite, usando `createWeek08Scenario` del baseline #42 |
-| Motor común desde composición y evaluación, sin solicitudes de red | `npm run test:week-08:sync` (incluye ambas suites) |
+| Motor común desde composición y evaluación, sin solicitudes de red | `npm run test:week-08:sync` (rutas explícitas: sync, composición y sync-validation de #48; el agregado y workflow W08 invocan ese script) |
 | Firmas y tres casos oficiales sin modificar | `npm run test:week-08:public` |
 | Regresión de sesión y límites | `npm run test:week-06`, `npm run check:week-06-readiness`, `npm run test:architecture`, `npm run check:architecture` |
 

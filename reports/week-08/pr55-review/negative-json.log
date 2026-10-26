@@ -1,0 +1,144 @@
+{"command": ["npm", "run", "test:week-08:module", "--", "course-tests/week-08-sync-validation.test.ts"], "cwd": "/tmp/campusops-w08-review/mutant", "commitSha": "7c06d0352e0af1becf8dfc5e285fbba6bdf441af", "startedAt": "2026-10-26T18:47:00.906787+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "M src/application/sync/resolveSync.ts\n?? node_modules"}
+
+> dmi-react-native-starter@1.0.0 test:week-08:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync-validation.test.ts
+
+FAIL course-tests/week-08-sync-validation.test.ts
+  CampusOps W08 — Issue #48: Pruebas de merge, conflictos y deduplicación sin mutaciones
+    Grupo A: Merge sin modificaciones (No-op merge)
+      ✓ A1: base, local y remote con campos equivalentes resuelven en merged sin conflicto (3 ms)
+    Grupo B: Modificación exclusivamente local
+      ✓ B1: cambio exclusivo en local preserva el valor local y no genera conflicto (1 ms)
+      ✓ B2: adición exclusiva de campo en local se incorpora en el merge (1 ms)
+      ✓ B3: eliminación de campo en local se respeta cuando remote no cambió (1 ms)
+    Grupo C: Modificación exclusivamente remota
+      ✓ C1: cambio exclusivo en remote se adopta sin conflicto
+      ✓ C2: adición exclusiva de campo en remote se incorpora sin conflicto (1 ms)
+      ✓ C3: eliminación de campo en remote se adopta cuando local no cambió
+    Grupo D: Cambios independientes combinados
+      ✓ D1: local y remote modifican campos distintos y ambos se combinan en el resultado
+      ✓ D2: adiciones independientes en local y remote se combinan sin colisión (1 ms)
+    Grupo E: Equivalencia JSON por contenido e indiferencia al orden de claves
+      ✓ E1: objetos anidados con orden de propiedades permutado son considerados idénticos (1 ms)
+      ✕ E4: cambios concurrentes a JSON equivalente con claves anidadas permutadas (local/remote) (9 ms)
+      ✕ E4: cambios concurrentes a JSON equivalente con claves anidadas permutadas (remote/local) (2 ms)
+      ✓ E2: reordenar un array sólo en local conserva ese orden en el merge (1 ms)
+      ✓ E3: distingue tipos escalares estrictos (número vs string y null vs objeto vacío)
+    Grupo F: Conflicto sobre el mismo campo y ausencia de Last-Write-Wins
+      ✓ F1: mutaciones simultáneas incompatibles sobre el mismo campo reportan conflict sin LWW (1 ms)
+      ✓ F2: edición versus eliminación sobre el mismo campo genera conflicto
+    Grupo G: Orden determinista de conflictos
+      ✓ G1: múltiples campos en conflicto siempre se ordenan alfabéticamente (1 ms)
+    Grupo H: Escenario oficial obligatorio campus-inc-001
+      ✓ H1: reasignación remota vs inicio local en campus-inc-001 produce conflicto atómico en work
+    Grupo I: Inmutabilidad estricta y seguridad de prototipos
+      ✓ I1: entradas profundamente congeladas no sufren mutación alguna
+      ✓ I2: campos especiales de prototipo (__proto__, constructor) sobreviven como propiedades propias (1 ms)
+    Grupo J: Deduplicación de operaciones pendientes
+      ✓ J1: lista vacía retorna array vacío sin mutaciones
+      ✓ J2: conserva el primer objeto exacto, orden de inserción y descarta repeticiones con distinto cuerpo (1 ms)
+      ✓ J3: deduplicación es idempotente y no genera IDs sintéticos
+
+  ● CampusOps W08 — Issue #48: Pruebas de merge, conflictos y deduplicación sin mutaciones › Grupo E: Equivalencia JSON por contenido e indiferencia al orden de claves › E4: cambios concurrentes a JSON equivalente con claves anidadas permutadas (local/remote)
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 24
+    + Received  +  3
+
+      Object {
+    -   "fields": Object {
+    -     "payload": Object {
+    -       "details": Object {
+    -         "enabled": true,
+    -         "nested": Object {
+    -           "count": 2,
+    -           "label": "sintético",
+    -         },
+    -       },
+    -       "items": Array [
+    -         Object {
+    -           "code": "A",
+    -           "meta": Object {
+    -             "x": 1,
+    -             "y": Array [
+    -               true,
+    -               null,
+    -             ],
+    -           },
+    -         },
+    +   "fields": Array [
+    +     "payload",
+        ],
+    -       "revision": "nueva",
+    -     },
+    -   },
+    -   "kind": "merged",
+    +   "kind": "conflict",
+      }
+
+      187 |         const [left, right] = order === 'local/remote' ? [local, remote] : [remote, local];
+      188 |
+    > 189 |         expect(resolveSync(base, left, right)).toEqual({
+          |                                                ^
+      190 |           kind: 'merged',
+      191 |           fields: { payload: localPayload },
+      192 |         });
+
+      at toEqual (course-tests/week-08-sync-validation.test.ts:189:48)
+
+  ● CampusOps W08 — Issue #48: Pruebas de merge, conflictos y deduplicación sin mutaciones › Grupo E: Equivalencia JSON por contenido e indiferencia al orden de claves › E4: cambios concurrentes a JSON equivalente con claves anidadas permutadas (remote/local)
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 24
+    + Received  +  3
+
+      Object {
+    -   "fields": Object {
+    -     "payload": Object {
+    -       "details": Object {
+    -         "enabled": true,
+    -         "nested": Object {
+    -           "count": 2,
+    -           "label": "sintético",
+    -         },
+    -       },
+    -       "items": Array [
+    -         Object {
+    -           "code": "A",
+    -           "meta": Object {
+    -             "x": 1,
+    -             "y": Array [
+    -               true,
+    -               null,
+    -             ],
+    -           },
+    -         },
+    +   "fields": Array [
+    +     "payload",
+        ],
+    -       "revision": "nueva",
+    -     },
+    -   },
+    -   "kind": "merged",
+    +   "kind": "conflict",
+      }
+
+      187 |         const [left, right] = order === 'local/remote' ? [local, remote] : [remote, local];
+      188 |
+    > 189 |         expect(resolveSync(base, left, right)).toEqual({
+          |                                                ^
+      190 |           kind: 'merged',
+      191 |           fields: { payload: localPayload },
+      192 |         });
+
+      at toEqual (course-tests/week-08-sync-validation.test.ts:189:48)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 21 passed, 23 total
+Snapshots:   0 total
+Time:        2.472 s
+Ran all test suites within paths "course-tests/week-08-sync-validation.test.ts".
+
+{"exitCode": 1, "durationSeconds": 3.165}

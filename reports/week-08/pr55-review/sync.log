@@ -1,0 +1,16 @@
+{"command": ["npm", "run", "test:week-08:sync"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-pr55-fix/campusops-dmi-team", "commitSha": "7c06d0352e0af1becf8dfc5e285fbba6bdf441af", "startedAt": "2026-10-26T18:46:40.574882+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": ""}
+
+> dmi-react-native-starter@1.0.0 test:week-08:sync
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts course-tests/week-08-sync-validation.test.ts
+
+PASS course-tests/week-08-sync-validation.test.ts
+PASS course-tests/week-08-sync.test.ts
+PASS course-tests/week-08-sync-composition.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       47 passed, 47 total
+Snapshots:   0 total
+Time:        4.388 s
+Ran all test suites within paths "course-tests/week-08-sync.test.ts", "course-tests/week-08-sync-composition.test.ts", "course-tests/week-08-sync-validation.test.ts".
+
+{"exitCode": 0, "durationSeconds": 5.295}
