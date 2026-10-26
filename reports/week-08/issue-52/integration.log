@@ -1,0 +1,17 @@
+{"command": ["npm", "run", "test:week-08:integration"], "startedAt": "2026-10-26T19:41:39.970771+00:00", "schemaVersion": 1, "week": 8, "commitSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
+
+> dmi-react-native-starter@1.0.0 test:week-08:integration
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx
+
+(node:59831) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-integration.test.tsx
+PASS course-tests/week-08-gateway.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       24 passed, 24 total
+Snapshots:   0 total
+Time:        4.422 s
+Ran all test suites within paths "course-tests/week-08-gateway.test.ts", "course-tests/week-08-integration.test.tsx".
+
+{"exitCode": 0, "durationSeconds": 5.415}

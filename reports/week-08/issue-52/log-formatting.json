@@ -1,0 +1,34 @@
+{
+  "initialCheck": {
+    "command": "git diff --cached --check",
+    "exitCode": 2,
+    "rawDiagnostics": "reports/week-08/issue-52/staged-whitespace-before.log.gz"
+  },
+  "normalization": "Readable .log copies remove only spaces/tabs immediately before newline. Exact original command output is retained as .log.gz. No test result, assertion, check or status is changed.",
+  "files": [
+    {
+      "readable": "reports/week-08/issue-52/feedback.log",
+      "byteExactOriginal": "reports/week-08/issue-52/feedback.log.gz",
+      "rawSha256": "f0202a079bdc3d28fb7968c0748600ce85d1e95bf74c89e200883b2dccad30c5",
+      "readableSha256": "a488108fd7b93f250e7a290d3089ced32edd82471b282937d8f59e6b3e9c356b"
+    },
+    {
+      "readable": "reports/week-08/issue-52/precommit/feedback.log",
+      "byteExactOriginal": "reports/week-08/issue-52/precommit/feedback.log.gz",
+      "rawSha256": "126ee1d878b1d99fe9a742eceafe4789af925ea22b90e7db4e594f8b743aedb4",
+      "readableSha256": "1b585a717f7f02d62707b68d304fc454395e665a19bc321eb3b273313e9ccef1"
+    },
+    {
+      "readable": "reports/week-08/issue-52/precommit/session.log",
+      "byteExactOriginal": "reports/week-08/issue-52/precommit/session.log.gz",
+      "rawSha256": "a9bf45dc31d533ec41c9ef839f7c00c975fbad0f68f2e06679e358c3453f8260",
+      "readableSha256": "9bffaae4287454869281a2cba0828b32e20f52b31ed90795af3d21bbdabf1e11"
+    },
+    {
+      "readable": "reports/week-08/issue-52/session.log",
+      "byteExactOriginal": "reports/week-08/issue-52/session.log.gz",
+      "rawSha256": "c2e8d29cbecdeb5ffa6159b68ace20bff4c998a7985050844efa131d44c241da",
+      "readableSha256": "1e5bfdb36396fd869dac17c538c5ce23ea3f1200da64c952e2a7fe1ae44ae6e9"
+    }
+  ]
+}

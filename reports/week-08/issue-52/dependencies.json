@@ -1,0 +1,75 @@
+{
+  "observedAt": "2026-10-26",
+  "issues": [
+    {
+      "number": 42,
+      "title": "[DMI][W08][Medium · 2 pts] Baseline, kit e interfaces de persistencia/sync — Fase 1 – owner",
+      "state": "closed",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/42",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 43,
+      "title": "[DMI][W08][Hard · 3 pts] Persistencia duradera, cola y migración transaccional — Fase 1 – owner",
+      "state": "closed",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/43",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 44,
+      "title": "[DMI][W08][Hard · 3 pts] Motor compartido de merge, conflictos e identidad estable — Fase 1 – owner",
+      "state": "closed",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/44",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 45,
+      "title": "[DMI][W08][Hard · 3 pts] Integrar cola, sesión y sync idempotente en el flujo real — Fase 1 – owner",
+      "state": "closed",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/45",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 46,
+      "title": "[DMI][W08][Easy · 1 pts] Evidencia individual verificable de Draggodeidad — Fase 1 – owner",
+      "state": "closed",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/46",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 47,
+      "title": "[DMI][W08][Medium · 2 pts] Probar reinicio, migración y rollback del almacén local — Fase 2 – equipo",
+      "state": "open",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/47",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 48,
+      "title": "[DMI][W08][Medium · 2 pts] Probar merge, conflictos y deduplicación sin mutaciones — Fase 2 – equipo",
+      "state": "open",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/48",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 49,
+      "title": "[DMI][W08][Easy · 1 pts] Evidencia individual verificable de osbaldoXxC — Fase 2 – equipo",
+      "state": "open",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/49",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 50,
+      "title": "[DMI][W08][Easy · 1 pts] Revisión guiada del checklist documental W08 — Fase 2 – equipo",
+      "state": "open",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/50",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    },
+    {
+      "number": 51,
+      "title": "[DMI][W08][Easy · 1 pts] Evidencia individual guiada de JulianDele — Fase 2 – equipo",
+      "state": "open",
+      "url": "https://github.com/Draggodeidad/campusops-dmi-team/issues/51",
+      "scope": "Administrative status only; not proof of human review or academic completion"
+    }
+  ]
+}

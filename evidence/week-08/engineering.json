@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "week": 8,
-  "commitSha": "ee37a64408b05fd910b51e350e45c6c2bfc38f6b",
-  "generatedAt": "2026-10-26T19:14:32.772341+00:00",
+  "commitSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9",
+  "generatedAt": "2026-10-26T19:42:54.521790+00:00",
   "decision": "Conservar SQLite transaccional para snapshot y cola, archivos sintéticos durables y operaciones con autor/baseVersion/identidad estables. IncidentWorkspace persiste antes de enviar, verifica el recibo exacto y sólo entonces confirma/retiro; timeout, 403/409 o reasignación conservan la intención. resolveSync compara JSON por contenido profundo sin depender del orden de claves, mantiene el orden de arrays y trata work como un campo indivisible. Cambios independientes o concurrentes equivalentes se combinan; los incompatibles requieren lectura autorizada y decisión explícita. Reformular usa otro ID y conserva el original reviewed/superseded sin acknowledge. Los scripts por rutas explícitas incorporan las suites independientes sin modificar owner/públicas ni duplicarlas dentro del agregado/workflow.",
   "alternatives": [
     "Last-write-wins por reloj/versión simplificaría reconciliación, pero puede borrar intención offline o imponer una asignación obsoleta; se descarta.",
@@ -19,84 +19,104 @@
   ],
   "verification": [
     {
-      "command": "npm run test:architecture",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/architecture-tests.log; exit 0; Jest passed/total per invocation=[('2', '2')]"
-    },
-    {
-      "command": "npm run check:architecture",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/architecture.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "make feedback",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/feedback.log; exit 0; Jest passed/total per invocation=[('87', '87')]"
-    },
-    {
-      "command": "python3 reports/week-08/pr56-review/validate-individual.py",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/individual-contract.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "npm run lint",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/lint.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "npm run test:week-08:persistence",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/persistence.log; exit 0; Jest passed/total per invocation=[('30', '30')]"
-    },
-    {
-      "command": "git diff --exit-code 129694e0544b9857a4ed52a3101aa24bb2bddf2b -- src course-tests/public course-tests/week-08-workspace-owner.test.ts course-tests/week-08-sync.test.ts course-tests/week-08-sync-composition.test.ts .github/workflows package-lock.json",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/preserved-boundaries.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "python3 reports/week-08/pr56-review/audit.py",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/provenance-audit.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "make public-test-week-08",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/public-w08.log; exit 0; Jest passed/total per invocation=[('90', '90')]"
-    },
-    {
-      "command": "npm run check:week-06-readiness",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/session-readiness.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "npm run test:week-06",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/session.log; exit 0; Jest passed/total per invocation=[('31', '31')]"
-    },
-    {
       "command": "make setup",
       "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/setup.log; exit 0; Jest passed/total per invocation=[]"
-    },
-    {
-      "command": "npm run test:week-08:sync",
-      "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/sync.log; exit 0; Jest passed/total per invocation=[('47', '47')]"
+      "evidence": "reports/week-08/issue-52/setup.log; exit 0; Jest passed/total per invocation=[]"
     },
     {
       "command": "npm run typecheck",
       "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/typecheck.log; exit 0; Jest passed/total per invocation=[]"
+      "evidence": "reports/week-08/issue-52/typecheck.log; exit 0; Jest passed/total per invocation=[]"
     },
     {
-      "command": "make verify-week-08",
+      "command": "npm run lint",
       "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/verify-w08.log; exit 0; Jest passed/total per invocation=[('1', '1')]"
+      "evidence": "reports/week-08/issue-52/lint.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "npm run test:smoke",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/smoke.log; exit 0; Jest passed/total per invocation=[('1', '1')]"
+    },
+    {
+      "command": "npm run test:incidents",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/incidents.log; exit 0; Jest passed/total per invocation=[('3', '3')]"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/architecture-tests.log; exit 0; Jest passed/total per invocation=[('2', '2')]"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/architecture.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/session.log; exit 0; Jest passed/total per invocation=[('31', '31')]"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/session-readiness.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "npm run test:week-08:persistence",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/persistence.log; exit 0; Jest passed/total per invocation=[('30', '30')]"
+    },
+    {
+      "command": "npm run test:week-08:sync",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/sync.log; exit 0; Jest passed/total per invocation=[('47', '47')]"
+    },
+    {
+      "command": "npm run test:week-08:integration",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/integration.log; exit 0; Jest passed/total per invocation=[('24', '24')]"
     },
     {
       "command": "npm run test:week-08",
       "result": "pass; exit 0",
-      "evidence": "reports/week-08/main-after-pr57/week08-aggregate.log; exit 0; Jest passed/total per invocation=[('3', '3'), ('30', '30'), ('47', '47'), ('24', '24'), ('3', '3')]"
+      "evidence": "reports/week-08/issue-52/week08-aggregate.log; exit 0; Jest passed/total per invocation=[('3', '3'), ('30', '30'), ('47', '47'), ('24', '24'), ('3', '3')]"
+    },
+    {
+      "command": "make feedback",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/feedback.log; exit 0; Jest passed/total per invocation=[('87', '87')]"
+    },
+    {
+      "command": "make verify-week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/verify-w08.log; exit 0; Jest passed/total per invocation=[('1', '1')]"
+    },
+    {
+      "command": "python3 reports/week-08/pr56-review/validate-individual.py",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/individual-contract.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "python3 reports/week-08/pr56-review/audit.py",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/provenance-audit.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "git diff --exit-code 749b171b1c57a6215810dca5da376b0f288bd732 -- src App.tsx course-tests .github/workflows Makefile tools/course_public_evaluator.py docs/EVIDENCE_CONTRACT.md docs/SUBMISSION.md docs/assignments package.json package-lock.json",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/protected-files.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/patch-hygiene.log; exit 0; Jest passed/total per invocation=[]"
+    },
+    {
+      "command": "make public-test-week-08",
+      "result": "pass; exit 0",
+      "evidence": "reports/week-08/issue-52/public-w08.log; exit 0; Jest passed/total per invocation=[('90', '90')]"
     }
   ],
   "implementation": [
@@ -116,5 +136,8 @@
     "Native Android integration not rerun here; Node SQLite on disk and Expo Android export do not certify installation/APK or native integration. Historical native evidence retains its source SHA.",
     "PR54-57 merged on explicit user request. No approval published, final tag created/moved or Classroom submission. Human corroboration and original personal logs remain pending. Delivery deadline 2026-10-26 23:59 America/Mexico_City."
   ],
-  "aiAssistance": "Decisión basada en código/ADR existentes y nuevas verificaciones de Codex; no se atribuye comprensión ni ejecución personal a integrantes."
+  "aiAssistance": "Decisión basada en código/ADR existentes y nuevas verificaciones de Codex; no se atribuye comprensión ni ejecución personal a integrantes.",
+  "scope": "Fresh reproduction of exact technical HEAD with no uncommitted source/document changes; all commands, cwd, times, exits and environment are recorded in reports/week-08/issue-52/validation.json. Only reports/evidence were being recorded. Precommit observations are archived separately and are not reused as current results. After PR merge, verify the actual main SHA and regenerate in an evidence-only PR if the HEAD/direct-parent rule no longer holds.",
+  "sourceTreeClean": true,
+  "finalTagStatus": "pending_final_tag"
 }
