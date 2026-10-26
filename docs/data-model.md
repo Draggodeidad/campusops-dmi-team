@@ -69,8 +69,8 @@ introducidos por callers. Sólo se usan fixtures sintéticas.
   fotos ya confirmadas quedan pendientes, sin borrar archivos compartidos.
 - Errores del proveedor se traducen a `WorkspaceError('STORAGE')` sin mensaje,
   payload ni causa nativa. `CLOSED`, `VERSION`, `INVALID_DATA` e
-  `IDENTITY_CONFLICT` distinguen fallas controladas. #45 debe presentarlas
-  mediante resultados/estados de Application y UI.
+  `IDENTITY_CONFLICT` distinguen fallas controladas. #45 las presenta mediante
+  resultados/estados de Application y UI, comprobados en la suite de integración.
 
 No se garantiza conservación tras desinstalar, borrar datos de la app o
 modificar archivos externamente. El almacenamiento operativo no cifra por
