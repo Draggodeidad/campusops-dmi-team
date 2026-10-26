@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "observedAt": "2026-10-26T19:35:30.340556+00:00",
+  "cause": "week-08-final absent locally and on origin after fetch; not a missing checkout ref",
+  "finalTagStatus": "pending_final_tag",
+  "officialFrozenShaStatus": "fail in original CI; no local final evidence gate run before authorized tag",
+  "workflowUnchanged": true,
+  "evaluatorUnchanged": true,
+  "ci": {
+    "runId": 40385165581,
+    "jobId": 121791385428,
+    "commitSha": "749b171b1c57a6215810dca5da376b0f288bd732",
+    "url": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/40385165581",
+    "evidence": "reports/week-08/issue-52/ci-ac03.log",
+    "makeExitCode": 2,
+    "evaluatorExitCode": 1
+  },
+  "commands": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exitCode": 0,
+      "stdout": " M docs/data-model.md\n M docs/sync-policy.md\n M reports/week-08/verify.json\n?? docs/week-08-delivery.md\n?? reports/week-08/issue-52/\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "fetch",
+        "origin",
+        "--tags"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "tag",
+        "-l",
+        "week-08-final"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-remote",
+        "--tags",
+        "origin",
+        "week-08-final"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "749b171b1c57a6215810dca5da376b0f288bd732\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "origin/main"
+      ],
+      "exitCode": 0,
+      "stdout": "749b171b1c57a6215810dca5da376b0f288bd732\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "--show-origin",
+        "--get",
+        "user.name"
+      ],
+      "exitCode": 0,
+      "stdout": "file:/home/dragodeidad/.gitconfig\tDraggodeidad\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "--show-origin",
+        "--get",
+        "user.email"
+      ],
+      "exitCode": 0,
+      "stdout": "file:/home/dragodeidad/.gitconfig\tantonioimanol7@gmail.com\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "var",
+        "GIT_AUTHOR_IDENT"
+      ],
+      "exitCode": 0,
+      "stdout": "Draggodeidad <antonioimanol7@gmail.com> 1793043329 -0600\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "var",
+        "GIT_COMMITTER_IDENT"
+      ],
+      "exitCode": 0,
+      "stdout": "Draggodeidad <antonioimanol7@gmail.com> 1793043329 -0600\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "user",
+        "--jq",
+        "{login,id}"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"id\":171895481,\"login\":\"Draggodeidad\"}\n",
+      "stderr": ""
+    }
+  ],
+  "initialCommitPushStatus": "pending_explicit_identity_authorization",
+  "initialNewCommits": [],
+  "identityAuthorization": {
+    "source": "Explicit human reply in this chat: Sí, autorizo esa identidad",
+    "name": "Draggodeidad",
+    "email": "antonioimanol7@gmail.com",
+    "status": "authorized"
+  },
+  "commitPushStatus": "Authorized human identity verified before commits; complete final capture observed; final evidence-only commit prepared for owner-reviewed PR.",
+  "technicalSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "codeDocumentationSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9"
+}

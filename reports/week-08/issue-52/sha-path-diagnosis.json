@@ -1,0 +1,11 @@
+{
+  "observedFailure": {
+    "command": "official evidence_sha_matches on candidate 1f4a20134d3514db614766fd6f7eb7d765019f59",
+    "reportedSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9",
+    "result": "fail",
+    "detail": "evidence-only commit; invalid changes=['ek-08/issue-52/contract-checks.json']"
+  },
+  "cause": "run() keeps only the last 3000 characters of stdout/stderr; git diff --name-only output was 3330 bytes, truncating a path into a false disallowed path. The actual Git diff contained only reports/evidence.",
+  "correction": "Archive historical captures byte for byte, verify each entry digest, retain original commits, rerun on the new archive commit, then use one final evidence-only commit with a shorter list of changed paths. Evaluator/workflow remain unchanged.",
+  "publication": "The initial candidate branch was published before the failing guard stopped the shell sequence. Preserve it in history and add ordinary commits; no force/amend/reset."
+}

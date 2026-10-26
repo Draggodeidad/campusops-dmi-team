@@ -1,0 +1,252 @@
+{
+  "members": [
+    {
+      "githubLogin": "Draggodeidad",
+      "commits": [
+        {
+          "sha": "9f56862e269221ff96a5789b77d32162c8d57d24",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            ".github/workflows/week-08-persistencia-sincronizacion-feedback.yml",
+            "INSTALL.md",
+            "README.md",
+            "course-tests/fixtures/week-08/scenario.ts",
+            "course-tests/fixtures/week-08/temporaryWorkspace.ts",
+            "course-tests/week-08-baseline.test.ts",
+            "docs/adr/ADR-001-architecture.md",
+            "docs/architecture.mmd",
+            "docs/assignments/week-08-repository.md",
+            "docs/assignments/week-08-rubric.md",
+            "docs/assignments/week-08.md",
+            "docs/week-08-baseline.md",
+            "package.json",
+            "src/application/persistence/LocalIncidentSnapshot.ts",
+            "src/application/persistence/LocalWorkspace.ts",
+            "src/application/persistence/PendingOperationStore.ts",
+            "src/course-evaluation/contracts.ts",
+            "src/domain/sync/SyncRecord.ts",
+            "tools/check-week-08-provider.mjs",
+            "tools/inspect-week-08-kit.py"
+          ]
+        },
+        {
+          "sha": "caadd9b9a256a551e7b7e50488043c2dc36739e4",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": []
+        },
+        {
+          "sha": "2028d6dfac33329b9cd80c966031c87a4cd34336",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "course-tests/week-08-sync.test.ts",
+            "src/application/sync/deduplicateOperations.ts",
+            "src/application/sync/resolveSync.ts",
+            "src/course-evaluation/index.ts"
+          ]
+        },
+        {
+          "sha": "654b0fb731acfcf7a77efb534c45c2e11b506b19",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            ".github/workflows/week-08-persistencia-sincronizacion-feedback.yml",
+            "App.tsx",
+            "course-tests/week-08-sync-composition.test.ts",
+            "docs/adr/ADR-001-architecture.md",
+            "docs/architecture.mmd",
+            "docs/sync-policy.md",
+            "docs/week-08-baseline.md",
+            "package.json"
+          ]
+        },
+        {
+          "sha": "f2be0c9a22183185ceb52c7a2e0598cfdeed3dfb",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": []
+        },
+        {
+          "sha": "02a405461a8c7a2b8b2e00cdc88dbd24a621759c",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "course-tests/fixtures/week-08/nodeWorkspace.ts",
+            "course-tests/week-08-workspace-owner.test.ts",
+            "src/application/persistence/LocalWorkspace.ts",
+            "src/infrastructure/persistence/SqliteLocalWorkspace.ts",
+            "src/infrastructure/persistence/WorkspaceDatabase.ts",
+            "src/infrastructure/persistence/workspaceValidation.ts"
+          ]
+        },
+        {
+          "sha": "96a5f58738872492f79bfa06753167c8d7dc5a85",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            ".github/workflows/week-08-persistencia-sincronizacion-feedback.yml",
+            "App.tsx",
+            "app.json",
+            "course-tests/fixtures/week-08/scenario.ts",
+            "docs/adr/ADR-001-architecture.md",
+            "docs/architecture.mmd",
+            "docs/data-model.md",
+            "docs/week-08-baseline.md",
+            "package-lock.json",
+            "package.json",
+            "src/infrastructure/persistence/createExpoWorkspace.ts",
+            "tools/test-week-08-native.mjs",
+            "tools/week-08-native-entry.tsx"
+          ]
+        },
+        {
+          "sha": "7d562cd5efa321222d7c2f2dffb9f30e0587d91c",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "tools/test-week-08-native.mjs"
+          ]
+        },
+        {
+          "sha": "140433af5c72c22ace13a34cfcdd6ae9758fb3cf",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "tools/test-week-08-native.mjs"
+          ]
+        },
+        {
+          "sha": "b8ea59e711b24ae862efb3904f1ed7e3a105efff",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": []
+        },
+        {
+          "sha": "0d5ac76bd911770cab004660d8d1fee236a6bb32",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": []
+        },
+        {
+          "sha": "17db4b47de3e4228891aeda0b65d23d9503cc7b3",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": []
+        },
+        {
+          "sha": "10dc2b86fa9ccdaaffb56fdc7cedf87361cce66a",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "course-tests/week-08-gateway.test.ts",
+            "src/application/errors/ApplicationFailure.ts",
+            "src/application/persistence/LocalIncidentSnapshot.ts",
+            "src/application/persistence/LocalWorkspace.ts",
+            "src/application/sync/IncidentSyncGateway.ts",
+            "src/application/sync/incidentRecord.ts",
+            "src/domain/incidents/Incident.ts",
+            "src/infrastructure/http/IncidentTransport.ts",
+            "src/infrastructure/http/SessionTransportDecorator.ts",
+            "src/infrastructure/incidents/dto/IncidentDtoMapper.ts",
+            "src/infrastructure/persistence/SqliteLocalWorkspace.ts",
+            "src/infrastructure/sync/HttpIncidentSyncGateway.ts"
+          ]
+        },
+        {
+          "sha": "8d502f9cdd5322ef28e61050750eceab83f8f460",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            ".github/workflows/week-08-persistencia-sincronizacion-feedback.yml",
+            "App.tsx",
+            "course-tests/fixtures/week-08/syncNetwork.ts",
+            "course-tests/week-06-integration-regression.test.tsx",
+            "course-tests/week-08-integration.test.tsx",
+            "package.json",
+            "src/application/incidents/PerformIncidentAction.ts",
+            "src/application/persistence/LocalIncidentSnapshot.ts",
+            "src/application/sync/IncidentWorkspace.ts",
+            "src/infrastructure/sync/ExpoSyntheticPhotoSource.ts",
+            "src/ui/CampusOpsApp.tsx",
+            "src/ui/incidents/IncidentDetailScreen.tsx",
+            "src/ui/incidents/OfflineWorkspacePanel.tsx"
+          ]
+        },
+        {
+          "sha": "cad06b75dc416cef682f55e7920343074cef737e",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "course-tests/week-08-integration.test.tsx",
+            "src/application/sync/IncidentWorkspace.ts"
+          ]
+        },
+        {
+          "sha": "99dd0dea54c60a1ac13ee074fb70a8ae751f7147",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "AGENTS.md",
+            "course-tests/week-08-integration.test.tsx",
+            "docs/adr/ADR-001-architecture.md",
+            "docs/architecture.mmd",
+            "docs/data-model.md",
+            "docs/sync-policy.md",
+            "docs/week-08-baseline.md"
+          ]
+        },
+        {
+          "sha": "498f4cff5db105dd9aaf5c2138897ffe5b1a2ea1",
+          "gitAuthor": "Draggodeidad",
+          "reachableFromHead": true,
+          "listedFilesChanged": []
+        }
+      ],
+      "humanCorroboration": "pending",
+      "scope": "Original Git authorship only; not proof of personal execution or unaided work"
+    },
+    {
+      "githubLogin": "osbaldoXxC",
+      "commits": [
+        {
+          "sha": "300cd24123206448367bf9902766acb1c7f0f440",
+          "gitAuthor": "osbaldoXxC",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "course-tests/week-08-persistence.test.ts"
+          ]
+        },
+        {
+          "sha": "12189435eb1e59f4684efe237051186bc6abcb84",
+          "gitAuthor": "osbaldoXxC",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "course-tests/week-08-sync-validation.test.ts"
+          ]
+        }
+      ],
+      "humanCorroboration": "pending",
+      "scope": "Original Git authorship only; not proof of personal execution or unaided work"
+    },
+    {
+      "githubLogin": "JulianDele",
+      "commits": [
+        {
+          "sha": "d7f388c8e2bd467e755048ea3be94710e0385bee",
+          "gitAuthor": "JulianDele",
+          "reachableFromHead": true,
+          "listedFilesChanged": [
+            "docs/reviews/week-08-juliandele-checklist.md",
+            "evidence/week-08/individual.json"
+          ]
+        }
+      ],
+      "humanCorroboration": "pending",
+      "scope": "Original Git authorship only; not proof of personal execution or unaided work"
+    }
+  ],
+  "individualSha256": "eb7777317bb4f7c221b24832a5a36ea56001478e48e812016ccb34498feb5d15",
+  "individualUnchanged": true
+}

@@ -1,0 +1,59 @@
+{
+  "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "checks": [
+    {
+      "path": "reports/week-08/migration-tests.json",
+      "status": "pass",
+      "detail": "20 checks indexed, 13 boundary/failure; report evaluates HEAD"
+    },
+    {
+      "path": "evidence/week-08/engineering.json",
+      "status": "pass",
+      "detail": "decision evidence is substantive and reproducible; report evaluates HEAD"
+    },
+    {
+      "path": "evidence/week-08/individual.json",
+      "status": "pass",
+      "detail": "three individual evidence records found"
+    }
+  ],
+  "sourceTreeClean": true,
+  "individualUnchanged": true,
+  "logSha256": {
+    "setup.log": "20f1834ce3d78b9595f94ed554116b8132cd872f0142e2e07dab6e5f09dd843f",
+    "typecheck.log": "fbbe768d72ad419968fa14097d0484dae570d7371a39a15620fbc0a457ca9dc4",
+    "lint.log": "4d7f8437a73679ffb8f2e1806cf7933ea95aabed373a4e05a1bef12e5b6884e3",
+    "smoke.log": "6d500be7ad40fa7c6b86e44b4277003a49048701bce890d0235d9a22549b98e9",
+    "incidents.log": "6ed3b1c4c7b1f5c5785573ecd360ebc1262e50b360bb47c07ef68964665c04d7",
+    "architecture-tests.log": "4ff2e36db40c273684533d517a34f27d0c48cf85d00a4b02922270d034946ca6",
+    "architecture.log": "2410fa86804069cc38928d0364914aa54c14367d96d21b2fdf2aa2871d812ffe",
+    "session.log": "579a4a23e02790dc2d506b8af19d66de26a89b14c61e5a7cb5612b62ab333ec0",
+    "session-readiness.log": "24f0adb574010103fbcf508587ce8006153061fb3456bf2d4df18c52f3b896e3",
+    "persistence.log": "f94f1394421724ba662e1bb58eef022059b7e58605fd6028a95d2dacb672082a",
+    "sync.log": "02ebe29fee9ba6dbd504413c976f431c87b35bcba92b1f141854940c8d55a6a9",
+    "integration.log": "f8843a3c5c7c95bf0d2351fb0e587fd1892fa15bd5021c6244e9acbebf135d16",
+    "week08-aggregate.log": "be8c8446913595a10255a88178739516292b62ef3058e196e5261419fb1b74ad",
+    "feedback.log": "f2789a2d2f41bd553411d5c1f779b2b157c0e159c64afa71659b838eb4d8fc44",
+    "verify-w08.log": "ac1b6ad7ac807d55356461314fa0ca00b0312d3a3b86f07646907a747230c9f6",
+    "individual-contract.log": "04831330f503c8fafbfa9f0ef4d08f0a8f04dc6393c5e2893eb4238317e60803",
+    "provenance-audit.log": "e0e152479bb9633fb240b28e09e1972c706c4921d9ce288876039bb9842f4431",
+    "protected-files.log": "25a857b96d346140680cc92dac04d2ea10bd8cc190b83f4b14cfc3f61f6e8f67",
+    "patch-hygiene.log": "c9cefcf8f6b449d950118f8b74dd3afc9c8216f1d866a1c7576cc43359c02875",
+    "public-w08.log": "4f1d0e4596ab8e1a742d284db0501e576d204760aba2c2dd1bd3b1096eb169f2"
+  },
+  "rawLogArchives": [
+    {
+      "readable": "reports/week-08/issue-52/feedback.log",
+      "byteExactOriginal": "reports/week-08/issue-52/feedback.log.gz",
+      "rawSha256": "91c560ccad1af4ed590fbd5e118f31b965d9cf674411f534c3df7fb724fcf8b2",
+      "readableSha256": "f2789a2d2f41bd553411d5c1f779b2b157c0e159c64afa71659b838eb4d8fc44"
+    },
+    {
+      "readable": "reports/week-08/issue-52/session.log",
+      "byteExactOriginal": "reports/week-08/issue-52/session.log.gz",
+      "rawSha256": "863b055c98309efa77690443f3a04eb172c3fd72e0a4581eab9a13ee875dedc7",
+      "readableSha256": "579a4a23e02790dc2d506b8af19d66de26a89b14c61e5a7cb5612b62ab333ec0"
+    }
+  ],
+  "finalTagStatus": "pending_final_tag"
+}

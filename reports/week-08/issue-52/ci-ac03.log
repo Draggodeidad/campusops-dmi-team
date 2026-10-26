@@ -1,0 +1,68 @@
+##[group]Run make evidence-week-08
+2026-10-26T19:17:22.6079139Z [36;1mmake evidence-week-08[0m
+2026-10-26T19:17:22.6144627Z shell: /usr/bin/bash -e {0}
+2026-10-26T19:17:22.6144959Z ##[endgroup]
+2026-10-26T19:17:22.6247233Z python3 tools/course_public_evaluator.py --week 08 --mode evidence
+2026-10-26T19:17:23.6513495Z {
+2026-10-26T19:17:23.6513935Z   "schemaVersion": 1,
+2026-10-26T19:17:23.6514371Z   "week": 8,
+2026-10-26T19:17:23.6514695Z   "mode": "evidence",
+2026-10-26T19:17:23.6515229Z   "commitSha": "749b171b1c57a6215810dca5da376b0f288bd732",
+2026-10-26T19:17:23.6515862Z   "evaluatedAt": "2026-10-26T19:17:23.650731+00:00",
+2026-10-26T19:17:23.6516399Z   "status": "fail",
+2026-10-26T19:17:23.6516756Z   "checks": [
+2026-10-26T19:17:23.6517111Z     {
+2026-10-26T19:17:23.6517438Z       "id": "base_files",
+2026-10-26T19:17:23.6517807Z       "status": "pass",
+2026-10-26T19:17:23.6518190Z       "detail": "missing=[]"
+2026-10-26T19:17:23.6518543Z     },
+2026-10-26T19:17:23.6518870Z     {
+2026-10-26T19:17:23.6519230Z       "id": "react_native_profile",
+2026-10-26T19:17:23.6519659Z       "status": "pass",
+2026-10-26T19:17:23.6520292Z       "detail": "missing packages=[]"
+2026-10-26T19:17:23.6520702Z     },
+2026-10-26T19:17:23.6520993Z     {
+2026-10-26T19:17:23.6521341Z       "id": "toolchain_scripts",
+2026-10-26T19:17:23.6521752Z       "status": "pass",
+2026-10-26T19:17:23.6522173Z       "detail": "missing scripts=[]"
+2026-10-26T19:17:23.6522620Z     },
+2026-10-26T19:17:23.6522896Z     {
+2026-10-26T19:17:23.6535937Z       "id": "workflow_integrity",
+2026-10-26T19:17:23.6536449Z       "status": "pass",
+2026-10-26T19:17:23.6536935Z       "detail": "bypass markers=[]"
+2026-10-26T19:17:23.6537403Z     },
+2026-10-26T19:17:23.6537730Z     {
+2026-10-26T19:17:23.6538070Z       "id": "secret_scan",
+2026-10-26T19:17:23.6538501Z       "status": "pass",
+2026-10-26T19:17:23.6538922Z       "detail": "hits=[]"
+2026-10-26T19:17:23.6539322Z     },
+2026-10-26T19:17:23.6539644Z     {
+2026-10-26T19:17:23.6540516Z       "id": "required_evidence",
+2026-10-26T19:17:23.6540986Z       "status": "pass",
+2026-10-26T19:17:23.6541428Z       "detail": "missing/empty=[]"
+2026-10-26T19:17:23.6541884Z     },
+2026-10-26T19:17:23.6542215Z     {
+2026-10-26T19:17:23.6542739Z       "id": "schema:reports/week-08/migration-tests.json",
+2026-10-26T19:17:23.6543360Z       "status": "pass",
+2026-10-26T19:17:23.6544182Z       "detail": "27 checks indexed, 19 boundary/failure; evidence-only commit; invalid changes=[]"
+2026-10-26T19:17:23.6544915Z     },
+2026-10-26T19:17:23.6545246Z     {
+2026-10-26T19:17:23.6545752Z       "id": "schema:evidence/week-08/engineering.json",
+2026-10-26T19:17:23.6546263Z       "status": "pass",
+2026-10-26T19:17:23.6547194Z       "detail": "decision evidence is substantive and reproducible; evidence-only commit; invalid changes=[]"
+2026-10-26T19:17:23.6548102Z     },
+2026-10-26T19:17:23.6548420Z     {
+2026-10-26T19:17:23.6548879Z       "id": "schema:evidence/week-08/individual.json",
+2026-10-26T19:17:23.6549393Z       "status": "pass",
+2026-10-26T19:17:23.6549860Z       "detail": "three individual evidence records found"
+2026-10-26T19:17:23.6550588Z     },
+2026-10-26T19:17:23.6550910Z     {
+2026-10-26T19:17:23.6551232Z       "id": "frozen_sha",
+2026-10-26T19:17:23.6551623Z       "status": "fail",
+2026-10-26T19:17:23.6553625Z       "detail": "tag=week-08-final tagSha=fatal: ambiguous argument 'week-08-final': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]' head=749b171b1c57a6215810dca5da376b0f288bd732"
+2026-10-26T19:17:23.6555755Z     }
+2026-10-26T19:17:23.6556055Z   ]
+2026-10-26T19:17:23.6556359Z }
+2026-10-26T19:17:23.6589302Z make: *** [Makefile:39: evidence-week-08] Error 1
+2026-10-26T19:17:23.6605329Z ##[error]Process completed with exit code 2.
+2026-10-26T19:17:23.6686759Z

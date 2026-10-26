@@ -1,0 +1,17 @@
+{"command": ["npm", "run", "test:incidents"], "startedAt": "2026-10-26T19:47:25.435289+00:00", "schemaVersion": 1, "week": 8, "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
+
+> dmi-react-native-starter@1.0.0 test:incidents
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/incidents.test.tsx
+
+PASS course-tests/incidents.test.tsx
+  ✓ opens an incident from the list and returns from its detail (270 ms)
+  ✓ application use cases accept a substitute repository (2 ms)
+  ✓ shows a helpful placeholder when no incident is selected (3 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        1.147 s
+Ran all test suites matching /course-tests\/incidents.test.tsx/i.
+
+{"exitCode": 0, "durationSeconds": 2.135}

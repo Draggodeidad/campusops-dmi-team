@@ -50,10 +50,11 @@ Local v1: mismo asignado con `status: 'in_progress'`. Remoto v2: asignado
 ni las operaciones originales se modifican o descartan por esta decisión.
 
 El flujo `IncidentWorkspace` de #45 conserva base, local, remoto y operación
-pendiente. Se informará la versión/asignación actual, la intención original y
-por qué ya no es aplicable. Un usuario autorizado decidirá explícitamente
-revisar/reformular la intención sobre el estado actual o descartarla de forma
-informada. No se enviará automáticamente el inicio antiguo ni se marcará un
+pendiente. Una lectura autorizada informa la versión/asignación actual y la
+intención original; un 403 no revela la nueva asignación al técnico anterior.
+Un usuario autorizado puede conservar la asignación remota y archivar la
+intención sin borrarla, o reformular cuando siga autorizado, como describe la
+integración ejecutable más abajo. No se envía automáticamente el inicio antiguo ni se marca un
 conflicto como confirmación de servidor. El descarte explícito requiere su propio
 registro; no puede pasar por `acknowledge` como si se hubiera ejecutado.
 
@@ -97,9 +98,9 @@ política de proveedor W09.
 públicas intactas; Application sólo importa `SyncRecord` de Domain.
 `course-tests/week-08-sync-composition.test.ts` invoca el motor desde ese grafo,
 comprueba identidad con evaluación, merge compatible y conflicto con pendientes
-conservados. Esto prueba composición del motor; el flujo UI offline, persistencia,
-confirmación y resolución interactiva siguen en #43/#45. No se presentan como
-implementados por exponer funciones en el grafo.
+conservados. Esta suite prueba composición del motor. El flujo UI offline,
+persistencia, confirmación y resolución de #43/#45 ya están integrados y se
+comprueban por separado con `test:week-08:persistence` e integración.
 
 | Caso / requisito | Prueba reproducible |
 |---|---|
@@ -110,12 +111,13 @@ implementados por exponer funciones en el grafo.
 | Regresión de sesión y límites | `npm run test:week-06`, `npm run check:week-06-readiness`, `npm run test:architecture`, `npm run check:architecture` |
 
 El runner agregado `npm run test:week-08` incluye baseline, probe de proveedor,
-motor/composición y público. El workflow W08 ejecuta el motor adicionalmente a
-sus gates oficiales. #48 puede ampliar estas pruebas sin sustituir la lógica.
-Resultados, SHA comprobado y comandos observados: `reports/week-08/sync/`.
-Este cambio no certifica persistencia, reinicio, migración, idempotencia de extremo
-a extremo, revisión humana ni entrega W08. Asistencia material de Codex en código,
-pruebas, documentación y ejecución; revisión humana pendiente.
+persistencia (incluida #47), motor/composición y validación #48, integración y
+público. El workflow W08 conserva todos sus gates oficiales, incluido AC-03.
+`reports/week-08/sync/` conserva la ejecución histórica del motor #44;
+`reports/week-08/migration-tests.json` indexa la reproducción consolidada.
+La prueba del motor por sí sola no certifica persistencia, reinicio, migración
+o idempotencia remota. Asistencia material de Codex en código, pruebas,
+documentación y ejecución; revisión humana y entrega W08 pendientes.
 
 
 ## Integración ejecutable #45

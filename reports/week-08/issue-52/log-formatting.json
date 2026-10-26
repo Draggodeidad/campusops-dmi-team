@@ -1,0 +1,27 @@
+{
+  "initialCheck": {
+    "command": "git diff --cached --check",
+    "exitCode": 0
+  },
+  "normalization": "Readable .log copies remove only spaces/tabs immediately before newline. Exact original command output is retained as .log.gz. No test result, assertion, check or status is changed.",
+  "files": [
+    {
+      "readable": "reports/week-08/issue-52/feedback.log",
+      "byteExactOriginal": "reports/week-08/issue-52/feedback.log.gz",
+      "rawSha256": "91c560ccad1af4ed590fbd5e118f31b965d9cf674411f534c3df7fb724fcf8b2",
+      "readableSha256": "f2789a2d2f41bd553411d5c1f779b2b157c0e159c64afa71659b838eb4d8fc44"
+    },
+    {
+      "readable": "reports/week-08/issue-52/patch-hygiene-first-attempt.readable.log",
+      "byteExactOriginal": "reports/week-08/issue-52/patch-hygiene-first-attempt.log.gz",
+      "rawSha256": "a3ab51acf352a77fde686263b2a023655003ac574bce6115b19a18e12a0fa255",
+      "readableSha256": "3b364e1f007cce182fb23b9c134e9cecde2d4d378758393527b7e5692bf2be27"
+    },
+    {
+      "readable": "reports/week-08/issue-52/session.log",
+      "byteExactOriginal": "reports/week-08/issue-52/session.log.gz",
+      "rawSha256": "863b055c98309efa77690443f3a04eb172c3fd72e0a4581eab9a13ee875dedc7",
+      "readableSha256": "579a4a23e02790dc2d506b8af19d66de26a89b14c61e5a7cb5612b62ab333ec0"
+    }
+  ]
+}

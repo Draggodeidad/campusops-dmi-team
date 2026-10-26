@@ -1,0 +1,22 @@
+{
+  "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "attempts": [
+    {
+      "id": "patch-hygiene",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "git diff --check",
+      "commandArgs": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "startedAt": "2026-10-26T19:48:36.340183+00:00",
+      "exitCode": 2,
+      "durationSeconds": 0.017,
+      "jestPassedTotal": [],
+      "evidence": "reports/week-08/issue-52/patch-hygiene-first-attempt.log.gz"
+    }
+  ],
+  "cause": "Jest stdout introduced trailing blanks into tracked evidence logs. Original failed attempt and output retained; readable log whitespace is normalized with exact raw archives before rerunning the same check. Public check initially not started because regeneration correctly rejected a failed prerequisite."
+}
