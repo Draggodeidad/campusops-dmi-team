@@ -1,0 +1,10 @@
+{"command": ["python3", "reports/week-08/pr56-review/audit.py"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-integrated-verification/campusops-dmi-team", "commitSha": "c90067719fa44fb4ef4cb932aaa0750fbe41b2f4", "startedAt": "2026-10-26T18:58:16.226656+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "M evidence/week-08/individual.json\n M reports/week-08/pr56-review/README.md\n M reports/week-08/pr56-review/audit.py\n M reports/week-08/public-tests.json\n M reports/week-08/verify.json\n?? evidence/week-08/engineering.json\n?? reports/week-08/migration-tests.json\n?? reports/week-08/pr-review-integrated/"}
+Auxiliary and consolidated Osbaldo records equal; owner record unchanged. Third record checked against its actual source below.
+{"sha": "300cd24123206448367bf9902766acb1c7f0f440", "author": "osbaldoXxC", "files": ["course-tests/week-08-persistence.test.ts"]}
+{"sha": "12189435eb1e59f4684efe237051186bc6abcb84", "author": "osbaldoXxC", "files": ["course-tests/week-08-sync-validation.test.ts"]}
+Julian candidate: d7f388c8e2bd467e755048ea3be94710e0385bee JulianDele week-08: checklist documental y evidencia individual
+Candidate wrongly references: f3bb0c9f5dfb86cf4987c207ecc08349597804e8 Draggodeidad docs(w08): use weekly individual format with blank companion sections
+Third record recovered from its own authored source; personal fields unchanged, objective SHA corrected and provenance annotated. Human review pending.
+Scope: attribution and record equality only; original local logs and human corroboration remain pending.
+
+{"exitCode": 0, "durationSeconds": 0.103}

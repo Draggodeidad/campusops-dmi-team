@@ -1,0 +1,76 @@
+{"command": ["npm", "run", "check:week-06-readiness"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-integrated-verification/campusops-dmi-team", "commitSha": "c90067719fa44fb4ef4cb932aaa0750fbe41b2f4", "startedAt": "2026-10-26T18:53:16.067105+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "M reports/week-08/verify.json"}
+
+> dmi-react-native-starter@1.0.0 check:week-06-readiness
+> node tools/check-week-06-readiness.cjs
+
+{
+  "week": 6,
+  "purpose": "independent-readiness-review",
+  "checks": [
+    {
+      "id": "repository-uses-active-session-actor",
+      "status": "pass",
+      "observed": {
+        "activeActorMatchesOutgoingActor": true
+      }
+    },
+    {
+      "id": "anonymous-repository-does-not-send-fixture-authorization",
+      "status": "pass",
+      "observed": {
+        "anonymous": true,
+        "sentAuthorization": false
+      }
+    },
+    {
+      "id": "old-401-is-not-replayed-as-new-actor",
+      "status": "pass",
+      "observed": {
+        "attempts": 1,
+        "replayedUnderNewActor": false
+      }
+    },
+    {
+      "id": "evaluation-rejects-refresh-success-after-logout",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous",
+        "retainedToken": false
+      }
+    },
+    {
+      "id": "expired-request-refreshes-before-send",
+      "status": "pass",
+      "observed": {
+        "expired": true,
+        "refreshCallsBeforeSend": 1
+      }
+    },
+    {
+      "id": "restore-rejects-invalid-role-and-empty-tokens",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous",
+        "clearCalls": 1
+      }
+    },
+    {
+      "id": "restore-completion-cannot-resurrect-after-logout",
+      "status": "pass",
+      "observed": {
+        "state": "anonymous"
+      }
+    },
+    {
+      "id": "refresh-cleanup-reports-storage-delete-failure",
+      "status": "pass",
+      "observed": {
+        "errorCode": "SECURE_STORAGE_UNAVAILABLE",
+        "persistedRecordRemains": true,
+        "state": "anonymous"
+      }
+    }
+  ]
+}
+
+{"exitCode": 0, "durationSeconds": 0.74}

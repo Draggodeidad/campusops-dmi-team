@@ -1,5 +1,8 @@
 # Auditoría de procedencia W08, PR #56
 
+Este índice conserva el estado histórico da4b762. Para la consolidación posterior
+del registro fuente de Julián, consultar ../pr-review-integrated/README.md.
+
 Entrega documentada: 26-10-2026 23:59 America/Mexico_City. Estado: incompleto.
 
 Los SHA originales de Osbaldo existen y añaden las rutas citadas. Los datos de

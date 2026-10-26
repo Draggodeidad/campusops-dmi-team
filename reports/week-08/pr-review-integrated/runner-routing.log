@@ -1,0 +1,6 @@
+{"command": ["python3", "/tmp/campusops-w08-review/check-runners.py", "/home/dragodeidad/.codex/worktrees/w08-integrated-verification/campusops-dmi-team"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-integrated-verification/campusops-dmi-team", "commitSha": "c90067719fa44fb4ef4cb932aaa0750fbe41b2f4", "startedAt": "2026-10-26T18:52:46.445913+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "M reports/week-08/verify.json"}
+test:week-08:persistence: explicit paths ['course-tests/week-08-workspace-owner.test.ts', 'course-tests/week-08-persistence.test.ts']; included once in aggregate and once in W08 workflow
+test:week-08:sync: explicit paths ['course-tests/week-08-sync.test.ts', 'course-tests/week-08-sync-composition.test.ts', 'course-tests/week-08-sync-validation.test.ts']; included once in aggregate and once in W08 workflow
+No workflow or owner/public suite changes; actual execution recorded separately in suite/aggregate logs.
+
+{"exitCode": 0, "durationSeconds": 0.037}
