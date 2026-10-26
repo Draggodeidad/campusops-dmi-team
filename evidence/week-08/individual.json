@@ -106,17 +106,34 @@
       "aiAssistance": "Codex asistió materialmente la inspección del ZIP/repositorio, implementación, pruebas, documentación y ejecución de los comandos ya registrados, a petición del owner. La autoría Git se verificó en esta rama; no equivale a afirmar ejecución manual, comprensión o revisión humana ya realizadas. Este registro se compone de artefactos existentes y no atribuye aportes de compañeros. La validación y explicación humana del owner siguen pendientes. La trazabilidad completa se conserva en evidence/week-08/individual.draggodeidad.json."
     },
     {
-      "studentId": "",
-      "githubLogin": "",
-      "commitShas": [],
-      "files": [],
-      "tests": [],
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "300cd24123206448367bf9902766acb1c7f0f440",
+        "12189435eb1e59f4684efe237051186bc6abcb84"
+      ],
+      "files": [
+        "course-tests/week-08-persistence.test.ts",
+        "course-tests/week-08-sync-validation.test.ts"
+      ],
+      "tests": [
+        "npm run test:week-08:module -- course-tests/week-08-persistence.test.ts",
+        "npm run test:week-08:module -- course-tests/week-08-sync-validation.test.ts",
+        "npm run test:week-08:persistence",
+        "npm run test:week-08:sync",
+        "npm run test:week-08:public",
+        "npm run typecheck",
+        "npm run check:architecture",
+        "npm run test:week-06"
+      ],
       "reviews": [],
-      "prediction": "",
-      "command": "",
-      "observedResult": "",
-      "explanation": "",
-      "aiAssistance": ""
+      "prediction": "Expectativa técnica declarada en el PR original: recuperar identidades/autor/baseVersion y FIFO, rollback v1/v2, merge JSON e inmutabilidad. No hay registro fechado anterior a sus ejecuciones que corrobore una predicción personal previa; queda pendiente confirmación o nueva predicción humana antes de otra reproducción.",
+      "command": "En feat/week-08-persistence-tests-issue-47: npm run test:week-08:module -- course-tests/week-08-persistence.test.ts; En feat/week-08-sync-tests-issue-48: npm run test:week-08:module -- course-tests/week-08-sync-validation.test.ts",
+      "observedResult": "Autoría Git corroborada: 300cd24123206448367bf9902766acb1c7f0f440 añade course-tests/week-08-persistence.test.ts y 12189435eb1e59f4684efe237051186bc6abcb84 añade course-tests/week-08-sync-validation.test.ts; ambos figuran como osbaldoXxC. Los tiempos 4.416 s / 1.369 s y resultados locales del registro original NO están corroborados por logs originales accesibles. Se inspeccionaron reportes versionados y los tres artefactos de Actions: sus 90 logs por artefacto no incluyen ejecución de esas dos suites. CI sí registra 19 pruebas owner de persistencia, 24 owner de sync, 24 de integración y 31 W06; eso no acredita ejecución personal. Las nuevas reproducciones de Codex y su entorno/SHA/salida/exit están en reports/week-08/pr54-review y pr55-review; no se atribuyen a Osbaldo.",
+      "explanation": "Los dos commits citados contienen las suites indicadas y conservan la autoría Git original de osbaldoXxC. Persistencia comprueba reapertura, migración, rollback e identidad; sincronización comprueba merge, conflictos y dedupe. La explicación personal original queda como declaración del autor, pendiente de corroboración y explicación humana; esta corrección documental no la sustituye. Las correcciones de scripts y del caso JSON concurrente son trabajo de Codex, con commits propios, no contribución atribuida a Osbaldo.",
+      "aiAssistance": "El PR original declara asistencia de Antigravity bajo dirección de osbaldoXxC; se conserva como declaración, sin corroboración independiente de sus ejecuciones locales. Codex inspeccionó fuentes y corrigió este registro a petición del usuario. Codex también corrigió scripts/pruebas y ejecutó las reproducciones identificadas por separado; no son ejecuciones personales de Osbaldo. Revisión, predicción y explicación humanas siguen pendientes.",
+      "verificationStatus": "pending_original_local_logs_and_human_corroboration",
+      "provenance": "reports/week-08/pr56-review/provenance.json"
     },
     {
       "studentId": "",
