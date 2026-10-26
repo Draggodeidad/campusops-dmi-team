@@ -1,0 +1,35 @@
+{"command": ["npm", "run", "test:week-08:module", "--", "course-tests/week-08-persistence.test.ts"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-pr54-fix/campusops-dmi-team", "commitSha": "5eaa3a9403278f75351a06bb9b525bf4165fee0a", "startedAt": "2026-10-26T18:46:56.076599+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": ""}
+
+> dmi-react-native-starter@1.0.0 test:week-08:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-persistence.test.ts
+
+(node:23536) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23586) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-persistence.test.ts
+  CampusOps W08 — Issue #47: Pruebas de reinicio, migración y rollback del almacén local
+    Grupo A: Persistencia y reinicio durable
+      ✓ A1: reapertura conserva autor, versión base, notas, adjunto durable y orden exacto FIFO (56 ms)
+    Grupo B: Migración de esquema v1 a v2
+      ✓ B1: migra automáticamente de v1 a v2 preservando registros, PRAGMA user_version e índices (9 ms)
+      ✓ B2: migración idempotente y rechazo de versiones inválidas o downgrades (5 ms)
+    Grupo C: Rollback atómico en migración
+      ✓ C1: falla inyectada en migration.afterSchema revierte la transacción a v1 y permite recuperación posterior (8 ms)
+      ✓ C1: falla inyectada en migration.afterCopy revierte la transacción a v1 y permite recuperación posterior (8 ms)
+    Grupo D: Rollback atómico en operaciones de workspace
+      ✓ D1: falla en change.afterSnapshot revierte snapshot y cola, preservando adjuntos intactos (8 ms)
+      ✓ D2: falla en enqueue.afterWrite revierte encolado atómicamente (8 ms)
+      ✓ D3: falla en acknowledge.afterDelete restaura la operación en la cola (10 ms)
+    Grupo E: Integridad, detección de datos inválidos y límites
+      ✓ E1: idempotencia exacta ante misma identidad y rechazo con IDENTITY_CONFLICT si cambia el cuerpo (10 ms)
+      ✓ E2: rechazo atómico de datos inválidos o secretos no autorizados con INVALID_DATA (7 ms)
+      ✓ E3: aislamiento estricto entre fixtures en directorios temporales separados (12 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       11 passed, 11 total
+Snapshots:   0 total
+Time:        0.748 s, estimated 2 s
+Ran all test suites within paths "course-tests/week-08-persistence.test.ts".
+
+{"exitCode": 0, "durationSeconds": 1.841}
