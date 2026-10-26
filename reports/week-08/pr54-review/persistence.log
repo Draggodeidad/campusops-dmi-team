@@ -1,0 +1,21 @@
+{"command": ["npm", "run", "test:week-08:persistence"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-pr54-fix/campusops-dmi-team", "commitSha": "5eaa3a9403278f75351a06bb9b525bf4165fee0a", "startedAt": "2026-10-26T18:46:39.403487+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": ""}
+
+> dmi-react-native-starter@1.0.0 test:week-08:persistence
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-workspace-owner.test.ts course-tests/week-08-persistence.test.ts
+
+(node:23374) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23466) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-persistence.test.ts
+(node:23486) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-08-workspace-owner.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       30 passed, 30 total
+Snapshots:   0 total
+Time:        3.208 s
+Ran all test suites within paths "course-tests/week-08-workspace-owner.test.ts", "course-tests/week-08-persistence.test.ts".
+
+{"exitCode": 0, "durationSeconds": 4.208}
