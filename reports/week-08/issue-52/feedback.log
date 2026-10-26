@@ -1,4 +1,4 @@
-{"command": ["make", "feedback"], "startedAt": "2026-10-26T19:47:57.121316+00:00", "schemaVersion": 1, "week": 8, "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
+{"command": ["make", "feedback"], "startedAt": "2026-10-26T20:16:59.092026+00:00", "schemaVersion": 1, "week": 8, "commitSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
 npm run typecheck
 
 > dmi-react-native-starter@1.0.0 typecheck
@@ -14,7 +14,7 @@ npm test -- --ci --runInBand
 > dmi-react-native-starter@1.0.0 test
 > jest --no-watchman --cacheDirectory .jest-cache course-tests/smoke.test.tsx course-tests/incidents.test.tsx course-tests/architecture.test.ts course-tests/week-03-ci.test.ts course-tests/week-04-storage.test.ts course-tests/week-04-errors.test.tsx course-tests/week-05-client.test.tsx course-tests/week-05-transport-validation.test.tsx course-tests/week-05-ui-failure.test.tsx course-tests/public/week-01.test.ts course-tests/public/week-02.test.ts course-tests/public/week-03.test.ts course-tests/public/week-05.test.ts course-tests/public/week-06.test.ts course-tests/week-06-session.test.ts course-tests/week-06-session-controller.test.ts course-tests/week-06-session-validation.test.ts course-tests/week-06-authorization.test.tsx course-tests/week-06-integration-regression.test.tsx --ci --runInBand
 
-(node:65868) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:75132) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS course-tests/week-06-integration-regression.test.tsx
   ● Console
@@ -1035,14 +1035,14 @@ PASS course-tests/week-06-integration-regression.test.tsx
       at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
       at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
 
-PASS course-tests/smoke.test.tsx
 PASS course-tests/incidents.test.tsx
+PASS course-tests/smoke.test.tsx
 PASS course-tests/week-05-client.test.tsx
 PASS course-tests/architecture.test.ts
 PASS course-tests/week-06-authorization.test.tsx
+PASS course-tests/week-05-transport-validation.test.tsx
 PASS course-tests/week-05-ui-failure.test.tsx
 PASS course-tests/week-04-errors.test.tsx
-PASS course-tests/week-05-transport-validation.test.tsx
 PASS course-tests/week-06-session.test.ts
   ● Console
 
@@ -1362,20 +1362,20 @@ PASS course-tests/week-06-session.test.ts
 
       at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)
 
+PASS course-tests/public/week-05.test.ts
 PASS course-tests/week-06-session-validation.test.ts
+PASS course-tests/week-04-storage.test.ts
 PASS course-tests/public/week-06.test.ts
 PASS course-tests/week-06-session-controller.test.ts
-PASS course-tests/public/week-05.test.ts
-PASS course-tests/public/week-03.test.ts
-PASS course-tests/public/week-01.test.ts
-PASS course-tests/week-04-storage.test.ts
-PASS course-tests/public/week-02.test.ts
 PASS course-tests/week-03-ci.test.ts
+PASS course-tests/public/week-01.test.ts
+PASS course-tests/public/week-02.test.ts
+PASS course-tests/public/week-03.test.ts
 
 Test Suites: 19 passed, 19 total
 Tests:       87 passed, 87 total
 Snapshots:   0 total
-Time:        4.784 s, estimated 6 s
+Time:        4.429 s, estimated 6 s
 Ran all test suites matching /course-tests\/smoke.test.tsx|course-tests\/incidents.test.tsx|course-tests\/architecture.test.ts|course-tests\/week-03-ci.test.ts|course-tests\/week-04-storage.test.ts|course-tests\/week-04-errors.test.tsx|course-tests\/week-05-client.test.tsx|course-tests\/week-05-transport-validation.test.tsx|course-tests\/week-05-ui-failure.test.tsx|course-tests\/public\/week-01.test.ts|course-tests\/public\/week-02.test.ts|course-tests\/public\/week-03.test.ts|course-tests\/public\/week-05.test.ts|course-tests\/public\/week-06.test.ts|course-tests\/week-06-session.test.ts|course-tests\/week-06-session-controller.test.ts|course-tests\/week-06-session-validation.test.ts|course-tests\/week-06-authorization.test.tsx|course-tests\/week-06-integration-regression.test.tsx/i.
 npm run check:architecture
 
@@ -1464,7 +1464,7 @@ npm run bundle:release
 
 Starting Metro Bundler
 
-Android Bundled 4527ms index.ts (667 modules)
+Android Bundled 4147ms index.ts (667 modules)
 
 › android bundles (1):
 _expo/static/js/android/index-2f1f522ff20ff78262282600960cee81.hbc (1.8MB)
@@ -1474,4 +1474,4 @@ metadata.json (150B)
 
 Exported: dist/export
 
-{"exitCode": 0, "durationSeconds": 24.34}
+{"exitCode": 0, "durationSeconds": 21.864}

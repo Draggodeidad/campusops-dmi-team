@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": 8,
-  "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "commitSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
   "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team",
   "node": "v22.22.0",
   "npm": "10.9.4",
@@ -12,7 +12,7 @@
   "deliveryStatus": "incomplete",
   "humanReview": "pending",
   "finalTagStatus": "pending_final_tag",
-  "generatedAt": "2026-10-26T19:50:07.142787+00:00",
+  "generatedAt": "2026-10-26T20:17:50.257158+00:00",
   "checks": [
     {
       "id": "setup",
@@ -23,9 +23,9 @@
         "make",
         "setup"
       ],
-      "startedAt": "2026-10-26T19:47:00.871842+00:00",
+      "startedAt": "2026-10-26T20:16:09.286460+00:00",
       "exitCode": 0,
-      "durationSeconds": 13.463,
+      "durationSeconds": 11.874,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/setup.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -39,9 +39,9 @@
         "run",
         "typecheck"
       ],
-      "startedAt": "2026-10-26T19:47:14.339477+00:00",
+      "startedAt": "2026-10-26T20:16:21.163946+00:00",
       "exitCode": 0,
-      "durationSeconds": 3.022,
+      "durationSeconds": 2.791,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/typecheck.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -55,9 +55,9 @@
         "run",
         "lint"
       ],
-      "startedAt": "2026-10-26T19:47:17.366387+00:00",
+      "startedAt": "2026-10-26T20:16:23.959651+00:00",
       "exitCode": 0,
-      "durationSeconds": 5.87,
+      "durationSeconds": 5.018,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/lint.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -71,9 +71,9 @@
         "run",
         "test:smoke"
       ],
-      "startedAt": "2026-10-26T19:47:23.241244+00:00",
+      "startedAt": "2026-10-26T20:16:28.981647+00:00",
       "exitCode": 0,
-      "durationSeconds": 2.188,
+      "durationSeconds": 1.958,
       "jestPassedTotal": [
         [
           "1",
@@ -92,9 +92,9 @@
         "run",
         "test:incidents"
       ],
-      "startedAt": "2026-10-26T19:47:25.435289+00:00",
+      "startedAt": "2026-10-26T20:16:30.943812+00:00",
       "exitCode": 0,
-      "durationSeconds": 2.135,
+      "durationSeconds": 1.892,
       "jestPassedTotal": [
         [
           "3",
@@ -113,9 +113,9 @@
         "run",
         "test:architecture"
       ],
-      "startedAt": "2026-10-26T19:47:27.574820+00:00",
+      "startedAt": "2026-10-26T20:16:32.840206+00:00",
       "exitCode": 0,
-      "durationSeconds": 1.41,
+      "durationSeconds": 1.457,
       "jestPassedTotal": [
         [
           "2",
@@ -134,9 +134,9 @@
         "run",
         "check:architecture"
       ],
-      "startedAt": "2026-10-26T19:47:28.990552+00:00",
+      "startedAt": "2026-10-26T20:16:34.300685+00:00",
       "exitCode": 0,
-      "durationSeconds": 0.331,
+      "durationSeconds": 0.198,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/architecture.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -150,9 +150,9 @@
         "run",
         "test:week-06"
       ],
-      "startedAt": "2026-10-26T19:47:29.327198+00:00",
+      "startedAt": "2026-10-26T20:16:34.502573+00:00",
       "exitCode": 0,
-      "durationSeconds": 3.851,
+      "durationSeconds": 3.471,
       "jestPassedTotal": [
         [
           "31",
@@ -171,9 +171,9 @@
         "run",
         "check:week-06-readiness"
       ],
-      "startedAt": "2026-10-26T19:47:33.184798+00:00",
+      "startedAt": "2026-10-26T20:16:37.979251+00:00",
       "exitCode": 0,
-      "durationSeconds": 0.77,
+      "durationSeconds": 0.761,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/session-readiness.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -187,9 +187,9 @@
         "run",
         "test:week-08:persistence"
       ],
-      "startedAt": "2026-10-26T19:47:33.960196+00:00",
+      "startedAt": "2026-10-26T20:16:38.746597+00:00",
       "exitCode": 0,
-      "durationSeconds": 1.963,
+      "durationSeconds": 1.92,
       "jestPassedTotal": [
         [
           "30",
@@ -208,9 +208,9 @@
         "run",
         "test:week-08:sync"
       ],
-      "startedAt": "2026-10-26T19:47:35.928010+00:00",
+      "startedAt": "2026-10-26T20:16:40.671083+00:00",
       "exitCode": 0,
-      "durationSeconds": 2.204,
+      "durationSeconds": 1.877,
       "jestPassedTotal": [
         [
           "47",
@@ -229,9 +229,9 @@
         "run",
         "test:week-08:integration"
       ],
-      "startedAt": "2026-10-26T19:47:38.136838+00:00",
+      "startedAt": "2026-10-26T20:16:42.553349+00:00",
       "exitCode": 0,
-      "durationSeconds": 5.467,
+      "durationSeconds": 4.623,
       "jestPassedTotal": [
         [
           "24",
@@ -250,9 +250,9 @@
         "run",
         "test:week-08"
       ],
-      "startedAt": "2026-10-26T19:47:43.609406+00:00",
+      "startedAt": "2026-10-26T20:16:47.182294+00:00",
       "exitCode": 0,
-      "durationSeconds": 13.508,
+      "durationSeconds": 11.905,
       "jestPassedTotal": [
         [
           "3",
@@ -286,9 +286,9 @@
         "make",
         "feedback"
       ],
-      "startedAt": "2026-10-26T19:47:57.121316+00:00",
+      "startedAt": "2026-10-26T20:16:59.092026+00:00",
       "exitCode": 0,
-      "durationSeconds": 24.34,
+      "durationSeconds": 21.864,
       "jestPassedTotal": [
         [
           "87",
@@ -306,9 +306,9 @@
         "make",
         "verify-week-08"
       ],
-      "startedAt": "2026-10-26T19:48:21.468157+00:00",
+      "startedAt": "2026-10-26T20:17:20.961007+00:00",
       "exitCode": 0,
-      "durationSeconds": 14.619,
+      "durationSeconds": 13.008,
       "jestPassedTotal": [
         [
           "1",
@@ -326,9 +326,9 @@
         "python3",
         "reports/week-08/pr56-review/validate-individual.py"
       ],
-      "startedAt": "2026-10-26T19:48:36.094427+00:00",
+      "startedAt": "2026-10-26T20:17:33.972823+00:00",
       "exitCode": 0,
-      "durationSeconds": 0.098,
+      "durationSeconds": 0.064,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/individual-contract.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -341,9 +341,9 @@
         "python3",
         "reports/week-08/pr56-review/audit.py"
       ],
-      "startedAt": "2026-10-26T19:48:36.198554+00:00",
+      "startedAt": "2026-10-26T20:17:34.041120+00:00",
       "exitCode": 0,
-      "durationSeconds": 0.125,
+      "durationSeconds": 0.091,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/provenance-audit.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -351,12 +351,12 @@
       "id": "protected-files",
       "status": "pass",
       "scenarioType": "boundary",
-      "command": "git diff --exit-code 749b171b1c57a6215810dca5da376b0f288bd732 -- src App.tsx course-tests .github/workflows Makefile tools/course_public_evaluator.py docs/EVIDENCE_CONTRACT.md docs/SUBMISSION.md docs/assignments package.json package-lock.json",
+      "command": "git diff --exit-code fb11b69f3617466712bbd67d0ef49f0592d3a357 -- src App.tsx course-tests .github/workflows Makefile tools/course_public_evaluator.py docs/EVIDENCE_CONTRACT.md docs/SUBMISSION.md docs/assignments package.json package-lock.json",
       "commandArgs": [
         "git",
         "diff",
         "--exit-code",
-        "749b171b1c57a6215810dca5da376b0f288bd732",
+        "fb11b69f3617466712bbd67d0ef49f0592d3a357",
         "--",
         "src",
         "App.tsx",
@@ -370,9 +370,9 @@
         "package.json",
         "package-lock.json"
       ],
-      "startedAt": "2026-10-26T19:48:36.328411+00:00",
+      "startedAt": "2026-10-26T20:17:34.136533+00:00",
       "exitCode": 0,
-      "durationSeconds": 0.006,
+      "durationSeconds": 0.004,
       "jestPassedTotal": [],
       "evidence": "reports/week-08/issue-52/protected-files.log; exit 0; Jest passed/total per invocation=[]"
     },
@@ -381,10 +381,16 @@
       "status": "pass",
       "scenarioType": "boundary",
       "command": "git diff --check",
+      "commandArgs": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "startedAt": "2026-10-26T20:17:34.216563+00:00",
       "exitCode": 0,
-      "startedAt": "2026-10-26T19:49:41.033880+00:00",
       "durationSeconds": 0.011,
-      "evidence": "reports/week-08/issue-52/patch-hygiene.log; exit 0 after readable log whitespace normalization; original failure preserved in retry-history.json and raw gzip"
+      "jestPassedTotal": [],
+      "evidence": "reports/week-08/issue-52/patch-hygiene.log; exit 0; Jest passed/total per invocation=[]"
     },
     {
       "id": "public-w08",
@@ -395,17 +401,16 @@
         "make",
         "public-test-week-08"
       ],
+      "startedAt": "2026-10-26T20:17:34.299914+00:00",
       "exitCode": 0,
-      "startedAt": "2026-10-26T19:49:50.628176+00:00",
-      "durationSeconds": 16.514,
+      "durationSeconds": 15.957,
       "jestPassedTotal": [
         [
           "90",
           "90"
         ]
       ],
-      "evidence": "reports/week-08/issue-52/public-w08.log; official public run after consolidating actual SHA evidence"
+      "evidence": "reports/week-08/issue-52/public-w08.log; exit 0; Jest passed/total per invocation=[('90', '90')]"
     }
-  ],
-  "priorAttempts": "reports/week-08/issue-52/retry-history.json"
+  ]
 }

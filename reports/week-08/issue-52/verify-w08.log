@@ -1,11 +1,11 @@
-{"command": ["make", "verify-week-08"], "startedAt": "2026-10-26T19:48:21.468157+00:00", "schemaVersion": 1, "week": 8, "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
+{"command": ["make", "verify-week-08"], "startedAt": "2026-10-26T20:17:20.961007+00:00", "schemaVersion": 1, "week": 8, "commitSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357", "cwd": "/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex technical reproduction requested by owner; no personal execution attributed to any student", "uncommittedSourceFiles": {}, "deliveryStatus": "incomplete", "humanReview": "pending", "finalTagStatus": "pending_final_tag"}
 python3 tools/course_public_evaluator.py --week 08 --mode verify --execute-toolchain
 {
   "schemaVersion": 1,
   "week": 8,
   "mode": "verify",
-  "commitSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
-  "evaluatedAt": "2026-10-26T19:48:36.062108+00:00",
+  "commitSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
+  "evaluatedAt": "2026-10-26T20:17:33.951796+00:00",
   "status": "pass",
   "checks": [
     {
@@ -51,7 +51,7 @@ python3 tools/course_public_evaluator.py --week 08 --mode verify --execute-toolc
     {
       "id": "toolchain_4",
       "status": "pass",
-      "detail": "npm run test:smoke\n> dmi-react-native-starter@1.0.0 test:smoke\n> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx\n\n\nPASS course-tests/smoke.test.tsx\n  ✓ renders the reproducible baseline and resolves backend state (260 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       1 passed, 1 total\nSnapshots:   0 total\nTime:        1.001 s\nRan all test suites matching /course-tests\\/smoke.test.tsx/i."
+      "detail": "npm run test:smoke\n> dmi-react-native-starter@1.0.0 test:smoke\n> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx\n\n\nPASS course-tests/smoke.test.tsx\n  ✓ renders the reproducible baseline and resolves backend state (289 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       1 passed, 1 total\nSnapshots:   0 total\nTime:        1.035 s\nRan all test suites matching /course-tests\\/smoke.test.tsx/i."
     },
     {
       "id": "toolchain_5",
@@ -61,4 +61,4 @@ python3 tools/course_public_evaluator.py --week 08 --mode verify --execute-toolc
   ]
 }
 
-{"exitCode": 0, "durationSeconds": 14.619}
+{"exitCode": 0, "durationSeconds": 13.008}
