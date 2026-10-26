@@ -1,0 +1,7 @@
+{"command": ["npm", "run", "typecheck"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-integrated-verification/campusops-dmi-team", "commitSha": "c90067719fa44fb4ef4cb932aaa0750fbe41b2f4", "startedAt": "2026-10-26T18:53:02.304610+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "M reports/week-08/verify.json"}
+
+> dmi-react-native-starter@1.0.0 typecheck
+> tsc --noEmit
+
+
+{"exitCode": 0, "durationSeconds": 3.074}

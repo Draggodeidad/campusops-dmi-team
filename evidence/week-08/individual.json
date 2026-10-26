@@ -106,9 +106,41 @@
       "aiAssistance": "Codex asistió materialmente la inspección del ZIP/repositorio, implementación, pruebas, documentación y ejecución de los comandos ya registrados, a petición del owner. La autoría Git se verificó en esta rama; no equivale a afirmar ejecución manual, comprensión o revisión humana ya realizadas. Este registro se compone de artefactos existentes y no atribuye aportes de compañeros. La validación y explicación humana del owner siguen pendientes. La trazabilidad completa se conserva en evidence/week-08/individual.draggodeidad.json."
     },
     {
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "300cd24123206448367bf9902766acb1c7f0f440",
+        "12189435eb1e59f4684efe237051186bc6abcb84"
+      ],
+      "files": [
+        "course-tests/week-08-persistence.test.ts",
+        "course-tests/week-08-sync-validation.test.ts"
+      ],
+      "tests": [
+        "npm run test:week-08:module -- course-tests/week-08-persistence.test.ts",
+        "npm run test:week-08:module -- course-tests/week-08-sync-validation.test.ts",
+        "npm run test:week-08:persistence",
+        "npm run test:week-08:sync",
+        "npm run test:week-08:public",
+        "npm run typecheck",
+        "npm run check:architecture",
+        "npm run test:week-06"
+      ],
+      "reviews": [],
+      "prediction": "Expectativa técnica declarada en el PR original: recuperar identidades/autor/baseVersion y FIFO, rollback v1/v2, merge JSON e inmutabilidad. No hay registro fechado anterior a sus ejecuciones que corrobore una predicción personal previa; queda pendiente confirmación o nueva predicción humana antes de otra reproducción.",
+      "command": "En feat/week-08-persistence-tests-issue-47: npm run test:week-08:module -- course-tests/week-08-persistence.test.ts; En feat/week-08-sync-tests-issue-48: npm run test:week-08:module -- course-tests/week-08-sync-validation.test.ts",
+      "observedResult": "Autoría Git corroborada: 300cd24123206448367bf9902766acb1c7f0f440 añade course-tests/week-08-persistence.test.ts y 12189435eb1e59f4684efe237051186bc6abcb84 añade course-tests/week-08-sync-validation.test.ts; ambos figuran como osbaldoXxC. Los tiempos 4.416 s / 1.369 s y resultados locales del registro original NO están corroborados por logs originales accesibles. Se inspeccionaron reportes versionados y los tres artefactos de Actions: sus 90 logs por artefacto no incluyen ejecución de esas dos suites. CI sí registra 19 pruebas owner de persistencia, 24 owner de sync, 24 de integración y 31 W06; eso no acredita ejecución personal. Las nuevas reproducciones de Codex y su entorno/SHA/salida/exit están en reports/week-08/pr54-review y pr55-review; no se atribuyen a Osbaldo.",
+      "explanation": "Los dos commits citados contienen las suites indicadas y conservan la autoría Git original de osbaldoXxC. Persistencia comprueba reapertura, migración, rollback e identidad; sincronización comprueba merge, conflictos y dedupe. La explicación personal original queda como declaración del autor, pendiente de corroboración y explicación humana; esta corrección documental no la sustituye. Las correcciones de scripts y del caso JSON concurrente son trabajo de Codex, con commits propios, no contribución atribuida a Osbaldo.",
+      "aiAssistance": "El PR original declara asistencia de Antigravity bajo dirección de osbaldoXxC; se conserva como declaración, sin corroboración independiente de sus ejecuciones locales. Codex inspeccionó fuentes y corrigió este registro a petición del usuario. Codex también corrigió scripts/pruebas y ejecutó las reproducciones identificadas por separado; no son ejecuciones personales de Osbaldo. Revisión, predicción y explicación humanas siguen pendientes.",
+      "verificationStatus": "pending_original_local_logs_and_human_corroboration",
+      "provenance": "reports/week-08/pr56-review/provenance.json"
+    },
+    {
       "studentId": "3522110437",
       "githubLogin": "JulianDele",
-      "commitShas": ["f3bb0c9f5dfb86cf4987c207ecc08349597804e8"],
+      "commitShas": [
+        "d7f388c8e2bd467e755048ea3be94710e0385bee"
+      ],
       "files": [
         "docs/reviews/week-08-juliandele-checklist.md",
         "evidence/week-08/individual.json"
@@ -121,20 +153,19 @@
       "command": "No se ejecutó comando automatizado; revisión documental manual de docs/week-08-baseline.md, docs/CAMPUSOPS.md, docs/CAMPUSOPS_API.md, docs/EVIDENCE_CONTRACT.md, course-contracts.json, reports/week-08/baseline/validation.json y src/application/persistence/LocalWorkspace.ts.",
       "observedResult": "Se creó el checklist con siete requisitos. El reporte baseline corresponde al SHA 9f56862e269221ff96a5789b77d32162c8d57d24 y registra fallos de los tests públicos/aggregate W08 por stubs sync; distingue el probe/harness del adaptador de la app. Los requisitos cuya implementación o prueba no se acredita en las fuentes autorizadas quedaron como Pendiente.",
       "explanation": "Como JulianDele (studentId 3522110437), realicé una revisión documental acotada a las fuentes indicadas y preparé el checklist para revisión. No ejecuté pruebas ni revisé código adicional. No encontré un commit Week 08 propio en el historial consultado, así que dejo commitShas vacío en lugar de usar un SHA ajeno o de otra semana. Este registro documenta el trabajo local y requiere el SHA del commit que lo incluya antes de la entrega final.",
-      "aiAssistance": "Se utilizó asistencia de IA para estructurar el checklist y el borrador de evidencia; las observaciones se contrastaron con las fuentes autorizadas. La revisión humana final de JulianDele sigue pendiente."
-    },
-    {
-      "studentId": "",
-      "githubLogin": "",
-      "commitShas": [],
-      "files": [],
-      "tests": [],
-      "reviews": [],
-      "prediction": "",
-      "command": "",
-      "observedResult": "",
-      "explanation": "",
-      "aiAssistance": ""
+      "aiAssistance": "Se utilizó asistencia de IA para estructurar el checklist y el borrador de evidencia; las observaciones se contrastaron con las fuentes autorizadas. La revisión humana final de JulianDele sigue pendiente.",
+      "provenance": {
+        "sourceCommitSha": "d7f388c8e2bd467e755048ea3be94710e0385bee",
+        "sourcePath": "evidence/week-08/individual.json, members[1]",
+        "originalCommitShas": [
+          "f3bb0c9f5dfb86cf4987c207ecc08349597804e8"
+        ],
+        "correction": "Codex corrected only the commit reference to the actual authored checklist/evidence commit, and placed the supplied record in free slot 3. Source personal fields retained verbatim. This is not a human review.",
+        "explanationContext": "The explanation was supplied in the source commit before its own SHA was available; its statement about an empty SHA list is retained as a historical statement, not a description of this corrected list.",
+        "sourceSnapshot": "reports/week-08/pr56-review/julian-source-record.json",
+        "checklistSnapshot": "reports/week-08/pr-review-integrated/julian-source-checklist.md"
+      },
+      "humanReview": "pending"
     }
   ]
 }

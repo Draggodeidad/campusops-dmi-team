@@ -1,0 +1,27 @@
+diff --git a/src/application/sync/resolveSync.ts b/src/application/sync/resolveSync.ts
+index 3e7abff..33dc5ba 100644
+--- a/src/application/sync/resolveSync.ts
++++ b/src/application/sync/resolveSync.ts
+@@ -2,21 +2,7 @@ import type { SyncRecord } from '../../domain/sync/SyncRecord';
+ 
+ /** JSON objects ignore key order; arrays preserve item order. Inputs are JSON. */
+ function sameJson(left: unknown, right: unknown): boolean {
+-  if (left === right) return true;
+-  if (left === null || right === null || typeof left !== 'object' || typeof right !== 'object') {
+-    return false;
+-  }
+-  if (Array.isArray(left) || Array.isArray(right)) {
+-    return Array.isArray(left) && Array.isArray(right)
+-      && left.length === right.length
+-      && left.every((value, index) => sameJson(value, right[index]));
+-  }
+-  const leftObject = left as Readonly<Record<string, unknown>>;
+-  const rightObject = right as Readonly<Record<string, unknown>>;
+-  const keys = Object.keys(leftObject);
+-  return keys.length === Object.keys(rightObject).length
+-    && keys.every((key) => Object.prototype.hasOwnProperty.call(rightObject, key)
+-      && sameJson(leftObject[key], rightObject[key]));
++  return JSON.stringify(left) === JSON.stringify(right);
+ }
+ 
+ function hasField(record: SyncRecord, field: string): boolean {
