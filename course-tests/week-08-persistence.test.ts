@@ -2,11 +2,10 @@ import { DatabaseSync } from 'node:sqlite';
 import { execFileSync } from 'node:child_process';
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
-import { pathToFileURL, fileURLToPath } from 'node:url';
+import { pathToFileURL } from 'node:url';
 import { createNodeWorkspace } from './fixtures/week-08/nodeWorkspace';
 import { createTemporaryWorkspace } from './fixtures/week-08/temporaryWorkspace';
 import { createWeek08Scenario, SYNTHETIC_PHOTO } from './fixtures/week-08/scenario';
-import type { PendingIncidentOperation } from '../src/campusops/contracts';
 
 /**
  * Suite de pruebas oficial para la Issue #47 (Semana 08)
