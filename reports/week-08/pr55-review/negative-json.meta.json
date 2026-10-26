@@ -1,0 +1,20 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "test:week-08:module",
+    "--",
+    "course-tests/week-08-sync-validation.test.ts"
+  ],
+  "cwd": "/tmp/campusops-w08-review/mutant",
+  "commitSha": "7c06d0352e0af1becf8dfc5e285fbba6bdf441af",
+  "startedAt": "2026-10-26T18:47:00.906787+00:00",
+  "node": "v22.22.0",
+  "npm": "10.9.4",
+  "NODE_OPTIONS": "--experimental-sqlite",
+  "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+  "executor": "Codex reproduction at user request; not a personal execution by Osbaldo",
+  "workingTree": "M src/application/sync/resolveSync.ts\n?? node_modules",
+  "exitCode": 1,
+  "durationSeconds": 3.165
+}

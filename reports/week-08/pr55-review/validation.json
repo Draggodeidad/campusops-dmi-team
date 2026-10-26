@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "7c06d0352e0af1becf8dfc5e285fbba6bdf441af",
+  "generatedAt": "2026-10-26T18:47:44.611111+00:00",
+  "checks": [
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm ci",
+      "evidence": "reports/week-08/pr55-review/setup.log; exit 0",
+      "exitCode": 0
+    },
+    {
+      "id": "module",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:module -- course-tests/week-08-sync-validation.test.ts",
+      "evidence": "reports/week-08/pr55-review/module.log; exit 0",
+      "exitCode": 0
+    },
+    {
+      "id": "sync",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08:sync",
+      "evidence": "reports/week-08/pr55-review/sync.log; exit 0",
+      "exitCode": 0
+    }
+  ],
+  "executor": "Codex; reproducción técnica asistida, no ejecución personal de Osbaldo",
+  "humanReview": "pending",
+  "deliveryStatus": "incomplete",
+  "negativeControl": {
+    "sourceCommitSha": "7c06d0352e0af1becf8dfc5e285fbba6bdf441af",
+    "temporaryMutation": "sameJson replaced by JSON.stringify equality only in a temporary worktree; patch archived as text, never applied to solution commits",
+    "command": "npm run test:week-08:module -- course-tests/week-08-sync-validation.test.ts",
+    "actualExitCode": 1,
+    "observed": "2 failed, 21 passed, 23 total; E4 local/remote and remote/local expect merged but receive conflict",
+    "realImplementation": "23 passed, 23 total; module.log",
+    "evidence": "reports/week-08/pr55-review/negative-json.log",
+    "expectedFailureConfirmed": true
+  }
+}
