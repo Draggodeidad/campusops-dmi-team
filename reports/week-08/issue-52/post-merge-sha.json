@@ -1,0 +1,17 @@
+{
+  "mainSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
+  "mergeParents": [
+    "749b171b1c57a6215810dca5da376b0f288bd732",
+    "fef910fb306d9321052c792117172ff3696be249"
+  ],
+  "mergedPr": 58,
+  "originalEvaluatedSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
+  "originalShaIsAncestor": true,
+  "originalHeadParentRule": {
+    "pass": false,
+    "detail": "commitSha must be HEAD or its direct evidence-only parent"
+  },
+  "newEvidenceSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
+  "finalTagStatus": "pending_final_tag",
+  "humanReview": "pending"
+}

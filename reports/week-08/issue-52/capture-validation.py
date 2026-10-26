@@ -39,7 +39,7 @@ commands = [
 ('verify-w08',['make','verify-week-08'], 'nominal'),
 ('individual-contract',['python3','reports/week-08/pr56-review/validate-individual.py'], 'boundary'),
 ('provenance-audit',['python3','reports/week-08/pr56-review/audit.py'], 'boundary'),
-('protected-files',['git','diff','--exit-code','749b171b1c57a6215810dca5da376b0f288bd732','--','src','App.tsx','course-tests','.github/workflows','Makefile','tools/course_public_evaluator.py','docs/EVIDENCE_CONTRACT.md','docs/SUBMISSION.md','docs/assignments','package.json','package-lock.json'], 'boundary'),
+('protected-files',['git','diff','--exit-code','fb11b69f3617466712bbd67d0ef49f0592d3a357','--','src','App.tsx','course-tests','.github/workflows','Makefile','tools/course_public_evaluator.py','docs/EVIDENCE_CONTRACT.md','docs/SUBMISSION.md','docs/assignments','package.json','package-lock.json'], 'boundary'),
 ('patch-hygiene',['git','diff','--check'], 'boundary'),
 ('public-w08',['make','public-test-week-08'], 'boundary')]
 checks=[]

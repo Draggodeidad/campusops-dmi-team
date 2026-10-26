@@ -1,158 +1,58 @@
-# Informe de preparación #52 — 26-10-2026
+# W08 — evidencia nueva del main fusionado (#52)
 
-**Entrega incompleta; no lista para etiquetar.** Preparación técnica para PR
-y revisión del owner. La identidad Git fue autorizada expresamente en este chat.
-El SHA realmente evaluado es d7d28522da8c3e13bd189a9539fafde077cd214b; el siguiente
-commit de entrega sólo contiene reports/ y evidence/. No fusionar ni etiquetar
-automáticamente. La URL y el SHA del PR se consultan en GitHub.
+SHA real de main evaluado: **fb11b69f3617466712bbd67d0ef49f0592d3a357**. PR #58 fusionado mediante merge commit; padres 749b171b1c57a6215810dca5da376b0f288bd732 y fef910fb306d9321052c792117172ff3696be249.
 
-## AC-03: causa confirmada
+El SHA histórico d7d28522da8c3e13bd189a9539fafde077cd214b sigue siendo ancestro, pero no HEAD/padre inmediato: el evaluador original rechazó esa relación tras el merge. post-merge-sha.json conserva el diagnóstico. Los índices oficiales ahora referencian el main realmente reejecutado.
 
-Después de fetch, week-08-final no existe localmente ni en origin. El workflow
-usa historial completo y descarga tags. El run 40385165581 sobre
-749b171b1c57a6215810dca5da376b0f288bd732 pasó los esquemas oficiales, AC-01 y
-AC-02; falló únicamente frozen_sha en AC-03 por referencia inexistente.
-Make devolvió 2 y el evaluador 1. ci-ac03.log conserva la salida original;
-diagnosis.json registra comandos, salidas y códigos de retorno nuevos.
-No se modificó evaluador, workflow, Makefile ni contrato académico.
-Estado de preparación: pending_final_tag; el fail oficial no se convierte en pass.
+## Controles observados
 
-## Estado de los cinco criterios
+Node 22.22.0, npm 10.9.4, NODE_OPTIONS=--experimental-sqlite. Fuente/documentos sin modificaciones locales durante la captura; sólo reports/evidence para registrar observaciones. Las ejecuciones son asistencia técnica de Codex a petición del owner, no ejecuciones personales atribuidas a estudiantes.
 
-| Criterio | Estado comprobado |
-|---|---|
-| AC-01 | Instalación/checks aprobados sobre el commit técnico con fuente limpia; repetir/comprobar el SHA definitivo después del merge. |
-| AC-02 | Persistencia, motor, integración y público aprobados. SQL Node real y backend loopback; no certificación Android del flujo integrado. |
-| AC-03 | Rollback, integridad y replay aprobados en suites. Gate de congelación pendiente: tag ausente; no se ejecutó make evidence-week-08 localmente antes del tag. |
-| AC-04 | Decisión, alternativas, tradeoff y verificaciones estructuralmente válidos; revisión humana pendiente. |
-| AC-05 | Tres registros válidos y 20 commits fuente con autoría coherente/alcanzable. Comprensión, explicación y corroboración humanas pendientes. |
+| Comando | Exit | Pruebas passed/total |
+|---|---:|---|
+| `make setup` | 0 | [] |
+| `npm run typecheck` | 0 | [] |
+| `npm run lint` | 0 | [] |
+| `npm run test:smoke` | 0 | [['1', '1']] |
+| `npm run test:incidents` | 0 | [['3', '3']] |
+| `npm run test:architecture` | 0 | [['2', '2']] |
+| `npm run check:architecture` | 0 | [] |
+| `npm run test:week-06` | 0 | [['31', '31']] |
+| `npm run check:week-06-readiness` | 0 | [] |
+| `npm run test:week-08:persistence` | 0 | [['30', '30']] |
+| `npm run test:week-08:sync` | 0 | [['47', '47']] |
+| `npm run test:week-08:integration` | 0 | [['24', '24']] |
+| `npm run test:week-08` | 0 | [['3', '3'], ['30', '30'], ['47', '47'], ['24', '24'], ['3', '3']] |
+| `make feedback` | 0 | [['87', '87']] |
+| `make verify-week-08` | 0 | [['1', '1']] |
+| `python3 reports/week-08/pr56-review/validate-individual.py` | 0 | [] |
+| `python3 reports/week-08/pr56-review/audit.py` | 0 | [] |
+| `git diff --exit-code fb11b69f3617466712bbd67d0ef49f0592d3a357 -- src App.tsx course-tests .github/workflows Makefile tools/course_public_evaluator.py docs/EVIDENCE_CONTRACT.md docs/SUBMISSION.md docs/assignments package.json package-lock.json` | 0 | [] |
+| `git diff --check` | 0 | [] |
+| `make public-test-week-08` | 0 | [['90', '90']] |
 
-## Los cinco archivos oficiales
+Los 20 controles finales aprobaron, incluido público 90/90 después de regenerar los índices. Los esquemas pasan con el validador original. No se ejecutó make evidence-week-08 localmente sin tag ni se convirtió pending_final_tag en pass.
 
-| Archivo | Revisión/cambio |
-|---|---|
-| docs/data-model.md | Esquema v2, transacciones, fotos y recuperación contrastados con adaptador y suites; se corrige una referencia a presentación de errores como trabajo futuro. |
-| docs/sync-policy.md | Merge JSON, work indivisible, identidad/recibos y resolución contrastados con código y suites; se actualiza la descripción del agregado y #43–#45 ya integrados. |
-| reports/week-08/migration-tests.json | Actualizado con 20 comandos reales del SHA técnico y escenarios de reinicio, migración/rollback, conflicto/merge/dedupe y replay; fuente/documentos sin cambios locales durante la ejecución. |
-| evidence/week-08/engineering.json | Decisión/alternativas preservadas; verificaciones vinculadas a la ejecución nueva del SHA técnico, con límites humanos y de congelación explícitos. |
-| evidence/week-08/individual.json | Sin cambios. Exactamente Draggodeidad, osbaldoXxC y JulianDele; se conserva procedencia, asistencia de IA y pendientes humanos. |
+## Integridad y procedencia
 
-Las copias previous-* conservan los índices anteriores sin reescribir sus
-resultados. dependencies.json refleja #42–#46 cerradas, #47–#51 abiertas al
-consultar; sus estados administrativos no acreditan revisión humana.
-No hubo cambios de implementación ni arquitectura: ADR y Mermaid se conservan.
-La nueva guía docs/week-08-delivery.md desarrolla el procedimiento manual completo.
+individual.json permanece idéntico a main, con Draggodeidad, osbaldoXxC y JulianDele. No se trasladan aportes ni logs originales de Osbaldo al owner. Las reproducciones nuevas se identifican como asistencia de IA bajo responsabilidad del owner. **AC-04 y AC-05 siguen pendientes de corroboración humana**; estructura y Git no acreditan comprensión o ejecución personal.
 
-## Validaciones observadas
+before-post-merge-capture.tar.gz y post-merge-archive.json preservan byte por byte los 49 artefactos anteriores de issue-52; sus resultados conservan los SHAs originales y no se presentan como actuales. Los archivos históricos fuera de esta carpeta y los commits anteriores se conservan. Las copias .log sólo normalizan espacios finales de stdout; .log.gz conserva los bytes exactos con hashes.
 
-Node v22.22.0, npm 10.9.4, NODE_OPTIONS=--experimental-sqlite, npm ci y lockfile
-intacto. validation.json incluye ruta, fechas, duración, entorno, HEAD,
-estado limpio de fuente/documentos, comando y exit de cada ejecución.
-La reproducción precommit anterior permanece dentro de before-final-capture.tar.gz;
-no se presenta como validación del SHA técnico.
-Todos los comandos siguientes terminaron con **exit 0**:
+## Auditoría y propuesta sin aplicar
 
-| Comando | Resultado |
-|---|---|
-| make setup | npm ci correcto |
-| npm run typecheck | correcto |
-| npm run lint | correcto |
-| npm run test:smoke | 1/1 |
-| npm run test:incidents | 3/3 |
-| npm run test:architecture | 2/2 |
-| npm run check:architecture | límites respetados |
-| npm run test:week-06 | 31/31 |
-| npm run check:week-06-readiness | 8/8 invariantes |
-| npm run test:week-08:persistence | 30/30 |
-| npm run test:week-08:sync | 47/47 |
-| npm run test:week-08:integration | 24/24 |
-| npm run test:week-08 | 3 + 30 + 47 + 24 + 3, y probe de proveedor |
-| make feedback | 87/87, tipos/lint, arquitectura, secretos, audit y export Android |
-| make verify-week-08 | aprobado, incluye backend self-test |
-| make public-test-week-08 | 90/90 y esquemas; repetido tras consolidar índices, exit 0 |
-| python3 reports/week-08/pr56-review/validate-individual.py | estructura de tres registros válida |
-| python3 reports/week-08/pr56-review/audit.py | procedencia y fuentes conservadas |
-| git diff --exit-code 749b171b1c57a6215810dca5da376b0f288bd732 -- src App.tsx course-tests .github/workflows Makefile tools/course_public_evaluator.py docs/EVIDENCE_CONTRACT.md docs/SUBMISSION.md docs/assignments package.json package-lock.json | archivos protegidos intactos |
-| git diff --check | sin errores |
+npm audit --omit=dev --json devolvió exit 1: ocho high, cero critical. El gate oficial audit:ci conserva su umbral critical y pasó. Expo es directa; las otras siete entradas son transitivas, principalmente herramientas Expo, y sobreviven a omitir dev. No se afirma alcance efectivo de cada dependencia en el bundle móvil.
 
-contract-checks.json aplica las funciones originales del evaluador a los
-tres JSON oficiales y comprueba sus estructuras; no sustituye congelación ni
-corroboración humana. El público valida los índices consolidados en ese SHA.
-El audit permitido por el proyecto pasó su umbral critical; informó **8 high**.
-No se afirma ausencia de vulnerabilidades ni se cambiaron versiones/umbrales.
+audit-production.json, audit-analysis.json y audit-proposal.md documentan versiones/rangos y un PR separado propuesto para brace-expansion 1.1.21/5.0.12, compression 1.8.2 y source-map-js 1.2.2. La compatibilidad requiere regresiones; no se aplicó ningún cambio. node-forge sigue sin parche publicado y Expo CLI requiere Zod 3; no imponer Zod 4 ni degradar Expo 57 a 54.
 
-## Git, autoría y SHA
+## Commit de evidencias y cierre pendiente
 
-Rama: fix/w08-final-evidence-issue-52, en checkout aislado
-/home/dragodeidad/.codex/worktrees/w08-issue-52/campusops-dmi-team.
-La cuenta conectada por plugin y gh es Draggodeidad. La identidad efectiva,
-comprobada antes de cada commit y autorizada expresamente por el owner, es
-Draggodeidad <antonioimanol7@gmail.com>. Se inspeccionan autor y committer de
-todos los commits de esta tarea; ninguno debe ser Codex ni añadir coautoría automática. La
-asistencia material de IA queda declarada y no se atribuyen nuevas ejecuciones
-personales a estudiantes. Se conservan historial, tags y trabajo local ajeno.
+Esta rama sólo modifica reports/ y evidence/, incluidos migration-tests.json y engineering.json. El commit de evidencias debe conservar fb11b69f3617466712bbd67d0ef49f0592d3a357 como primer padre. Verificar identidad autorizada Draggodeidad <antonioimanol7@gmail.com> antes de commit y revisar autor/committer después, sin coautoría automática.
 
-Base origin/main inspeccionada: **749b171b1c57a6215810dca5da376b0f288bd732**.
-SHA de código/documentación: **8ed7bae94b91229f4399b3a85c13bf01054751e9**.
-SHA realmente evaluado tras archivar: **d7d28522da8c3e13bd189a9539fafde077cd214b**.
-Los reportes y engineering registran ese SHA. El commit posterior exclusivo de
-reports/evidence lo conserva como padre directo; su propio SHA se obtiene de
-Git, evitando una autorreferencia imposible en los archivos comprometidos.
-Todavía no existe SHA definitivo de main tras revisión y merge de este PR.
+El owner debe revisar/fusionar este nuevo PR con Create a merge commit. Después, comprobar que el nuevo main F tiene fb11b69f3617466712bbd67d0ef49f0592d3a357 como primer padre, diff exclusivamente de evidencias y lista íntegra de rutas inferior a 3000 caracteres. Si main avanzó, revalidar sobre la nueva base en lugar de sustituir SHAs sin ejecutar. No fusionar desde esta tarea.
 
-El índice anterior referenciaba ee37a64408b05fd910b51e350e45c6c2bfc38f6b,
-padre inmediato de 749b171, una relación válida en el main inspeccionado.
-Las copias previous-* conservan esos resultados históricos. Los logs actuales
-son ejecuciones nuevas sobre d7d2852 en este checkout, sin documentos ni código
-sin commit; sólo se modifican reportes/evidencias para registrar resultados.
+La creación y publicación del tag anotado week-08-final están autorizadas al agente sólo después de verificar F, árbol limpio, ausencia local/remota del tag y relación válida de evidencias. Ejecutar make evidence-week-08 después de crear el tag; exigir status=pass y frozen_sha=pass antes de publicar. Ante fallo, conservarlo y no mover referencias. El reporte posterior queda local, sin otro commit.
 
-Publicar la rama sin force y abrir el PR con el título pedido; no fusionarlo ni
-cerrar #52 automáticamente. Después del merge, comprobar el SHA real de main:
-si el reportado ya no es HEAD/padre inmediato permitido, repetir checks en ese
-main y abrir otro PR exclusivo de evidencias. El merge debe conservar el SHA
-reportado como HEAD/padre y un diff exclusivamente de reports/evidence. No
-cambiar cifras sin ejecutar ni alterar el validador para aceptar otra relación.
+Verificar Actions del evento del tag y el mismo F. Sólo con tag remoto y frozen_sha=pass generar /home/dragodeidad/Documents/DMI/entrega-week-08.txt fuera del checkout congelado, con las tres líneas exactas solicitadas y el SHA obtenido de git rev-parse week-08-final^{commit}. No generar ese archivo ni declarar #52 completa antes de satisfacer la condición.
 
-## Pasos manuales finales y riesgos pendientes
-
-1. Revisar/aprobar el último PR y corroborar explicaciones/IA de los tres miembros.
-   Osbaldo necesita logs originales o una nueva reproducción humana identificada;
-   Julián debe revisar/explicar su aporte documental y el estado actual.
-2. En checkout limpio del main definitivo F, comprobar reportes HEAD/padre,
-   árbol limpio y todos los checks. No presuponer el SHA del branch tras merge.
-3. Sólo el owner, después de revisión/autorización y ausencia de tag existente:
-   `git tag -a week-08-final HEAD -m "DMI week 08 final"`.
-4. Comprobar tipo anotado y tag^{commit}=HEAD=F. Ejecutar
-   `make evidence-week-08`; exigir status=pass y frozen_sha=pass. Conservar
-   failure.json local sin otro commit. Si falla, conservar el fallo, no publicar
-   y no mover refs sin autorización; cualquier corrección de archivos va por PR.
-5. Cuando apruebe: `git push origin refs/tags/week-08-final`; verificar tag,
-   commit F y workflow Week 08 Academic Feedback sobre el evento del tag.
-6. Cada miembro entrega en Classroom repo, week-08-final, SHA F completo y aporte
-   propio comprobable. Quiz 8 individual separado; no publicar respuestas.
-
-No se ejecutó integración Android nativa nueva; los logs nativos históricos
-siguen ligados a su SHA. Export Expo no es APK ni prueba de instalación.
-Revisión humana, tag/gate final y Classroom siguen pendientes. La issue #52
-permanece abierta y esta preparación no acredita su cierre.
-
-El check adicional git diff --cached --check detectó espacios finales de la
-salida de Jest (exit 2). Se conservan los bytes originales en .log.gz y sus
-hashes en log-formatting.json; las copias legibles sólo quitan espacios/tab
-al final de línea. No se cambia ninguna aserción, resultado ni control.
-La comprobación de formato se repite tras preparar estas copias.
-
-El evaluador original limita la salida de git a 3000 caracteres. La primera
-lista de rutas del commit de evidencias tenía 3330 bytes y se truncó una ruta,
-rechazando la relación de SHAs aunque todas las rutas eran reports/evidence.
-sha-path-diagnosis.json conserva el fallo. before-final-capture.tar.gz y su
-manifest preservan byte por byte las capturas iniciales; el directorio precommit
-se encuentra dentro de ese archivo, además de permanecer en el historial Git.
-Se repite la validación sobre el commit que archiva esos registros y se genera
-un último commit exclusivo de evidencia con una lista de rutas menor.
-No se modifica ni debilita el evaluador, el workflow o la regla HEAD/padre.
-
-La repetición final también conservó un intento fallido de formato en
-retry-history.json (espacios finales del stdout de Jest); tras normalizar sólo
-las copias legibles, el mismo git diff --check pasó. Los bytes originales y
-las salidas del fallo quedan disponibles; no se eliminan aserciones ni controles.
+Estado actual: pending_final_tag; nuevo PR pendiente de revisión/fusión humana; AC-04/AC-05 pendientes. No se revalidó Android nativo integrado; export Expo y SQL Node en disco no acreditan APK instalado.

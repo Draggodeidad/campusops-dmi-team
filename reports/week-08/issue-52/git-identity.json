@@ -1,12 +1,9 @@
 {
   "git config --show-origin --get user.name": "file:/home/dragodeidad/.gitconfig\tDraggodeidad",
   "git config --show-origin --get user.email": "file:/home/dragodeidad/.gitconfig\tantonioimanol7@gmail.com",
-  "git var GIT_AUTHOR_IDENT": "Draggodeidad <antonioimanol7@gmail.com> 1793044239 -0600",
-  "git var GIT_COMMITTER_IDENT": "Draggodeidad <antonioimanol7@gmail.com> 1793044239 -0600",
-  "authorization": "Explicit human confirmation in this chat",
-  "commitsBeforeFinalEvidenceCommit": [
-    "d7d28522da8c3e13bd189a9539fafde077cd214b Draggodeidad <antonioimanol7@gmail.com> / Draggodeidad <antonioimanol7@gmail.com>",
-    "1f4a20134d3514db614766fd6f7eb7d765019f59 Draggodeidad <antonioimanol7@gmail.com> / Draggodeidad <antonioimanol7@gmail.com>",
-    "8ed7bae94b91229f4399b3a85c13bf01054751e9 Draggodeidad <antonioimanol7@gmail.com> / Draggodeidad <antonioimanol7@gmail.com>"
-  ]
+  "git var GIT_AUTHOR_IDENT": "Draggodeidad <antonioimanol7@gmail.com> 1793045985 -0600",
+  "git var GIT_COMMITTER_IDENT": "Draggodeidad <antonioimanol7@gmail.com> 1793045985 -0600",
+  "authorization": "Explicit owner confirmation preserved in this chat",
+  "evaluatedMainSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
+  "scope": "Identity checked before the new evidence-only commit; original student evidence not changed"
 }

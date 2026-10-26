@@ -1,50 +1,38 @@
-AC-03 falla porque `week-08-final` está ausente localmente y en origin después
-de fetch. El run [40385165581](https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/40385165581)
-validó los JSON, AC-01 y AC-02, pero `frozen_sha` falló; Make devolvió 2.
-Se mantiene `pending_final_tag` sin alterar workflow, evaluador, Makefile,
-contrato académico ni pruebas.
+Después del merge commit de #58, main es `fb11b69f3617466712bbd67d0ef49f0592d3a357`. El SHA
+histórico d7d2852 sigue siendo ancestro, pero dejó de ser HEAD/padre inmediato:
+el evaluador original rechaza correctamente esa relación. Este PR exclusivo
+de evidencias registra nuevas ejecuciones sobre el main real e identifica sus
+resultados sin reutilizar logs de otro SHA.
 
-Se corrige documentación que aún presentaba #43–#45 como trabajo futuro y se
-añade el procedimiento manual de congelación. Los índices oficiales enlazan
-nuevas ejecuciones sobre el SHA `d7d28522da8c3e13bd189a9539fafde077cd214b`,
-con fuente/documentos sin cambios locales. El commit posterior sólo contiene
-reports/evidence y conserva ese SHA como padre directo. Los resultados
-precommit y los índices anteriores se archivan con su procedencia.
+Node 22.22.0, npm 10.9.4 y NODE_OPTIONS=--experimental-sqlite. Los 20 controles
+terminaron con exit 0: setup, tipos/lint, smoke/incidencias, arquitectura,
+W06 31/31 y readiness 8/8, persistencia 30/30, sync 47/47, integración 24/24,
+agregado W08 107 pruebas más probe, feedback 87/87 y export Android,
+verify-week-08, público 90/90, contrato individual y procedencia. validation.json,
+final-report.md y los dos índices oficiales identifican el SHA realmente evaluado.
 
-Node 22.22.0, npm 10.9.4 y NODE_OPTIONS=--experimental-sqlite. Pasan make setup,
-typecheck, lint, smoke 1/1, incidents 3/3, arquitectura 2/2 y checker, W06 31/31,
-readiness 8/8, persistencia 30/30, sync 47/47, integración 24/24, agregado W08
-3+30+47+24+3, make feedback (87/87 y export Android), verify-week-08 y público
-(90/90 tras regenerar índices). También pasan contrato individual, auditoría de
-procedencia y preservación de archivos protegidos. Logs/entorno/SHA/exits en
-reports/week-08/issue-52/validation.json; todos los comandos terminan en exit 0.
+Sólo cambia reports/ y evidence/. Código, documentos, tests, workflow,
+evaluador, dependencias y umbrales permanecen intactos. individual.json sigue
+idéntico con Draggodeidad, osbaldoXxC y JulianDele. Los 49 artefactos anteriores
+se preservan byte por byte en archivo con manifest. Los logs nuevos son
+reproducciones de IA bajo responsabilidad del owner, no ejecuciones personales
+inventadas ni traslado de los aportes originales de Osbaldo. AC-04 y AC-05
+siguen pendientes de corroboración humana.
 
-individual.json no cambia: exactamente Draggodeidad, osbaldoXxC y JulianDele.
-Se auditan 20 commits originales; se preservan la autoría y los pendientes
-humanos. Las ejecuciones nuevas son asistencia técnica de Codex y no se
-atribuyen como trabajo personal de estudiantes. Autor y committer de los
-commits de esta tarea usan la identidad humana expresamente autorizada.
+Audit mantiene 8 high y 0 critical (audit --omit=dev exit 1; gate critical exit 0).
+Expo es directa y las otras siete entradas son transitivas, no exclusivamente
+dev. audit-proposal.md propone un PR independiente con actualizaciones
+compatibles de brace-expansion/compression/source-map-js, sin aplicarlas.
+No se impone Zod 4 al CLI que requiere Zod 3 ni se degrada Expo 57 a 54.
 
-La revisión y el merge corresponden al owner. Después de integrar, comprobar
-el SHA real de main: puede requerirse otro PR exclusivo de evidencias con
-nuevas ejecuciones para conservar la regla HEAD/padre inmediato. No asumir
-que el SHA de la rama sobrevivirá al merge ni etiquetar esta preparación.
+El owner debe revisar y fusionar usando **Create a merge commit**. Si main
+sigue en la base evaluada, el nuevo merge tendrá ese SHA como primer padre
+y sólo cambios de evidencia; comprobarlo con el validador original. Si avanzó,
+repetir sobre la nueva base. No fusionar automáticamente ni cerrar #52.
 
-Pendientes: corroboración y explicación de los tres integrantes; logs personales
-de Osbaldo o nueva reproducción humana identificada; revisión actual de Julián;
-tag autorizado, evidence-week-08 con frozen_sha=pass y Classroom. No se ejecutó
-el gate final sin tag ni se crearon/movieron etiquetas. No se revalidó Android
-nativo del flujo integrado: export Expo no es APK. Audit pasa el umbral critical
-pero informa 8 high; no se cambian versiones ni umbrales para ocultarlos.
-
-Relacionado con #52; **no cerrar automáticamente**. Entrega incompleta hasta
-revisión humana y congelación real. Guía: docs/week-08-delivery.md e informe
-reports/week-08/issue-52/final-report.md.
-
-La validación posterior al primer commit de evidencias encontró un límite real
-del evaluador: recorta a 3000 caracteres la lista de rutas, que ocupaba 3330 y
-partía un nombre. Se preserva el fallo en sha-path-diagnosis.json y se agrupan
-69 artefactos históricos byte por byte en before-final-capture.tar.gz, con
-manifest de hashes y commits anteriores intactos. Se repiten todos los checks
-en el SHA posterior al archivo; el último commit sólo cambia evidencias y su
-lista de rutas cabe completa en el evaluador original. No se modifica el gate.
+El agente tiene autorización para crear/publicar week-08-final sólo después
+de esa fusión y de comprobar el SHA definitivo, árbol limpio y ausencia del
+tag. frozen_sha sigue pending_final_tag; no se ha ejecutado el gate final
+local sin etiqueta. Después de crearla, exigir frozen_sha=pass antes de push y
+verificar Actions del tag. El archivo de entrega se generará fuera del checkout
+congelado únicamente cuando tag remoto y comprobación final sean válidos.

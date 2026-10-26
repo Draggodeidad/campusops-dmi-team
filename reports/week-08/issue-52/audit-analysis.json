@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
+  "generatedAt": "2026-10-26T20:17:01.437974+00:00",
+  "executor": "Codex technical analysis at owner request; not a personal student execution",
+  "auditCommand": "npm audit --omit=dev --json",
+  "auditExitCode": 1,
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 8,
+      "critical": 0,
+      "total": 8
+    },
+    "dependencies": {
+      "prod": 566,
+      "dev": 434,
+      "optional": 40,
+      "peer": 4,
+      "peerOptional": 0,
+      "total": 1011
+    }
+  },
+  "classification": "All listed findings survive omission of dev dependencies. Expo is direct; seven other affected package entries are transitive, largely through Expo CLI/build tooling. This does not establish runtime reachability in the exported mobile bundle.",
+  "packages": [
+    {
+      "name": "@expo/cli",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/expo/node_modules/@expo/cli",
+          "version": "57.0.18",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": {
+        "name": "expo",
+        "version": "54.0.38",
+        "isSemVerMajor": true
+      },
+      "advisories": []
+    },
+    {
+      "name": "@expo/code-signing-certificates",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/@expo/code-signing-certificates",
+          "version": "0.0.6",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": true,
+      "advisories": []
+    },
+    {
+      "name": "brace-expansion",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/@expo/fingerprint/node_modules/brace-expansion",
+          "version": "5.0.9",
+          "devOnly": false
+        },
+        {
+          "path": "node_modules/brace-expansion",
+          "version": "1.1.18",
+          "devOnly": false
+        },
+        {
+          "path": "node_modules/glob/node_modules/brace-expansion",
+          "version": "5.0.9",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": true,
+      "advisories": [
+        "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+        "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+        "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+        "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+        "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+        "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p"
+      ]
+    },
+    {
+      "name": "compression",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/compression",
+          "version": "1.8.1",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": true,
+      "advisories": [
+        "https://github.com/advisories/GHSA-vc2v-76pw-4v95"
+      ]
+    },
+    {
+      "name": "expo",
+      "severity": "high",
+      "isDirect": true,
+      "nodes": [
+        {
+          "path": "node_modules/expo",
+          "version": "57.0.16",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": {
+        "name": "expo",
+        "version": "54.0.38",
+        "isSemVerMajor": true
+      },
+      "advisories": []
+    },
+    {
+      "name": "node-forge",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/node-forge",
+          "version": "1.4.0",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": {
+        "name": "expo",
+        "version": "54.0.38",
+        "isSemVerMajor": true
+      },
+      "advisories": [
+        "https://github.com/advisories/GHSA-86w9-cpqp-85rv"
+      ]
+    },
+    {
+      "name": "source-map-js",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/source-map-js",
+          "version": "1.2.1",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": true,
+      "advisories": [
+        "https://github.com/advisories/GHSA-68fv-2mgg-jv7q"
+      ]
+    },
+    {
+      "name": "zod",
+      "severity": "high",
+      "isDirect": false,
+      "nodes": [
+        {
+          "path": "node_modules/expo/node_modules/zod",
+          "version": "3.25.76",
+          "devOnly": false
+        }
+      ],
+      "fixAvailableReportedByNpm": {
+        "name": "expo",
+        "version": "54.0.38",
+        "isSemVerMajor": true
+      },
+      "advisories": [
+        "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5"
+      ]
+    }
+  ],
+  "registryVersionVerification": [
+    {
+      "command": [
+        "npm",
+        "view",
+        "brace-expansion@1.1.21",
+        "version",
+        "--json"
+      ],
+      "exitCode": 0,
+      "stdout": "\"1.1.21\""
+    },
+    {
+      "command": [
+        "npm",
+        "view",
+        "brace-expansion@5.0.12",
+        "version",
+        "--json"
+      ],
+      "exitCode": 0,
+      "stdout": "\"5.0.12\""
+    },
+    {
+      "command": [
+        "npm",
+        "view",
+        "compression@1.8.2",
+        "version",
+        "--json"
+      ],
+      "exitCode": 0,
+      "stdout": "\"1.8.2\""
+    },
+    {
+      "command": [
+        "npm",
+        "view",
+        "source-map-js@1.2.2",
+        "version",
+        "--json"
+      ],
+      "exitCode": 0,
+      "stdout": "\"1.2.2\""
+    },
+    {
+      "command": [
+        "npm",
+        "view",
+        "node-forge",
+        "version",
+        "--json"
+      ],
+      "exitCode": 0,
+      "stdout": "\"1.4.0\""
+    },
+    {
+      "command": [
+        "npm",
+        "view",
+        "zod@4.6.6",
+        "version",
+        "--json"
+      ],
+      "exitCode": 0,
+      "stdout": "\"4.6.6\""
+    }
+  ],
+  "proposalOnly": true,
+  "dependencyChangesApplied": false,
+  "constraints": "No automatic audit fix, no force, no Expo 57 downgrade, no changing thresholds or controls; compatible leaf upgrades need a separate PR and regression validation."
+}

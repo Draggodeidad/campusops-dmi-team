@@ -146,7 +146,8 @@
     "email": "antonioimanol7@gmail.com",
     "status": "authorized"
   },
-  "commitPushStatus": "Authorized human identity verified before commits; complete final capture observed; final evidence-only commit prepared for owner-reviewed PR.",
-  "technicalSha": "d7d28522da8c3e13bd189a9539fafde077cd214b",
-  "codeDocumentationSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9"
+  "commitPushStatus": "Owner-authorized identity; exact merged main revalidated; evidence-only PR prepared. No tag until final human merge and frozen SHA validation.",
+  "technicalSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357",
+  "codeDocumentationSha": "8ed7bae94b91229f4399b3a85c13bf01054751e9",
+  "postMergeRevalidationSha": "fb11b69f3617466712bbd67d0ef49f0592d3a357"
 }
