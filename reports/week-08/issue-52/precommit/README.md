@@ -1,1 +1,0 @@
-Historical precommit reproduction at HEAD 749b171 with uncommitted document hashes. Files copied intact from issue-52/ before the clean technical-commit rerun. Original evidence paths in these snapshots refer to that location before archival; resolve logs within this directory. Not validation of the later technical commit.

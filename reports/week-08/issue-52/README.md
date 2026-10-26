@@ -48,3 +48,13 @@ salida de Jest (exit 2). Se conservan los bytes originales en .log.gz y sus
 hashes en log-formatting.json; las copias legibles sólo quitan espacios/tab
 al final de línea. No se cambia ninguna aserción, resultado ni control.
 La comprobación de formato se repite tras preparar estas copias.
+
+El evaluador original limita la salida de git a 3000 caracteres. La primera
+lista de rutas del commit de evidencias tenía 3330 bytes y se truncó una ruta,
+rechazando la relación de SHAs aunque todas las rutas eran reports/evidence.
+sha-path-diagnosis.json conserva el fallo. before-final-capture.tar.gz y su
+manifest preservan byte por byte las capturas iniciales; el directorio precommit
+se encuentra dentro de ese archivo, además de permanecer en el historial Git.
+Se repite la validación sobre el commit que archiva esos registros y se genera
+un último commit exclusivo de evidencia con una lista de rutas menor.
+No se modifica ni debilita el evaluador, el workflow o la regla HEAD/padre.
