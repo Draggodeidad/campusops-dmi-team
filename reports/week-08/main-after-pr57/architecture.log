@@ -1,0 +1,12 @@
+{"command": ["npm", "run", "check:architecture"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-pr57-review-merge/campusops-dmi-team", "commitSha": "ee37a64408b05fd910b51e350e45c6c2bfc38f6b", "startedAt": "2026-10-26T19:12:49.698527+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "?? reports/week-08/main-after-pr57/"}
+
+> dmi-react-native-starter@1.0.0 check:architecture
+> node tools/check-architecture.cjs
+
+{
+  "status": "pass",
+  "root": "src",
+  "violations": []
+}
+
+{"exitCode": 0, "durationSeconds": 0.209}

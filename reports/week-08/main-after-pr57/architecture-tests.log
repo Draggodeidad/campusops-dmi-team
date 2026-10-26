@@ -1,0 +1,16 @@
+{"command": ["npm", "run", "test:architecture"], "cwd": "/home/dragodeidad/.codex/worktrees/w08-pr57-review-merge/campusops-dmi-team", "commitSha": "ee37a64408b05fd910b51e350e45c6c2bfc38f6b", "startedAt": "2026-10-26T19:12:47.613866+00:00", "node": "v22.22.0", "npm": "10.9.4", "NODE_OPTIONS": "--experimental-sqlite", "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43", "executor": "Codex reproduction at user request; not a personal execution by Osbaldo", "workingTree": "?? reports/week-08/main-after-pr57/"}
+
+> dmi-react-native-starter@1.0.0 test:architecture
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/architecture.test.ts
+
+PASS course-tests/architecture.test.ts
+  ✓ the current source tree respects the declared dependency boundaries (7 ms)
+  ✓ the architecture check detects a direct UI-to-infrastructure import (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        1.018 s
+Ran all test suites matching /course-tests\/architecture.test.ts/i.
+
+{"exitCode": 0, "durationSeconds": 1.85}
