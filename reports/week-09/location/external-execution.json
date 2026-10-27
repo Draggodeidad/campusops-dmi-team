@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+  "generatedAt": "2026-10-27T22:49:29.927Z",
+  "provider": "Photon",
+  "endpoint": "https://photon.komoot.io",
+  "fixtureId": "w09-fictional-campus-location",
+  "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+  "timeoutMs": 5000,
+  "httpStatus": 200,
+  "durationMs": 1005,
+  "outcome": "manual",
+  "failureKind": "unavailable",
+  "externalExecutionConfirmed": true,
+  "status": "pass"
+}

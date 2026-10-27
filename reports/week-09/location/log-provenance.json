@@ -1,0 +1,74 @@
+{
+  "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+  "sanitization": "Local source/validation checkout path prefixes replaced; trailing whitespace and trailing blank lines normalized for Git hygiene. Commands, failures, warnings and counts preserved. External probe emits safe metadata only; no response bodies or provider location values logged.",
+  "files": {
+    "diff-check.log": {
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "committedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "external.log": {
+      "observedSha256": "f189d4e72eb699c71352e7023977d2f18f30a18d9af3e48a34beceeb0c6a08ad",
+      "committedSha256": "f189d4e72eb699c71352e7023977d2f18f30a18d9af3e48a34beceeb0c6a08ad"
+    },
+    "public-gate.log": {
+      "observedSha256": "ffaf0c03ee16e327d05f024f28262dc0a98b22a5fd9e921e60e81dce056b060b",
+      "committedSha256": "ffaf0c03ee16e327d05f024f28262dc0a98b22a5fd9e921e60e81dce056b060b"
+    },
+    "public-w09.log": {
+      "observedSha256": "8aa194441fcd27d4245692d9319612d46112ef46f448a40123056bfd6a82c401",
+      "committedSha256": "8aa194441fcd27d4245692d9319612d46112ef46f448a40123056bfd6a82c401"
+    },
+    "verify-w09.log": {
+      "observedSha256": "3465079568fddeec40c072f38eb00ddb43dfb45fa427bbacfeb40f3b2d2b6422",
+      "committedSha256": "3465079568fddeec40c072f38eb00ddb43dfb45fa427bbacfeb40f3b2d2b6422"
+    },
+    "feedback.log": {
+      "observedSha256": "a67e471316d7dfd10c43f425b8ddac10011a1b8208d391c85387f38b3c684608",
+      "committedSha256": "ac911fddb823f842f96b883d407e9edd5a0d771e361d97ff395e14e84d8df449"
+    },
+    "week08.log": {
+      "observedSha256": "821019e41dd86e28fb5f30a69864f943a19dd248ca9f3fed65eb99cb0aedf74b",
+      "committedSha256": "821019e41dd86e28fb5f30a69864f943a19dd248ca9f3fed65eb99cb0aedf74b"
+    },
+    "architecture.log": {
+      "observedSha256": "de9b69c206ff33c416e59e47d0794207d392eb7533b83a3c85ea8c4d25f883bc",
+      "committedSha256": "de9b69c206ff33c416e59e47d0794207d392eb7533b83a3c85ea8c4d25f883bc"
+    },
+    "architecture-tests.log": {
+      "observedSha256": "6055101a70fd91b8c281c63d34cfaaa7c3859bc1c78aba7c6e1330f8eeec1c44",
+      "committedSha256": "6055101a70fd91b8c281c63d34cfaaa7c3859bc1c78aba7c6e1330f8eeec1c44"
+    },
+    "incidents.log": {
+      "observedSha256": "44530411ab04ebc8ab6da4b7a0d074011495a0b5e4abad4a5387bd3758107c4d",
+      "committedSha256": "44530411ab04ebc8ab6da4b7a0d074011495a0b5e4abad4a5387bd3758107c4d"
+    },
+    "smoke.log": {
+      "observedSha256": "586fe1044d1c2b8775cb167d0f39e8dab0444ded50564f709356c7b8791f2f4e",
+      "committedSha256": "586fe1044d1c2b8775cb167d0f39e8dab0444ded50564f709356c7b8791f2f4e"
+    },
+    "baseline.log": {
+      "observedSha256": "9cf613bfb2adb7279b8b97c1ca5b5c0ee7bb3f6ac8d71e82de686ab1bb715f3a",
+      "committedSha256": "9cf613bfb2adb7279b8b97c1ca5b5c0ee7bb3f6ac8d71e82de686ab1bb715f3a"
+    },
+    "location.log": {
+      "observedSha256": "a425d1a1aaffa80cd0e80bd137771ca33346e3c993e8d3cc3f94347645d12322",
+      "committedSha256": "a425d1a1aaffa80cd0e80bd137771ca33346e3c993e8d3cc3f94347645d12322"
+    },
+    "session.log": {
+      "observedSha256": "e58557aa8ac48184315553b4bcddb85f29959b47a3715ca353eaf0d385a24f0b",
+      "committedSha256": "e8016c2caae99014d5131aae3d0ff41cb38a1b91e4b72c184c50fd551efaa5c6"
+    },
+    "lint.log": {
+      "observedSha256": "8c4d916a2deec69ec33762309c99d04f043e5eb12030f7e10b57c3f5de058967",
+      "committedSha256": "b78361e7341fca08b88304aa4d6d0b7f0ef0b5b96427de42a61bc882f65ea3a5"
+    },
+    "typecheck.log": {
+      "observedSha256": "93708bae9a5a2a9221c8992f020aca650069aa8fafceb98dde54e14a18fbffd5",
+      "committedSha256": "1ef05c1905a6c634e302542673cf6a060eee3a9d5664117907db87b55f36b552"
+    },
+    "session-readiness.log": {
+      "observedSha256": "55b22fd1ed1c65093be4f2e325f1f64c74e8e4718c7337defaa0067fcd5c1637",
+      "committedSha256": "55b22fd1ed1c65093be4f2e325f1f64c74e8e4718c7337defaa0067fcd5c1637"
+    }
+  }
+}

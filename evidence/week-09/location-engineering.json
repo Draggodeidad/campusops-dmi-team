@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+  "scope": "Issue #61 only; not the consolidated W09 engineering.json",
+  "decision": "Application valida/normaliza y orquesta proveedor, caché y reloj; Photon y LRU volátil viven en Infrastructure. La UI acepta explícitamente un resultado o usa la referencia manual, incluso durante una petición. Un 429 con Retry-After bloquea consultas hasta vencer; no se añaden retries automáticos.",
+  "alternatives": [
+    "Consultar geocodificación desde UI y duplicar validación: rechazada por acoplar proveedor a presentación y evaluación.",
+    "Introducir SDK de mapas, GPS y caché durable: rechazada por añadir permisos, retención y alcance futuro.",
+    "Puertos #60 con Photon, validador único y caché en memoria: elegida por sustitución y pruebas deterministas."
+  ],
+  "tradeoff": "Beneficio: fallback sin bloqueo, límites de capas verificables y fallas reproducibles; sin claves ni retención durable. Costo: estado de selección y caché explícitos, dependencia de servidor público sin SLA, pérdida de caché al reiniciar y no persistir source/coordenadas en el backend textual.",
+  "requirementIds": [
+    "AC-02",
+    "AC-03",
+    "AC-04"
+  ],
+  "verification": [
+    {
+      "command": "npm run test:week-09:location",
+      "result": "exit 0: 78 pruebas y probe HTTP loopback pasan",
+      "evidence": "reports/week-09/location/location.log"
+    },
+    {
+      "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+      "result": "exit 0: Photon HTTP 200, 1005 ms, consulta ficticia sin coincidencias y fallback manual",
+      "evidence": "reports/week-09/location/external-execution.json"
+    },
+    {
+      "command": "npm run test:architecture; npm run check:architecture",
+      "result": "Ambos exit 0; 2 pruebas y cero violaciones",
+      "evidence": "reports/week-09/location/architecture-tests.log; reports/week-09/location/architecture.log"
+    },
+    {
+      "command": "make public-test-week-09",
+      "result": "exit 2: tres fallos planRetry #62 y cuatro artefactos compartidos pendientes; no se declara entrega completa",
+      "evidence": "reports/week-09/location/public-gate.log"
+    }
+  ],
+  "aiAssistance": "Codex: implementación, pruebas y documentación; validación automática/externa observada. Revisión humana y evidencia individual pendientes."
+}
