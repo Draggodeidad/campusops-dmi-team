@@ -163,7 +163,12 @@ flowchart TB
   SyncTests --> SyncEvaluation
 
   subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
-    Location["Ubicación / proveedor externo"]
+    Location["Ubicación / proveedor externo — implementación #61 pendiente"]
+    LocationPorts["Application: LocationProvider / LocationCache / LocationLookupResult — contratos #60"]
+    RetryContracts["Application: RetryPolicy / StablePostRequest / ResilienceClock — contratos #60; implementación #62 pendiente"]
   end
 
-  Location -. "adaptador futuro dependerá de contrato interno" .-> Domain
+  LocationPorts --> IncidentLocation["campusops/contracts: IncidentLocation — tipo existente"]
+  Location -. "implementará; sin instancia actual" .-> LocationPorts
+  BaselineFixtures["Tests W09: fixtures/reloj virtual — sin imports desde app"] --> LocationPorts
+  BaselineFixtures --> RetryContracts
