@@ -71,6 +71,15 @@ Los índices de resultados están en `reports/week-05/contract-tests.json` y `re
 
 ## Actividades semanales
 
+### Semana 09 — baseline de integración resiliente
+
+El alcance de #60, revisión completa del ZIP, contratos, fixtures y trazabilidad
+están en [docs/week-09-baseline.md](docs/week-09-baseline.md). Material oficial:
+`docs/assignments/week-09*.md`. `npm run test:week-09:baseline` prueba el harness;
+`npm run test:week-09:public` ejecuta sólo las cuatro pruebas oficiales W09.
+Los stubs de ubicación/reintento siguen pendientes de #61/#62 y deben fallar.
+`npm test` no incluye W09. No se acredita entrega, revisión humana ni tag.
+
 ### Semana 08 — baseline de persistencia/sync
 
 La preparación de #42 está en [docs/week-08-baseline.md](docs/week-08-baseline.md):

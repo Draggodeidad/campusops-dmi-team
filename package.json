@@ -37,7 +37,10 @@
     "test:week-08": "npm run test:week-08:baseline && npm run check:week-08-provider && npm run test:week-08:persistence && npm run test:week-08:sync && npm run test:week-08:integration && npm run test:week-08:public",
     "test:week-08:persistence": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-workspace-owner.test.ts course-tests/week-08-persistence.test.ts",
     "test:week-08:native": "node tools/test-week-08-native.mjs",
-    "test:week-08:integration": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx"
+    "test:week-08:integration": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx",
+    "test:week-09:baseline": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-baseline.test.ts",
+    "test:week-09:public": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-09.test.ts",
+    "test:week-09:module": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath"
   },
   "dependencies": {
     "expo": "~57.0.9",

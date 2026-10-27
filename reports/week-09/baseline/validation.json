@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84",
+  "generatedAt": "2026-10-27T22:09:07.737511+00:00",
+  "status": "fail",
+  "scope": "Issue #60 baseline; not final W09 delivery",
+  "checks": [
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:baseline",
+      "evidence": "reports/week-09/baseline/baseline.log",
+      "exitCode": 0,
+      "durationSeconds": 0.69,
+      "generatedAt": "2026-10-27T22:07:52.046254+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make feedback",
+      "evidence": "reports/week-09/baseline/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 20.47,
+      "generatedAt": "2026-10-27T22:08:12.964115+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "public-isolated",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:public",
+      "evidence": "reports/week-09/baseline/public-isolated.log",
+      "exitCode": 1,
+      "durationSeconds": 1.23,
+      "generatedAt": "2026-10-27T22:07:53.276922+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "public-w09",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-09",
+      "evidence": "reports/week-09/baseline/public-w09.log",
+      "exitCode": 2,
+      "durationSeconds": 11.52,
+      "generatedAt": "2026-10-27T22:08:27.976014+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-09/baseline/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.51,
+      "generatedAt": "2026-10-27T22:07:53.009080+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-09/baseline/session.log",
+      "exitCode": 0,
+      "durationSeconds": 6.31,
+      "generatedAt": "2026-10-27T22:07:59.317102+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "verify-w09",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make verify-week-09",
+      "evidence": "reports/week-09/baseline/verify-w09.log",
+      "exitCode": 0,
+      "durationSeconds": 11.31,
+      "generatedAt": "2026-10-27T22:08:16.454427+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "week08",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-09/baseline/week08.log",
+      "exitCode": 0,
+      "durationSeconds": 11.46,
+      "generatedAt": "2026-10-27T22:08:10.778828+00:00",
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "kit-inventory",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "python3 tools/inspect-week-09-kit.py /home/dragodeidad/Documents/DMI/campusops-dmi-team/week-09-integracion-resiliente.zip --destination /tmp/campusops-w09-final-inspection-60 --ref 3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d",
+      "evidence": "reports/week-09/baseline/zip-inventory.json",
+      "exitCode": 0,
+      "durationSeconds": 0.09,
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "preserve-history",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --exit-code 3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d -- package-lock.json tsconfig.json App.tsx src/campusops src/domain src/course-evaluation src/infrastructure src/ui src/application/session src/application/sync src/application/persistence src/application/incidents src/application/errors course-tests/public .github/workflows/starter-feedback.yml .github/workflows/week-01-feedback.yml .github/workflows/week-02-arquitectura-justificable-feedback.yml .github/workflows/week-03-ci-amenazas-feedback.yml .github/workflows/week-04-seguridad-privacidad-feedback.yml .github/workflows/week-05-cliente-cloud-feedback.yml .github/workflows/week-06-sesion-segura-feedback.yml .github/workflows/week-08-persistencia-sincronizacion-feedback.yml reports/week-01 reports/week-02 reports/week-03 reports/week-04 reports/week-05 reports/week-06 reports/week-08 evidence",
+      "evidence": "reports/week-09/baseline/preserve-history.log",
+      "exitCode": 0,
+      "durationSeconds": 0.0,
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    },
+    {
+      "id": "diff-check",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --check 3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d",
+      "evidence": "reports/week-09/baseline/diff-check.log",
+      "exitCode": 0,
+      "durationSeconds": 0.0,
+      "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84"
+    }
+  ],
+  "bootstrap": {
+    "command": "make setup",
+    "nodeVersion": "22.22.0",
+    "exitCode": 0,
+    "sourceCommitSha": "3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d",
+    "workingTreeState": "official kit staged in working tree before contract commits; dependency lock unchanged",
+    "evidence": "reports/week-09/baseline/setup.log"
+  },
+  "interpretation": {
+    "baseline": "4/4 harness checks pass; no production location or retry behavior claimed",
+    "feedback": "19 suites / 87 tests pass, architecture/secret scan/audit critical gate and Android Expo export pass",
+    "session": "6 suites / 31 tests pass; 8 readiness assertions pass",
+    "week08": "9 suites / 107 tests pass plus SQLite provider probe",
+    "verifyW09": "pass; structural/toolchain/backend check does not exercise W09 stubs or required deliverables",
+    "publicIsolated": "4/4 tests fail at pending planRetry/selectIncidentLocation; exact official tests unchanged",
+    "publicEvaluator": "87 accumulated tests pass, 4 W09 tests fail; all five official deliverables absent",
+    "audit": "Critical gate passes; npm reports 7 high severity advisories in unchanged dependency tree",
+    "evidenceCommand": "Not run; requires future week-09-final tag. No tag created."
+  },
+  "pendingIssues": [
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69
+  ],
+  "humanReview": "pending",
+  "ownerIndividualEvidence": "pending (#63)",
+  "aiAssistance": "Codex assisted complete ZIP inspection/comparison, contracts, fixtures, docs and observed command execution. Human review pending.",
+  "logFormatting": {
+    "normalization": "Trailing whitespace and final empty lines removed only; original hashes retained",
+    "files": {
+      "public-w09.log": {
+        "originalSha256": "d63373a007cd616f5680e723c9151464f044204931bb94b9866963c3ced89f39",
+        "committedSha256": "d63373a007cd616f5680e723c9151464f044204931bb94b9866963c3ced89f39"
+      },
+      "verify-w09.log": {
+        "originalSha256": "406569611614f84279e724813f49b3c24d585d46a63fce3f903d7e9bb3e56ece",
+        "committedSha256": "406569611614f84279e724813f49b3c24d585d46a63fce3f903d7e9bb3e56ece"
+      },
+      "week08.log": {
+        "originalSha256": "387a4b2fd5c13450b06b4fe92cce998a10fb4695acc453f7213a21cacf40615a",
+        "committedSha256": "387a4b2fd5c13450b06b4fe92cce998a10fb4695acc453f7213a21cacf40615a"
+      },
+      "session.log": {
+        "originalSha256": "0324a6ddda317825d107172db39ccb8b079e289da3b9027344dd259b65c7868c",
+        "committedSha256": "7caf7787da1a860342cb9dda3724a2fc87dddf0c4a278744544a70392b108d68"
+      },
+      "feedback.log": {
+        "originalSha256": "e69661bae9446e587bde7e3f872740c39f3139bb9cfcd1f9a14b0d557f9e206c",
+        "committedSha256": "cbd16bae17be3e109cda67ddae133dd41b2f136be2a028c5044bcccef8663ade"
+      },
+      "session-readiness.log": {
+        "originalSha256": "55b22fd1ed1c65093be4f2e325f1f64c74e8e4718c7337defaa0067fcd5c1637",
+        "committedSha256": "55b22fd1ed1c65093be4f2e325f1f64c74e8e4718c7337defaa0067fcd5c1637"
+      },
+      "public-isolated.log": {
+        "originalSha256": "f92ffaa5e5e63c7eeef10c61a5bb6001c8372af3815c882aecc2d1e036713523",
+        "committedSha256": "f92ffaa5e5e63c7eeef10c61a5bb6001c8372af3815c882aecc2d1e036713523"
+      },
+      "baseline.log": {
+        "originalSha256": "8dcf791b63f269350c8058d4fe70d12c60fb44b979928f613fb3f72273e01cb7",
+        "committedSha256": "8dcf791b63f269350c8058d4fe70d12c60fb44b979928f613fb3f72273e01cb7"
+      },
+      "setup.log": {
+        "originalSha256": "92a80be89250e6df0e8d51adf422dfa585201429d28d66dbaf2d31f77985de66",
+        "committedSha256": "92a80be89250e6df0e8d51adf422dfa585201429d28d66dbaf2d31f77985de66"
+      },
+      "preserve-history.log": {
+        "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "committedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "diff-check.log": {
+        "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "committedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  }
+}

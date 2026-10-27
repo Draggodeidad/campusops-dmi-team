@@ -346,3 +346,33 @@ SQLite real en sus fixtures. El workflow W08 añade el gate de integración al
 existente; los anteriores permanecen. Resultados y SHA observados:
 reports/week-08/app-integration/validation.json. No acredita revisión humana,
 recopilación #52, etiqueta final ni entrega Classroom.
+
+## Anexo W09 — contratos del baseline #60 (27-10-2026)
+
+**Contexto.** El ZIP W09 exige proveedor/caché/manual, retry acotado y respuesta
+perdida. W08 ya conserva identidad/cuerpo/recibos; sus dos envíos inmediatos no
+implementan Retry-After. Los stubs públicos W09 permanecen pendientes.
+
+**Alternativas.** (1) Extender el transporte HTTP de incidencias desde UI
+acoplaría pantalla/proveedor y no aislaría caché. (2) Implementar proveedor,
+executor y UI al revisar el kit mezclaría #60 con #61/#62. (3) Publicar puertos
+estrechos y fixtures permite pruebas paralelas sin adelantar esos flujos.
+Se elige la tercera, con el costo de mantener coherencia entre contrato e
+implementación posterior.
+
+**Decisión presente.** LocationProvider/LocationCache y resultados seguros
+viven en Application; datos externos siguen unknown hasta la validación futura
+única. IncidentLocation permanece en el vocabulario compartido. RetryPolicy
+conserva la firma pública y ResilienceClock permite pruebas de espera/vigencia.
+StablePostRequest conserva body serializado e identidad; no modifica cola,
+recibos ni sesión W08/W06. Los puertos no se componen todavía en App.tsx.
+Infraestructura, UI, selectIncidentLocation y planRetry corresponden a #61/#62.
+
+**Consecuencias y comprobación.** Cambiar proveedor quedará localizado en
+Infrastructure/composición; tests podrán sustituir puerto/reloj. El baseline
+sólo prueba el harness/compatibilidad de tipos y conserva fallos de stubs; no
+acredita red externa, caché ni política ejecutada. README, diagrama y
+`docs/week-09-baseline.md` distinguen contratos disponibles de flujo activo.
+Resultados y SHA se registran en `reports/week-09/baseline/validation.json`.
+Se conserva la procedencia histórica de reports/evidence W02–W08, sin atribuir
+sus resultados al SHA nuevo. No se crea tag ni evidencia individual final.
