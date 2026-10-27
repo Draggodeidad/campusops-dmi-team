@@ -1,0 +1,79 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-09.test.ts
+
+FAIL course-tests/public/week-09.test.ts
+  ✕ CampusOps accepts valid geocoding and otherwise keeps manual incident location (2 ms)
+  ✕ CampusOps can retry a lost resolution response only with a stable operation key (1 ms)
+  ✕ retries bounded idempotent failures and honors Retry-After
+  ✕ does not retry a POST without stable idempotency identity
+
+  ● CampusOps accepts valid geocoding and otherwise keeps manual incident location
+
+    selectIncidentLocation must be implemented in the assigned week
+
+      13 |
+      14 | function pending(name: string): never {
+    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      16 | }
+      17 |
+      18 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:15:9)
+      at pending (src/course-evaluation/index.ts:80:10)
+      at Object.<anonymous> (course-tests/public/week-09.test.ts:4:32)
+
+  ● CampusOps can retry a lost resolution response only with a stable operation key
+
+    planRetry must be implemented in the assigned week
+
+      13 |
+      14 | function pending(name: string): never {
+    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      16 | }
+      17 |
+      18 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:15:9)
+      at pending (src/course-evaluation/index.ts:62:10)
+      at Object.<anonymous> (course-tests/public/week-09.test.ts:13:19)
+
+  ● retries bounded idempotent failures and honors Retry-After
+
+    planRetry must be implemented in the assigned week
+
+      13 |
+      14 | function pending(name: string): never {
+    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      16 | }
+      17 |
+      18 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:15:9)
+      at pending (src/course-evaluation/index.ts:62:10)
+      at Object.<anonymous> (course-tests/public/week-09.test.ts:17:19)
+
+  ● does not retry a POST without stable idempotency identity
+
+    planRetry must be implemented in the assigned week
+
+      13 |
+      14 | function pending(name: string): never {
+    > 15 |   throw new Error(`${name} must be implemented in the assigned week`);
+         |         ^
+      16 | }
+      17 |
+      18 | export { redactForTelemetry, parseRemoteResource };
+
+      at pending (src/course-evaluation/index.ts:15:9)
+      at pending (src/course-evaluation/index.ts:62:10)
+      at Object.<anonymous> (course-tests/public/week-09.test.ts:26:19)
+
+Test Suites: 1 failed, 1 total
+Tests:       4 failed, 4 total
+Snapshots:   0 total
+Time:        0.858 s
+Ran all test suites within paths "course-tests/public/week-09.test.ts".

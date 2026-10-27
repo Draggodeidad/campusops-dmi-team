@@ -1,0 +1,15 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:baseline
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-baseline.test.ts
+
+PASS course-tests/week-09-baseline.test.ts
+  ✓ published policy types remain compatible and cache port can be substituted (2 ms)
+  ✓ controlled provider waits on injected time and gives isolated raw responses (2 ms)
+  ✓ failure fixtures distinguish unavailable transport from invalid raw data (5 ms)
+  ✓ lost-response fixture preserves the W08 serialization and independent lifecycle inputs (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.275 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-09-baseline.test.ts".

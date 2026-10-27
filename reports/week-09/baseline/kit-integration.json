@@ -1,0 +1,79 @@
+{
+  "baseCommitSha": "3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d",
+  "technicalCommitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84",
+  "archiveSha256": "d49efb163816635a8c6c27766e0d89b9bde2d3e0f3ae5e98b81c79c3dd262119",
+  "entries": [
+    {
+      "path": ".github/workflows/week-09-integracion-resiliente-feedback.yml",
+      "bytes": 1271,
+      "sha256": "8e468f90bd576f422151725a23523c31b1abf3a64d431f2b2c30d3f8cde99924",
+      "comparisonAtBase": "new",
+      "readInFull": true,
+      "action": "official mandatory commands retained; checkout history/PR SHA, pinned Node, baseline and regressions added",
+      "integratedSha256": "a84257b8b1a8fb14d84ca25d73b66eaa3f4398badc6b5525efaf74e1a1d1235c"
+    },
+    {
+      "path": "INSTALL.md",
+      "bytes": 594,
+      "sha256": "1c1753bfed4a16c4744ee346fd7910e57031dd8e21e0668746c0e4699b5de4d5",
+      "comparisonAtBase": "different",
+      "readInFull": true,
+      "action": "official W09 text prepended; historical W08/W06/W05 retained",
+      "integratedSha256": "e7a46760108f16be2c44d2823a764af1c925fdadcd7de7872f066826caec3f93"
+    },
+    {
+      "path": "course-tests/public/week-09.test.ts",
+      "bytes": 1509,
+      "sha256": "265fa5ba285c4be74bad478a8f53cbaa770031e201cd3a6067b6b368d09d34c8",
+      "comparisonAtBase": "identical",
+      "readInFull": true,
+      "action": "retained unchanged",
+      "integratedSha256": "265fa5ba285c4be74bad478a8f53cbaa770031e201cd3a6067b6b368d09d34c8"
+    },
+    {
+      "path": "docs/CAMPUSOPS.md",
+      "bytes": 9454,
+      "sha256": "9a992d73aaab3f1e3d14b42f09aac1c44beb53e9eb20d9c194149fbf13bbe578",
+      "comparisonAtBase": "identical",
+      "readInFull": true,
+      "action": "retained unchanged",
+      "integratedSha256": "9a992d73aaab3f1e3d14b42f09aac1c44beb53e9eb20d9c194149fbf13bbe578"
+    },
+    {
+      "path": "docs/CAMPUSOPS_API.md",
+      "bytes": 6957,
+      "sha256": "86a103f8f64f77885ea0a87f12d4126bd94a31936e7fc6b57546b8af0b44ea08",
+      "comparisonAtBase": "identical",
+      "readInFull": true,
+      "action": "retained unchanged",
+      "integratedSha256": "86a103f8f64f77885ea0a87f12d4126bd94a31936e7fc6b57546b8af0b44ea08"
+    },
+    {
+      "path": "docs/assignments/week-09-repository.md",
+      "bytes": 6256,
+      "sha256": "30c02c622d6b2003dd3ef567d092499a774088d324b48bf0679a8f7ec3c694bf",
+      "comparisonAtBase": "new",
+      "readInFull": true,
+      "action": "copied byte-for-byte",
+      "integratedSha256": "30c02c622d6b2003dd3ef567d092499a774088d324b48bf0679a8f7ec3c694bf"
+    },
+    {
+      "path": "docs/assignments/week-09-rubric.md",
+      "bytes": 6005,
+      "sha256": "8db1db931b3c399cb079e859de8fec0335ef50dd059283124ff681e7564b5e1f",
+      "comparisonAtBase": "new",
+      "readInFull": true,
+      "action": "copied byte-for-byte",
+      "integratedSha256": "8db1db931b3c399cb079e859de8fec0335ef50dd059283124ff681e7564b5e1f"
+    },
+    {
+      "path": "docs/assignments/week-09.md",
+      "bytes": 9352,
+      "sha256": "075b6a22738d9f4ec42de4ebe074a0337e222f1ace3d33dfbcc21b44ba1b937f",
+      "comparisonAtBase": "new",
+      "readInFull": true,
+      "action": "copied byte-for-byte",
+      "integratedSha256": "075b6a22738d9f4ec42de4ebe074a0337e222f1ace3d33dfbcc21b44ba1b937f"
+    }
+  ]
+}
