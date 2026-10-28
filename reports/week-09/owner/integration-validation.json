@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "4eba53a19535ff848ec681fadd230bfed67632bb",
+  "generatedAt": "2026-10-28T06:01:04.202440+00:00",
+  "status": "fail",
+  "scope": "Post-integration owner provenance; final team delivery remains pending",
+  "checks": [
+    {
+      "id": "owner-after-integration",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "python3 reports/week-09/owner/verify-record.py --scope owner",
+      "exitCode": 0,
+      "evidence": "reports/week-09/owner/owner-after-integration.log",
+      "durationSeconds": 0.617
+    },
+    {
+      "id": "team-after-integration",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "python3 reports/week-09/owner/verify-record.py --scope team",
+      "exitCode": 1,
+      "evidence": "reports/week-09/owner/team-after-integration.log",
+      "durationSeconds": 0.043
+    },
+    {
+      "id": "public-schema-after-integration",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "python3 tools/course_public_evaluator.py --week 9 --mode public",
+      "exitCode": 1,
+      "evidence": "reports/week-09/owner/public-schema-after-integration.log",
+      "durationSeconds": 0.186
+    }
+  ],
+  "limits": [
+    "No implementation suites rerun in this evidence-only update; combined results retain their own SHA.",
+    "Official schema still requires the two actual teammate members and three shared final artifacts.",
+    "Range-entry audit originally treated eight log paths as one; it now verifies every original JSON observation without altering the official team validator."
+  ]
+}

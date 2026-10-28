@@ -54,7 +54,17 @@ def audit_owner():
         assert all(path.startswith(('reports/', 'evidence/')) for path in changes)
         check = next(c for c in index['checks'] if c['id'] == item['checkId'])
         assert all(item[key] == check[key] for key in ['command', 'status', 'exitCode', 'evidence'])
-        git('cat-file', '-e', f"{item['artifactCommitSha']}:{item['evidence']}")
+        if check.get('repetitions'):
+            count = check['repetitions']
+            match = re.fullmatch(r'(reports/week-09/integration-order/native-repeat-)1\.log through native-repeat-(\d+)\.log', item['evidence'])
+            assert match and isinstance(count, int) and 1 <= count <= 100 and int(match[2]) == count
+            for repetition in range(1, count + 1):
+                path = f'{match[1]}{repetition}.log'
+                observation = source(item['artifactCommitSha'], path)
+                assert observation['commitSha'] == item['commitSha'] and observation['sourceTreeDirty'] is False
+                assert all(result['status'] == 'pass' for result in observation['checks'])
+        else:
+            git('cat-file', '-e', f"{item['artifactCommitSha']}:{item['evidence']}")
     approval = member['humanValidation']
     assert approval['status'] == 'approved_by_owner'
     assert approval['source'] == 'explicit_user_statement_in_this_Codex_chat'

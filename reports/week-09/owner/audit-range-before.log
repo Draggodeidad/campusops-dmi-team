@@ -1,0 +1,23 @@
+fatal: path 'reports/week-09/integration-order/native-repeat-1.log through native-repeat-8.log' does not exist in 'fb8d80087923fae52b40d405733d825124b36871'
+Traceback (most recent call last):
+  File "/home/dragodeidad/.codex/worktrees/week-09-owner-evidence-issue-63/campusops-dmi-team/reports/week-09/owner/verify-record.py", line 88, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/dragodeidad/.codex/worktrees/week-09-owner-evidence-issue-63/campusops-dmi-team/reports/week-09/owner/verify-record.py", line 83, in main
+    print(json.dumps(audit_owner(), ensure_ascii=False))
+                     ~~~~~~~~~~~^^
+  File "/home/dragodeidad/.codex/worktrees/week-09-owner-evidence-issue-63/campusops-dmi-team/reports/week-09/owner/verify-record.py", line 57, in audit_owner
+    git('cat-file', '-e', f"{item['artifactCommitSha']}:{item['evidence']}")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dragodeidad/.codex/worktrees/week-09-owner-evidence-issue-63/campusops-dmi-team/reports/week-09/owner/verify-record.py", line 16, in git
+    return subprocess.check_output(['git', *args], cwd=ROOT, text=True).strip()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 473, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['git', 'cat-file', '-e', 'fb8d80087923fae52b40d405733d825124b36871:reports/week-09/integration-order/native-repeat-1.log through native-repeat-8.log']' returned non-zero exit status 128.
