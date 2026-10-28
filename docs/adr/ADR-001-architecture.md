@@ -377,6 +377,46 @@ Resultados y SHA se registran en `reports/week-09/baseline/validation.json`.
 Se conserva la procedencia histórica de reports/evidence W02–W08, sin atribuir
 sus resultados al SHA nuevo. No se crea tag ni evidencia individual final.
 
+## Anexo W09 — integración de ubicación #61 (27-10-2026)
+
+**Contexto.** El anexo #60 anterior describe su snapshot histórico; #61 activa
+los puertos de ubicación y reemplaza el stub público. El backend aún guarda
+ubicación textual. GPS y persistir coordenadas no pertenecen a esta integración.
+
+**Alternativas.** (1) Consultar HTTP desde la pantalla simplificaría el primer
+paso pero rompería UI → Application y duplicaría validación. (2) Añadir un SDK
+de mapas, GPS y caché durable introduciría permisos, retención y funcionalidades
+fuera de alcance. (3) Un caso de uso con puertos y adaptador de geocodificación,
+caché volátil y selección manual mantiene límites sustituibles. Se elige (3).
+Photon se prefiere a Open-Meteo por búsquedas de lugares; sus restricciones y
+las de la alternativa Nominatim se documentan en `docs/resilience-policy.md`.
+
+**Decisión.** LookupIncidentLocation normaliza y orquesta proveedor/caché/reloj;
+selectIncidentLocation y evaluateIncidentLocation comparten el único validador.
+El resultado conserva motivo seguro y cacheHit opcional. Infrastructure aporta
+PhotonLocationProvider, MemoryLocationCache (LRU 50) y SystemLocationClock.
+FetchIncidentTransport se reutiliza con otra instancia sin decoración de sesión.
+App.tsx construye ese grafo y lo inyecta a CampusOpsApp/CreateIncidentScreen.
+La UI acepta explícitamente un candidato o envía su referencia manual; las
+respuestas obsoletas no cambian el formulario. Sólo la etiqueta viaja al backend.
+
+**Razones y consecuencias.** El cambio de proveedor se limita a Infrastructure
+y composición; los mismos puertos permiten fallas reproducibles. TTL 5 minutos,
+timeout 1 segundo y reloj son inyectables. Se conserva la utilidad ante timeout,
+429, desconexión o corrupción, con costo de validación/estado explícitos y sin
+caché tras reiniciar. No hay retries automáticos; 429 con Retry-After válido
+bloquea nuevos envíos durante la espera. #62 conserva su executor pendiente.
+No se cachean referencias manuales ni se registra contenido de ubicación.
+Los textos de búsqueda deben ser sintéticos; no se promete detectar PII.
+
+**Comprobación.** test:week-09:location prueba política, caché, adaptador y UI,
+composición con disco/backend W08, y fetch/aborto real por loopback. El comando
+externo opt-in usa el adaptador real y una consulta ficticia; resultados y SHA
+comprobados están en reports/week-09/location/validation.json. Las suites públicas
+permanecen intactas y su estado completo se registra aunque falle planRetry.
+Se añaden observaciones de arquitectura a W02 sin reemplazar sus SHA/resultados
+históricos. Revisión humana, evidencia individual y consolidación W09 pendientes.
+
 ## Anexo W09 — retry compartido e idempotencia #62 (27-10-2026)
 
 **Contexto.** El baseline #60 fija los contratos y el corte desde intento 4.
@@ -432,3 +472,15 @@ acredita su entrega. Resultados y SHA comprobados: reports/week-09/retry/.
 Se conservan controles públicos y regresiones acumuladas. #61, revisión humana,
 evidencia individual y consolidación/entrega W09 se completan por sus issues;
 este anexo no declara esos hitos cumplidos.
+
+
+## Integración W09 — #61 y #62
+
+Los anexos anteriores conservan sus snapshots de implementación. La composición
+actual incluye ubicación y retry; Photon conserva una petición por búsqueda y
+los reintentos se limitan a incidencias. Al integrar se detectó un timer que
+puede despertar 1 ms antes: SystemResilienceClock completa el plazo restante
+con hasta cuatro callbacks y rechaza un reloj regresivo o scheduler incoherente.
+La regresión reproduce el fallo previo y comprueba que no se envía antes de
+Retry-After; un scheduler siempre anticipado termina en error acotado.
+El probe nativo publica sólo etapa/clase/código sanitizados si falla.

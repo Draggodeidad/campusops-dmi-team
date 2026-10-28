@@ -20,7 +20,10 @@ import { CreateIncidentScreen } from './incidents/CreateIncidentScreen';
 import { IncidentDetailScreen } from './incidents/IncidentDetailScreen';
 import { IncidentListScreen } from './incidents/IncidentListScreen';
 
+import type { LookupIncidentLocation } from '../application/location/LookupIncidentLocation';
+
 type Props = Readonly<{
+  lookupIncidentLocation?: LookupIncidentLocation;
   getBackendStatus: GetBackendStatus;
   getIncidents: GetIncidents;
   getIncidentById: GetIncidentById;
@@ -47,6 +50,7 @@ function presentIncidentFailure(error: unknown, operation: 'list' | 'detail' | '
 }
 
 export function CampusOpsApp({
+  lookupIncidentLocation,
   getBackendStatus,
   getIncidents,
   getIncidentById,
@@ -326,6 +330,7 @@ export function CampusOpsApp({
 
       {sessionUsable && activeView === 'create' && (
         <CreateIncidentScreen
+          {...(lookupIncidentLocation ? { lookupIncidentLocation } : {})}
           error={createError}
           loading={createLoading}
           onCancel={handleCancelCreate}

@@ -17,4 +17,5 @@ export type LocationUnavailable = Readonly<{ available: false; failure: Location
 export type LocationLookupResult = Readonly<{
   location: IncidentLocation;
   failure?: LocationFailure;
+  cacheHit?: boolean;
 }>;

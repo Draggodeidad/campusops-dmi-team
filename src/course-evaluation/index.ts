@@ -3,7 +3,6 @@ import type {
   PermissionEvent,
   RemoteResponse,
 } from './contracts';
-import type { IncidentLocation } from '../campusops/contracts';
 
 import { RefreshCoordinator } from '../application/session/RefreshCoordinator';
 
@@ -67,7 +66,4 @@ export function reducePermissionLifecycle(
   return pending('reducePermissionLifecycle');
 }
 
-/** Week 09: see docs/CAMPUSOPS_API.md; this is not a completed solution. */
-export function selectIncidentLocation(_provider: unknown, _manualLabel: string): IncidentLocation {
-  return pending('selectIncidentLocation');
-}
+export { selectIncidentLocation } from '../application/location/selectIncidentLocation';

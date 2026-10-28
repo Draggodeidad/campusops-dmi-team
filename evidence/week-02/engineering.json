@@ -101,5 +101,20 @@
       "evidence": "reports/week-09/retry/validation.json"
     },
     "engineeringEvidence": "evidence/week-09/retry-engineering.json"
+  },
+  "followUpIssue61": {
+    "week": 9,
+    "issue": 61,
+    "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+    "generatedAt": "2026-10-27T22:51:20.705595+00:00",
+    "scope": "Extensión aditiva #61; se conservan decisiones, SHA y resultados históricos W02/W08.",
+    "requirement": "Integrar geocodificación/cache/manual sin invertir dependencias ni duplicar lógica evaluable.",
+    "decision": "UI consume LookupIncidentLocation; Application valida y orquesta LocationProvider/LocationCache/reloj; Infrastructure implementa Photon/LRU; App.tsx compone. Evaluación reexporta selectIncidentLocation real.",
+    "verification": {
+      "command": "npm run test:architecture; npm run check:architecture; npm run test:week-09:location",
+      "result": "exit 0 en los tres comandos; 2 pruebas de arquitectura, cero violaciones, 78 pruebas de ubicación y probe HTTP local pasan.",
+      "evidence": "reports/week-09/location/validation.json"
+    },
+    "engineeringEvidence": "evidence/week-09/location-engineering.json"
   }
 }

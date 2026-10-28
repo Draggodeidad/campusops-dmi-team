@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+  "generatedAt": "2026-10-27T22:51:20.705595+00:00",
+  "status": "fail",
+  "scope": "Issue #61 implementation validated; full W09 public/delivery gates remain incomplete.",
+  "locationImplementationStatus": "pass",
+  "checks": [
+    {
+      "id": "typecheck",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run typecheck",
+      "evidence": "reports/week-09/location/typecheck.log",
+      "exitCode": 0,
+      "durationSeconds": 2.153,
+      "generatedAt": "2026-10-27T22:48:30.084429+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-09/location/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.5,
+      "generatedAt": "2026-10-27T22:48:31.234971+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-09/location/session.log",
+      "exitCode": 0,
+      "durationSeconds": 6.843,
+      "generatedAt": "2026-10-27T22:48:31.735060+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "lint",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run lint",
+      "evidence": "reports/week-09/location/lint.log",
+      "exitCode": 0,
+      "durationSeconds": 3.469,
+      "generatedAt": "2026-10-27T22:48:32.237771+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "location",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:location",
+      "evidence": "reports/week-09/location/location.log",
+      "exitCode": 0,
+      "durationSeconds": 4.038,
+      "generatedAt": "2026-10-27T22:48:35.706761+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "week08",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-09/location/week08.log",
+      "exitCode": 0,
+      "durationSeconds": 8.442,
+      "generatedAt": "2026-10-27T22:48:38.579226+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:baseline",
+      "evidence": "reports/week-09/location/baseline.log",
+      "exitCode": 0,
+      "durationSeconds": 0.943,
+      "generatedAt": "2026-10-27T22:48:39.745375+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "smoke",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:smoke",
+      "evidence": "reports/week-09/location/smoke.log",
+      "exitCode": 0,
+      "durationSeconds": 1.271,
+      "generatedAt": "2026-10-27T22:48:40.688355+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "reports/week-09/location/incidents.log",
+      "exitCode": 0,
+      "durationSeconds": 1.318,
+      "generatedAt": "2026-10-27T22:48:41.959571+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-09/location/architecture-tests.log",
+      "exitCode": 0,
+      "durationSeconds": 0.895,
+      "generatedAt": "2026-10-27T22:48:43.277923+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-09/location/architecture.log",
+      "exitCode": 0,
+      "durationSeconds": 0.153,
+      "generatedAt": "2026-10-27T22:48:44.173210+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "reports/week-09/location/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 21.399,
+      "generatedAt": "2026-10-27T22:48:47.109031+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "verify-w09",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-09",
+      "evidence": "reports/week-09/location/verify-w09.log",
+      "exitCode": 0,
+      "durationSeconds": 8.578,
+      "generatedAt": "2026-10-27T22:49:08.511909+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "public-w09",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:public",
+      "evidence": "reports/week-09/location/public-w09.log",
+      "exitCode": 1,
+      "durationSeconds": 0.875,
+      "generatedAt": "2026-10-27T22:49:17.089977+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "public-gate",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-09",
+      "evidence": "reports/week-09/location/public-gate.log",
+      "exitCode": 2,
+      "durationSeconds": 10.487,
+      "generatedAt": "2026-10-27T22:49:17.965102+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "external",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+      "evidence": "reports/week-09/location/external.log",
+      "exitCode": 0,
+      "durationSeconds": 1.488,
+      "generatedAt": "2026-10-27T22:49:28.452788+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    },
+    {
+      "id": "diff-check",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "git diff --check",
+      "evidence": "reports/week-09/location/diff-check.log",
+      "exitCode": 0,
+      "durationSeconds": 0.018,
+      "generatedAt": "2026-10-27T22:49:29.940601+00:00",
+      "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f"
+    }
+  ],
+  "environment": {
+    "nodeVersion": "v22.22.0",
+    "checkout": "Detached clean worktree of commitSha; original local changes excluded.",
+    "dependencies": "Existing node_modules reused through symlink; no fresh installation claimed.",
+    "trackedStateAfterChecks": "Clean, verified by git status; generated reports and dependency symlink are untracked."
+  },
+  "observed": {
+    "locationJestTests": 78,
+    "locationSuites": 3,
+    "baselineTests": 4,
+    "week06Tests": 31,
+    "week08Tests": 107,
+    "feedbackTests": 87,
+    "publicWeek09": {
+      "passed": 1,
+      "failed": 3,
+      "failureReason": "planRetry remains the #62 stub"
+    },
+    "publicGate": {
+      "passedTests": 88,
+      "failedTests": 3,
+      "missingArtifacts": [
+        "reports/week-09/fault-injection.json",
+        "reports/week-09/retry-metrics.json",
+        "evidence/week-09/engineering.json",
+        "evidence/week-09/individual.json"
+      ]
+    },
+    "loopback": [
+      "provider-success",
+      "cache-hit",
+      "socket-abort-timeout",
+      "429-retry-after",
+      "cooldown-no-request",
+      "connection-refused-manual"
+    ],
+    "external": {
+      "httpStatus": 200,
+      "durationMs": 1005,
+      "timeoutMs": 5000,
+      "outcome": "manual",
+      "interpretation": "Real Photon execution with fictional fixture; no match, manual retained. Not proof of valid external coordinates."
+    }
+  },
+  "pending": [
+    "#62 planRetry/executor and associated tests",
+    "#64/#65 fault and retry reports",
+    "#69 consolidated engineering and individual evidence",
+    "Human review and actual owner individual contribution evidence"
+  ],
+  "aiAssistance": "Codex materially assisted implementation/tests/docs; validation commands and real external execution recorded; no human review claimed.",
+  "noFinalTag": true
+}

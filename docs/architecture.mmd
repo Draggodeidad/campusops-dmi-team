@@ -10,6 +10,7 @@ flowchart TB
   subgraph UI["UI — src/ui"]
     CampusApp["CampusOpsApp"]
     ListScreen["IncidentListScreen"]
+    CreateScreen["CreateIncidentScreen — búsqueda explícita/manual"]
     DetailScreen["IncidentDetailScreen"]
     OfflinePanel["OfflineWorkspacePanel"]
   end
@@ -18,6 +19,10 @@ flowchart TB
     RetryPolicy["planRetry / decideRetry — límites puros W09"]
     RetryClock["ResilienceClock — reloj/espera inyectables"]
     Redaction["redactForTelemetry — W04"]
+    LookupLocation["LookupIncidentLocation — normalización/caché/fallback"]
+    LocationValidation["selectIncidentLocation / evaluateIncidentLocation — validación única"]
+    LocationPorts["LocationProvider / LocationCache / LocationLookupResult"]
+    LocationClockPort["ResilienceClock.now — reloj inyectable"]
     GetAll["GetIncidents"]
     GetOne["GetIncidentById"]
     CreateOne["CreateIncident"]
@@ -48,6 +53,10 @@ flowchart TB
   end
 
   subgraph Infrastructure["Infrastructure — src/infrastructure"]
+    Photon["PhotonLocationProvider — GeoJSON / 429 cooldown"]
+    LocationCacheAdapter["MemoryLocationCache — LRU 50 / volátil"]
+    LocationClockAdapter["SystemLocationClock"]
+    LocationTransportPort["IncidentTransport — puerto HTTP interno"]
     FakeRepo["FakeIncidentRepository (in-memory)"]
     HttpRepo["HttpIncidentRepository"]
     DtoMapper["parseRemoteResource + IncidentDtoMapper"]
@@ -179,14 +188,28 @@ flowchart TB
   SyncTests["Suites W08 sync y composición"] --> Root
   SyncTests --> SyncEvaluation
 
-  subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
-    Location["Ubicación / proveedor externo — implementación #61 pendiente"]
-    LocationPorts["Application: LocationProvider / LocationCache / LocationLookupResult — contratos #60"]
-  end
+  CampusApp --> CreateScreen
+  CampusApp --> LookupLocation
+  CreateScreen --> LookupLocation
+  LookupLocation --> LocationPorts
+  LookupLocation --> LocationValidation
+  LookupLocation --> LocationClockPort
+  LocationValidation --> IncidentLocation["campusops/contracts: IncidentLocation"]
+  Photon --> LocationPorts
+  Photon --> LocationTransportPort
+  Photon --> LookupLocation
+  Photon --> LocationClockPort
+  Transport --> LocationTransportPort
+  LocationCacheAdapter --> LocationPorts
+  LocationCacheAdapter --> LocationValidation
+  Root --> LookupLocation
+  Root --> Photon
+  Root --> LocationCacheAdapter
+  Root --> LocationClockAdapter
 
-  LocationPorts --> IncidentLocation["campusops/contracts: IncidentLocation — tipo existente"]
-  Location -. "implementará; sin instancia actual" .-> LocationPorts
   BaselineFixtures["Tests W09: fixtures/reloj virtual — sin imports desde app"] --> LocationPorts
   BaselineFixtures --> RetryPolicy
   RetryEvaluation["course-evaluation.planRetry — reexport"] --> RetryPolicy
   RetryTests["W09 owner: policy / HTTP-sesión / disco-backend / fetch loopback"] --> Root
+  LocationTests["Suites #61 + probe externo opt-in"] --> Root
+  LocationEvaluation["course-evaluation.selectIncidentLocation — reexport"] --> LocationValidation

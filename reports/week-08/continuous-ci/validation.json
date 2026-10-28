@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "commitSha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a",
+  "generatedAt": "2026-10-28T05:43:05.467670+00:00",
+  "checks": [
+    {
+      "id": "unit",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "exitCode": 0,
+      "evidence": "reports/week-08/continuous-ci/unit.log",
+      "durationSeconds": 1.643
+    },
+    {
+      "id": "revalidation",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 tools/revalidate-prior-evidence.py --week 8",
+      "exitCode": 0,
+      "evidence": "reports/week-08/continuous-ci/revalidation.log",
+      "durationSeconds": 23.086
+    },
+    {
+      "id": "verify",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make verify-week-08",
+      "exitCode": 0,
+      "evidence": "reports/week-08/continuous-ci/verify.log",
+      "durationSeconds": 6.271
+    },
+    {
+      "id": "public",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make public-test-week-08",
+      "exitCode": 0,
+      "evidence": "reports/week-08/continuous-ci/public.log",
+      "durationSeconds": 7.526
+    },
+    {
+      "id": "frozen",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "python3 tools/verify-frozen-evidence.py --week 8",
+      "exitCode": 0,
+      "evidence": "reports/week-08/continuous-ci/frozen.log",
+      "durationSeconds": 0.278
+    }
+  ],
+  "status": "pass",
+  "scope": "Disposable checkout continuous W08 validation and unchanged frozen-tag evidence",
+  "frozenTagSha": "3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d"
+}
