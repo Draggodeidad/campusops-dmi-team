@@ -1,0 +1,64 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-retry-transport.test.ts -t system clock completes
+
+FAIL course-tests/week-09-retry-transport.test.ts
+  ✕ system clock completes the minimum wait when a native timer callback arrives one millisecond early (9 ms)
+  ○ skipped GET 429 header 0.8 waits safely before repository success
+  ○ skipped GET 429 header invalid waits safely before repository success
+  ○ skipped GET 429 header Infinity waits safely before repository success
+  ○ skipped GET 429 header -1 waits safely before repository success
+  ○ skipped HTTP date and normalized milliseconds use the same policy
+  ○ skipped transient errors stop after four actual sends, with one progressive wait between sends
+  ○ skipped POST without stable identity, offline, conflict and validation errors do not retry
+  ○ skipped server delay outside cap or time budget stops without sleeping or truncating
+  ○ skipped request durations consume budget and each timeout uses only remaining time
+  ○ skipped W06 replay consumes the same four-send budget and retains body and key
+  ○ skipped exhaustion before auth replay never opens another retry loop
+  ○ skipped a session change during sleep stops all further sends
+  ○ skipped nonincident paths and session endpoints are never retried
+  ○ skipped metrics contain only sanitized technical fields even with hostile content and logger failure
+  ○ skipped invalid, backward, early or oversleeping clocks cannot trigger a replay
+  ○ skipped POST caller mutation during wait cannot change path, identity, session or serialized body
+  ○ skipped timeouts remain distinguishable after exhaustion and a POST obeys Retry-After
+  ○ skipped refresh time and actual request durations share the elapsed budget
+  ○ skipped online resolution rejects a successful but mismatching key confirmation without retry
+  ○ skipped online resolution rejects a successful but mismatching duplicate confirmation without retry
+  ○ skipped online resolution rejects a successful but mismatching version confirmation without retry
+  ○ skipped online resolution rejects a successful but mismatching status confirmation without retry
+  ○ skipped online resolution rejects a successful but mismatching history confirmation without retry
+  ○ skipped online resolution rejects a successful but mismatching diagnosis confirmation without retry
+  ○ skipped online resolution rejects a successful but mismatching resource confirmation without retry
+  ○ skipped creation rejects a successful but mismatching key receipt
+  ○ skipped creation rejects a successful but mismatching content receipt
+
+  ● system clock completes the minimum wait when a native timer callback arrives one millisecond early
+
+    expect(received).resolves.toMatchObject(expected)
+
+    - Expected  - 3
+    + Received  + 1
+
+    - Object {
+    -   "status": 200,
+    - }
+    + [ApplicationFailure: El reloj no confirmó la espera; conserva el cambio.]
+
+      207 |     expect(times).toEqual([started]);
+      208 |     await jest.advanceTimersByTimeAsync(1);
+    > 209 |     await expect(outcome).resolves.toMatchObject({ status: 200 });
+          |                                    ^
+      210 |     expect(times).toEqual([started, started + 250]);
+      211 |   } finally { jest.restoreAllMocks(); jest.useRealTimers(); }
+      212 | });
+
+      at Object.toMatchObject (node_modules/expect/build/index.js:174:22)
+      at Object.toMatchObject (course-tests/week-09-retry-transport.test.ts:209:36)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 27 skipped, 28 total
+Snapshots:   0 total
+Time:        0.499 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-09-retry-transport.test.ts".

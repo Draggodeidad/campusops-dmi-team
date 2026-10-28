@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "mode": "evidence",
+  "commitSha": "3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d",
+  "evaluatedAt": "2026-10-28T05:43:05.445406+00:00",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "pass",
+      "detail": "missing/empty=[]"
+    },
+    {
+      "id": "schema:reports/week-08/migration-tests.json",
+      "status": "pass",
+      "detail": "20 checks indexed, 13 boundary/failure; evidence-only commit; invalid changes=[]"
+    },
+    {
+      "id": "schema:evidence/week-08/engineering.json",
+      "status": "pass",
+      "detail": "decision evidence is substantive and reproducible; evidence-only commit; invalid changes=[]"
+    },
+    {
+      "id": "schema:evidence/week-08/individual.json",
+      "status": "pass",
+      "detail": "three individual evidence records found"
+    },
+    {
+      "id": "frozen_sha",
+      "status": "pass",
+      "detail": "tag=week-08-final tagSha=3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d head=3fbdee0b7118b2a77437e8c8bbfff352dbeaa36d"
+    }
+  ]
+}

@@ -183,6 +183,7 @@ export class HttpIncidentRepository implements IncidentRepository {
   }
 
   async create(input: CreateIncidentData): Promise<Incident> {
+    input = { ...input };
     const key =
       input.idempotencyKey && input.idempotencyKey.trim().length >= 8
         ? input.idempotencyKey.trim()
@@ -261,6 +262,13 @@ export class HttpIncidentRepository implements IncidentRepository {
         );
       }
 
+      if (!('operationId' in parsedJson) || parsedJson.operationId !== key
+        || !('duplicate' in parsedJson) || typeof parsedJson.duplicate !== 'boolean'
+        || created.version !== 1 || created.status !== 'open' || created.category !== input.category
+        || created.description !== input.description || created.locationLabel !== input.locationLabel) {
+        throw new ApplicationFailure('CREATE_INCIDENT_FAILED', 'El servidor no confirmó la creación exacta.', 'contract');
+      }
+
       return created;
     } catch (error: unknown) {
       if (error instanceof ApplicationFailure) {
@@ -280,6 +288,7 @@ export class HttpIncidentRepository implements IncidentRepository {
   }
 
   async performAction(input: IncidentActionData): Promise<Incident> {
+    input = { ...input };
     const key =
       input.idempotencyKey && input.idempotencyKey.trim().length >= 8
         ? input.idempotencyKey.trim()
@@ -367,6 +376,20 @@ export class HttpIncidentRepository implements IncidentRepository {
           'No fue posible construir la entidad interna a partir de la respuesta.',
           'contract',
         );
+      }
+
+      const remotePayload = envelopeResult.value.payload;
+      const history = remotePayload?.history;
+      const confirmedEvent = Array.isArray(history) && history.some((event: unknown) =>
+        event !== null && typeof event === 'object' && 'operationId' in event && event.operationId === key
+        && 'action' in event && event.action === input.action && 'version' in event && event.version === input.baseVersion + 1);
+      const expectedStatus = input.action === 'start' ? 'in_progress' : input.action === 'resolve' ? 'resolved'
+        : input.action === 'close' ? 'closed' : updated.assignedTechnicianId ? 'assigned' : 'open';
+      if (!('operationId' in parsedJson) || parsedJson.operationId !== key
+        || !('duplicate' in parsedJson) || typeof parsedJson.duplicate !== 'boolean'
+        || updated.id !== input.incidentId || updated.version !== input.baseVersion + 1 || !confirmedEvent
+        || updated.status !== expectedStatus || (input.action === 'resolve' && remotePayload?.diagnosis !== input.diagnosis)) {
+        throw new ApplicationFailure('UPDATE_INCIDENT_FAILED', 'El servidor no confirmó la acción exacta.', 'contract');
       }
 
       return updated;

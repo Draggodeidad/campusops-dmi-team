@@ -286,3 +286,14 @@ restantes siguen pendientes.
 Ayuda material de IA: Codex asistió lectura/comparación del kit, contratos,
 fixtures, documentación y ejecución de comandos a petición del usuario.
 Validación automática observada en el índice; revisión humana pendiente.
+
+## Implementación posterior #62
+
+Los contratos anteriores conservan el acuerdo/snapshot #60. #62 activa
+planRetry/decideRetry en Application y el ejecutor HTTP/sesión en la composición;
+la política activa está en docs/resilience-policy.md. Se publica
+`npm run test:week-09:retry` (suites owner y fetch loopback) y
+`npm run check:week-09-retry` (métricas reales de Retry-After/respuesta perdida).
+Config/reloj/observador se inyectan mediante createGraph; TransportResponse
+añade retryAfterMs opcional normalizado. #65 conserva su corroboración propia.
+La publicación no sustituye revisión humana ni evidencia individual.

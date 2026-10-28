@@ -73,5 +73,46 @@
       "evidence": "reports/week-08/app-integration/validation.json"
     },
     "engineeringEvidence": "evidence/week-08/integration-engineering.json"
+  },
+  "followUpIssue62": {
+    "week": 9,
+    "issue": 62,
+    "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+    "generatedAt": "2026-10-28T05:14:49.638312+00:00",
+    "scope": "Extensión aditiva #62; conserva decisiones, observaciones y SHA históricos W02/W08 y el baseline W09.",
+    "requirement": "Reintentos acotados e idempotencia sin invertir dependencias ni multiplicar los envíos W06/W08.",
+    "decision": "Application contiene política pura; Infrastructure controla HTTP/espera/normalización y presupuesto compartido con sesión; App.tsx inyecta, UI mantiene sus casos de uso y workspace sólo reconoce recibos exactos.",
+    "verification": {
+      "command": "npm run test:architecture; npm run check:architecture; npm run test:week-09:retry",
+      "result": "Los tres exit 0; 2 pruebas de arquitectura, cero violaciones, 79 pruebas retry y probe HTTP loopback pasan.",
+      "evidence": "reports/week-09/retry/validation.json"
+    },
+    "engineeringEvidence": "evidence/week-09/retry-engineering.json"
+  },
+  "followUpIssue61": {
+    "week": 9,
+    "issue": 61,
+    "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+    "generatedAt": "2026-10-27T22:51:20.705595+00:00",
+    "scope": "Extensión aditiva #61; se conservan decisiones, SHA y resultados históricos W02/W08.",
+    "requirement": "Integrar geocodificación/cache/manual sin invertir dependencias ni duplicar lógica evaluable.",
+    "decision": "UI consume LookupIncidentLocation; Application valida y orquesta LocationProvider/LocationCache/reloj; Infrastructure implementa Photon/LRU; App.tsx compone. Evaluación reexporta selectIncidentLocation real.",
+    "verification": {
+      "command": "npm run test:architecture; npm run check:architecture; npm run test:week-09:location",
+      "result": "exit 0 en los tres comandos; 2 pruebas de arquitectura, cero violaciones, 78 pruebas de ubicación y probe HTTP local pasan.",
+      "evidence": "reports/week-09/location/validation.json"
+    },
+    "engineeringEvidence": "evidence/week-09/location-engineering.json"
+  },
+  "followUpW09Integration": {
+    "week": 9,
+    "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+    "scope": "Integración acumulativa #61/#62 tras CI W08; conserva todas las observaciones históricas.",
+    "decision": "App.tsx compone ubicación y retry mediante sus puertos; el reloj completa esperas anticipadas sin exceder su límite de callbacks. UI no conoce Infrastructure.",
+    "verification": {
+      "command": "npm run test:week-09:location; npm run test:week-09:retry; npm run test:architecture; npm run check:architecture",
+      "result": "exit 0; 78 ubicación, 81 retry, 2 arquitectura y cero violaciones.",
+      "evidence": "reports/week-09/integration-order/validation.json"
+    }
   }
 }

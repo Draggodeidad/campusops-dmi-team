@@ -1,0 +1,11 @@
+{
+  "normalization": "Trailing whitespace and empty EOF lines only; exact originals retained in gzip",
+  "files": [
+    {
+      "file": "reports/week-08/continuous-ci/revalidation.log",
+      "originalGzip": "reports/week-08/continuous-ci/revalidation.log.gz",
+      "originalSha256": "f59fec03c573067919fcfb17c4d552151f7caba6f91419fbd1a36ee292c11ea2",
+      "readableSha256": "95dde8d654231ba8e7d984cc303eaafe986c550dfcbc2f70a12ff09b4cbbd213"
+    }
+  ]
+}

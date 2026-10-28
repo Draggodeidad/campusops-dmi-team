@@ -21,6 +21,10 @@ import { ExpoSyntheticPhotoSource } from './src/infrastructure/sync/ExpoSyntheti
 import type { IncidentRepository } from './src/domain/incidents/IncidentRepository';
 import { FetchIncidentTransport } from './src/infrastructure/http/FetchIncidentTransport';
 import { SessionTransportDecorator } from './src/infrastructure/http/SessionTransportDecorator';
+import type { RetryConfiguration } from './src/application/resilience/RetryPolicy';
+import type { ResilienceClock } from './src/application/resilience/ResilienceClock';
+import { IncidentRetryExecutor, type RetryObserver } from './src/infrastructure/http/IncidentRetryExecutor';
+import { SystemResilienceClock } from './src/infrastructure/http/SystemResilienceClock';
 import { FakeIncidentRepository } from './src/infrastructure/incidents/FakeIncidentRepository';
 import { HttpIncidentRepository } from './src/infrastructure/incidents/HttpIncidentRepository';
 import { ExpoSecureSessionSecretStore } from './src/infrastructure/session/ExpoSecureSessionSecretStore';
@@ -28,10 +32,23 @@ import { HttpSessionProvider } from './src/infrastructure/session/HttpSessionPro
 import { CourseBackendHealthAdapter } from './src/infrastructure/system/CourseBackendHealthAdapter';
 import { CampusOpsApp } from './src/ui/CampusOpsApp';
 
+import { LookupIncidentLocation, DEFAULT_LOCATION_CONFIGURATION } from './src/application/location/LookupIncidentLocation';
+import type { LocationProvider } from './src/application/location/LocationProvider';
+import type { LocationCache, LocationConfiguration } from './src/application/location/LocationCache';
+import { MemoryLocationCache } from './src/infrastructure/location/MemoryLocationCache';
+import { PhotonLocationProvider, PHOTON_URL, SystemLocationClock } from './src/infrastructure/location/PhotonLocationProvider';
+
 export const BACKEND_URL =
   Platform.OS === 'android' ? 'http://10.0.2.2:4310' : 'http://localhost:4310';
 
 export function createGraph(options: Readonly<{
+  retryClock?: ResilienceClock;
+  retryConfiguration?: RetryConfiguration;
+  retryObserver?: RetryObserver;
+  locationProvider?: LocationProvider;
+  locationCache?: LocationCache;
+  locationClock?: Pick<ResilienceClock, 'now'>;
+  locationConfiguration?: LocationConfiguration;
   useHttp?: boolean;
   transport?: IncidentTransport;
   secretStore?: SessionSecretStore;
@@ -46,12 +63,20 @@ export function createGraph(options: Readonly<{
   const sessionStore = options.secretStore ?? new ExpoSecureSessionSecretStore();
   const sessionClock = options.clock ?? new SystemClock();
   const sessionController = new DefaultSessionController(sessionProvider, sessionStore, sessionClock);
-  const sessionTransport = new SessionTransportDecorator(baseTransport, sessionController);
+  const retryExecutor = new IncidentRetryExecutor(options.retryClock ?? new SystemResilienceClock(), options.retryConfiguration,
+    options.retryObserver ?? (metric => { if (process.env.NODE_ENV !== 'test') console.info('campusops.retry', metric); }));
+  const sessionTransport = new SessionTransportDecorator(baseTransport, sessionController, retryExecutor);
 
   const repository: IncidentRepository = isTest
     ? new FakeIncidentRepository()
     : new HttpIncidentRepository(sessionTransport);
 
+  const locationClock = options.locationClock ?? new SystemLocationClock();
+  const locationConfiguration = options.locationConfiguration ?? DEFAULT_LOCATION_CONFIGURATION;
+  const locationProvider = options.locationProvider ?? new PhotonLocationProvider(
+    new FetchIncidentTransport(PHOTON_URL), locationClock, locationConfiguration);
+  const lookupIncidentLocation = new LookupIncidentLocation(locationProvider,
+    options.locationCache ?? new MemoryLocationCache(), locationClock, locationConfiguration);
   const getIncidents = new GetIncidents(repository);
   const getIncidentById = new GetIncidentById(repository);
   const createIncident = new CreateIncident(repository);
@@ -63,6 +88,7 @@ export function createGraph(options: Readonly<{
   const performIncidentAction = new PerformIncidentAction(repository, isTest ? undefined : incidentSync);
 
   return {
+    lookupIncidentLocation,
     repository,
     localWorkspace,
     incidentSync,
@@ -86,6 +112,7 @@ export function createDefaultRepository(): IncidentRepository {
 export default function App() {
   return (
     <CampusOpsApp
+      lookupIncidentLocation={defaultGraph.lookupIncidentLocation}
       createIncident={defaultGraph.createIncident}
       getBackendStatus={defaultGraph.getBackendStatus}
       getIncidentById={defaultGraph.getIncidentById}

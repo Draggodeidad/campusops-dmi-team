@@ -3,7 +3,6 @@ import type {
   PermissionEvent,
   RemoteResponse,
 } from './contracts';
-import type { IncidentLocation } from '../campusops/contracts';
 
 import { RefreshCoordinator } from '../application/session/RefreshCoordinator';
 
@@ -52,15 +51,7 @@ export function coordinateRefresh(events: readonly AuthEvent[]): Readonly<{
   return coordinator.getSummary();
 }
 
-export function planRetry(_input: Readonly<{
-  method: 'GET' | 'POST';
-  status: number | 'timeout';
-  attempt: number;
-  retryAfterMs?: number;
-  idempotencyKey?: string;
-}>): Readonly<{ retry: boolean; delayMs: number; requiresStableIdempotencyKey: boolean }> {
-  return pending('planRetry');
-}
+export { planRetry } from '../application/resilience/RetryPolicy';
 
 export function reduceRemoteResponses(_input: Readonly<{
   activeRequestId: string;
@@ -75,7 +66,4 @@ export function reducePermissionLifecycle(
   return pending('reducePermissionLifecycle');
 }
 
-/** Week 09: see docs/CAMPUSOPS_API.md; this is not a completed solution. */
-export function selectIncidentLocation(_provider: unknown, _manualLabel: string): IncidentLocation {
-  return pending('selectIncidentLocation');
-}
+export { selectIncidentLocation } from '../application/location/selectIncidentLocation';

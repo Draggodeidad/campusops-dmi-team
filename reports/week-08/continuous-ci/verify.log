@@ -1,0 +1,61 @@
+python3 tools/course_public_evaluator.py --week 08 --mode verify --execute-toolchain
+{
+  "schemaVersion": 1,
+  "week": 8,
+  "mode": "verify",
+  "commitSha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a",
+  "evaluatedAt": "2026-10-28T05:42:57.657768+00:00",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "toolchain_1",
+      "status": "pass",
+      "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+    },
+    {
+      "id": "toolchain_2",
+      "status": "pass",
+      "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+    },
+    {
+      "id": "toolchain_3",
+      "status": "pass",
+      "detail": "npm run audit:ci\nstion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nbrace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nfix available via `npm audit fix`\nnode_modules/@expo/fingerprint/node_modules/brace-expansion\nnode_modules/brace-expansion\nnode_modules/glob/node_modules/brace-expansion\n\ncompression  <1.8.2\nSeverity: high\ncompression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95\nfix available via `npm audit fix`\nnode_modules/compression\n\ndeepmerge  >=4.2.0\ndeepmerge mergeObject() allows prototype poisoning of returned objects - https://github.com/advisories/GHSA-gcqx-w48m-w2h4\nfix available via `npm audit fix --force`\nWill install expo@51.0.39, which is a breaking change\nnode_modules/deepmerge\n  @expo/config  >=9.1.0-canary-20240628-1ba8152\n  Depends on vulnerable versions of deepmerge\n  node_modules/@expo/config\n    @expo/cli  >=0.19.0-canary-20240625-2333e70\n    Depends on vulnerable versions of @expo/config\n    Depends on vulnerable versions of @expo/metro-config\n    Depends on vulnerable versions of @expo/prebuild-config\n    Depends on vulnerable versions of zod\n    node_modules/expo/node_modules/@expo/cli\n      expo  >=52.0.0-canary-20240625-2333e70\n      Depends on vulnerable versions of @expo/cli\n      Depends on vulnerable versions of @expo/config\n      Depends on vulnerable versions of @expo/local-build-cache-provider\n      Depends on vulnerable versions of @expo/metro-config\n      node_modules/expo\n    @expo/local-build-cache-provider  *\n    Depends on vulnerable versions of @expo/config\n    node_modules/@expo/local-build-cache-provider\n    @expo/metro-config  >=0.19.0-canary-20240625-2333e70\n    Depends on vulnerable versions of @expo/config\n    node_modules/@expo/metro-config\n    @expo/prebuild-config  >=7.1.0-canary-20240904-69100c1\n    Depends on vulnerable versions of @expo/config\n    node_modules/@expo/prebuild-config\n\nnode-forge  <=1.4.0\nSeverity: high\nnode-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv\nfix available via `npm audit fix`\nnode_modules/node-forge\n\nsource-map-js  1.0.0 - 1.2.1\nSeverity: high\nsource-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q\nfix available via `npm audit fix`\nnode_modules/source-map-js\n\nzod  <4.6.6\nSeverity: high\nZod can exhaust memory while validating oversized constrained collections - https://github.com/advisories/GHSA-mrhx-c7xc-m3w5\nfix available via `npm audit fix --force`\nWill install expo@51.0.39, which is a breaking change\nnode_modules/expo/node_modules/zod\n\n12 vulnerabilities (5 low, 7 high)\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force"
+    },
+    {
+      "id": "toolchain_4",
+      "status": "pass",
+      "detail": "npm run test:smoke\n> dmi-react-native-starter@1.0.0 test:smoke\n> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand course-tests/smoke.test.tsx\n\n\nPASS course-tests/smoke.test.tsx\n  ✓ renders the reproducible baseline and resolves backend state (128 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       1 passed, 1 total\nSnapshots:   0 total\nTime:        0.481 s, estimated 1 s\nRan all test suites matching /course-tests\\/smoke.test.tsx/i."
+    },
+    {
+      "id": "toolchain_5",
+      "status": "pass",
+      "detail": "npm run backend:self-test\n> dmi-react-native-starter@1.0.0 backend:self-test\n> node course-backend/self-test.mjs\n\nCampusOps backend contracts: roles, reassignment conflict, lost response, idempotency, evidence and geocoding PASS.\nControlled backend self-test passed."
+    }
+  ]
+}

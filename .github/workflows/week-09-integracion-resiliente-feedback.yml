@@ -36,6 +36,8 @@ jobs:
         run: npm run bundle:release
       - name: W09 shared contracts and fixtures
         run: npm run test:week-09:baseline
+      - name: W09 bounded retries and lost-response integration
+        run: npm run test:week-09:retry
       - name: Preserve W06 session and W08 persistence/sync
         run: npm run test:week-06 && npm run test:week-08
       - name: Architecture boundaries

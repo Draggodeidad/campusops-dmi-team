@@ -1,19 +1,33 @@
 import { ApplicationFailure } from '../../application/errors/ApplicationFailure';
 import type { SessionAuthorizationContext } from '../../application/session/SessionAuthorizationContext';
 import type { IncidentTransport, TransportRequest, TransportResponse } from './IncidentTransport';
+import type { IncidentRetryExecutor } from './IncidentRetryExecutor';
 
 /** Session identity is authoritative; caller-supplied credentials never survive. */
 export class SessionTransportDecorator implements IncidentTransport {
   constructor(
     private readonly baseTransport: IncidentTransport,
     private readonly sessionContext: SessionAuthorizationContext,
+    private readonly retries?: IncidentRetryExecutor,
   ) {}
 
   async send(request: TransportRequest): Promise<TransportResponse> {
+    request = { ...request, ...(request.headers ? { headers: { ...request.headers } } : {}),
+      ...(request.session ? { session: { ...request.session } } : {}) };
     if (!this.matchesSession(request)) return sessionChanged();
     const generation = this.sessionContext.getGeneration();
     const authEndpoint = /^\/?v1\/session\/(login|refresh)(?:\?|$)/.test(request.path);
     if (authEndpoint) return this.baseTransport.send(this.authorize(request, false));
+    const transport = this.retries?.forRequest(this.baseTransport, request, async outgoing => {
+      if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request)) {
+        throw new ApplicationFailure('SESSION_EXPIRED', 'La sesión cambió; se conserva la operación original.');
+      }
+      if (['expired', 'refreshing'].includes(this.sessionContext.getSnapshot().state)) await this.sessionContext.refresh(generation);
+      if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request)) {
+        throw new ApplicationFailure('SESSION_EXPIRED', 'La sesión cambió; se conserva la operación original.');
+      }
+      return this.authorize(outgoing, true);
+    }) ?? this.baseTransport;
 
     const state = this.sessionContext.getSnapshot().state;
     const renewedBeforeSend = state === 'expired' || state === 'refreshing';
@@ -21,7 +35,7 @@ export class SessionTransportDecorator implements IncidentTransport {
     if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request)) return sessionChanged();
 
     const sentAuthorization = this.sessionContext.getAuthorizationHeader();
-    const response = await this.baseTransport.send(this.authorize(request, true));
+    const response = await transport.send(this.authorize(request, true));
     if (generation !== this.sessionContext.getGeneration()) return sessionChanged();
     if (response.status !== 401 || !sentAuthorization) return response;
     if (renewedBeforeSend && sentAuthorization === this.sessionContext.getAuthorizationHeader()) {
@@ -40,7 +54,7 @@ export class SessionTransportDecorator implements IncidentTransport {
       return response;
     }
     if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request) || !this.sessionContext.getAuthorizationHeader()) return response;
-    const retried = await this.baseTransport.send(this.authorize(request, true));
+    const retried = await transport.send(this.authorize(request, true));
     if (generation !== this.sessionContext.getGeneration()) return sessionChanged();
     if (retried.status === 401) await this.sessionContext.invalidate(generation);
     return retried;

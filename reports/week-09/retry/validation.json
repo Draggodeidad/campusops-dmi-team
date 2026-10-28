@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+  "generatedAt": "2026-10-28T05:14:49.638312+00:00",
+  "status": "fail",
+  "scope": "Issue #62 owner implementation; independent from unmerged #61; not a final W09 delivery",
+  "environment": {
+    "node": "v22.22.0",
+    "packageLockSha256": "fbd16534848db0268c487be87e472d957e8c5a2b696b24dd65560f1f0738cb77"
+  },
+  "checks": [
+    {
+      "id": "retry",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:retry",
+      "evidence": "reports/week-09/retry/retry.log",
+      "exitCode": 0,
+      "durationSeconds": 4.996,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:02.952387+00:00"
+    },
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:baseline",
+      "evidence": "reports/week-09/retry/baseline.log",
+      "exitCode": 0,
+      "durationSeconds": 1.187,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:04.140170+00:00"
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "reports/week-09/retry/session-readiness.log",
+      "exitCode": 0,
+      "durationSeconds": 0.44,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:04.580134+00:00"
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "evidence": "reports/week-09/retry/session.log",
+      "exitCode": 0,
+      "durationSeconds": 5.276,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:09.856376+00:00"
+    },
+    {
+      "id": "week08",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "evidence": "reports/week-09/retry/week08.log",
+      "exitCode": 0,
+      "durationSeconds": 10.766,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:20.622861+00:00"
+    },
+    {
+      "id": "backend",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run backend:self-test",
+      "evidence": "reports/week-09/retry/backend.log",
+      "exitCode": 0,
+      "durationSeconds": 0.634,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:21.256682+00:00"
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "evidence": "reports/week-09/retry/incidents.log",
+      "exitCode": 0,
+      "durationSeconds": 1.507,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:22.763824+00:00"
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "evidence": "reports/week-09/retry/architecture-tests.log",
+      "exitCode": 0,
+      "durationSeconds": 1.202,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:23.966118+00:00"
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "evidence": "reports/week-09/retry/architecture.log",
+      "exitCode": 0,
+      "durationSeconds": 0.133,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:24.099575+00:00"
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make feedback",
+      "evidence": "reports/week-09/retry/feedback.log",
+      "exitCode": 0,
+      "durationSeconds": 23.286,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:47.386088+00:00"
+    },
+    {
+      "id": "verify-w09",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make verify-week-09",
+      "evidence": "reports/week-09/retry/verify-w09.log",
+      "exitCode": 0,
+      "durationSeconds": 9.918,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:57.304018+00:00"
+    },
+    {
+      "id": "public-direct",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:public",
+      "evidence": "reports/week-09/retry/public-direct.log",
+      "exitCode": 1,
+      "durationSeconds": 1.182,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:12:58.486923+00:00"
+    },
+    {
+      "id": "public-gate",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-09",
+      "evidence": "reports/week-09/retry/public-gate.log",
+      "exitCode": 2,
+      "durationSeconds": 11.755,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:13:10.241794+00:00"
+    },
+    {
+      "id": "diff-check",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --check",
+      "evidence": "reports/week-09/retry/diff-check.log",
+      "exitCode": 0,
+      "durationSeconds": 0.012,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:13:10.255100+00:00"
+    },
+    {
+      "id": "native-probe",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "reports/week-09/retry/native-probe.log",
+      "exitCode": 0,
+      "durationSeconds": 2.583,
+      "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+      "generatedAt": "2026-10-28T05:14:49.635338+00:00"
+    }
+  ],
+  "pending": [
+    "Human review and owner individual evidence are pending.",
+    "Location #61 remains pending on origin/main; its public stub is outside #62.",
+    "Final W09 fault-injection/retry-metrics/engineering/individual deliverables belong to consolidation #69."
+  ],
+  "aiAssistance": "Codex assisted implementation, tests, documentation and command execution; automated checks do not establish human review or individual contribution.",
+  "bootstrapSetup": {
+    "command": "make setup",
+    "exitCode": 0,
+    "evidence": "reports/week-09/retry/setup-bootstrap.log",
+    "scope": "Clean npm ci with Node 22.22.0 before the technical commit; installation-only bootstrap, not source validation."
+  },
+  "summary": {
+    "ownerTestsPassed": 79,
+    "week06TestsPassed": 31,
+    "week08TestsPassed": 107,
+    "baselineTestsPassed": 4,
+    "feedbackTestsPassed": 87,
+    "publicWeek09Passed": 3,
+    "publicWeek09Failed": 1,
+    "loopbackMinimumMs": 1000,
+    "loopbackObservedIntervalMs": 1034
+  }
+}

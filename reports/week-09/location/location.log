@@ -1,0 +1,16 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:location
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location-policy.test.ts course-tests/week-09-location-adapter.test.ts course-tests/week-09-location-integration.test.tsx && node tools/check-week-09-location-provider.cjs --local
+
+(node:35300) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-09-location-integration.test.tsx
+PASS course-tests/week-09-location-adapter.test.ts
+PASS course-tests/week-09-location-policy.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       78 passed, 78 total
+Snapshots:   0 total
+Time:        2.959 s
+Ran all test suites within paths "course-tests/week-09-location-policy.test.ts", "course-tests/week-09-location-adapter.test.ts", "course-tests/week-09-location-integration.test.tsx".
+{"scope":"Actual FetchIncidentTransport + Photon adapter + Application over loopback HTTP","status":"pass","checks":["provider-success","cache-hit","socket-abort-timeout","429-retry-after","cooldown-no-request","connection-refused-manual"],"timeoutDurationMs":256,"requestCount":3}

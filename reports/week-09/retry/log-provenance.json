@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-10-28T05:16:12.560661+00:00",
+  "initialStagedWhitespaceExitCode": 2,
+  "initialEvidence": "reports/week-09/retry/staged-whitespace-before.log.gz",
+  "normalizations": [
+    {
+      "readable": "reports/week-09/retry/session.log",
+      "originalGzip": "reports/week-09/retry/session.log.gz",
+      "originalSha256": "72c3fc3659e96013dc9c0526d1e560e82d0062af591f639cf0094567b8e5450f",
+      "readableSha256": "449f670dcc750fe1b95075aa1b1fa4a1a3da38a8c11c78567ed9474eeecd6480",
+      "transformation": "Remove trailing spaces/tabs/CR only; retain all lines/content. Exact raw output preserved in gzip."
+    },
+    {
+      "readable": "reports/week-09/retry/feedback.log",
+      "originalGzip": "reports/week-09/retry/feedback.log.gz",
+      "originalSha256": "438df5b859ad921d640dcecc9a64f5ecfa9914cc47b3b827cd1386f0972927b3",
+      "readableSha256": "0465e1bd438d2c9872cb883eb6b57a9ded60b8bda304a140c7f87d0ed5b1dc0b",
+      "transformation": "Remove trailing spaces/tabs/CR only; retain all lines/content. Exact raw output preserved in gzip."
+    }
+  ],
+  "normalizedStagedWhitespaceExitCode": 0
+}
