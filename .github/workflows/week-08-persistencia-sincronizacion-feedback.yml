@@ -48,10 +48,19 @@ jobs:
         run: npm run test:week-08:integration
       - name: AC-01 — reproducibility
         run: make verify-week-08
+      - name: Evidence provenance regressions
+        run: python3 -m unittest discover -s tools/tests -v
+      - name: Revalidate current W08 evidence after integration
+        if: github.ref != 'refs/tags/week-08-final'
+        run: python3 tools/revalidate-prior-evidence.py --week 8
       - name: AC-02 — public behavior
         run: make public-test-week-08
-      - name: AC-03 — declared failure evidence
+      - name: AC-03 — declared failure evidence on its frozen revision
+        if: github.ref == 'refs/tags/week-08-final'
         run: make evidence-week-08
+      - name: AC-03 — verify frozen W08 evidence without moving its tag
+        if: github.ref != 'refs/tags/week-08-final'
+        run: python3 tools/verify-frozen-evidence.py --week 8
       - name: Upload academic evidence
         if: always()
         uses: actions/upload-artifact@v4
