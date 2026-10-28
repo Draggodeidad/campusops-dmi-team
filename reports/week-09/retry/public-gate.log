@@ -1,0 +1,62 @@
+python3 tools/course_public_evaluator.py --week 09 --mode public --execute-toolchain
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "mode": "public",
+  "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+  "evaluatedAt": "2026-10-28T05:13:10.216314+00:00",
+  "status": "fail",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "fail",
+      "detail": "missing/empty=['reports/week-09/fault-injection.json', 'reports/week-09/retry-metrics.json', 'evidence/week-09/engineering.json', 'evidence/week-09/individual.json']"
+    },
+    {
+      "id": "toolchain_1",
+      "status": "pass",
+      "detail": "npm run typecheck\n> dmi-react-native-starter@1.0.0 typecheck\n> tsc --noEmit"
+    },
+    {
+      "id": "toolchain_2",
+      "status": "pass",
+      "detail": "npm run lint\n> dmi-react-native-starter@1.0.0 lint\n> eslint ."
+    },
+    {
+      "id": "toolchain_3",
+      "status": "pass",
+      "detail": "npm run audit:ci\nstion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nbrace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion - https://github.com/advisories/GHSA-6j4f-fj2g-mc7p\nfix available via `npm audit fix`\nnode_modules/@expo/fingerprint/node_modules/brace-expansion\nnode_modules/brace-expansion\nnode_modules/glob/node_modules/brace-expansion\n\ncompression  <1.8.2\nSeverity: high\ncompression vulnerable to Denial of Service via memory leak on premature response close - https://github.com/advisories/GHSA-vc2v-76pw-4v95\nfix available via `npm audit fix`\nnode_modules/compression\n\ndeepmerge  >=4.2.0\ndeepmerge mergeObject() allows prototype poisoning of returned objects - https://github.com/advisories/GHSA-gcqx-w48m-w2h4\nfix available via `npm audit fix --force`\nWill install expo@51.0.39, which is a breaking change\nnode_modules/deepmerge\n  @expo/config  >=9.1.0-canary-20240628-1ba8152\n  Depends on vulnerable versions of deepmerge\n  node_modules/@expo/config\n    @expo/cli  >=0.19.0-canary-20240625-2333e70\n    Depends on vulnerable versions of @expo/config\n    Depends on vulnerable versions of @expo/metro-config\n    Depends on vulnerable versions of @expo/prebuild-config\n    Depends on vulnerable versions of zod\n    node_modules/expo/node_modules/@expo/cli\n      expo  >=52.0.0-canary-20240625-2333e70\n      Depends on vulnerable versions of @expo/cli\n      Depends on vulnerable versions of @expo/config\n      Depends on vulnerable versions of @expo/local-build-cache-provider\n      Depends on vulnerable versions of @expo/metro-config\n      node_modules/expo\n    @expo/local-build-cache-provider  *\n    Depends on vulnerable versions of @expo/config\n    node_modules/@expo/local-build-cache-provider\n    @expo/metro-config  >=0.19.0-canary-20240625-2333e70\n    Depends on vulnerable versions of @expo/config\n    node_modules/@expo/metro-config\n    @expo/prebuild-config  >=7.1.0-canary-20240904-69100c1\n    Depends on vulnerable versions of @expo/config\n    node_modules/@expo/prebuild-config\n\nnode-forge  <=1.4.0\nSeverity: high\nnode-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements - https://github.com/advisories/GHSA-86w9-cpqp-85rv\nfix available via `npm audit fix`\nnode_modules/node-forge\n\nsource-map-js  1.0.0 - 1.2.1\nSeverity: high\nsource-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q\nfix available via `npm audit fix`\nnode_modules/source-map-js\n\nzod  <4.6.6\nSeverity: high\nZod can exhaust memory while validating oversized constrained collections - https://github.com/advisories/GHSA-mrhx-c7xc-m3w5\nfix available via `npm audit fix --force`\nWill install expo@51.0.39, which is a breaking change\nnode_modules/expo/node_modules/zod\n\n12 vulnerabilities (5 low, 7 high)\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force"
+    },
+    {
+      "id": "toolchain_4",
+      "status": "fail",
+      "detail": "npm test -- --ci --runInBand course-tests/public/week-09.test.ts\n(course-tests/week-06-session.test.ts:173:17)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [B] RESULT\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [B] RESULT\n\n      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [C] RESULT\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [C] RESULT\n\n      at AuthenticatedIncidentTransport.log [as logger] (course-tests/week-06-session.test.ts:173:17)\n          at Generator.throw (<anonymous>)\n\n    console.log\n      [A] REQUEST\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [A] 401\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [AUTH] REFRESH START\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [AUTH] REFRESH SUCCESS\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [A] RETRY\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\n    console.log\n      [A] RESULT\n\n      at AuthenticatedIncidentTransport.log (src/infrastructure/http/AuthenticatedIncidentTransport.ts:72:13)\n\nPASS course-tests/week-03-ci.test.ts\nPASS course-tests/week-06-session-validation.test.ts\nPASS course-tests/week-06-session-controller.test.ts\nPASS course-tests/public/week-01.test.ts\nPASS course-tests/public/week-05.test.ts\nPASS course-tests/public/week-02.test.ts\nPASS course-tests/public/week-06.test.ts\n\nTest Suites: 1 failed, 19 passed, 20 total\nTests:       1 failed, 90 passed, 91 total\nSnapshots:   0 total\nTime:        3.143 s, estimated 5 s\nRan all test suites matching /course-tests\\/smoke.test.tsx|course-tests\\/incidents.test.tsx|course-tests\\/architecture.test.ts|course-tests\\/week-03-ci.test.ts|course-tests\\/week-04-storage.test.ts|course-tests\\/week-04-errors.test.tsx|course-tests\\/week-05-client.test.tsx|course-tests\\/week-05-transport-validation.test.tsx|course-tests\\/week-05-ui-failure.test.tsx|course-tests\\/public\\/week-01.test.ts|course-tests\\/public\\/week-02.test.ts|course-tests\\/public\\/week-03.test.ts|course-tests\\/public\\/week-05.test.ts|course-tests\\/public\\/week-06.test.ts|course-tests\\/week-06-session.test.ts|course-tests\\/week-06-session-controller.test.ts|course-tests\\/week-06-session-validation.test.ts|course-tests\\/week-06-authorization.test.tsx|course-tests\\/week-06-integration-regression.test.tsx|course-tests\\/public\\/week-09.test.ts/i."
+    }
+  ]
+}
+make: *** [Makefile:36: public-test-week-09] Error 1

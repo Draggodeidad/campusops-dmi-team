@@ -73,5 +73,20 @@
       "evidence": "reports/week-08/app-integration/validation.json"
     },
     "engineeringEvidence": "evidence/week-08/integration-engineering.json"
+  },
+  "followUpIssue62": {
+    "week": 9,
+    "issue": 62,
+    "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+    "generatedAt": "2026-10-28T05:14:49.638312+00:00",
+    "scope": "Extensión aditiva #62; conserva decisiones, observaciones y SHA históricos W02/W08 y el baseline W09.",
+    "requirement": "Reintentos acotados e idempotencia sin invertir dependencias ni multiplicar los envíos W06/W08.",
+    "decision": "Application contiene política pura; Infrastructure controla HTTP/espera/normalización y presupuesto compartido con sesión; App.tsx inyecta, UI mantiene sus casos de uso y workspace sólo reconoce recibos exactos.",
+    "verification": {
+      "command": "npm run test:architecture; npm run check:architecture; npm run test:week-09:retry",
+      "result": "Los tres exit 0; 2 pruebas de arquitectura, cero violaciones, 79 pruebas retry y probe HTTP loopback pasan.",
+      "evidence": "reports/week-09/retry/validation.json"
+    },
+    "engineeringEvidence": "evidence/week-09/retry-engineering.json"
   }
 }
