@@ -1,0 +1,661 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110651",
+      "githubLogin": "Draggodeidad",
+      "commitShas": [
+        "7644e1705d018f7df532776350df63f78ede50ea",
+        "8607c920076958f121ccc6a63b5e56ea40be2608",
+        "9b1af62f0cf7a824480c152748af75cf42b76d84",
+        "71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992",
+        "652f57a1c589a516bf2fb3b55d8a55651257fa95",
+        "8bd7c0fbe6271f61b60cf99067fed2d66501418d",
+        "eccd4e807bdcf5fa2ef1801a095cbb3b349e6aa5",
+        "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+        "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+        "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+        "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+        "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a",
+        "e906b7ff3fe740aebb3977ba5832247bc7701c68",
+        "11268820d1ba4e3d723ca52e7aff1f512fe2b242",
+        "2971e0c9ded5bf0f7f43b5801cf0f0080ee8ea17",
+        "aaed45282b8cb50a6384347bd47dda2daa6621bc",
+        "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+        "fb8d80087923fae52b40d405733d825124b36871"
+      ],
+      "files": [
+        "App.tsx",
+        "course-tests/fixtures/week-09/scenario.ts",
+        "course-tests/fixtures/week-09/virtualClock.ts",
+        "course-tests/week-09-baseline.test.ts",
+        "course-tests/week-09-location-adapter.test.ts",
+        "course-tests/week-09-location-integration.test.tsx",
+        "course-tests/week-09-location-policy.test.ts",
+        "course-tests/week-09-retry-integration.test.ts",
+        "course-tests/week-09-retry-policy.test.ts",
+        "course-tests/week-09-retry-transport.test.ts",
+        "src/application/errors/ApplicationFailure.ts",
+        "src/application/location/LocationCache.ts",
+        "src/application/location/LocationProvider.ts",
+        "src/application/location/LookupIncidentLocation.ts",
+        "src/application/location/selectIncidentLocation.ts",
+        "src/application/resilience/ResilienceClock.ts",
+        "src/application/resilience/RetryPolicy.ts",
+        "src/application/sync/IncidentWorkspace.ts",
+        "src/course-evaluation/index.ts",
+        "src/infrastructure/http/FetchIncidentTransport.ts",
+        "src/infrastructure/http/IncidentRetryExecutor.ts",
+        "src/infrastructure/http/IncidentTransport.ts",
+        "src/infrastructure/http/SessionTransportDecorator.ts",
+        "src/infrastructure/http/SystemResilienceClock.ts",
+        "src/infrastructure/http/parseRetryAfter.ts",
+        "src/infrastructure/incidents/HttpIncidentRepository.ts",
+        "src/infrastructure/location/MemoryLocationCache.ts",
+        "src/infrastructure/location/PhotonLocationProvider.ts",
+        "src/infrastructure/sync/HttpIncidentSyncGateway.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/ui/incidents/CreateIncidentScreen.tsx",
+        "tools/check-week-09-location-provider.cjs",
+        "tools/check-week-09-retry.cjs",
+        "tools/revalidate-prior-evidence.py",
+        "tools/verify-frozen-evidence.py",
+        "tools/tests/test_evidence_revalidation.py"
+      ],
+      "tests": [
+        "npm run test:week-09:baseline",
+        "npm run test:week-09:public",
+        "npm run test:week-09:location",
+        "npm run check:week-09-location-provider -- --timeout-ms=5000",
+        "npm run typecheck",
+        "npm run lint",
+        "npm run check:architecture",
+        "make feedback",
+        "make verify-week-09",
+        "make public-test-week-09",
+        "npm run test:week-09:retry",
+        "npm run check:week-09-retry",
+        "npm run backend:self-test",
+        "npm run check:week-06-readiness",
+        "npm run test:week-06",
+        "npm run test:week-08",
+        "npm run test:incidents",
+        "npm run test:architecture",
+        "node tools/check-week-09-retry.cjs"
+      ],
+      "reviews": [
+        "Aprobación humana de #61 / PR #71 expresada por Draggodeidad en este chat; head 4d23d2610657b5d1adff2e3a614b8d1efca24774.",
+        "Aprobación humana de #62 / PR #72 expresada por Draggodeidad en este chat; head 62de6a325b3a78bd39c8818d49fb5e4d075f01bf."
+      ],
+      "prediction": "Para la próxima reproducción espero que ubicación valide caché y fallback manual, y que retry se detenga desde intento 4, respete Retry-After sin recortarlo y conserve clave/cuerpo ante respuesta perdida. Una operación sin recibo exacto debe permanecer pendiente y el validador individual debe seguir rechazando el registro del equipo mientras sólo exista mi miembro. Es una predicción para una ejecución futura, redactada después de los logs citados; no se presenta como predicción personal anterior a ellos.",
+      "command": "npm run test:week-09:retry",
+      "observedResult": "Los logs existentes de a4e3e62d33890dd82c51f1242d8040438ee4408f registran 78/78 pruebas de ubicación y probe HTTP local aprobados; la ejecución real de Photon obtuvo HTTP 200 en 1005 ms con consulta ficticia sin coincidencias y fallback manual. En 1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6 se observaron 79/79 pruebas de retry, W06 31/31 con ocho regresiones, W08 107/107 y feedback/verify W09 exitosos. El probe nativo de retry esperó 1034 ms para Retry-After de 1000 ms; resolución y cierre usaron dos envíos por operación, recibo duplicate y un solo efecto. El público de la rama #61 conservó tres fallos de planRetry; el de #62 aprobó sus tres casos de retry y falló sólo el stub de ubicación no integrado en su base. Ambos gates completos también señalaron cuatro artefactos compartidos entonces ausentes. Son observaciones históricas por SHA, no ejecuciones nuevas ni una validación conjunta o entrega W09 completa. Actualización de integración autorizada: en 9a067e11d73a5854a99a9c50d3d3b5213ff9d569 se observaron ubicación 78/78, retry 81/81, público W09 4/4 y ocho probes nativos fijos aprobados, además de W06/W08, arquitectura, feedback y verify. La regresión dirigida reproduce el callback 1 ms anticipado; el reloj ahora completa el mínimo con callbacks acotados. El gate completo de esa rama técnica conservó los cuatro artefactos compartidos ausentes entonces; no se convierte ese fail histórico en pass. Mi registro se incorpora después y los dos compañeros siguen pendientes.",
+      "explanation": "Mi aportación W09 verificable comprende el baseline #60, ubicación #61 y retry/idempotencia #62 en los commits propios relacionados. Publiqué los contratos y fixtures del ZIP sin sustituir semanas anteriores. LookupIncidentLocation valida proveedor/caché y ofrece ubicación manual; Photon permanece aislado de sesión y la caché LRU es volátil. planRetry/decideRetry comparten la política real en Application; Infrastructure normaliza Retry-After y ejecuta esperas acotadas con sesión/generación verificadas. El workspace persiste intención y conserva operationId/cuerpo/baseVersion; sólo un recibo exacto autoriza acknowledge. App.tsx compone manualmente los puertos y adaptadores. He dado mi visto bueno humano a #61 y #62 en este chat; esta explicación se prepara con asistencia de IA a partir de artefactos comprobados. No atribuye autoría de suites o trabajo de compañeros ni ejecución manual de los comandos por la persona. La ejecución posterior del orden de merge fue autorizada explícitamente por el usuario. Se corrigió la revalidación W08 conservando el tag histórico, se combinaron los grafos #61/#62 y se reparó el reloj real sin adelantar Retry-After. Los commits y comprobaciones nuevos se anexan; las observaciones iniciales no se reemplazan.",
+      "verification": [
+        {
+          "phase": "baseline",
+          "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84",
+          "artifactCommitSha": "71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992",
+          "checkId": "baseline",
+          "command": "npm run test:week-09:baseline",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/baseline/baseline.log",
+          "sourceIndex": "reports/week-09/baseline/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992/reports/week-09/baseline/baseline.log"
+        },
+        {
+          "phase": "baseline",
+          "commitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84",
+          "artifactCommitSha": "71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992",
+          "checkId": "public-isolated",
+          "command": "npm run test:week-09:public",
+          "status": "fail",
+          "exitCode": 1,
+          "evidence": "reports/week-09/baseline/public-isolated.log",
+          "sourceIndex": "reports/week-09/baseline/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992/reports/week-09/baseline/public-isolated.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "location",
+          "command": "npm run test:week-09:location",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/location.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/location.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "external",
+          "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/external.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/external.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "typecheck",
+          "command": "npm run typecheck",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/typecheck.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/typecheck.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "lint",
+          "command": "npm run lint",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/lint.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/lint.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "architecture",
+          "command": "npm run check:architecture",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/architecture.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/architecture.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "feedback",
+          "command": "make feedback",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/feedback.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/feedback.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "verify-w09",
+          "command": "make verify-week-09",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/location/verify-w09.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/verify-w09.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "public-w09",
+          "command": "npm run test:week-09:public",
+          "status": "fail",
+          "exitCode": 1,
+          "evidence": "reports/week-09/location/public-w09.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/public-w09.log"
+        },
+        {
+          "phase": "location",
+          "commitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "checkId": "public-gate",
+          "command": "make public-test-week-09",
+          "status": "fail",
+          "exitCode": 2,
+          "evidence": "reports/week-09/location/public-gate.log",
+          "sourceIndex": "reports/week-09/location/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/public-gate.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "retry",
+          "command": "npm run test:week-09:retry",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/retry.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/retry.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "native-probe",
+          "command": "npm run check:week-09-retry",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/native-probe.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/native-probe.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "backend",
+          "command": "npm run backend:self-test",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/backend.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/backend.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "session-readiness",
+          "command": "npm run check:week-06-readiness",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/session-readiness.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/session-readiness.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "session",
+          "command": "npm run test:week-06",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/session.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/session.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "week08",
+          "command": "npm run test:week-08",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/week08.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/week08.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "architecture",
+          "command": "npm run check:architecture",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/architecture.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/architecture.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "feedback",
+          "command": "make feedback",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/feedback.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/feedback.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "verify-w09",
+          "command": "make verify-week-09",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/retry/verify-w09.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/verify-w09.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "public-direct",
+          "command": "npm run test:week-09:public",
+          "status": "fail",
+          "exitCode": 1,
+          "evidence": "reports/week-09/retry/public-direct.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/public-direct.log"
+        },
+        {
+          "phase": "retry",
+          "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "checkId": "public-gate",
+          "command": "make public-test-week-09",
+          "status": "fail",
+          "exitCode": 2,
+          "evidence": "reports/week-09/retry/public-gate.log",
+          "sourceIndex": "reports/week-09/retry/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/public-gate.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "location",
+          "command": "npm run test:week-09:location",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/location.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/location.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "retry",
+          "command": "npm run test:week-09:retry",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/retry.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/retry.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "public-direct",
+          "command": "npm run test:week-09:public",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/public-direct.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/public-direct.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "baseline",
+          "command": "npm run test:week-09:baseline",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/baseline.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/baseline.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "session-readiness",
+          "command": "npm run check:week-06-readiness",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/session-readiness.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/session-readiness.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "session",
+          "command": "npm run test:week-06",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/session.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/session.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "week08",
+          "command": "npm run test:week-08",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/week08.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/week08.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "incidents",
+          "command": "npm run test:incidents",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/incidents.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/incidents.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "architecture-tests",
+          "command": "npm run test:architecture",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/architecture-tests.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/architecture-tests.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "architecture",
+          "command": "npm run check:architecture",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/architecture.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/architecture.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "backend",
+          "command": "npm run backend:self-test",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/backend.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/backend.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "feedback",
+          "command": "make feedback",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/feedback.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/feedback.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "verify-w09",
+          "command": "make verify-week-09",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/verify-w09.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/verify-w09.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "public-gate",
+          "command": "make public-test-week-09",
+          "status": "fail",
+          "exitCode": 2,
+          "evidence": "reports/week-09/integration-order/public-gate.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/public-gate.log"
+        },
+        {
+          "phase": "combined-integration",
+          "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "checkId": "native-repeat",
+          "command": "node tools/check-week-09-retry.cjs",
+          "status": "pass",
+          "exitCode": 0,
+          "evidence": "reports/week-09/integration-order/native-repeat-1.log through native-repeat-8.log",
+          "sourceIndex": "reports/week-09/integration-order/validation.json",
+          "evidenceUrl": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/native-repeat-1.log"
+        }
+      ],
+      "sourceArtifacts": [
+        {
+          "phase": "baseline",
+          "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/70",
+          "artifactCommitSha": "71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992",
+          "evaluatedCommitSha": "9b1af62f0cf7a824480c152748af75cf42b76d84",
+          "index": "reports/week-09/baseline/validation.json",
+          "url": "https://github.com/Draggodeidad/campusops-dmi-team/blob/71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992/reports/week-09/baseline/validation.json"
+        },
+        {
+          "phase": "location",
+          "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/71",
+          "artifactCommitSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "evaluatedCommitSha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "index": "reports/week-09/location/validation.json",
+          "url": "https://github.com/Draggodeidad/campusops-dmi-team/blob/4d23d2610657b5d1adff2e3a614b8d1efca24774/reports/week-09/location/validation.json"
+        },
+        {
+          "phase": "retry",
+          "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/72",
+          "artifactCommitSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "evaluatedCommitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "index": "reports/week-09/retry/validation.json",
+          "url": "https://github.com/Draggodeidad/campusops-dmi-team/blob/62de6a325b3a78bd39c8818d49fb5e4d075f01bf/reports/week-09/retry/validation.json"
+        },
+        {
+          "phase": "combined-integration",
+          "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/72",
+          "artifactCommitSha": "fb8d80087923fae52b40d405733d825124b36871",
+          "evaluatedCommitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "index": "reports/week-09/integration-order/validation.json",
+          "url": "https://github.com/Draggodeidad/campusops-dmi-team/blob/fb8d80087923fae52b40d405733d825124b36871/reports/week-09/integration-order/validation.json"
+        }
+      ],
+      "aiAssistance": "Codex asistió materialmente inspección del kit, implementación, pruebas, documentación, ejecución de comandos y preparación de este registro por solicitud del owner. Las validaciones automáticas citadas fueron ejecutadas por el agente bajo su dirección y verificadas contra Git/índices/logs; no se presentan como ejecuciones humanas manuales. El owner confirmó explícitamente su aprobación humana de #61 y #62 en este chat. No se generan aportes de compañeros.",
+      "humanValidation": {
+        "status": "approved_by_owner",
+        "reviewerGithubLogin": "Draggodeidad",
+        "source": "explicit_user_statement_in_this_Codex_chat",
+        "statement": "ya le di mi visto bueno a la 61 y 62 y si las apruebo mi revision humana esta lista",
+        "recordedAt": "2026-10-27T23:25:13.904387-06:00",
+        "scope": [
+          {
+            "issue": 61,
+            "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/71",
+            "headSha": "4d23d2610657b5d1adff2e3a614b8d1efca24774"
+          },
+          {
+            "issue": 62,
+            "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/72",
+            "headSha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf"
+          }
+        ],
+        "limits": "Se registra la aprobación humana expresada por el owner en este chat. No se afirma una revisión GitHub adicional, pruebas ejecutadas manualmente por la persona, aprobación del texto nuevo de #63 ni aprobación de otras issues."
+      },
+      "recordStatus": "owner_record_prepared_team_evidence_pending",
+      "integrationAuthorization": {
+        "source": "explicit_user_instruction_in_this_Codex_chat",
+        "statement": "ejecuta el orden propuesto",
+        "recordedAt": "2026-10-28T06:00:04.878873+00:00",
+        "scope": "Corregir CI W08, integrar #71 y #72, actualizar evidencia #73 y fusionarla. No se atribuye una revisión humana nueva del código corregido.",
+        "mergedPullRequests": [
+          {
+            "number": 74,
+            "mergeSha": "c3e0789881f162b3c1171676384d3e673c8a4697"
+          },
+          {
+            "number": 71,
+            "mergeSha": "8765bb989d58a8a5d55b65779d2bb3fbe82159ac"
+          },
+          {
+            "number": 72,
+            "mergeSha": "3ec5b27da722d884142b1bd7354059bb797180eb"
+          }
+        ]
+      }
+    }
+  ],
+  "status": "pending_team_evidence",
+  "generatedAt": "2026-10-27T23:25:13.904387-06:00",
+  "recordedFromCommit": "24157c7bc6461e0b8509f5b49b7816e4bb2e2151",
+  "identitySource": {
+    "path": "evidence/week-08/individual.json",
+    "sourceCommit": "24157c7bc6461e0b8509f5b49b7816e4bb2e2151",
+    "fieldsReused": [
+      "teamId",
+      "studentId",
+      "githubLogin"
+    ],
+    "corroboratedWith": [
+      "evidence/week-03/individual.json",
+      "evidence/week-04/individual.json",
+      "evidence/week-05/individual.json",
+      "evidence/week-06/individual.json"
+    ],
+    "scope": "Identidad previamente registrada en el archivo oficial del equipo y consistente en sus evidencias anteriores. Se reutiliza sólo la identidad del owner; no se afirma consulta de un roster externo nuevo ni se copian aportaciones previas como trabajo W09."
+  },
+  "pendingContributors": [
+    {
+      "githubLogin": "osbaldoXxC",
+      "issue": "https://github.com/Draggodeidad/campusops-dmi-team/issues/66",
+      "status": "pending_own_evidence"
+    },
+    {
+      "githubLogin": "JulianDele",
+      "issue": "https://github.com/Draggodeidad/campusops-dmi-team/issues/68",
+      "status": "pending_own_evidence"
+    }
+  ],
+  "consolidation": {
+    "issue": "https://github.com/Draggodeidad/campusops-dmi-team/issues/69",
+    "requiredMemberCount": 3,
+    "recordedMemberCount": 1,
+    "status": "pending_teammate_submissions",
+    "instruction": "Cada compañero agrega su propio registro real con los campos oficiales. No se rellenan sus matrículas, commits, pruebas, revisiones o explicación. El owner existente se conserva; el esquema de tres miembros sólo se declara completo después de las dos aportaciones y su validación."
+  },
+  "scope": "Registro propio de #63 en la ruta oficial, por solicitud explícita del owner. Es un archivo parcial del equipo y no satisface aún el esquema final de exactamente tres miembros. No se crea un formato auxiliar de entrega ni se consolidan aportes ajenos. La aprobación humana aplica únicamente a #61 y #62; no implica merge, tag o entrega Classroom.",
+  "updatedAt": "2026-10-28T06:00:04.878914+00:00",
+  "integrationSourceCommit": "4eba53a19535ff848ec681fadd230bfed67632bb"
+}

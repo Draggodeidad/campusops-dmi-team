@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "24157c7bc6461e0b8509f5b49b7816e4bb2e2151",
+  "generatedAt": "2026-10-28T05:28:06.459321+00:00",
+  "status": "fail",
+  "scope": "Owner evidence provenance audit #63; official team evidence intentionally incomplete at the user request",
+  "ownerRecordVerified": true,
+  "teamDeliveryReady": false,
+  "checks": [
+    {
+      "id": "json",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "python3 -m json.tool evidence/week-09/individual.json",
+      "evidence": "reports/week-09/owner/json.log",
+      "exitCode": 0,
+      "durationSeconds": 0.1101
+    },
+    {
+      "id": "owner",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "python3 reports/week-09/owner/verify-record.py --scope owner",
+      "evidence": "reports/week-09/owner/owner.log",
+      "exitCode": 0,
+      "durationSeconds": 0.6313
+    },
+    {
+      "id": "team-schema",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "python3 reports/week-09/owner/verify-record.py --scope team",
+      "evidence": "reports/week-09/owner/team-schema.log",
+      "exitCode": 1,
+      "durationSeconds": 0.1068
+    },
+    {
+      "id": "diff-check",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "git diff --check",
+      "evidence": "reports/week-09/owner/diff-check.log",
+      "exitCode": 0,
+      "durationSeconds": 0.0028
+    }
+  ],
+  "limits": [
+    "No implementation test suite was rerun; existing per-SHA logs were verified.",
+    "Official team validator rejects one member; #66/#68 remain pending and #69 consolidates later.",
+    "The human approval of #61/#62 comes from the explicit user statement in this chat; no extra GitHub review or manual execution is claimed."
+  ],
+  "aiAssistance": "Codex prepared the owner record and verified Git/log provenance under the user instruction. Team evidence is not fabricated."
+}

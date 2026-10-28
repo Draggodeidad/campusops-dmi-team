@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "mode": "public",
+  "commitSha": "4eba53a19535ff848ec681fadd230bfed67632bb",
+  "evaluatedAt": "2026-10-28T06:01:04.194966+00:00",
+  "status": "fail",
+  "checks": [
+    {
+      "id": "base_files",
+      "status": "pass",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "react_native_profile",
+      "status": "pass",
+      "detail": "missing packages=[]"
+    },
+    {
+      "id": "toolchain_scripts",
+      "status": "pass",
+      "detail": "missing scripts=[]"
+    },
+    {
+      "id": "workflow_integrity",
+      "status": "pass",
+      "detail": "bypass markers=[]"
+    },
+    {
+      "id": "secret_scan",
+      "status": "pass",
+      "detail": "hits=[]"
+    },
+    {
+      "id": "required_evidence",
+      "status": "fail",
+      "detail": "missing/empty=['reports/week-09/fault-injection.json', 'reports/week-09/retry-metrics.json', 'evidence/week-09/engineering.json']"
+    },
+    {
+      "id": "schema:evidence/week-09/individual.json",
+      "status": "fail",
+      "detail": "week must match and members must contain exactly three entries"
+    }
+  ]
+}
