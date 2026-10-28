@@ -10,6 +10,8 @@ export type TransportRequest = Readonly<{
 
 export type TransportResponse = Readonly<{
   status: number;
+  /** Normalized by the HTTP adapter. Never contains the raw Retry-After header. */
+  retryAfterMs?: number;
   headers: Readonly<Record<string, string>>;
   bodyText: string;
 }>;

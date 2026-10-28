@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+  "decision": "Implementar planRetry/decideRetry en Application y un ejecutor HTTP por solicitud de incidencias dentro del decorador de sesión. Compartir máximo cuatro envíos/10 s con replay W06, detener Retry-After fuera del presupuesto sin recortarlo y retirar el bucle W08 duplicado. Mantener clave/cuerpo/baseVersion y validar recibos exactos antes de éxito o acknowledge.",
+  "alternatives": [
+    "Reintentos independientes en repositorios, gateway y workspace: multiplican presupuestos y duplican política.",
+    "Retry global en fetch: afectaría login/refresh y servicios cuya idempotencia no está garantizada.",
+    "Política pura compartida y ejecutor por solicitud permitida, con reloj/configuración/sesión inyectados desde App.tsx."
+  ],
+  "tradeoff": "Beneficio: límites comprobables incluso con refresh, misma clave/cuerpo y recibo exacto tras respuesta perdida, sin acoplar UI a Infrastructure. Costo: preparar/validar sesión por envío, conservar operaciones sin confirmar y pedir un ciclo manual al agotar tiempo. GET previo y POST tienen presupuestos separados, hasta ocho envíos de incidencias por operación/ciclo; no se promete atomicidad entre red y SQLite ni entrega de notificaciones inexistentes en el backend.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04"
+  ],
+  "verification": [
+    {
+      "command": "npm run test:week-09:retry",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/retry.log"
+    },
+    {
+      "command": "npm run check:week-09-retry",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/native-probe.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/session-readiness.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/session.log"
+    },
+    {
+      "command": "npm run test:week-08",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/week08.log"
+    },
+    {
+      "command": "npm run test:architecture",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/architecture-tests.log"
+    },
+    {
+      "command": "npm run check:architecture",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/architecture.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/feedback.log"
+    },
+    {
+      "command": "make verify-week-09",
+      "result": "exit 0; pass",
+      "evidence": "reports/week-09/retry/verify-w09.log"
+    },
+    {
+      "command": "npm run test:week-09:public",
+      "result": "exit 1; fail",
+      "evidence": "reports/week-09/retry/public-direct.log"
+    },
+    {
+      "command": "make public-test-week-09",
+      "result": "exit 2; fail",
+      "evidence": "reports/week-09/retry/public-gate.log"
+    }
+  ],
+  "reviewStatus": "pending_human_review",
+  "individualEvidenceStatus": "pending_owner_record",
+  "aiAssistance": "Codex assisted implementation, tests, documentation and command execution; automated checks do not establish human review or individual contribution.",
+  "limits": "Evidencia de implementación #62. El público W09 conserva un fallo por selectIncidentLocation pendiente de #61 en main; cuatro entregables finales siguen pendientes de consolidación. No acredita Android nativo, proveedor externo ni revisión humana."
+}

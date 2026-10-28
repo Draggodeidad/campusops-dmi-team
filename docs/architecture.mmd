@@ -16,6 +16,9 @@ flowchart TB
   end
 
   subgraph Application["Application — src/application"]
+    RetryPolicy["planRetry / decideRetry — límites puros W09"]
+    RetryClock["ResilienceClock — reloj/espera inyectables"]
+    Redaction["redactForTelemetry — W04"]
     LookupLocation["LookupIncidentLocation — normalización/caché/fallback"]
     LocationValidation["selectIncidentLocation / evaluateIncidentLocation — validación única"]
     LocationPorts["LocationProvider / LocationCache / LocationLookupResult"]
@@ -57,6 +60,9 @@ flowchart TB
     FakeRepo["FakeIncidentRepository (in-memory)"]
     HttpRepo["HttpIncidentRepository"]
     DtoMapper["parseRemoteResource + IncidentDtoMapper"]
+    RetryExecutor["IncidentRetryExecutor — presupuesto por solicitud"]
+    RetryClockAdapter["SystemResilienceClock — timers nativos"]
+    RetryHeader["parseRetryAfter — HTTP a milisegundos"]
     Transport["FetchIncidentTransport / fetch + AbortController"]
     SessionTransport["SessionTransportDecorator"]
     HttpSession["HttpSessionProvider"]
@@ -112,6 +118,17 @@ flowchart TB
   HttpRepo --> IncidentPort
   HttpRepo --> DtoMapper
   HttpRepo --> SessionTransport
+  SessionTransport --> RetryExecutor
+  RetryExecutor --> Transport
+  RetryExecutor --> RetryPolicy
+  RetryExecutor --> RetryClock
+  RetryExecutor --> Redaction
+  RetryExecutor --> RetryHeader
+  Transport --> RetryHeader
+  Transport --> RetryClockAdapter
+  Root --> RetryExecutor
+  Root --> RetryClockAdapter
+  RetryClockAdapter --> RetryClock
   SessionTransport --> Transport
   SessionTransport --> SessionContext
   SessionController --> SessionContext
@@ -190,10 +207,9 @@ flowchart TB
   Root --> LocationCacheAdapter
   Root --> LocationClockAdapter
 
-  subgraph Planned["Implementaciones pendientes — sin conexión al grafo actual"]
-    RetryContracts["Application: RetryPolicy / StablePostRequest — contratos #60; implementación #62 pendiente"]
-  end
   BaselineFixtures["Tests W09: fixtures/reloj virtual — sin imports desde app"] --> LocationPorts
-  BaselineFixtures --> RetryContracts
+  BaselineFixtures --> RetryPolicy
+  RetryEvaluation["course-evaluation.planRetry — reexport"] --> RetryPolicy
+  RetryTests["W09 owner: policy / HTTP-sesión / disco-backend / fetch loopback"] --> Root
   LocationTests["Suites #61 + probe externo opt-in"] --> Root
   LocationEvaluation["course-evaluation.selectIncidentLocation — reexport"] --> LocationValidation

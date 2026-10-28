@@ -1,0 +1,97 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:retry
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-retry-policy.test.ts course-tests/week-09-retry-transport.test.ts course-tests/week-09-retry-integration.test.ts && node tools/check-week-09-retry.cjs
+
+(node:27758) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-09-retry-integration.test.ts
+PASS course-tests/week-09-retry-transport.test.ts
+PASS course-tests/week-09-retry-policy.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       79 passed, 79 total
+Snapshots:   0 total
+Time:        1.876 s, estimated 2 s
+Ran all test suites within paths "course-tests/week-09-retry-policy.test.ts", "course-tests/week-09-retry-transport.test.ts", "course-tests/week-09-retry-integration.test.ts".
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+  "sourceTreeDirty": false,
+  "generatedAt": "2026-10-28T05:12:02.906Z",
+  "checks": [
+    {
+      "id": "get-429-real-retry-after",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"intervalMs\":1027,\"minimumMs\":1000}"
+    },
+    {
+      "id": "lost-resolve-response",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"duplicateReceipt\":true,\"stableKey\":true,\"identicalBody\":true,\"effectCount\":1,\"finalVersion\":3,\"finalStatus\":\"resolved\"}"
+    },
+    {
+      "id": "lost-close-response",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"duplicateReceipt\":true,\"stableKey\":true,\"identicalBody\":true,\"effectCount\":1,\"finalVersion\":4,\"finalStatus\":\"closed\"}"
+    }
+  ],
+  "metrics": [
+    {
+      "correlationId": "w09-request-1",
+      "method": "GET",
+      "status": 429,
+      "attempt": 1,
+      "durationMs": 27
+    },
+    {
+      "correlationId": "w09-request-1",
+      "method": "GET",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 6
+    },
+    {
+      "correlationId": "w09-request-2",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": "timeout",
+      "attempt": 1,
+      "durationMs": 258
+    },
+    {
+      "correlationId": "w09-request-2",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 7
+    },
+    {
+      "correlationId": "w09-request-3",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": "timeout",
+      "attempt": 1,
+      "durationMs": 252
+    },
+    {
+      "correlationId": "w09-request-3",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 6
+    }
+  ],
+  "limitations": [
+    "Loopback sintético; no proveedor externo ni dispositivo Android.",
+    "El backend no implementa notificaciones; no se acredita un envío real."
+  ]
+}

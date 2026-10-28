@@ -1,0 +1,40 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-retry-transport.test.ts
+
+PASS course-tests/week-09-retry-transport.test.ts
+  ✓ GET 429 header 0.8 waits safely before repository success (2 ms)
+  ✓ GET 429 header invalid waits safely before repository success (1 ms)
+  ✓ GET 429 header Infinity waits safely before repository success
+  ✓ GET 429 header -1 waits safely before repository success (1 ms)
+  ✓ HTTP date and normalized milliseconds use the same policy (1 ms)
+  ✓ transient errors stop after four actual sends, with one progressive wait between sends
+  ✓ POST without stable identity, offline, conflict and validation errors do not retry (10 ms)
+  ✓ server delay outside cap or time budget stops without sleeping or truncating (1 ms)
+  ✓ request durations consume budget and each timeout uses only remaining time
+  ✓ W06 replay consumes the same four-send budget and retains body and key (1 ms)
+  ✓ exhaustion before auth replay never opens another retry loop
+  ✓ a session change during sleep stops all further sends
+  ✓ nonincident paths and session endpoints are never retried
+  ✓ metrics contain only sanitized technical fields even with hostile content and logger failure (2 ms)
+  ✓ invalid, backward, early or oversleeping clocks cannot trigger a replay (1 ms)
+  ✓ POST caller mutation during wait cannot change path, identity, session or serialized body (1 ms)
+  ✓ timeouts remain distinguishable after exhaustion and a POST obeys Retry-After
+  ✓ refresh time and actual request durations share the elapsed budget
+  ✓ online resolution rejects a successful but mismatching key confirmation without retry
+  ✓ online resolution rejects a successful but mismatching duplicate confirmation without retry
+  ✓ online resolution rejects a successful but mismatching version confirmation without retry
+  ✓ online resolution rejects a successful but mismatching status confirmation without retry
+  ✓ online resolution rejects a successful but mismatching history confirmation without retry
+  ✓ online resolution rejects a successful but mismatching diagnosis confirmation without retry (1 ms)
+  ✓ online resolution rejects a successful but mismatching resource confirmation without retry
+  ✓ creation rejects a successful but mismatching key receipt
+  ✓ creation rejects a successful but mismatching content receipt (1 ms)
+  ✓ system clock completes the minimum wait when a native timer callback arrives one millisecond early (1 ms)
+  ✓ system wait stops a scheduler that repeatedly wakes before its deadline (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       29 passed, 29 total
+Snapshots:   0 total
+Time:        0.512 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-09-retry-transport.test.ts".

@@ -1,0 +1,15 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-09.test.ts
+
+PASS course-tests/public/week-09.test.ts
+  ✓ CampusOps accepts valid geocoding and otherwise keeps manual incident location (2 ms)
+  ✓ CampusOps can retry a lost resolution response only with a stable operation key
+  ✓ retries bounded idempotent failures and honors Retry-After
+  ✓ does not retry a POST without stable idempotency identity
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.255 s, estimated 1 s
+Ran all test suites within paths "course-tests/public/week-09.test.ts".
