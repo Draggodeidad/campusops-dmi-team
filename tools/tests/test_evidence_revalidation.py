@@ -114,7 +114,7 @@ class RevalidationTests(unittest.TestCase):
 
 class MultiReportRevalidationTests(RevalidationTests):
     def prepare_week(self, week):
-        names = {5: ['contract-tests.json', 'failure-matrix.json'], 6: ['auth-tests.json', 'concurrency.json']}[week]
+        names = {5: ['contract-tests.json', 'failure-matrix.json'], 6: ['auth-tests.json', 'concurrency.json'], 8: ['migration-tests.json']}[week]
         key = f'week-{week:02d}'
         for relative, original in [
             *((f'reports/{key}/{name}', self.report) for name in names),
@@ -131,7 +131,7 @@ class MultiReportRevalidationTests(RevalidationTests):
         return [self.repo / 'reports' / key / name for name in names]
 
     def test_both_reports_preserve_original_provenance(self):
-        for week in [5, 6]:
+        for week in [5, 6, 8]:
             with self.subTest(week=week):
                 paths = self.prepare_week(week)
                 command = [sys.executable, '-c', 'print("synthetic regression")']
@@ -145,7 +145,7 @@ class MultiReportRevalidationTests(RevalidationTests):
                     self.assertTrue(module.validate_report(self.repo, path, week, self.sha)[0])
 
     def test_failure_does_not_relabel_either_index(self):
-        for week in [5, 6]:
+        for week in [5, 6, 8]:
             with self.subTest(week=week):
                 paths = self.prepare_week(week)
                 originals = [path.read_bytes() for path in paths]
@@ -155,13 +155,15 @@ class MultiReportRevalidationTests(RevalidationTests):
                         module.revalidate(self.repo, week)
                 self.assertEqual([path.read_bytes() for path in paths], originals)
 
-    def test_week_six_final_tag_forbids_revalidation(self):
-        paths = self.prepare_week(6)
-        originals = [path.read_bytes() for path in paths]
-        with patch.dict(os.environ, {'GITHUB_REF': 'refs/tags/week-06-final'}):
-            with self.assertRaisesRegex(ValueError, 'forbidden'):
-                module.revalidate(self.repo, 6)
-        self.assertEqual([path.read_bytes() for path in paths], originals)
+    def test_week_six_and_eight_final_tags_forbid_revalidation(self):
+        for week in [6, 8]:
+            with self.subTest(week=week):
+                paths = self.prepare_week(week)
+                originals = [path.read_bytes() for path in paths]
+                with patch.dict(os.environ, {'GITHUB_REF': f'refs/tags/week-{week:02d}-final'}):
+                    with self.assertRaisesRegex(ValueError, 'forbidden'):
+                        module.revalidate(self.repo, week)
+                self.assertEqual([path.read_bytes() for path in paths], originals)
 
 
 if __name__ == '__main__':
