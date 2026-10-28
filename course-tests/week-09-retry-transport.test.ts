@@ -1,4 +1,5 @@
 import { IncidentRetryExecutor, type RetryAttemptMetric } from '../src/infrastructure/http/IncidentRetryExecutor';
+import { SystemResilienceClock } from '../src/infrastructure/http/SystemResilienceClock';
 import { SessionTransportDecorator } from '../src/infrastructure/http/SessionTransportDecorator';
 import { HttpIncidentRepository } from '../src/infrastructure/incidents/HttpIncidentRepository';
 import type { SessionAuthorizationContext } from '../src/application/session/SessionAuthorizationContext';
@@ -190,4 +191,34 @@ test.each(['key', 'content'] as const)('creation rejects a successful but mismat
   await expect(new HttpIncidentRepository(setup({ send }).transport).create({ category: 'water', description: 'Fuga sintética',
     locationLabel: 'Zona ficticia', idempotencyKey: key })).rejects.toMatchObject({ code: 'CREATE_INCIDENT_FAILED', reason: 'contract' });
   expect(send).toHaveBeenCalledTimes(1);
+});
+test('system clock completes the minimum wait when a native timer callback arrives one millisecond early', async () => {
+  jest.useFakeTimers();
+  try {
+    const clock = new SystemResilienceClock(); const started = clock.now();
+    const schedule = global.setTimeout;
+    jest.spyOn(global, 'setTimeout').mockImplementationOnce((callback, delay, ...args) =>
+      schedule(callback, Math.max(0, (delay ?? 0) - 1), ...args));
+    const times: number[] = [];
+    const app = setup({ async send() { times.push(clock.now()); return response(times.length === 1 ? 429 : 200,
+      times.length === 1 ? { 'retry-after': '0.25' } : {}); } }, undefined, clock);
+    const outcome = app.transport.send(request).catch((error: unknown) => error);
+    await jest.advanceTimersByTimeAsync(249);
+    expect(times).toEqual([started]);
+    await jest.advanceTimersByTimeAsync(1);
+    await expect(outcome).resolves.toMatchObject({ status: 200 });
+    expect(times).toEqual([started, started + 250]);
+  } finally { jest.restoreAllMocks(); jest.useRealTimers(); }
+});
+test('system wait stops a scheduler that repeatedly wakes before its deadline', async () => {
+  jest.useFakeTimers();
+  try {
+    const schedule = global.setTimeout;
+    const timer = jest.spyOn(global, 'setTimeout').mockImplementation((callback, _delay, ...args) => schedule(callback, 0, ...args));
+    const outcome = new SystemResilienceClock().sleep(250).catch((error: unknown) => error);
+    await jest.advanceTimersByTimeAsync(10);
+    await expect(outcome).resolves.toMatchObject({ message: 'Timer did not complete the minimum wait' });
+    expect(timer.mock.calls.length).toBeLessThanOrEqual(4);
+    expect(jest.getTimerCount()).toBe(0);
+  } finally { jest.restoreAllMocks(); jest.useRealTimers(); }
 });
