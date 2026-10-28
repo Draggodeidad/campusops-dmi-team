@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+  "generatedAt": "2026-10-28T05:56:24.818229+00:00",
+  "status": "fail",
+  "scope": "Combined #61/#62 plus native timer fix; owner/team evidence is not consolidated by this check",
+  "checks": [
+    {
+      "id": "location",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:location",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/location.log",
+      "durationSeconds": 3.1
+    },
+    {
+      "id": "retry",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:retry",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/retry.log",
+      "durationSeconds": 4.259
+    },
+    {
+      "id": "public-direct",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:public",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/public-direct.log",
+      "durationSeconds": 0.589
+    },
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:baseline",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/baseline.log",
+      "durationSeconds": 0.624
+    },
+    {
+      "id": "session-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/session-readiness.log",
+      "durationSeconds": 0.332
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/session.log",
+      "durationSeconds": 1.657
+    },
+    {
+      "id": "week08",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/week08.log",
+      "durationSeconds": 6.227
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/incidents.log",
+      "durationSeconds": 0.942
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/architecture-tests.log",
+      "durationSeconds": 0.611
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/architecture.log",
+      "durationSeconds": 0.084
+    },
+    {
+      "id": "backend",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/backend.log",
+      "durationSeconds": 0.507
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make feedback",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/feedback.log",
+      "durationSeconds": 17.843
+    },
+    {
+      "id": "verify-w09",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make verify-week-09",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/verify-w09.log",
+      "durationSeconds": 7.528
+    },
+    {
+      "id": "public-gate",
+      "status": "fail",
+      "scenarioType": "failure",
+      "command": "make public-test-week-09",
+      "exitCode": 2,
+      "evidence": "reports/week-09/integration-order/public-gate.log",
+      "durationSeconds": 8.711
+    },
+    {
+      "id": "native-repeat",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node tools/check-week-09-retry.cjs",
+      "exitCode": 0,
+      "evidence": "reports/week-09/integration-order/native-repeat-1.log through native-repeat-8.log",
+      "repetitions": 8
+    }
+  ],
+  "nativeRepetitions": [
+    {
+      "run": 1,
+      "exitCode": 0
+    },
+    {
+      "run": 2,
+      "exitCode": 0
+    },
+    {
+      "run": 3,
+      "exitCode": 0
+    },
+    {
+      "run": 4,
+      "exitCode": 0
+    },
+    {
+      "run": 5,
+      "exitCode": 0
+    },
+    {
+      "run": 6,
+      "exitCode": 0
+    },
+    {
+      "run": 7,
+      "exitCode": 0
+    },
+    {
+      "run": 8,
+      "exitCode": 0
+    }
+  ],
+  "pending": [
+    "Shared W09 final artifacts and individual team consolidation remain outside the implementation PR."
+  ],
+  "aiAssistance": "Codex resolved merges, diagnosed and corrected early native waits, and executed these checks under the user authorization.",
+  "diagnosis": {
+    "ciJob": "https://github.com/Draggodeidad/campusops-dmi-team/actions/runs/40639805925/job/122655051744",
+    "diagnosticSourceSha": "2971e0c9ded5bf0f7f43b5801cf0f0080ee8ea17",
+    "observed": "79 Jest tests passed; native lost-resolve stopped with RETRY_BUDGET_EXHAUSTED.",
+    "regression": "A native callback simulated at 249 ms for a 250 ms minimum reproduced the prior clock failure. The repaired clock completes the remaining wait with bounded callbacks; an always-early scheduler terminates with a controlled error.",
+    "scope": "Targeted before/after logs are exploratory reproductions; full combined checks above were executed on commitSha with unchanged source."
+  },
+  "summary": {
+    "location": {
+      "passed": 78,
+      "total": 78
+    },
+    "retry": {
+      "passed": 81,
+      "total": 81
+    },
+    "public-direct": {
+      "passed": 4,
+      "total": 4
+    }
+  }
+}

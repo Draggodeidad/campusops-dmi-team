@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+  "sourceTreeDirty": false,
+  "generatedAt": "2026-10-28T05:54:53.212Z",
+  "checks": [
+    {
+      "id": "get-429-real-retry-after",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"intervalMs\":1021,\"minimumMs\":1000}"
+    },
+    {
+      "id": "lost-resolve-response",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"duplicateReceipt\":true,\"stableKey\":true,\"identicalBody\":true,\"effectCount\":1,\"finalVersion\":3,\"finalStatus\":\"resolved\"}"
+    },
+    {
+      "id": "lost-close-response",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"duplicateReceipt\":true,\"stableKey\":true,\"identicalBody\":true,\"effectCount\":1,\"finalVersion\":4,\"finalStatus\":\"closed\"}"
+    }
+  ],
+  "metrics": [
+    {
+      "correlationId": "w09-request-1",
+      "method": "GET",
+      "status": 429,
+      "attempt": 1,
+      "durationMs": 20
+    },
+    {
+      "correlationId": "w09-request-1",
+      "method": "GET",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 5
+    },
+    {
+      "correlationId": "w09-request-2",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": "timeout",
+      "attempt": 1,
+      "durationMs": 254
+    },
+    {
+      "correlationId": "w09-request-2",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 7
+    },
+    {
+      "correlationId": "w09-request-3",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": "timeout",
+      "attempt": 1,
+      "durationMs": 251
+    },
+    {
+      "correlationId": "w09-request-3",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 6
+    }
+  ],
+  "limitations": [
+    "Loopback sintético; no proveedor externo ni dispositivo Android.",
+    "El backend no implementa notificaciones; no se acredita un envío real."
+  ]
+}

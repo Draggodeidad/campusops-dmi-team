@@ -1,0 +1,6 @@
+2026-10-28T05:47:01.8475898Z Test Suites: 1 passed, 1 total
+2026-10-28T05:47:01.8476529Z Tests:       4 passed, 4 total
+2026-10-28T05:47:06.8684391Z Test Suites: 3 passed, 3 total
+2026-10-28T05:47:06.8744296Z Tests:       79 passed, 79 total
+2026-10-28T05:47:08.9441289Z {"checkStage":"lost-resolve","kind":"runtime","code":"RETRY_BUDGET_EXHAUSTED"}
+2026-10-28T05:47:08.9599899Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,17 @@
+{
+  "normalization": "Trailing whitespace/empty EOF lines only; exact original retained in gzip",
+  "files": [
+    {
+      "readable": "reports/week-09/integration-order/session.log",
+      "originalGzip": "reports/week-09/integration-order/session.log.gz",
+      "originalSha256": "475c3590890c9593bd70514e7e7676fe32970f40315d478aa13de66bc6c46061",
+      "readableSha256": "606bde7bdb613edf929c0e63407936a756c7e8b3cea9c04690081d3f7adfd8e5"
+    },
+    {
+      "readable": "reports/week-09/integration-order/feedback.log",
+      "originalGzip": "reports/week-09/integration-order/feedback.log.gz",
+      "originalSha256": "46d29401f68f88b17410536fc6758acd91c6873749e6cb00e5277442674751c1",
+      "readableSha256": "b247c3c02a9db4f2122d4ac1a8d5b5863cf4f341a7fff84ee5c2b49a8df4fbd0"
+    }
+  ]
+}
