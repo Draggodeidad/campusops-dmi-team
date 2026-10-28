@@ -88,3 +88,21 @@ ni se omiten gates para hacer pasar main.
 El caso de recuperación del merge prematuro de #40 se documenta en
 `docs/week-06-main-recovery.md`. Integrar correcciones después no modifica el
 SHA que ya fue enviado en Classroom.
+
+
+## Retroalimentación W08 después del cierre semanal
+
+W08 conserva sus JSON y tag históricos al avanzar a W09. En ramas/PR,
+`python3 tools/revalidate-prior-evidence.py --week 8` comprueba primero el
+esquema original y la ascendencia del SHA, guarda copias exactas y ejecuta
+feedback, las 107 regresiones W08 y las invariantes de sesión. Sólo si todos
+los comandos aprueban actualiza índices del checkout desechable, conservando
+las observaciones anteriores con su evaluatedCommitSha. Individual no se modifica.
+
+Después se ejecuta el evaluador público sobre ese SHA y se verifica la entrega
+congelada en una copia aislada de week-08-final mediante
+`python3 tools/verify-frozen-evidence.py --week 8`. Sobre el evento del tag
+exacto se mantienen los comandos oficiales directos y se prohíbe revalidar.
+No se mueve el tag, relajan reglas de SHA ni convierten fallos históricos en éxitos.
+`python3 -m unittest discover -s tools/tests -v` también cubre W08: copias,
+proveniencia, control fallido sin relabel y rechazo en el tag final.
