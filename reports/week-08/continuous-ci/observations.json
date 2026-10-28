@@ -1,0 +1,29 @@
+{
+  "commitSha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a",
+  "checks": [
+    {
+      "id": "revalidation-feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "evidence": "exit 0; reports/week-08/generated-revalidation/feedback.log",
+      "evaluatedCommitSha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a"
+    },
+    {
+      "id": "revalidation-workspace-sync-regressions",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "evidence": "exit 0; reports/week-08/generated-revalidation/workspace-sync-regressions.log",
+      "evaluatedCommitSha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a"
+    },
+    {
+      "id": "revalidation-session-readiness",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-06-readiness",
+      "evidence": "exit 0; reports/week-08/generated-revalidation/session-readiness.log",
+      "evaluatedCommitSha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a"
+    }
+  ]
+}
