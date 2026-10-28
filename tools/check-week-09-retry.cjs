@@ -37,6 +37,7 @@ async function startBackend() {
     return { child, url };
   } catch (error) { child.kill('SIGTERM'); throw error; }
 }
+let checkStage = 'backend-start';
 async function main() {
   const { child, url } = await startBackend();
   const checks = [];
@@ -47,6 +48,7 @@ async function main() {
     body: JSON.stringify(body), headers: { ...auth(actor), 'idempotency-key': key }, timeoutMs: fixture.timeoutMs });
   const executor = new IncidentRetryExecutor(clock, undefined, metric => metrics.push(metric));
   try {
+    checkStage = 'get-429';
     const starts = [];
     const rateLimited = { async send(input) {
       starts.push(clock.now());
@@ -60,6 +62,7 @@ async function main() {
     assert.equal(starts.length, 2); assert.ok(starts[1] - starts[0] >= 1000);
     checks.push({ id: 'get-429-real-retry-after', status: 'pass', scenarioType: 'boundary',
       command: 'npm run check:week-09-retry', evidence: { sends: starts.length, intervalMs: starts[1] - starts[0], minimumMs: 1000 } });
+    checkStage = 'prepare-start';
     const initial = await fetchTransport.send(request(fixture.preparation.body, fixture.preparation.operationId));
     assert.equal(initial.status, 201);
     for (const operation of [
@@ -72,8 +75,10 @@ async function main() {
         return fetchTransport.send({ ...input, headers: { ...input.headers,
           ...(writes.length === 1 ? { 'x-course-scenario': fixture.scenario } : {}) } });
       } };
+      checkStage = `lost-${operation.body.action}`;
       const post = request(operation.body, operation.key, operation.actor);
       const result = await executor.forRequest(lost, post, async input => input).send(post);
+      checkStage = `receipt-${operation.body.action}`;
       const receipt = JSON.parse(result.bodyText);
       assert.equal(result.status, 200); assert.equal(receipt.duplicate, true);
       assert.equal(receipt.operationId, operation.key); assert.equal(receipt.incident.status, operation.expected);
@@ -86,6 +91,7 @@ async function main() {
           stableKey: writes[0].headers['idempotency-key'] === writes[1].headers['idempotency-key'],
           identicalBody: writes[0].body === writes[1].body, effectCount: receipt.incident.payload.history.filter(entry => entry.operationId === operation.key).length, finalVersion: receipt.incident.version, finalStatus: receipt.incident.status } });
     }
+    checkStage = 'timeout-metrics';
     assert.equal(metrics.filter(metric => metric.status === 'timeout').length, 2);
     return { schemaVersion: 1, week: 9, commitSha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
       sourceTreeDirty: Boolean(execFileSync('git', ['status', '--porcelain', '--untracked-files=all', '--', '.', ':!reports', ':!evidence'],
@@ -96,7 +102,9 @@ async function main() {
     if (child.exitCode === null && !child.killed) await new Promise(resolve => { child.once('exit', resolve); child.kill('SIGTERM'); });
   }
 }
-main().then(result => process.stdout.write(`${JSON.stringify(result, null, 2)}\n`)).catch(() => {
-  process.stderr.write('W09 retry loopback check failed; assertions or transport did not complete.\n');
+main().then(result => process.stdout.write(`${JSON.stringify(result, null, 2)}\n`)).catch(error => {
+  const kind = error instanceof assert.AssertionError ? 'assertion' : 'runtime';
+  const code = error?.code === 'RETRY_BUDGET_EXHAUSTED' ? 'RETRY_BUDGET_EXHAUSTED' : undefined;
+  process.stderr.write(`${JSON.stringify({ checkStage, kind, ...(code ? { code } : {}) })}\n`);
   process.exitCode = 1;
 });
