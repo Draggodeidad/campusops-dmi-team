@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -8,6 +8,10 @@ import {
   TextInput,
   View,
 } from 'react-native';
+
+import type { LookupIncidentLocation } from '../../application/location/LookupIncidentLocation';
+import type { LocationLookupResult, LocationFailure } from '../../application/location/LocationProvider';
+import { ApplicationFailure } from '../../application/errors/ApplicationFailure';
 
 import type { IncidentCategory } from '../../campusops/contracts';
 
@@ -22,6 +26,7 @@ const CATEGORIES: readonly { id: IncidentCategory; label: string }[] = [
 ];
 
 type Props = Readonly<{
+  lookupIncidentLocation?: LookupIncidentLocation;
   loading: boolean;
   error: string | null;
   onSubmit: (data: {
@@ -32,12 +37,34 @@ type Props = Readonly<{
   onCancel: () => void;
 }>;
 
-export function CreateIncidentScreen({ loading, error, onSubmit, onCancel }: Props) {
+export function CreateIncidentScreen({ loading, error, onSubmit, onCancel, lookupIncidentLocation }: Props) {
   const [category, setCategory] = useState<IncidentCategory>('connectivity');
   const [description, setDescription] = useState('');
   const [locationLabel, setLocationLabel] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
 
+  const [query, setQuery] = useState('');
+  const [searching, setSearching] = useState(false);
+  const [lookup, setLookup] = useState<LocationLookupResult | null>(null);
+  const [accepted, setAccepted] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const requestId = useRef(0);
+  useEffect(() => () => { requestId.current++; }, []);
+  const invalidateLookup = () => {
+    requestId.current++; setSearching(false); setLookup(null); setAccepted(false); setSearchError(null);
+  };
+  const handleSearch = async () => {
+    if (!lookupIncidentLocation || searching) return;
+    const id = ++requestId.current;
+    setSearching(true); setLookup(null); setAccepted(false); setSearchError(null);
+    try {
+      const result = await lookupIncidentLocation.execute({ query, manualLabel: locationLabel });
+      if (id === requestId.current) setLookup(result);
+    } catch (failure: unknown) {
+      if (id === requestId.current) setSearchError(failure instanceof ApplicationFailure
+        ? failure.message : 'No fue posible consultar. Puedes continuar manualmente.');
+    } finally { if (id === requestId.current) setSearching(false); }
+  };
   const handleSubmit = () => {
     if (description.trim().length === 0) {
       setValidationError('La descripción no puede estar vacía.');
@@ -48,10 +75,11 @@ export function CreateIncidentScreen({ loading, error, onSubmit, onCancel }: Pro
       return;
     }
     setValidationError(null);
+    requestId.current++; setSearching(false);
     onSubmit({
       category,
       description: description.trim(),
-      locationLabel: locationLabel.trim(),
+      locationLabel: accepted && lookup?.location.source === 'provider' ? lookup.location.label : locationLabel.trim(),
     });
   };
 
@@ -63,7 +91,7 @@ export function CreateIncidentScreen({ loading, error, onSubmit, onCancel }: Pro
         <Text style={styles.title}>Reportar Incidencia</Text>
         <Pressable
           accessibilityRole="button"
-          onPress={onCancel}
+          onPress={() => { invalidateLookup(); onCancel(); }}
           style={styles.cancelLink}
           testID="create-cancel-button"
         >
@@ -112,6 +140,7 @@ export function CreateIncidentScreen({ loading, error, onSubmit, onCancel }: Pro
       <TextInput
         accessibilityLabel="Ubicación"
         onChangeText={(text) => {
+          invalidateLookup();
           setLocationLabel(text);
           if (validationError) setValidationError(null);
         }}
@@ -120,6 +149,41 @@ export function CreateIncidentScreen({ loading, error, onSubmit, onCancel }: Pro
         testID="create-location-input"
         value={locationLabel}
       />
+
+
+      {lookupIncidentLocation && (
+        <View style={styles.locationBox}>
+          <Text>Buscar una ubicación ficticia (opcional)</Text>
+          <Text>No incluyas datos personales ni ubicaciones reales. La referencia manual permanece en la app.</Text>
+          <TextInput
+            accessibilityLabel="Consulta de ubicación ficticia"
+            onChangeText={text => { invalidateLookup(); setQuery(text); }}
+            placeholder="Ej. Edificio de prueba A"
+            style={styles.input}
+            testID="location-query-input"
+            value={query}
+          />
+          <Pressable accessibilityRole="button" disabled={searching || loading} onPress={() => { void handleSearch(); }} testID="location-search-button">
+            <Text>Buscar ubicación</Text>
+          </Pressable>
+          {searching && <ActivityIndicator testID="location-search-loading" />}
+          <Text accessibilityLiveRegion="polite" testID="location-status">
+            {searching ? 'Consultando ubicación. Puedes registrar con tu referencia manual.'
+              : accepted ? 'Ubicación del proveedor seleccionada.'
+                : lookup?.failure ? `${presentLocationFailure(lookup.failure)} Puedes continuar con tu referencia manual.`
+                  : lookup?.location.source === 'provider' ? `Resultado disponible${lookup.cacheHit ? ' desde caché' : ' de Photon'}. Confirma para usarlo.`
+                    : 'Se usará tu referencia manual.'}
+          </Text>
+          {searchError && <Text accessibilityRole="alert" testID="location-search-error">{searchError}</Text>}
+          {lookup?.location.source === 'provider' && <>
+            <Text testID="location-candidate">{lookup.location.label}</Text>
+            <Pressable accessibilityRole="button" onPress={() => setAccepted(true)} testID="location-accept-button"><Text>Usar este resultado</Text></Pressable>
+          </>}
+          <Pressable accessibilityRole="button" onPress={invalidateLookup} testID="location-manual-button"><Text>Usar ubicación manual</Text></Pressable>
+          <Text>Geocodificación: Photon · © OpenStreetMap contributors · ODbL</Text>
+          <Text selectable>https://www.openstreetmap.org/copyright</Text>
+        </View>
+      )}
 
       {displayedError && (
         <View accessibilityRole="alert" style={styles.errorBox}>
@@ -150,7 +214,20 @@ export function CreateIncidentScreen({ loading, error, onSubmit, onCancel }: Pro
   );
 }
 
+function presentLocationFailure(failure: LocationFailure): string {
+  switch (failure.kind) {
+    case 'timeout': return 'El proveedor tardó demasiado.';
+    case 'offline': return 'No hay conexión con el proveedor.';
+    case 'rate_limited': return 'El proveedor limita las consultas; espera antes de buscar otra vez.';
+    case 'incomplete': return 'El proveedor devolvió una ubicación incompleta.';
+    case 'invalid_coordinates': return 'El proveedor devolvió coordenadas inválidas.';
+    case 'invalid_response': return 'El proveedor devolvió datos inválidos.';
+    case 'unavailable': return 'No hay un resultado disponible.';
+  }
+}
+
 const styles = StyleSheet.create({
+  locationBox: { gap: 10, padding: 12, borderWidth: 1, borderColor: '#ccc', borderRadius: 8 },
   container: { gap: 14, paddingBottom: 24 },
   headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   title: { fontSize: 20, fontWeight: '700' },

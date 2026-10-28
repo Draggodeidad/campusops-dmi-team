@@ -40,7 +40,9 @@
     "test:week-08:integration": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-08-gateway.test.ts course-tests/week-08-integration.test.tsx",
     "test:week-09:baseline": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-baseline.test.ts",
     "test:week-09:public": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-09.test.ts",
-    "test:week-09:module": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath"
+    "test:week-09:module": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath",
+    "test:week-09:location": "jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location-policy.test.ts course-tests/week-09-location-adapter.test.ts course-tests/week-09-location-integration.test.tsx && node tools/check-week-09-location-provider.cjs --local",
+    "check:week-09-location-provider": "node --use-env-proxy tools/check-week-09-location-provider.cjs --external"
   },
   "dependencies": {
     "expo": "~57.0.9",
