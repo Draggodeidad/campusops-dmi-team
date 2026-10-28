@@ -76,6 +76,9 @@ export class HttpIncidentSyncGateway implements IncidentSyncGateway {
       || event.version !== operation.baseVersion + 1 || state.record.version !== event.version) return invalid();
     const payload = object(object(receipt.incident).payload);
     if (operation.action === 'start' && (state.incident.status !== 'in_progress' || state.incident.assignedTechnicianId !== operation.actorId)) return invalid();
+    if (operation.action === 'resolve' && (state.incident.status !== 'resolved' || payload.diagnosis !== operation.payload.diagnosis
+      || state.incident.assignedTechnicianId !== operation.actorId)) return invalid();
+    if (operation.action === 'close' && state.incident.status !== 'closed') return invalid();
     if (operation.action === 'comment' && (!Array.isArray(payload.notes)
       || !payload.notes.some(value => { const note = object(value); return note.actorId === operation.actorId && note.text === operation.payload.text; }))) return invalid();
     if (operation.action === 'add_evidence' && (!Array.isArray(payload.evidence)

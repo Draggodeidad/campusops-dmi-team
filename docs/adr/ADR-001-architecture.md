@@ -376,3 +376,59 @@ acredita red externa, caché ni política ejecutada. README, diagrama y
 Resultados y SHA se registran en `reports/week-09/baseline/validation.json`.
 Se conserva la procedencia histórica de reports/evidence W02–W08, sin atribuir
 sus resultados al SHA nuevo. No se crea tag ni evidencia individual final.
+
+## Anexo W09 — retry compartido e idempotencia #62 (27-10-2026)
+
+**Contexto.** El baseline #60 fija los contratos y el corte desde intento 4.
+El doble bucle W08 inmediato carecía de backoff/Retry-After; añadir otro bucle
+sobre HTTP y el replay W06 multiplicaría envíos. Un timeout después del commit
+no autoriza descartar ni reformular la operación.
+
+**Alternativas.** (1) Retry en cada repositorio, gateway y workspace duplicaría
+política y presupuestos. (2) Retry global de fetch también repetiría login,
+refresh y proveedores sin conocer su seguridad. (3) Política pura en Application
+y un ejecutor por solicitud de incidencia dentro del decorador de sesión,
+inyectado desde la composición, conserva un presupuesto para todos sus envíos.
+Se elige (3), con el costo de integrar explícitamente la preparación de sesión
+antes de cada intento y comprobar tiempo/generación tras las esperas.
+
+**Decisión implementada.** `planRetry`/`decideRetry` y configuración viven en
+Application; evaluación reexporta la misma función. Infrastructure implementa
+`IncidentRetryExecutor`, `SystemResilienceClock` y parseo de Retry-After.
+Fetch publica sólo el delay normalizado adicional al contrato HTTP existente;
+reloj/espera/observación/configuración se inyectan desde App.tsx. El decorador
+W06 crea un presupuesto por solicitud y comparte ese objeto con el replay 401.
+El ejecutor aplica sólo a las rutas conocidas de incidencias, sin importar UI.
+Los casos de uso y UI siguen usando sus puertos actuales.
+
+`IncidentWorkspace` delega apply una vez, sin el anterior bucle de dos envíos.
+La copia previa y el cuerpo serializado conservan identidad/contenido/baseVersion
+mientras la autorización puede renovarse dentro de la misma generación. Antes
+de cada envío se vuelve a comprobar la sesión; timeout y HTTP transitorios sólo
+reintentan si la política lo permite. No se recorta Retry-After válido: se detiene
+si excede el límite o no deja presupuesto de envío. Offline, contrato, 403/409 y
+sesión requieren acción propia. La política real/manual se publica en
+`docs/resilience-policy.md`; los anexos W08 anteriores conservan su contexto
+histórico y ya no describen el límite activo de retry.
+
+**Consecuencias.** Hasta cuatro envíos por solicitud lógica, incluso al renovar;
+hasta ocho de incidencias en un ciclo con GET previo y POST, cada uno acotado.
+No se introduce otro contenedor, almacenamiento ni servicio. Sólo un recibo
+exacto autoriza persistir y acknowledge; se añade validación de efecto para
+resolución/cierre. El repositorio online verifica asimismo clave, versión y
+contenido/efecto antes de informar éxito. Relojes incoherentes detienen el replay. Las métricas usan
+allowlist sintético y sanitizador W04, sin cuerpos/cabeceras/errores originales.
+Los adaptadores crudos siguen siendo sustituibles; la política activa requiere
+el grafo compuesto. El costo es retener pendientes y pedir una acción manual al
+agotar presupuesto; no se promete respuesta exitosa ni deduplicación sin un
+backend que implemente idempotencia.
+
+**Comprobación.** `test:week-09:retry` cubre política pública, límites/tiempo,
+HTTP/sesión y disco/backend W08. El runner loopback usa los adaptadores reales,
+fetch/timers nativos y timeout_after_commit en resolución/cierre; conserva misma
+clave/cuerpo y un efecto. Las pruebas de cola incluyen nota/evidencia, agotamiento,
+cuarto timeout y reapertura. El backend no implementa notificaciones; no se
+acredita su entrega. Resultados y SHA comprobados: reports/week-09/retry/.
+Se conservan controles públicos y regresiones acumuladas. #61, revisión humana,
+evidencia individual y consolidación/entrega W09 se completan por sus issues;
+este anexo no declara esos hitos cumplidos.

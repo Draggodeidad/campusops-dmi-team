@@ -83,7 +83,7 @@ para esa operación exacta. Un timeout puede ocurrir después del commit remoto;
 error de red, 401/403, 409 o conflicto mantienen el pendiente. #45 implementa
 el envío y la confirmación antes de llamar `PendingOperationStore.acknowledge`.
 
-Política acordada para el ciclo W08 de #45: como máximo **dos envíos** por
+Política histórica para el ciclo W08 de #45 (sustituida en W09 por #62): como máximo **dos envíos** por
 operación y ciclo explícito (inicial y un reintento), únicamente ante falla
 transitoria con la misma identidad/cuerpo y sesión vigente. Al agotar el límite
 se conserva pendiente y se informa; 403/409/conflicto requieren intervención,
@@ -135,7 +135,7 @@ enviar, aplica las funciones compartidas y conserva campos compatibles en el
 snapshot local. No modifica el cuerpo o baseVersion de ninguna operación.
 Se procesa por orden, deteniendo esa incidencia al fallar; una reformulación
 ocupa la posición lógica de su original. Otras incidencias pueden avanzar.
-Sólo timeout y desconexión admiten un segundo envío idéntico en ese ciclo;
+En el ciclo histórico W08, timeout y desconexión admitían un segundo envío idéntico;
 403/409/respuesta inválida no disparan reintento automático. Los replays 401
 acotados por el decorador W06 siguen siendo renovación de sesión, no un ciclo
 de reintentos de proveedor W09. No hay observador de conectividad: al recuperar
@@ -204,3 +204,13 @@ GPS, infraestructura productiva ni los stubs futuros de W09/W10. Los logs y
 SHA realmente comprobados quedan en `reports/week-08/app-integration/`.
 La revisión humana y la evidencia individual completa del equipo siguen
 pendientes y no se atribuyen a esta ejecución asistida por Codex.
+
+## Política activa W09 #62
+
+El motor puro merge/dedupe sigue sin hacer red. El workspace ahora invoca el
+gateway una vez; SessionTransportDecorator/IncidentRetryExecutor comparten hasta
+cuatro envíos por solicitud, incluido replay W06, y 10 s de presupuesto. GET
+previo y POST tienen presupuestos separados. Desconexión conserva pendiente y
+pide otro ciclo manual; timeout/429/500/502/503/504 aplican backoff/Retry-After
+sólo con identidad/cuerpo estables. Se conservan revisión, recibo y acknowledge
+W08. Reglas, configuración, pruebas y límites: docs/resilience-policy.md.

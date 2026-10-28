@@ -52,15 +52,7 @@ export function coordinateRefresh(events: readonly AuthEvent[]): Readonly<{
   return coordinator.getSummary();
 }
 
-export function planRetry(_input: Readonly<{
-  method: 'GET' | 'POST';
-  status: number | 'timeout';
-  attempt: number;
-  retryAfterMs?: number;
-  idempotencyKey?: string;
-}>): Readonly<{ retry: boolean; delayMs: number; requiresStableIdempotencyKey: boolean }> {
-  return pending('planRetry');
-}
+export { planRetry } from '../application/resilience/RetryPolicy';
 
 export function reduceRemoteResponses(_input: Readonly<{
   activeRequestId: string;

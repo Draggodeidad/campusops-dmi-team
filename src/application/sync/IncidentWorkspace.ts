@@ -9,7 +9,7 @@ import type { SessionSnapshot } from '../session/SessionSnapshot';
 import { deduplicateOperations } from './deduplicateOperations';
 import { resolveSync } from './resolveSync';
 import { incidentRecord, recordIncident } from './incidentRecord';
-import type { IncidentSyncGateway, RemoteIncidentState, SyntheticPhoto, SyntheticPhotoSource } from './IncidentSyncGateway';
+import type { IncidentSyncGateway, SyntheticPhoto, SyntheticPhotoSource } from './IncidentSyncGateway';
 
 type Identity = SessionSnapshot & { actorId: string };
 type OperationState = NonNullable<LocalIncidentSnapshot['operationStates']>[string];
@@ -202,7 +202,7 @@ export class IncidentWorkspace {
     return { ...record, fields };
   }
 
-  /** One explicit cycle; at most two identical sends per operation on transient failure. */
+  /** One explicit cycle. The injected HTTP/session graph owns the shared retry budget. */
   synchronize(): Promise<readonly LocalIncidentView[]> {
     return this.run(async identity => {
       const operations = deduplicateOperations(await this.workspace.pending.listPending());
@@ -235,15 +235,7 @@ export class IncidentWorkspace {
           }
           // Compatible fields are presented locally; they do not authorize rewriting the queued body/version.
           if (result.kind === 'merged') snapshot = { ...snapshot, local: { ...snapshot.local, fields: result.fields } };
-          let confirmed: RemoteIncidentState | undefined;
-          for (let attempt = 0; attempt < 2; attempt++) {
-            this.check(identity);
-            try { confirmed = await this.gateway.apply(operation, identity); break; }
-            catch (error) {
-              if (attempt === 1 || !(error instanceof ApplicationFailure)
-                || !['INCIDENT_TIMEOUT', 'REMOTE_COMMUNICATION_ERROR'].includes(error.code)) throw error;
-            }
-          }
+          const confirmed = await this.gateway.apply(operation, identity);
           this.check(identity);
           if (!confirmed) throw new ApplicationFailure('SYNC_CONFIRMATION_INVALID', 'No se recibió confirmación.');
           // An idempotent replay may return the old receipt, while GET already saw a newer authorized state.
