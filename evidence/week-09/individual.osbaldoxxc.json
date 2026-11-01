@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110279",
+      "githubLogin": "osbaldoXxC",
+      "commitShas": [
+        "a3691327901dfb2667e791d0f0f7b2a90a4218d3",
+        "d74fb9798184d3afec501a79e6b5cd5d5f2b8119"
+      ],
+      "files": [
+        "course-tests/week-09-location.test.tsx",
+        "course-tests/week-09-retry.test.ts"
+      ],
+      "tests": [
+        "npx jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location.test.tsx",
+        "npx jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-retry.test.ts",
+        "npm run typecheck",
+        "npm run check:architecture",
+        "npm run backend:self-test",
+        "npm run test:week-09:public",
+        "npm run test:week-09:baseline",
+        "npm run test:week-08:sync"
+      ],
+      "reviews": [],
+      "prediction": "Para la verificación de Week 09 esperaba que la geocodificación externa degradara a manual sin inventar (0,0) ante límites geográficos ±90/±180, respuestas incompletas y fallas de red (timeout, rate_limited 429, offline); y que el transporte HTTP resiliente respetara Retry-After sin truncar el mínimo del servidor, interrumpiera reintentos irreversiblemente en el intento 4, impidiera reintentar POST sin Idempotency-Key y resolviera la respuesta perdida (timeout_after_commit) de forma idempotente con un único efecto en backend.",
+      "command": "En feat/week-09-location-tests-issue-64: npx jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location.test.tsx; En feat/week-09-retry-tests-issue-65: npx jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-retry.test.ts",
+      "observedResult": "En a3691327901dfb2667e791d0f0f7b2a90a4218d3, la suite week-09-location.test.tsx aprueba 18/18 pruebas en 3.363 s evaluando consulta exitosa, límites de coordenadas ±90/±180, origen (0,0), NaN/Infinity, caché MISS/HIT/TTL de 300 s, fallas timeout/429/offline y preservación de referencia manual en CreateIncidentScreen. En d74fb9798184d3afec501a79e6b5cd5d5f2b8119, la suite week-09-retry.test.ts aprueba 22/22 pruebas en 1.725 s verificando backoff progresivo (250, 500, 1000 ms), corte en intento 4, Retry-After válido/cero/inválido/excesivo, POST sin Idempotency-Key que envía una sola vez sin reintentar, recuperación de timeout_after_commit con un solo efecto, y métricas sanitizadas. Las comprobaciones de regresión typecheck, check:architecture (0 violaciones), backend:self-test, test:week-09:public (4/4) y test:week-08:sync (47/47) aprobaron con código de salida 0.",
+      "explanation": "La aportación técnica de osbaldoXxC en W09 comprende las suites de prueba unitarias e independientes para la Issue #64 (proveedor Photon, caché y fallback manual) y la Issue #65 (reintentos acotados, telemetría y respuesta perdida). Se diseñaron pruebas deterministas con VirtualClock y dobles controlados sin llamadas a la red externa ni dependencias nativas bloqueantes. La política de reintentos verifica que la aplicación nunca trunca un Retry-After superior a maxDelayMs, deteniendo el reintento de forma segura. En POST, se exige Idempotency-Key estable para autorizar reintentos y se asegura la deduplicación ante timeout_after_commit. En UI, la referencia manual se preserva y no se inventan coordenadas ficticias. Ambas suites se construyeron sobre ramas aisladas partiendo de main limpio (8df44b5).",
+      "aiAssistance": "Asistencia técnica de Antigravity bajo la dirección de osbaldoXxC para la estructuración y ejecución automatizada de las suites de prueba en el entorno local. Las ejecuciones locales, códigos de salida y comprobaciones fueron observados directamente. Revisión humana personal pendiente para el proceso formal de Pull Request."
+    }
+  ]
+}
