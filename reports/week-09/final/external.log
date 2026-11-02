@@ -1,0 +1,5 @@
+
+> dmi-react-native-starter@1.0.0 check:week-09-location-provider
+> node --use-env-proxy tools/check-week-09-location-provider.cjs --external --timeout-ms=5000
+
+{"schemaVersion":1,"week":9,"commitSha":"86f1b9d6f8810bde7b378a87ebfa19f80add2739","generatedAt":"2026-11-02T21:27:24.387Z","provider":"Photon","endpoint":"https://photon.komoot.io","fixtureId":"w09-fictional-campus-location","command":"npm run check:week-09-location-provider -- --timeout-ms=5000","timeoutMs":5000,"httpStatus":200,"durationMs":957,"outcome":"manual","failureKind":"unavailable","externalExecutionConfirmed":true,"status":"pass"}

@@ -1,0 +1,12 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location.test.tsx course-tests/week-09-retry.test.ts
+
+PASS course-tests/week-09-location.test.tsx
+PASS course-tests/week-09-retry.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       40 passed, 40 total
+Snapshots:   0 total
+Time:        0.616 s, estimated 1 s
+Ran all test suites within paths "course-tests/week-09-location.test.tsx", "course-tests/week-09-retry.test.ts".

@@ -1,0 +1,155 @@
+
+> dmi-react-native-starter@1.0.0 test:week-09:baseline
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-baseline.test.ts
+
+PASS course-tests/week-09-baseline.test.ts
+  ✓ published policy types remain compatible and cache port can be substituted (3 ms)
+  ✓ controlled provider waits on injected time and gives isolated raw responses (2 ms)
+  ✓ failure fixtures distinguish unavailable transport from invalid raw data (6 ms)
+  ✓ lost-response fixture preserves the W08 serialization and independent lifecycle inputs (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.52 s
+Ran all test suites within paths "course-tests/week-09-baseline.test.ts".
+
+> dmi-react-native-starter@1.0.0 test:week-09:location
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location-policy.test.ts course-tests/week-09-location-adapter.test.ts course-tests/week-09-location-integration.test.tsx && node tools/check-week-09-location-provider.cjs --local
+
+(node:20683) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-09-location-integration.test.tsx
+PASS course-tests/week-09-location-adapter.test.ts
+PASS course-tests/week-09-location-policy.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       78 passed, 78 total
+Snapshots:   0 total
+Time:        2.625 s
+Ran all test suites within paths "course-tests/week-09-location-policy.test.ts", "course-tests/week-09-location-adapter.test.ts", "course-tests/week-09-location-integration.test.tsx".
+{"scope":"Actual FetchIncidentTransport + Photon adapter + Application over loopback HTTP","status":"pass","checks":["provider-success","cache-hit","socket-abort-timeout","429-retry-after","cooldown-no-request","connection-refused-manual"],"timeoutDurationMs":256,"requestCount":3}
+
+> dmi-react-native-starter@1.0.0 test:week-09:retry
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-retry-policy.test.ts course-tests/week-09-retry-transport.test.ts course-tests/week-09-retry-integration.test.ts && node tools/check-week-09-retry.cjs
+
+PASS course-tests/week-09-retry-transport.test.ts
+(node:20782) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS course-tests/week-09-retry-integration.test.ts
+PASS course-tests/week-09-retry-policy.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       81 passed, 81 total
+Snapshots:   0 total
+Time:        2.237 s
+Ran all test suites within paths "course-tests/week-09-retry-policy.test.ts", "course-tests/week-09-retry-transport.test.ts", "course-tests/week-09-retry-integration.test.ts".
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+  "sourceTreeDirty": false,
+  "generatedAt": "2026-11-02T21:22:43.129Z",
+  "checks": [
+    {
+      "id": "get-429-real-retry-after",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"intervalMs\":1026,\"minimumMs\":1000}"
+    },
+    {
+      "id": "lost-resolve-response",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"duplicateReceipt\":true,\"stableKey\":true,\"identicalBody\":true,\"effectCount\":1,\"finalVersion\":3,\"finalStatus\":\"resolved\"}"
+    },
+    {
+      "id": "lost-close-response",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-09-retry",
+      "evidence": "{\"sends\":2,\"duplicateReceipt\":true,\"stableKey\":true,\"identicalBody\":true,\"effectCount\":1,\"finalVersion\":4,\"finalStatus\":\"closed\"}"
+    }
+  ],
+  "metrics": [
+    {
+      "correlationId": "w09-request-1",
+      "method": "GET",
+      "status": 429,
+      "attempt": 1,
+      "durationMs": 24
+    },
+    {
+      "correlationId": "w09-request-1",
+      "method": "GET",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 6
+    },
+    {
+      "correlationId": "w09-request-2",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": "timeout",
+      "attempt": 1,
+      "durationMs": 257
+    },
+    {
+      "correlationId": "w09-request-2",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 6
+    },
+    {
+      "correlationId": "w09-request-3",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": "timeout",
+      "attempt": 1,
+      "durationMs": 252
+    },
+    {
+      "correlationId": "w09-request-3",
+      "incidentId": "campus-inc-001",
+      "method": "POST",
+      "status": 200,
+      "attempt": 2,
+      "durationMs": 6
+    }
+  ],
+  "limitations": [
+    "Loopback sintético; no proveedor externo ni dispositivo Android.",
+    "El backend no implementa notificaciones; no se acredita un envío real."
+  ]
+}
+
+> dmi-react-native-starter@1.0.0 test:week-09:module
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/week-09-location.test.tsx course-tests/week-09-retry.test.ts
+
+PASS course-tests/week-09-location.test.tsx
+PASS course-tests/week-09-retry.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       40 passed, 40 total
+Snapshots:   0 total
+Time:        1.077 s
+Ran all test suites within paths "course-tests/week-09-location.test.tsx", "course-tests/week-09-retry.test.ts".
+
+> dmi-react-native-starter@1.0.0 test:week-09:public
+> jest --no-watchman --cacheDirectory .jest-cache --ci --runInBand --runTestsByPath course-tests/public/week-09.test.ts
+
+PASS course-tests/public/week-09.test.ts
+  ✓ CampusOps accepts valid geocoding and otherwise keeps manual incident location (2 ms)
+  ✓ CampusOps can retry a lost resolution response only with a stable operation key
+  ✓ retries bounded idempotent failures and honors Retry-After
+  ✓ does not retry a POST without stable idempotency identity
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.471 s
+Ran all test suites within paths "course-tests/public/week-09.test.ts".

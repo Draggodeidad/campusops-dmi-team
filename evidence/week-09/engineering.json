@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+  "generatedAt": "2026-11-02T21:27:50.230973+00:00",
+  "decision": "Retry only transient incident failures within one finite shared session/retry budget, preserving the original POST key and serialized body. Continue location manually on invalid data, timeout, 429 or offline; only validated provider results enter the volatile TTL cache. Report terminal/conflict/unconfirmed outcomes explicitly and retain durable W08 intent until an exact receipt confirms it. Application owns policy and Infrastructure owns transport/timers; App.tsx injects the actual graph.",
+  "alternatives": [
+    "Retry every transient call independently in UI, session and workspace: appears convenient but multiplies sends, loses a total budget and can duplicate POST effects after a lost response; rejected in favor of one incident request executor.",
+    "Fail immediately and forbid manual location or write replay: reduces network load but makes provider availability block incident reporting and leaves a committed timeout hard to recover; rejected in favor of manual location and explicit stable replay.",
+    "Centralize retries in the HTTP incident executor with injected clock and policy, isolate Photon cooldown/cache/manual lookup, and retain W08 confirmation semantics: chosen for replaceable providers, deterministic verification and bounded recovery."
+  ],
+  "tradeoff": "Benefit: useful manual reporting during provider failures, bounded network load, preserved session isolation and one effect after replay. Cost: at most four sends per logical request (up to eight for separate sync read/write), finite latency, volatile cache after restart, public Photon without SLA, and explicit human retry/review when no exact receipt arrives. Never shorten a valid Retry-After to fit the cap; stop instead.",
+  "requirementIds": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05"
+  ],
+  "verification": [
+    {
+      "command": "make setup",
+      "result": "exitCode=0; Node 22.22.0 npm ci from clean technical checkout",
+      "evidence": "reports/week-09/final/setup.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "exitCode=0; types, lint, accumulated tests, architecture, secret scan, critical audit and Expo Android export",
+      "evidence": "reports/week-09/final/feedback.log"
+    },
+    {
+      "command": "npm run backend:self-test",
+      "result": "exitCode=0; local backend self-test",
+      "evidence": "reports/week-09/final/backend.log"
+    },
+    {
+      "command": "npm run test:week-09:baseline",
+      "result": "exitCode=0; shared contracts and fixtures",
+      "evidence": "reports/week-09/final/baseline.log"
+    },
+    {
+      "command": "npm run test:week-09:location",
+      "result": "exitCode=0; production adapter, cache, UI and composition",
+      "evidence": "reports/week-09/final/location.log"
+    },
+    {
+      "command": "npm run test:week-09:retry",
+      "result": "exitCode=0; bounded retries, session budget, durable disk and lost responses",
+      "evidence": "reports/week-09/final/retry.log"
+    },
+    {
+      "command": "npm run test:week-09:module -- course-tests/week-09-location.test.tsx course-tests/week-09-retry.test.ts",
+      "result": "exitCode=0; independent peer suites",
+      "evidence": "reports/week-09/final/peer-suites.log"
+    },
+    {
+      "command": "node tools/check-week-09-retry.cjs",
+      "result": "exitCode=0; native fetch and timers; same key/body and one effect",
+      "evidence": "reports/week-09/final/retry-http.log"
+    },
+    {
+      "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+      "result": "exitCode=0; real Photon request with fixed fictional fixture",
+      "evidence": "reports/week-09/final/external.log"
+    },
+    {
+      "command": "npm run test:week-06",
+      "result": "exitCode=0; session regressions",
+      "evidence": "reports/week-09/final/week06.log"
+    },
+    {
+      "command": "npm run check:week-06-readiness",
+      "result": "exitCode=0; eight W06 readiness regressions",
+      "evidence": "reports/week-09/final/readiness.log"
+    },
+    {
+      "command": "npm run test:week-08",
+      "result": "exitCode=0; durable persistence and sync regressions",
+      "evidence": "reports/week-09/final/week08.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "exitCode=2; npm Audit DNS EAI_AGAIN; preserved, not suppressed; subsequent retry recorded separately",
+      "evidence": "reports/week-09/final/initial-feedback-final.log"
+    },
+    {
+      "command": "make verify-week-09",
+      "result": "exitCode=2; npm Audit DNS EAI_AGAIN; preserved, not suppressed; subsequent retry recorded separately",
+      "evidence": "reports/week-09/final/initial-verify-final.log"
+    },
+    {
+      "command": "make public-test-week-09",
+      "result": "exitCode=0; passed",
+      "evidence": "reports/week-09/final/initial-public-final.log"
+    },
+    {
+      "command": "python3 reports/week-09/final/validate-authorship.py",
+      "result": "exitCode=0; passed",
+      "evidence": "reports/week-09/final/authorship.log"
+    },
+    {
+      "command": "make feedback",
+      "result": "exitCode=0; passed",
+      "evidence": "reports/week-09/final/feedback-final.log"
+    },
+    {
+      "command": "make verify-week-09",
+      "result": "exitCode=0; passed",
+      "evidence": "reports/week-09/final/verify-final.log"
+    },
+    {
+      "command": "make public-test-week-09",
+      "result": "exitCode=0; passed",
+      "evidence": "reports/week-09/final/public-final.log"
+    }
+  ],
+  "traceability": [
+    {
+      "requirementId": "AC-01",
+      "evidence": "reports/week-09/final/validation.json"
+    },
+    {
+      "requirementId": "AC-02",
+      "evidence": "reports/week-09/fault-injection.json"
+    },
+    {
+      "requirementId": "AC-03",
+      "evidence": "reports/week-09/retry-metrics.json"
+    },
+    {
+      "requirementId": "AC-04",
+      "evidence": "docs/resilience-policy.md"
+    },
+    {
+      "requirementId": "AC-05",
+      "evidence": "evidence/week-09/individual.json"
+    }
+  ],
+  "aiAssistance": "Codex materially assisted inspection, implementation in prior contributions, this consolidation, command execution and writing. Results are agent executions under owner direction, not manual human test runs.",
+  "humanValidation": {
+    "status": "owner_declared_review_of_preexisting_main",
+    "source": "explicit_user_statement_in_this_Codex_chat",
+    "statement": "yo ya revise ya hice mi contribucion humana y veo que todo esta bien",
+    "reviewedCommitSha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+    "limits": "No new GitHub review, personal test execution, or human approval of newly generated artifacts is asserted."
+  },
+  "limitations": [
+    "Synthetic fixture and loopback fault injection; no real device GPS/photos or location data.",
+    "Photon may return no matches; successful synthetic coordinates are demonstrated only by controlled fixtures.",
+    "Backend implements no notification delivery; one history effect and notes/evidence deduplication are verified, not real notification sending.",
+    "No tag created/published and make evidence-week-09 not run; Classroom and quiz remain human tasks."
+  ]
+}

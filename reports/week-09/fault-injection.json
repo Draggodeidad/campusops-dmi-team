@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+  "generatedAt": "2026-11-02T21:27:50.230973+00:00",
+  "checks": [
+    {
+      "id": "provider-synthetic-success",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:week-09:location",
+      "evidence": "reports/week-09/final/location.log: finite (0,0) and boundary coordinates accepted by production logic; UI requires explicit acceptance."
+    },
+    {
+      "id": "cache-miss-hit-expiry",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:location",
+      "evidence": "reports/week-09/final/location.log: normalized lookup MISS/HIT, exact TTL expiry and rollback MISS; TTL zero bypasses storage; corruption and cache failure remain safe."
+    },
+    {
+      "id": "manual-incomplete-invalid",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:location",
+      "evidence": "reports/week-09/final/location.log: incomplete, invalid types/coordinates, NaN/Infinity and unexpected rejection produce a distinguishable manual result without invented coordinates; UI preserves manual contents."
+    },
+    {
+      "id": "timeout-429-offline-http",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node tools/check-week-09-location-provider.cjs --local",
+      "evidence": "reports/week-09/final/location-http.json: actual fetch abort, HTTP 429 Retry-After=1000, cooldown without an extra request, closed loopback connection falls back to manual."
+    },
+    {
+      "id": "external-real-fictional-query",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+      "evidence": "reports/week-09/final/external-execution.json: Photon HTTP 200, 957 ms, outcome manual, confirmed=True. HTTP 200 without a match is external execution plus manual fallback, not synthetic geographic success."
+    },
+    {
+      "id": "lost-resolve-and-close",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "node tools/check-week-09-retry.cjs",
+      "evidence": "reports/week-09/final/retry-http.json: timeout_after_commit, two sends per action, identical key/body, duplicate receipt and one history effect for each resolve/close."
+    },
+    {
+      "id": "durable-queue-confirmation",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:retry",
+      "evidence": "reports/week-09/final/retry.log: W08 start/note/evidence confirm exactly once; exhausted four-send budget and fourth-send committed timeout preserve exact queue on disk until explicit replay after reopen."
+    },
+    {
+      "id": "session-conflict-and-receipt-guards",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:retry",
+      "evidence": "reports/week-09/final/retry.log: session changes stop sends, 401 replay shares budget, 409 stays for review, mismatching operation/content/version/history/diagnosis receipts never confirm."
+    },
+    {
+      "id": "independent-corroboration",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:module -- course-tests/week-09-location.test.tsx course-tests/week-09-retry.test.ts",
+      "evidence": "reports/week-09/final/peer-suites.log: existing independent suites by osbaldoXxC reproduced by agent; no attribution of this execution to the teammate."
+    }
+  ],
+  "externalExecution": {
+    "schemaVersion": 1,
+    "week": 9,
+    "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+    "generatedAt": "2026-11-02T21:27:24.387Z",
+    "provider": "Photon",
+    "endpoint": "https://photon.komoot.io",
+    "fixtureId": "w09-fictional-campus-location",
+    "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+    "timeoutMs": 5000,
+    "httpStatus": 200,
+    "durationMs": 957,
+    "outcome": "manual",
+    "failureKind": "unavailable",
+    "externalExecutionConfirmed": true,
+    "status": "pass"
+  },
+  "loopbackLocation": {
+    "scope": "Actual FetchIncidentTransport + Photon adapter + Application over loopback HTTP",
+    "status": "pass",
+    "checks": [
+      "provider-success",
+      "cache-hit",
+      "socket-abort-timeout",
+      "429-retry-after",
+      "cooldown-no-request",
+      "connection-refused-manual"
+    ],
+    "timeoutDurationMs": 256,
+    "requestCount": 3
+  },
+  "limitations": [
+    "Synthetic fixture and loopback fault injection; no real device GPS/photos or location data.",
+    "Photon may return no matches; successful synthetic coordinates are demonstrated only by controlled fixtures.",
+    "Backend implements no notification delivery; one history effect and notes/evidence deduplication are verified, not real notification sending.",
+    "No tag created/published and make evidence-week-09 not run; Classroom and quiz remain human tasks."
+  ]
+}
