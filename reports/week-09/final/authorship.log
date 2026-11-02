@@ -1,0 +1,174 @@
+{
+  "status": "pass",
+  "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+  "members": [
+    {
+      "githubLogin": "Draggodeidad",
+      "commits": [
+        {
+          "sha": "7644e1705d018f7df532776350df63f78ede50ea",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "8607c920076958f121ccc6a63b5e56ea40be2608",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "9b1af62f0cf7a824480c152748af75cf42b76d84",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "71a3d345d4bbd7e6f8de7e44b4b59e7d5ca72992",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "652f57a1c589a516bf2fb3b55d8a55651257fa95",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "8bd7c0fbe6271f61b60cf99067fed2d66501418d",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "eccd4e807bdcf5fa2ef1801a095cbb3b349e6aa5",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "a4e3e62d33890dd82c51f1242d8040438ee4408f",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "4d23d2610657b5d1adff2e3a614b8d1efca24774",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "1200535f9a0d957d7cf17fb8b71b1a7d4c3b64c6",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "62de6a325b3a78bd39c8818d49fb5e4d075f01bf",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "11f0f2b3aa9ece266f7c8f76d1c1ad4e08ef5d1a",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "e906b7ff3fe740aebb3977ba5832247bc7701c68",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "11268820d1ba4e3d723ca52e7aff1f512fe2b242",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "2971e0c9ded5bf0f7f43b5801cf0f0080ee8ea17",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "aaed45282b8cb50a6384347bd47dda2daa6621bc",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "9a067e11d73a5854a99a9c50d3d3b5213ff9d569",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "fb8d80087923fae52b40d405733d825124b36871",
+          "authorGithubLogin": "Draggodeidad"
+        },
+        {
+          "sha": "2a3e313c5823372857cab414deea6655bb780b19",
+          "authorGithubLogin": "Draggodeidad"
+        }
+      ],
+      "declaredFilesExist": true,
+      "ownChangedFiles": [
+        "App.tsx",
+        "course-tests/fixtures/week-09/scenario.ts",
+        "course-tests/fixtures/week-09/virtualClock.ts",
+        "course-tests/week-09-baseline.test.ts",
+        "course-tests/week-09-location-adapter.test.ts",
+        "course-tests/week-09-location-integration.test.tsx",
+        "course-tests/week-09-location-policy.test.ts",
+        "course-tests/week-09-retry-integration.test.ts",
+        "course-tests/week-09-retry-policy.test.ts",
+        "course-tests/week-09-retry-transport.test.ts",
+        "src/application/errors/ApplicationFailure.ts",
+        "src/application/location/LocationCache.ts",
+        "src/application/location/LocationProvider.ts",
+        "src/application/location/LookupIncidentLocation.ts",
+        "src/application/location/selectIncidentLocation.ts",
+        "src/application/resilience/ResilienceClock.ts",
+        "src/application/resilience/RetryPolicy.ts",
+        "src/application/sync/IncidentWorkspace.ts",
+        "src/course-evaluation/index.ts",
+        "src/infrastructure/http/FetchIncidentTransport.ts",
+        "src/infrastructure/http/IncidentRetryExecutor.ts",
+        "src/infrastructure/http/IncidentTransport.ts",
+        "src/infrastructure/http/SessionTransportDecorator.ts",
+        "src/infrastructure/http/SystemResilienceClock.ts",
+        "src/infrastructure/http/parseRetryAfter.ts",
+        "src/infrastructure/incidents/HttpIncidentRepository.ts",
+        "src/infrastructure/location/MemoryLocationCache.ts",
+        "src/infrastructure/location/PhotonLocationProvider.ts",
+        "src/infrastructure/sync/HttpIncidentSyncGateway.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/ui/incidents/CreateIncidentScreen.tsx",
+        "tools/check-week-09-location-provider.cjs",
+        "tools/check-week-09-retry.cjs",
+        "tools/revalidate-prior-evidence.py",
+        "tools/tests/test_evidence_revalidation.py",
+        "tools/verify-frozen-evidence.py"
+      ],
+      "signal": "tests"
+    },
+    {
+      "githubLogin": "osbaldoXxC",
+      "commits": [
+        {
+          "sha": "a3691327901dfb2667e791d0f0f7b2a90a4218d3",
+          "authorGithubLogin": "osbaldoXxC"
+        },
+        {
+          "sha": "d74fb9798184d3afec501a79e6b5cd5d5f2b8119",
+          "authorGithubLogin": "osbaldoXxC"
+        }
+      ],
+      "declaredFilesExist": true,
+      "ownChangedFiles": [
+        "course-tests/week-09-location.test.tsx",
+        "course-tests/week-09-retry.test.ts"
+      ],
+      "signal": "tests"
+    },
+    {
+      "githubLogin": "JulianDele",
+      "commits": [
+        {
+          "sha": "0895c854f2517221e41467583479bc2f6f82d28a",
+          "authorGithubLogin": "JulianDele"
+        },
+        {
+          "sha": "0479657a4cc2a1b0bb67d4e09d3d9e07870a3458",
+          "authorGithubLogin": "JulianDele"
+        },
+        {
+          "sha": "d9876136fc537f98047e4a6412e8154086402c8e",
+          "authorGithubLogin": "JulianDele"
+        },
+        {
+          "sha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+          "authorGithubLogin": "JulianDele"
+        }
+      ],
+      "declaredFilesExist": true,
+      "ownChangedFiles": [
+        "docs/reviews/week-09-juliandele-checklist.md",
+        "evidence/week-09/individual.json"
+      ],
+      "signal": "documentary_review"
+    }
+  ],
+  "limits": "Authors and reachable changed files corroborated with Git, not proof of personal command execution or a new human review."
+}

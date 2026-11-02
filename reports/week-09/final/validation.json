@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+  "generatedAt": "2026-11-02T21:29:38.268214+00:00",
+  "status": "pass_after_transient_audit_dns_retry",
+  "checks": [
+    {
+      "id": "setup",
+      "command": "make setup",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:26:48.177906+00:00",
+      "durationSeconds": 5.838,
+      "evidence": "reports/week-09/final/setup.log",
+      "originalSha256": "c175ee6c70f629b329eb4bf676cc5e58411ff58aa9d3f3b9dcc692f5b5d39055",
+      "sha256": "c175ee6c70f629b329eb4bf676cc5e58411ff58aa9d3f3b9dcc692f5b5d39055",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "feedback",
+      "command": "make feedback",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:26:54.016504+00:00",
+      "durationSeconds": 15.034,
+      "evidence": "reports/week-09/final/feedback.log",
+      "originalSha256": "5756636cd05cf5aaf10b71c5f621c36e74ca908b50ae96c37c1da8b810cadcbf",
+      "sha256": "68a0c2e9caca60536346bc6a8d3e231de3e02189677676ae43b5fbda8a1fd800",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "backend",
+      "command": "npm run backend:self-test",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:09.051136+00:00",
+      "durationSeconds": 0.677,
+      "evidence": "reports/week-09/final/backend.log",
+      "originalSha256": "ff9479526f6d3ca3fb3cd77b875432a9673e39d967135e7aa17ac278c69b3882",
+      "sha256": "ff9479526f6d3ca3fb3cd77b875432a9673e39d967135e7aa17ac278c69b3882",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "baseline",
+      "command": "npm run test:week-09:baseline",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:09.728328+00:00",
+      "durationSeconds": 0.733,
+      "evidence": "reports/week-09/final/baseline.log",
+      "originalSha256": "493d48f79f74e059c2a1f44eaa5a27bbb68a34cb9eb13ebb075a1f1b02ec2bce",
+      "sha256": "493d48f79f74e059c2a1f44eaa5a27bbb68a34cb9eb13ebb075a1f1b02ec2bce",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "location",
+      "command": "npm run test:week-09:location",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:10.461136+00:00",
+      "durationSeconds": 3.138,
+      "evidence": "reports/week-09/final/location.log",
+      "originalSha256": "260bb10a9427885328127ad036858da7284a45101125395918230225a23f0769",
+      "sha256": "260bb10a9427885328127ad036858da7284a45101125395918230225a23f0769",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "retry",
+      "command": "npm run test:week-09:retry",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:13.599731+00:00",
+      "durationSeconds": 4.647,
+      "evidence": "reports/week-09/final/retry.log",
+      "originalSha256": "d89dc5ce1f36d34aac1b728a8013d56a014db3e367abf5e7cb163d117b0ec2a8",
+      "sha256": "d89dc5ce1f36d34aac1b728a8013d56a014db3e367abf5e7cb163d117b0ec2a8",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "peer-suites",
+      "command": "npm run test:week-09:module -- course-tests/week-09-location.test.tsx course-tests/week-09-retry.test.ts",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:18.247317+00:00",
+      "durationSeconds": 1.075,
+      "evidence": "reports/week-09/final/peer-suites.log",
+      "originalSha256": "2f1c30525bf79acd75b40ed006639b95340ca4213d12e39e033f7e555abe25b3",
+      "sha256": "2f1c30525bf79acd75b40ed006639b95340ca4213d12e39e033f7e555abe25b3",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "public-direct",
+      "command": "npm run test:week-09:public",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:19.322897+00:00",
+      "durationSeconds": 0.72,
+      "evidence": "reports/week-09/final/public-direct.log",
+      "originalSha256": "adda0dbca7f534b2a1308e85ce0a928b4521c5d4558bb450c0ef3d5bd6cfb4a6",
+      "sha256": "adda0dbca7f534b2a1308e85ce0a928b4521c5d4558bb450c0ef3d5bd6cfb4a6",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "location-http",
+      "command": "node tools/check-week-09-location-provider.cjs --local",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:20.042956+00:00",
+      "durationSeconds": 0.507,
+      "evidence": "reports/week-09/final/location-http.log",
+      "originalSha256": "ffc5600f05bb14e10a7c689b33442eb788da6b970d96b87ca6b315b2fc07d7c8",
+      "sha256": "ffc5600f05bb14e10a7c689b33442eb788da6b970d96b87ca6b315b2fc07d7c8",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "retry-http",
+      "command": "node tools/check-week-09-retry.cjs",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:20.549770+00:00",
+      "durationSeconds": 2.449,
+      "evidence": "reports/week-09/final/retry-http.log",
+      "originalSha256": "5a867fa50cfd5912354cb0b588c8c8d3aa1bc3ba9fc8ea307743ef375e4904dd",
+      "sha256": "5a867fa50cfd5912354cb0b588c8c8d3aa1bc3ba9fc8ea307743ef375e4904dd",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "external",
+      "command": "npm run check:week-09-location-provider -- --timeout-ms=5000",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:22.999214+00:00",
+      "durationSeconds": 1.41,
+      "evidence": "reports/week-09/final/external.log",
+      "originalSha256": "cff069a715924de3ec582bfd6f4d1e72a5af0a81087c5d2f037b0d513f6ba915",
+      "sha256": "cff069a715924de3ec582bfd6f4d1e72a5af0a81087c5d2f037b0d513f6ba915",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "week06",
+      "command": "npm run test:week-06",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:24.409982+00:00",
+      "durationSeconds": 2.096,
+      "evidence": "reports/week-09/final/week06.log",
+      "originalSha256": "527be8233c0857a937b32ff015ef44c0e10ad015078e1e36ab74395400c13225",
+      "sha256": "a4299db96e9cc03d7a525df3379a95a0b6693e07195bb060035741df81088f5e",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "readiness",
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:26.505975+00:00",
+      "durationSeconds": 0.352,
+      "evidence": "reports/week-09/final/readiness.log",
+      "originalSha256": "55b22fd1ed1c65093be4f2e325f1f64c74e8e4718c7337defaa0067fcd5c1637",
+      "sha256": "55b22fd1ed1c65093be4f2e325f1f64c74e8e4718c7337defaa0067fcd5c1637",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "week08",
+      "command": "npm run test:week-08",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:26.858176+00:00",
+      "durationSeconds": 9.24,
+      "evidence": "reports/week-09/final/week08.log",
+      "originalSha256": "e36043647a74c87ef3b26410b57afd147d05a9f2977d35fd17c24144b9c8bf97",
+      "sha256": "e36043647a74c87ef3b26410b57afd147d05a9f2977d35fd17c24144b9c8bf97",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "architecture-tests",
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:36.098369+00:00",
+      "durationSeconds": 0.635,
+      "evidence": "reports/week-09/final/architecture-tests.log",
+      "originalSha256": "7a8a484588937b70580e9644fae77c3485cb3c6a4c18045416a62fe4a76e56aa",
+      "sha256": "7a8a484588937b70580e9644fae77c3485cb3c6a4c18045416a62fe4a76e56aa",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "architecture",
+      "command": "npm run check:architecture",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:36.733452+00:00",
+      "durationSeconds": 0.178,
+      "evidence": "reports/week-09/final/architecture.log",
+      "originalSha256": "de9b69c206ff33c416e59e47d0794207d392eb7533b83a3c85ea8c4d25f883bc",
+      "sha256": "de9b69c206ff33c416e59e47d0794207d392eb7533b83a3c85ea8c4d25f883bc",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "verify-w09",
+      "command": "make verify-week-09",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:36.911407+00:00",
+      "durationSeconds": 9.071,
+      "evidence": "reports/week-09/final/verify-w09.log",
+      "originalSha256": "1a00aae5f2fe33479ea4caf8818ba3fea6e49959df2e8ab16b0080ad2bb43160",
+      "sha256": "1a00aae5f2fe33479ea4caf8818ba3fea6e49959df2e8ab16b0080ad2bb43160",
+      "status": "pass",
+      "scenarioType": "boundary"
+    },
+    {
+      "id": "initial-feedback-final",
+      "command": "make feedback",
+      "exitCode": 2,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:50.755944+00:00",
+      "durationSeconds": 9.157,
+      "evidence": "reports/week-09/final/initial-feedback-final.log",
+      "status": "fail",
+      "scenarioType": "failure",
+      "originalSha256": "c35dfc050a1cefb2d8c67560d22177cc41dbec4f521575a00fa3adb90df8a7ce",
+      "sha256": "d9871349b39b57b70118bf96de9ab4ed4aae3372bbe3e525bfff2de82bfdbc1e"
+    },
+    {
+      "id": "initial-verify-final",
+      "command": "make verify-week-09",
+      "exitCode": 2,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:27:59.913130+00:00",
+      "durationSeconds": 8.028,
+      "evidence": "reports/week-09/final/initial-verify-final.log",
+      "status": "fail",
+      "scenarioType": "failure",
+      "originalSha256": "d1f2ebda493d356b94a72fa44c6903a758f0cb51831400d156674c250d0f0467",
+      "sha256": "ca116548d37577b4364642bdaeec23965d6c6af15955aebd352de4a71a03a41b"
+    },
+    {
+      "id": "initial-public-final",
+      "command": "make public-test-week-09",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:28:07.941495+00:00",
+      "durationSeconds": 10.127,
+      "evidence": "reports/week-09/final/initial-public-final.log",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "originalSha256": "bde552d80ad095804bd5c6cb219a2e1ef2150af1158e23e013f75f9edd9e6711",
+      "sha256": "bde552d80ad095804bd5c6cb219a2e1ef2150af1158e23e013f75f9edd9e6711"
+    },
+    {
+      "id": "authorship",
+      "command": "python3 reports/week-09/final/validate-authorship.py",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:28:20.975063+00:00",
+      "durationSeconds": 0.344,
+      "evidence": "reports/week-09/final/authorship.log",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "originalSha256": "723f69c0d215323d49b5e7def49d63b0e409759a305dee2ab6201bb6607ae37e",
+      "sha256": "723f69c0d215323d49b5e7def49d63b0e409759a305dee2ab6201bb6607ae37e"
+    },
+    {
+      "id": "feedback-final",
+      "command": "make feedback",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:28:43.688808+00:00",
+      "durationSeconds": 13.84,
+      "evidence": "reports/week-09/final/feedback-final.log",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "originalSha256": "f490df001f162696e5d5b53e5255ed6853d16e8d214097df2e8f359ca435c15b",
+      "sha256": "56409f1b811d90777f3b3370bc0c4c400e82e588d0f97bc9ad856f2f7f4a9765"
+    },
+    {
+      "id": "verify-final",
+      "command": "make verify-week-09",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:28:57.529552+00:00",
+      "durationSeconds": 8.473,
+      "evidence": "reports/week-09/final/verify-final.log",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "originalSha256": "7984ac7861b9420c906b0d8ae18a65721aca8666b027d84b2a04765d58198dfd",
+      "sha256": "7984ac7861b9420c906b0d8ae18a65721aca8666b027d84b2a04765d58198dfd"
+    },
+    {
+      "id": "public-final",
+      "command": "make public-test-week-09",
+      "exitCode": 0,
+      "commitSha": "86f1b9d6f8810bde7b378a87ebfa19f80add2739",
+      "generatedAt": "2026-11-02T21:29:06.003043+00:00",
+      "durationSeconds": 10.127,
+      "evidence": "reports/week-09/final/public-final.log",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "originalSha256": "30d81ee2a0dd0b51506d26596b92b146c78b6084fd67075c8726e9841ddc7647",
+      "sha256": "30d81ee2a0dd0b51506d26596b92b146c78b6084fd67075c8726e9841ddc7647"
+    }
+  ],
+  "environment": {
+    "node": "22.22.0",
+    "npm": "10.9.4",
+    "checkoutCleanBeforeSetup": true,
+    "workingTree": "Only reports/evidence generated after technical checkout; original user workspace changes preserved separately."
+  },
+  "humanDelivery": {
+    "repositoryUrl": "https://github.com/Draggodeidad/campusops-dmi-team",
+    "plannedTag": "week-09-final",
+    "tagStatus": "pending_human_creation_and_publication",
+    "evidenceCommandStatus": "not_run_requires_tag",
+    "classroomStatus": "pending_human_submission"
+  },
+  "limitations": [
+    "Synthetic fixture and loopback fault injection; no real device GPS/photos or location data.",
+    "Photon may return no matches; successful synthetic coordinates are demonstrated only by controlled fixtures.",
+    "Backend implements no notification delivery; one history effect and notes/evidence deduplication are verified, not real notification sending.",
+    "No tag created/published and make evidence-week-09 not run; Classroom and quiz remain human tasks."
+  ],
+  "finalGates": {
+    "feedback-final": "pass",
+    "verify-final": "pass",
+    "public-final": "pass",
+    "authorship": "pass"
+  },
+  "historicalFailure": "The first repeated feedback/verify could not resolve npm audit registry (EAI_AGAIN); raw results retained with hashes. Subsequent full gates passed without disabling controls.",
+  "deliveryChecklist": [
+    {
+      "item": "complete_kit_compared",
+      "status": "validado"
+    },
+    {
+      "item": "external_execution_and_manual",
+      "status": "validado"
+    },
+    {
+      "item": "cache_boundaries_and_faults",
+      "status": "validado"
+    },
+    {
+      "item": "bounded_retries_and_retry_after",
+      "status": "validado"
+    },
+    {
+      "item": "lost_response_one_effect_and_durable_confirmation",
+      "status": "validado"
+    },
+    {
+      "item": "exactly_three_authored_contributions",
+      "status": "validado"
+    },
+    {
+      "item": "feedback_verify_public_and_json_contract",
+      "status": "validado"
+    },
+    {
+      "item": "week-09-final_and_make_evidence",
+      "status": "pendiente de tag"
+    },
+    {
+      "item": "Classroom_and_individual_quiz",
+      "status": "pendiente/faltante",
+      "detail": "human delivery; no automation submission"
+    }
+  ],
+  "authorshipEvidence": "reports/week-09/final/authorship.log",
+  "logNormalization": {
+    "changes": [
+      "ANSI escapes removed",
+      "Trailing whitespace normalized",
+      "User npm-cache path replaced with <npm-cache>"
+    ],
+    "integrity": "Original stdout bytes retained outside checkout; each original and normalized SHA-256 recorded. No outcome, exit code or timing rewritten."
+  }
+}

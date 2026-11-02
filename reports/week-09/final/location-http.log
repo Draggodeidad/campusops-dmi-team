@@ -1,0 +1,1 @@
+{"scope":"Actual FetchIncidentTransport + Photon adapter + Application over loopback HTTP","status":"pass","checks":["provider-success","cache-hit","socket-abort-timeout","429-retry-after","cooldown-no-request","connection-refused-manual"],"timeoutDurationMs":256,"requestCount":3}

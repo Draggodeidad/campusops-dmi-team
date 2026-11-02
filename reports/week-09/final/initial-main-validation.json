@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "week": 9,
+  "scope": "pre-consolidation main, historical result preserved",
+  "checks": [
+    {
+      "id": "setup",
+      "command": "make setup",
+      "exitCode": 0,
+      "commitSha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+      "generatedAt": "2026-11-02T21:21:39.928138+00:00",
+      "durationSeconds": 30.18,
+      "evidence": "reports/week-09/final/initial-main-setup.log",
+      "originalSha256": "3045f35e7020d151b9237a1db4fac0681d6a00891282ce30e33c212800a759b5",
+      "sha256": "3045f35e7020d151b9237a1db4fac0681d6a00891282ce30e33c212800a759b5",
+      "status": "pass"
+    },
+    {
+      "id": "feedback",
+      "command": "make feedback",
+      "exitCode": 0,
+      "commitSha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+      "generatedAt": "2026-11-02T21:22:10.108829+00:00",
+      "durationSeconds": 23.218,
+      "evidence": "reports/week-09/final/initial-main-feedback.log",
+      "originalSha256": "d9c8f9c9acf8400c3eb32626dfe3274f2b0505e433a2d5f55d59e4ff6ded639c",
+      "sha256": "ec79d4088eccf1f0dd1b893c2da5cf63d79a3b86ddc60a6a8002bde90dbb3606",
+      "status": "pass"
+    },
+    {
+      "id": "week09",
+      "command": "npm run test:week-09:baseline && npm run test:week-09:location && npm run test:week-09:retry && npm run test:week-09:module -- course-tests/week-09-location.test.tsx course-tests/week-09-retry.test.ts && npm run test:week-09:public",
+      "exitCode": 0,
+      "commitSha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+      "generatedAt": "2026-11-02T21:22:33.327793+00:00",
+      "durationSeconds": 12.43,
+      "evidence": "reports/week-09/final/initial-main-week09.log",
+      "originalSha256": "7eb8dec1132b008267775c2d372b962030b54e7f0c5a5c3caca482f11878a442",
+      "sha256": "7eb8dec1132b008267775c2d372b962030b54e7f0c5a5c3caca482f11878a442",
+      "status": "pass"
+    },
+    {
+      "id": "public-w09",
+      "command": "make public-test-week-09",
+      "exitCode": 2,
+      "commitSha": "e800c70b6b4537466e537bfe1a23d7c83c7aec2b",
+      "generatedAt": "2026-11-02T21:22:45.758175+00:00",
+      "durationSeconds": 10.574,
+      "evidence": "reports/week-09/final/initial-main-public-w09.log",
+      "originalSha256": "b376eecd5f9b19ee48b48b304e023a8c5ccb3ea1f8877520f8af79614b296af6",
+      "sha256": "b376eecd5f9b19ee48b48b304e023a8c5ccb3ea1f8877520f8af79614b296af6",
+      "status": "fail"
+    }
+  ]
+}
