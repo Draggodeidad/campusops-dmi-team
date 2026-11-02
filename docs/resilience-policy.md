@@ -140,8 +140,9 @@ Las primeras exploraciones de red no se atribuyen al SHA final. Los fallos de
 `planRetry` o entregables W09 pendientes se registran separadamente.
 
 Ayuda material de IA: Codex asistió en implementación, pruebas y documentación.
-La validación automática y la llamada externa quedan trazadas a comandos reales;
-la revisión humana y evidencia individual del owner se registrarán cuando existan.
+La validación automática y la llamada externa quedan trazadas a comandos reales.
+El registro individual del owner está en `evidence/week-09/individual.json`;
+su actualización de revisión humana se describe en la consolidación #69 al final.
 No se crea tag, se entrega en Classroom ni se cierra automáticamente #61.
 
 ## Reintentos e idempotencia (#62)
@@ -285,8 +286,68 @@ política. Las pruebas Jest usan reloj virtual y SQLite/archivos/backend reales.
 Resultados reproducidos y limitaciones: `reports/week-09/retry/validation.json`.
 El owner confirmó su visto bueno humano de #61/#62 en el chat; #63 conserva
 ese alcance y su registro propio. La integración y corrección posteriores fueron
-autorizadas por el usuario y se validan automáticamente. Aportes de compañeros
-y consolidación final W09 siguen pendientes.
+autorizadas por el usuario y se validan automáticamente. #78 incorporó la revisión
+documental de Julian y completó los tres registros individuales; la consolidación
+#69 distingue esa contribución de las ejecuciones automáticas finales.
 Ayuda material de IA: Codex asistió implementación, pruebas, documentación y
 comprobaciones automáticas; no acredita aportes o revisión de ningún integrante.
 No se crea tag ni se entrega en Classroom desde esta issue.
+
+## Consolidación y preparación de entrega (#69)
+
+El 02-11-2026 se volvió a comparar el ZIP completo: ocho entradas UTF-8,
+SHA-256 `d49efb163816635a8c6c27766e0d89b9bde2d3e0f3ae5e98b81c79c3dd262119`.
+Actividad, rúbrica, guía, contratos y prueba pública coinciden con el kit.
+INSTALL conserva semanas anteriores; el workflow conserva todos los gates del
+kit y añade Node 22.22.0, checkout con historial/tags y regresiones W06/W08.
+El inventario inicial de #60 y sus fallos históricos se conservan sin reemplazo.
+
+La revisión de `main` en `e800c70b6b4537466e537bfe1a23d7c83c7aec2b`, desde
+worktree separado y Node 22.22.0, aprobó setup, feedback, suites de ubicación,
+retry, corroboración del compañero y las cuatro pruebas públicas. El gate público
+completo falló por los tres artefactos oficiales ausentes y por tener sólo dos
+registros individuales. #78 sólo añadió documentación y el tercer registro;
+su CI aprobó comportamiento, regresiones y reproducción, y falló exclusivamente
+por los tres artefactos ausentes. Se integró sin cambiar controles ni pruebas.
+
+El owner declaró en este chat: «yo ya revise ya hice mi contribucion humana y
+veo que todo esta bien». Se registra como declaración humana sobre el `main`
+que existía al solicitar el trabajo; no como una revisión GitHub ni ejecución
+manual de pruebas, ni como aprobación anticipada de los artefactos nuevos.
+La revisión documental propia de Julian y las suites propias de osbaldoXxC se
+conservan con sus autores, SHA y límites; no se les atribuyen ejecuciones nuevas.
+Codex asiste materialmente en esta consolidación, ejecución y redacción.
+
+Los cinco entregables oficiales son esta política, `reports/week-09/fault-injection.json`,
+`reports/week-09/retry-metrics.json`, `evidence/week-09/engineering.json` e
+`evidence/week-09/individual.json`. Los reportes finales referencian el SHA
+técnico comprobado; `reports/week-09/final/validation.json` indexa comandos,
+fechas, salidas, códigos y hashes de logs sanitizados. Las observaciones
+históricas se distinguen de la reproducción final. Un fallo no se transforma
+en éxito por copiar un archivo o cambiar una etiqueta de estado.
+
+| Elemento | Estado y evidencia |
+|---|---|
+| Kit completo y formatos | Validado: inventario #60, comparación repetida y contratos oficiales intactos. |
+| Proveedor, caché, manual, fallas y retry | Validado en la base revisada; reproducción del SHA técnico final en el índice final. Éxito geográfico sólo con datos sintéticos del doble; Photon real puede responder sin coincidencias. |
+| Respuesta perdida y confirmación W08 | Validado en la base: misma clave/cuerpo, un efecto por resolución/cierre; la cola conserva operaciones sin recibo exacto. Resultado final y tiempos en los dos reportes oficiales. |
+| Tres aportes | Registros propios disponibles tras #78; corroborar autoría/archivos y esquema en el índice final. La declaración de revisión humana del owner tiene el alcance anterior. |
+| Feedback, verify y public del SHA final | Pendiente de reproducción al guardar este documento; el estado observado definitivo se consulta en el índice final, sin sustituirlo por esta tabla. |
+| `week-09-final` | Pendiente de tag: creación/publicación exclusivamente humana; no se ha creado desde #69. |
+| `make evidence-week-09` | Pendiente de tag: ejecutar sobre el SHA que señale la etiqueta, conservar el resultado local sin otro commit. |
+| Classroom y quiz | Pendiente de entrega humana; quiz individual fuera del alcance. |
+
+Orden conforme al kit: integrar este documento por PR; desde ese SHA limpio
+ejecutar `make setup`, feedback, backend, suites W09, regresiones W06/W08,
+verify/public y llamada externa sintética; guardar los resultados en un commit
+exclusivo de `reports/` y `evidence/`, integrado por PR sin squash ni rebase.
+El merge final debe tener como primer padre el SHA técnico y modificar sólo
+esas dos carpetas; comprobarlo con el evaluador. Así los `commitSha` siguen
+siendo HEAD o su padre directo exclusivo de evidencias, sin autorreferencia.
+
+Preparar `entrega-semana-09.txt` como archivo local de tres líneas, fuera del
+commit final de evidencias: repositorio `https://github.com/Draggodeidad/campusops-dmi-team`,
+etiqueta prevista `week-09-final` y SHA completo del merge final comprobado.
+Ese SHA es candidato hasta que la persona cree/publique la etiqueta y apruebe
+`make evidence-week-09`; no se afirma que ya exista un tag remoto ni entrega.
+No añadir un commit para ese archivo después de congelar la versión.
