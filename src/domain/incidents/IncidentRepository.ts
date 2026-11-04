@@ -17,8 +17,8 @@ export type IncidentActionData = Readonly<{
 }>;
 
 export interface IncidentRepository {
-  findAll(): Promise<readonly Incident[]>;
-  findById(id: string): Promise<Incident | null>;
+  findAll(signal?: AbortSignal): Promise<readonly Incident[]>;
+  findById(id: string, signal?: AbortSignal): Promise<Incident | null>;
   create?(input: CreateIncidentData): Promise<Incident>;
   performAction?(input: IncidentActionData): Promise<Incident>;
 }

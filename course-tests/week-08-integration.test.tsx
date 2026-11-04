@@ -241,6 +241,8 @@ test('real UI stores offline changes, restores them after remount and clears pri
   network.offline = true;
   await act(async () => { await fireEvent.press(view.getByTestId('action-start')); });
   await waitFor(() => expect(view.getByText('start: Sin confirmación; reintenta con la sesión original')).toBeTruthy());
+  expect(view.getByRole('button', { name: 'Resolver incidencia' })).toBeDisabled();
+  expect(view.getByRole('button', { name: 'Sincronizar con mi sesión' })).toBeEnabled();
   await act(async () => { await fireEvent.changeText(view.getByTestId('local-note-input'), 'Nota desde interfaz'); });
   await act(async () => { await fireEvent.press(view.getByTestId('local-note')); });
   await waitFor(() => expect(view.getByText('Nota guardada: Nota desde interfaz')).toBeTruthy());
@@ -255,6 +257,9 @@ test('real UI stores offline changes, restores them after remount and clears pri
   network.offline = false;
   await act(async () => { await fireEvent.press(view.getByTestId('sync-pending')); });
   await waitFor(() => expect(view.getByText('comment: Conflicto: requiere revisión')).toBeTruthy());
+  expect(view.getByRole('alert', { name: /Conflicto\. Revisa/ })).toBeOnTheScreen();
+  expect(view.getByRole('button', { name: 'Guardar nota pendiente' })).toBeDisabled();
+  expect(view.getByRole('button', { name: 'Consultar servidor y revisar conflicto' })).toBeEnabled();
   await act(async () => { await fireEvent.press(view.getByTestId('inspect-conflict')); });
   await waitFor(() => expect(view.getByTestId('reformulate-w08-integration-2')).toBeTruthy());
   await act(async () => { await fireEvent.press(view.getByTestId('reformulate-w08-integration-2')); });
@@ -334,4 +339,21 @@ test('confirming an old lost receipt does not roll back a newer remote state alr
   expect(snapshot.local.fields.priority).toBe('high');
   expect(await app.localWorkspace.pending.listPending()).toEqual([]);
   expect((await remote()).payload.history).toHaveLength(2);
+});
+
+test('offline list and detail show the authorized copy and can reconnect', async () => {
+  const app = await prepared();
+  network.offline = true;
+  const view = await render(<CampusOpsApp {...app} />);
+  await waitFor(() => expect(view.getByRole('button', { name: 'Reintentar conexión lista' })).toBeOnTheScreen());
+  await fireEvent.press(view.getByTestId('incident-campus-inc-001'));
+  const reconnect = await view.findByRole('button', { name: 'Reintentar conexión detalle' });
+  expect(view.getByTestId('incident-detail')).toBeOnTheScreen();
+  expect(view.getByRole('button', { name: 'Iniciar atención' })).toBeDisabled();
+  expect(view.queryByRole('progressbar')).toBeNull();
+
+  network.offline = false;
+  await fireEvent.press(reconnect);
+  await waitFor(() => expect(view.getByRole('button', { name: 'Iniciar atención' })).toBeEnabled());
+  expect(view.queryByRole('button', { name: 'Reintentar conexión detalle' })).toBeNull();
 });

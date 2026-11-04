@@ -1,11 +1,13 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import type { RemoteUiState } from '../../application/ui-state/RemoteUiState';
+import { RemoteRequestFeedback } from './RemoteRequestFeedback';
 import type { Incident } from '../../domain/incidents/Incident';
 
 type Props = Readonly<{
-  incidents: readonly Incident[];
-  loading: boolean;
-  error: string | null;
+  state: RemoteUiState<readonly Incident[]>;
+  onCancel: () => void;
+  onRetry: () => void;
   onSelect: (id: string) => void;
   onCreate?: (() => void) | undefined;
 }>;
@@ -18,9 +20,8 @@ const statusLabels: Record<Incident['status'], string> = {
   closed: 'Cerrada',
 };
 
-export function IncidentListScreen({ incidents, loading, error, onSelect, onCreate }: Props) {
-  if (loading) return <Text accessibilityRole="progressbar">Cargando incidencias…</Text>;
-  if (error) return <Text accessibilityRole="alert">{error}</Text>;
+export function IncidentListScreen({ state, onCancel, onRetry, onSelect, onCreate }: Props) {
+  const incidents = 'value' in state ? state.value : [];
 
   return (
     <View style={styles.list}>
@@ -28,7 +29,7 @@ export function IncidentListScreen({ incidents, loading, error, onSelect, onCrea
         <Text accessibilityRole="header" style={styles.heading}>
           Incidencias
         </Text>
-        {onCreate && (
+        {onCreate && (state.state === 'success' || state.state === 'empty') && (
           <Pressable
             accessibilityRole="button"
             onPress={onCreate}
@@ -40,23 +41,27 @@ export function IncidentListScreen({ incidents, loading, error, onSelect, onCrea
         )}
       </View>
 
-      {incidents.length === 0 ? (
-        <Text style={styles.emptyText}>No hay incidencias registradas.</Text>
-      ) : (
-        incidents.map((incident) => (
-          <Pressable
-            accessibilityRole="button"
-            key={incident.id}
-            onPress={() => onSelect(incident.id)}
-            style={styles.card}
-            testID={`incident-${incident.id}`}
-          >
-            <Text style={styles.title}>{incident.title}</Text>
-            <Text>{incident.locationLabel}</Text>
-            <Text>{statusLabels[incident.status]}</Text>
-          </Pressable>
-        ))
-      )}
+      <RemoteRequestFeedback
+        state={state}
+        label="lista"
+        loading="Cargando incidencias…"
+        empty="No hay incidencias registradas."
+        cancel={onCancel}
+        retry={onRetry}
+      />
+      {incidents.map((incident) => (
+        <Pressable
+          accessibilityRole="button"
+          key={incident.id}
+          onPress={() => { onSelect(incident.id); }}
+          style={styles.card}
+          testID={`incident-${incident.id}`}
+        >
+          <Text style={styles.title}>{incident.title}</Text>
+          <Text>{incident.locationLabel}</Text>
+          <Text>{statusLabels[incident.status]}</Text>
+        </Pressable>
+      ))}
     </View>
   );
 }
@@ -74,5 +79,4 @@ const styles = StyleSheet.create({
   createButtonText: { color: '#ffffff', fontWeight: '600', fontSize: 13 },
   card: { gap: 4, borderWidth: 1, borderColor: '#cbd5e1', borderRadius: 10, padding: 14 },
   title: { fontSize: 16, fontWeight: '600' },
-  emptyText: { marginTop: 8, color: '#555' },
 });

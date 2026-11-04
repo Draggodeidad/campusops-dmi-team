@@ -4,6 +4,7 @@ export type TransportRequest = Readonly<{
   headers?: Readonly<Record<string, string>>;
   body?: string;
   timeoutMs?: number;
+  signal?: AbortSignal;
   /** A queued write cannot follow a later login, even during token renewal. */
   session?: Readonly<{ actorId: string; generation: number }>;
 }>;
