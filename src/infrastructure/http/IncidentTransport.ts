@@ -5,6 +5,8 @@ export type TransportRequest = Readonly<{
   body?: string;
   timeoutMs?: number;
   signal?: AbortSignal;
+  /** Internal diagnostics metadata. Never serialized into the HTTP request. */
+  correlationId?: string;
   /** A queued write cannot follow a later login, even during token renewal. */
   session?: Readonly<{ actorId: string; generation: number }>;
 }>;

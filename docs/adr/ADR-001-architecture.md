@@ -544,3 +544,42 @@ su identidad y sus reglas de confirmación.
 `npm run test:week-10:module -- course-tests/week-10-ui-integration.test.tsx course-tests/week-08-integration.test.tsx`
 ejercita navegación, cancelación, accesibilidad, reconexión y revisión de
 cambios guardados con la UI real.
+
+## Anexo W10 — correlación de incidencias y diagnóstico local (#83)
+
+La UI ya descarta respuestas obsoletas. HTTP puede devolver 200 y aun así
+producir un error visible por un cuerpo inválido. Asimismo, un timeout puede
+ocurrir después de guardar una acción. Registrar sólo el estado HTTP
+perdería el desenlace. Registrar el contexto completo y redactar por nombres
+de claves permitiría filtrar texto libre bajo claves desconocidas.
+
+La decisión es reutilizar el `requestId` de la intención UI como correlación
+W10. Application genera la secuencia en memoria y los puertos pasan el ID
+como metadato opcional. El adaptador de HTTP nunca lo serializa. Cada reintento
+y el replay de sesión de un mismo envío lógico mantienen el ID y el contador
+de intentos. UI emite sólo los desenlaces aceptados por el reducer, incluida
+la cancelación explícita. El panel abre una correlación por acción. La
+sincronización manual comparte esa correlación en el ciclo, mientras que un
+inicio de atención usa un ID aparte para cada operación de otra incidencia
+que el ciclo procese. Cada envío HTTP independiente inicia su contador en 1.
+`attempt: 1` en un desenlace local representa una observación de estado.
+
+`emitDiagnostic` valida y proyecta la allowlist de #81 antes de aplicar el
+redactor W04. `App.tsx` inyecta un sink local sustituible en UI, sync y retry.
+La señal W09 conserva su observador independiente. No se espera al sink
+ni se registra contexto de sesión, salud o geocodificación en W10.
+
+| Resultado observado | Señal W10 y límite |
+| --- | --- |
+| Cuerpo inválido con HTTP 200 | `200` y `error` con el mismo ID. `error` también abarca otras fallas recuperables y no incluye mensaje ni contenido. |
+| Timeout con confirmación posterior | `timeout` y el código del siguiente intento. Sólo `success` de sync después de guardar y reconocer acredita confirmación local. |
+| Red caída y copia local o cambio durable | `offline` en transporte o presentación de copia local, y `pending` si la intención queda por confirmar. Una copia local no acredita desconexión por sí sola. |
+| Versión incompatible o revisión requerida | `conflict` tras conservar la operación. Puede seguir a un 409, un 403 o un GET exitoso que detectó incompatibilidad. La señal excluye los campos del conflicto. |
+| Cancelación explícita | `cancelled` en UI. Si ya se inició una escritura, el transporte aún puede registrar su resultado bajo el mismo ID. |
+
+Se añade una secuencia volátil, una proyección por evento y una referencia
+opcional en los límites de solicitud. Los IDs pueden repetirse tras reiniciar
+el runtime. El sink local no ofrece agregación ni garantías de entrega, y
+la duración mide el tramo observado en cada capa. Un sink inyectado debe
+mantener breve su tramo síncrono porque comparte el hilo JavaScript. La
+suite de #83 ejercita la UI, SQLite y el backend didáctico en loopback.

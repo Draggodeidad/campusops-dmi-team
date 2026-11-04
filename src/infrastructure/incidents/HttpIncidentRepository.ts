@@ -25,9 +25,10 @@ export class HttpIncidentRepository implements IncidentRepository {
     };
   }
 
-  async findAll(signal?: AbortSignal): Promise<readonly Incident[]> {
+  async findAll(signal?: AbortSignal, correlationId?: string): Promise<readonly Incident[]> {
     try {
       const response = await this.transport.send({
+        ...(correlationId !== undefined ? { correlationId } : {}),
         method: 'GET',
         path: '/v1/incidents',
         headers: this.authHeaders,
@@ -104,13 +105,14 @@ export class HttpIncidentRepository implements IncidentRepository {
     }
   }
 
-  async findById(id: string, signal?: AbortSignal): Promise<Incident | null> {
+  async findById(id: string, signal?: AbortSignal, correlationId?: string): Promise<Incident | null> {
     if (typeof id !== 'string' || id.trim().length === 0) {
       throw new ApplicationFailure('INVALID_INCIDENT_ID', 'Identificador de incidencia inválido.');
     }
 
     try {
       const response = await this.transport.send({
+        ...(correlationId !== undefined ? { correlationId } : {}),
         method: 'GET',
         path: `/v1/incidents/${encodeURIComponent(id)}`,
         headers: this.authHeaders,
@@ -184,7 +186,7 @@ export class HttpIncidentRepository implements IncidentRepository {
     }
   }
 
-  async create(input: CreateIncidentData): Promise<Incident> {
+  async create(input: CreateIncidentData, correlationId?: string): Promise<Incident> {
     input = { ...input };
     const key =
       input.idempotencyKey && input.idempotencyKey.trim().length >= 8
@@ -193,6 +195,7 @@ export class HttpIncidentRepository implements IncidentRepository {
 
     try {
       const response = await this.transport.send({
+        ...(correlationId !== undefined ? { correlationId } : {}),
         method: 'POST',
         path: '/v1/incidents',
         headers: {
@@ -289,7 +292,7 @@ export class HttpIncidentRepository implements IncidentRepository {
     }
   }
 
-  async performAction(input: IncidentActionData): Promise<Incident> {
+  async performAction(input: IncidentActionData, correlationId?: string): Promise<Incident> {
     input = { ...input };
     const key =
       input.idempotencyKey && input.idempotencyKey.trim().length >= 8
@@ -307,6 +310,7 @@ export class HttpIncidentRepository implements IncidentRepository {
       }
 
       const response = await this.transport.send({
+        ...(correlationId !== undefined ? { correlationId } : {}),
         method: 'POST',
         path: `/v1/incidents/${encodeURIComponent(input.incidentId)}/actions`,
         headers: {

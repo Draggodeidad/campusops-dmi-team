@@ -14,8 +14,8 @@ export type RemoteIncidentState = Readonly<{
 
 /** apply returns only after verifying the exact operation's server receipt. */
 export interface IncidentSyncGateway {
-  read(incidentId: string, identity: SyncIdentity): Promise<RemoteIncidentState>;
-  apply(operation: PendingIncidentOperation, identity: SyncIdentity): Promise<RemoteIncidentState>;
+  read(incidentId: string, identity: SyncIdentity, correlationId?: string): Promise<RemoteIncidentState>;
+  apply(operation: PendingIncidentOperation, identity: SyncIdentity, correlationId?: string): Promise<RemoteIncidentState>;
 }
 
 export type SyntheticPhoto = Readonly<{ localUri: string; mediaType: string; byteLength: number }>;

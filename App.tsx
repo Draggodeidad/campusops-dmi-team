@@ -11,6 +11,7 @@ import type { SessionSecretStore } from './src/application/session/SessionSecret
 import type { IncidentTransport } from './src/infrastructure/http/IncidentTransport';
 import { DefaultSessionController } from './src/application/session/DefaultSessionController';
 import { SystemClock } from './src/application/session/SessionClock';
+import type { DiagnosticSink } from './src/application/telemetry/emitDiagnostic';
 import { GetBackendStatus } from './src/application/system/GetBackendStatus';
 import { resolveSync } from './src/application/sync/resolveSync';
 import { deduplicateOperations } from './src/application/sync/deduplicateOperations';
@@ -45,6 +46,7 @@ export function createGraph(options: Readonly<{
   retryClock?: ResilienceClock;
   retryConfiguration?: RetryConfiguration;
   retryObserver?: RetryObserver;
+  diagnosticSink?: DiagnosticSink;
   locationProvider?: LocationProvider;
   locationCache?: LocationCache;
   locationClock?: Pick<ResilienceClock, 'now'>;
@@ -63,8 +65,11 @@ export function createGraph(options: Readonly<{
   const sessionStore = options.secretStore ?? new ExpoSecureSessionSecretStore();
   const sessionClock = options.clock ?? new SystemClock();
   const sessionController = new DefaultSessionController(sessionProvider, sessionStore, sessionClock);
+  const diagnosticSink: DiagnosticSink | undefined = options.diagnosticSink ?? (process.env.NODE_ENV === 'test'
+    ? undefined : event => { console.info('campusops.diagnostic', event); });
   const retryExecutor = new IncidentRetryExecutor(options.retryClock ?? new SystemResilienceClock(), options.retryConfiguration,
-    options.retryObserver ?? (metric => { if (process.env.NODE_ENV !== 'test') console.info('campusops.retry', metric); }));
+    options.retryObserver ?? (metric => { if (process.env.NODE_ENV !== 'test') console.info('campusops.retry', metric); }),
+    diagnosticSink);
   const sessionTransport = new SessionTransportDecorator(baseTransport, sessionController, retryExecutor);
 
   const repository: IncidentRepository = isTest
@@ -84,11 +89,12 @@ export function createGraph(options: Readonly<{
   const localWorkspace = options.localWorkspace ?? createExpoWorkspace();
   const incidentSync = new IncidentWorkspace(localWorkspace, sessionController,
     new HttpIncidentSyncGateway(sessionTransport), options.syntheticPhotos ?? new ExpoSyntheticPhotoSource(),
-    options.operationId ?? (() => `campus-op-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`));
+    options.operationId ?? (() => `campus-op-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`), diagnosticSink);
   const performIncidentAction = new PerformIncidentAction(repository, isTest ? undefined : incidentSync);
 
   return {
     lookupIncidentLocation,
+    diagnosticSink,
     repository,
     localWorkspace,
     incidentSync,
@@ -113,6 +119,7 @@ export default function App() {
   return (
     <CampusOpsApp
       lookupIncidentLocation={defaultGraph.lookupIncidentLocation}
+      diagnosticSink={defaultGraph.diagnosticSink}
       createIncident={defaultGraph.createIncident}
       getBackendStatus={defaultGraph.getBackendStatus}
       getIncidentById={defaultGraph.getIncidentById}

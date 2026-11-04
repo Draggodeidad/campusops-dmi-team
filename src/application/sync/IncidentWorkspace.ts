@@ -6,6 +6,8 @@ import type { LocalIncidentSnapshot } from '../persistence/LocalIncidentSnapshot
 import type { LocalWorkspace } from '../persistence/LocalWorkspace';
 import type { SessionController } from '../session/SessionController';
 import type { SessionSnapshot } from '../session/SessionSnapshot';
+import type { DiagnosticSink } from '../telemetry/emitDiagnostic';
+import { nextCorrelationId, startDiagnosticRequest } from '../telemetry/startDiagnosticRequest';
 import { deduplicateOperations } from './deduplicateOperations';
 import { resolveSync } from './resolveSync';
 import { incidentRecord, recordIncident } from './incidentRecord';
@@ -38,6 +40,7 @@ export class IncidentWorkspace {
     private readonly gateway: IncidentSyncGateway,
     private readonly photos: SyntheticPhotoSource,
     private readonly nextId: () => string,
+    private readonly diagnosticSink?: DiagnosticSink,
   ) {}
 
   private identity(): Identity {
@@ -117,12 +120,12 @@ export class IncidentWorkspace {
   }
 
   /** Existing start button: persist first, then attempt synchronization, including when offline. */
-  async start(incidentId: string, expectedVersion: number, operationId?: string): Promise<Incident> {
+  async start(incidentId: string, expectedVersion: number, operationId?: string, correlationId = nextCorrelationId()): Promise<Incident> {
     const identity = this.identity();
     const alreadyRecorded = await this.run(async current => {
       let snapshot = await this.workspace.getSnapshot(incidentId);
       if (!snapshot || snapshot.ownerActorId !== current.actorId) {
-        const remote = await this.gateway.read(incidentId, current);
+        const remote = await this.gateway.read(incidentId, current, correlationId);
         this.check(current);
         const pending = await this.workspace.pending.listPending();
         if (pending.some(op => op.incidentId === incidentId)) throw new ApplicationFailure('VERSION_CONFLICT', 'Hay una intención previa que requiere revisión.');
@@ -146,7 +149,7 @@ export class IncidentWorkspace {
     this.check(identity);
     if (!alreadyRecorded) await this.record(incidentId, { action: 'start' }, operationId);
     this.check(identity);
-    const synchronized = await this.synchronize();
+    const synchronized = await this.synchronize(correlationId, incidentId);
     this.check(identity);
     return synchronized.find(view => view.incident.id === incidentId)!.incident;
   }
@@ -203,7 +206,7 @@ export class IncidentWorkspace {
   }
 
   /** One explicit cycle. The injected HTTP/session graph owns the shared retry budget. */
-  synchronize(): Promise<readonly LocalIncidentView[]> {
+  synchronize(correlationId = nextCorrelationId(), sourceIncidentId?: string): Promise<readonly LocalIncidentView[]> {
     return this.run(async identity => {
       const operations = deduplicateOperations(await this.workspace.pending.listPending());
       const stopped = new Set<string>();
@@ -221,8 +224,10 @@ export class IncidentWorkspace {
         if (processed.has(operation.operationId)) continue;
         processed.add(operation.operationId);
         if (!active(snapshot, operation)) continue;
+        const diagnostic = startDiagnosticRequest(this.diagnosticSink, operation.incidentId,
+          sourceIncidentId === undefined || sourceIncidentId === operation.incidentId ? correlationId : undefined);
         try {
-          const remote = await this.gateway.read(operation.incidentId, identity);
+          const remote = await this.gateway.read(operation.incidentId, identity, diagnostic.correlationId);
           this.check(identity);
           const receiptExists = remote.history.some(event => event.operationId === operation.operationId
             && event.actorId === operation.actorId && event.action === operation.action);
@@ -230,12 +235,13 @@ export class IncidentWorkspace {
           snapshot = { ...snapshot, remote: remote.record, remoteReaderActorId: identity.actorId };
           if (!receiptExists && result.kind === 'conflict') {
             await this.workspace.saveSnapshot(this.state(snapshot, operation.operationId, { state: 'conflict', fields: result.fields }));
+            diagnostic.report('conflict');
             stopped.add(operation.incidentId);
             continue;
           }
           // Compatible fields are presented locally; they do not authorize rewriting the queued body/version.
           if (result.kind === 'merged') snapshot = { ...snapshot, local: { ...snapshot.local, fields: result.fields } };
-          const confirmed = await this.gateway.apply(operation, identity);
+          const confirmed = await this.gateway.apply(operation, identity, diagnostic.correlationId);
           this.check(identity);
           if (!confirmed) throw new ApplicationFailure('SYNC_CONFIRMATION_INVALID', 'No se recibió confirmación.');
           // An idempotent replay may return the old receipt, while GET already saw a newer authorized state.
@@ -250,6 +256,7 @@ export class IncidentWorkspace {
           await this.workspace.saveSnapshot(snapshot);
           this.check(identity);
           await this.workspace.pending.acknowledge(operation.operationId);
+          diagnostic.report('success');
         } catch (error) {
           this.check(identity);
           if (!(error instanceof ApplicationFailure)) throw error;
@@ -258,6 +265,7 @@ export class IncidentWorkspace {
           await this.workspace.saveSnapshot(this.state(snapshot, operation.operationId, { state,
             ...(state === 'forbidden' ? { fields: ['work'] } : {}),
           }));
+          diagnostic.report(state === 'retry' ? 'pending' : 'conflict');
           stopped.add(operation.incidentId);
         }
       }
@@ -267,9 +275,9 @@ export class IncidentWorkspace {
   }
 
   /** Authorized live read is mandatory before exposing remote assignment or reviewing another actor's conflict. */
-  inspect(incidentId: string): Promise<ConflictReview> {
+  inspect(incidentId: string, correlationId?: string): Promise<ConflictReview> {
     return this.run(async identity => {
-      const remote = await this.gateway.read(incidentId, identity);
+      const remote = await this.gateway.read(incidentId, identity, correlationId);
       this.check(identity);
       const snapshot = await this.workspace.getSnapshot(incidentId);
       if (!snapshot || (snapshot.ownerActorId !== identity.actorId && identity.role !== 'coordinator')) {
@@ -288,9 +296,9 @@ export class IncidentWorkspace {
     });
   }
 
-  keepRemote(incidentId: string, expectedVersion: number): Promise<void> {
+  keepRemote(incidentId: string, expectedVersion: number, correlationId?: string): Promise<void> {
     return this.run(async identity => {
-      const remote = await this.gateway.read(incidentId, identity);
+      const remote = await this.gateway.read(incidentId, identity, correlationId);
       this.check(identity);
       if (remote.record.version !== expectedVersion) throw new ApplicationFailure('VERSION_CONFLICT', 'La incidencia cambió; vuelve a revisar la decisión.');
       let snapshot = await this.workspace.getSnapshot(incidentId);
@@ -312,7 +320,7 @@ export class IncidentWorkspace {
   }
 
   /** Explicit new intent on a freshly authorized base, retaining the original operation as an audit record. */
-  reformulate(incidentId: string, operationId: string, expectedVersion: number): Promise<LocalIncidentView> {
+  reformulate(incidentId: string, operationId: string, expectedVersion: number, correlationId?: string): Promise<LocalIncidentView> {
     return this.run(async identity => {
       let snapshot = await this.owned(incidentId, identity);
       const operations = await this.workspace.pending.listPending();
@@ -321,7 +329,7 @@ export class IncidentWorkspace {
       if (snapshot.operationStates?.[operationId]?.state !== 'conflict') {
         throw new ApplicationFailure('VERSION_CONFLICT', 'Primero confirma el conflicto; una respuesta perdida requiere replay original.');
       }
-      const remote = await this.gateway.read(incidentId, identity);
+      const remote = await this.gateway.read(incidentId, identity, correlationId);
       this.check(identity);
       if (remote.record.version !== expectedVersion || remote.history.some(event => event.operationId === operationId)) {
         throw new ApplicationFailure('VERSION_CONFLICT', 'Actualiza o confirma la operación original antes de reformular.');

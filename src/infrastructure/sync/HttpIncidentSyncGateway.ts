@@ -57,15 +57,18 @@ export class HttpIncidentSyncGateway implements IncidentSyncGateway {
     try { return JSON.parse(response.bodyText) as unknown; } catch { return invalid(); }
   }
 
-  async read(incidentId: string, identity: SyncIdentity): Promise<RemoteIncidentState> {
-    const response = await this.send({ method: 'GET', path: `/v1/incidents/${encodeURIComponent(incidentId)}`, session: identity });
+  async read(incidentId: string, identity: SyncIdentity, correlationId?: string): Promise<RemoteIncidentState> {
+    const response = await this.send({ method: 'GET', path: `/v1/incidents/${encodeURIComponent(incidentId)}`,
+      session: identity, ...(correlationId !== undefined ? { correlationId } : {}),
+    });
     return remoteState(this.decode(response), incidentId);
   }
 
-  async apply(operation: PendingIncidentOperation, identity: SyncIdentity): Promise<RemoteIncidentState> {
+  async apply(operation: PendingIncidentOperation, identity: SyncIdentity, correlationId?: string): Promise<RemoteIncidentState> {
     if (identity.actorId !== operation.actorId) throw new ApplicationFailure('UNAUTHORIZED_ACTION', 'La operación pertenece a otra sesión.');
     const response = await this.send({ method: 'POST', path: `/v1/incidents/${encodeURIComponent(operation.incidentId)}/actions`,
       headers: { 'idempotency-key': operation.operationId }, session: identity,
+      ...(correlationId !== undefined ? { correlationId } : {}),
       body: JSON.stringify({ ...operation.payload, action: operation.action, baseVersion: operation.baseVersion }),
     });
     const receipt = object(this.decode(response));

@@ -5,6 +5,7 @@ flowchart TB
 
   subgraph Composition["Composition Root — App.tsx"]
     Root["Construcción e inyección manual"]
+    ConsoleDiagnostic["Sink local — consola"]
   end
 
   subgraph UI["UI — src/ui"]
@@ -21,6 +22,8 @@ flowchart TB
     Redaction["redactForTelemetry — W04"]
     RemoteUiPolicy["RemoteUiState — identidad, resolución y cancelación W10"]
     DiagnosticEmission["emitDiagnostic — allowlist y sink inyectable W10"]
+    DiagnosticRequest["startDiagnosticRequest — correlación W10 volátil"]
+    DiagnosticSink["DiagnosticSink — puerto de Application"]
     LookupLocation["LookupIncidentLocation — normalización/caché/fallback"]
     LocationValidation["selectIncidentLocation / evaluateIncidentLocation — validación única"]
     LocationPorts["LocationProvider / LocationCache / LocationLookupResult"]
@@ -229,3 +232,17 @@ flowchart TB
   CampusApp --> LocalAttention
   OfflinePanel --> LocalAttention
   W10UiTests["Suite #82 — navegación, cancelación y recuperación"] --> CampusApp
+
+  RemoteRequestHook["useRemoteRequest — intención UI"] --> RemoteUiPolicy
+  CampusApp --> RemoteRequestHook
+  CampusApp --> DiagnosticRequest
+  RemoteRequestHook --> DiagnosticRequest
+  OfflinePanel --> DiagnosticRequest
+  SyncFlow --> DiagnosticRequest
+  RetryExecutor --> DiagnosticRequest
+  RetryExecutor --> DiagnosticEmission
+  DiagnosticRequest --> DiagnosticEmission
+  DiagnosticEmission --> DiagnosticSink
+  Root --> ConsoleDiagnostic
+  ConsoleDiagnostic --> DiagnosticSink
+  W10DiagnosticTests["Suite #83 — UI, SQLite y backend local"] --> Root

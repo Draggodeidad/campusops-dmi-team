@@ -5,12 +5,12 @@ import { ApplicationFailure } from '../errors/ApplicationFailure';
 export class GetIncidentById {
   constructor(private readonly repository: IncidentRepository) {}
 
-  async execute(id: string, signal?: AbortSignal): Promise<Incident | null> {
+  async execute(id: string, signal?: AbortSignal, correlationId?: string): Promise<Incident | null> {
     if (typeof id !== 'string' || id.trim().length === 0) {
       throw new ApplicationFailure('INVALID_INCIDENT_ID', 'La incidencia solicitada no es válida.');
     }
     try {
-      return await this.repository.findById(id, signal);
+      return await this.repository.findById(id, signal, correlationId);
     } catch (error: unknown) {
       if (error instanceof ApplicationFailure) throw error;
       throw new ApplicationFailure(
