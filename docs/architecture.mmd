@@ -19,6 +19,8 @@ flowchart TB
     RetryPolicy["planRetry / decideRetry — límites puros W09"]
     RetryClock["ResilienceClock — reloj/espera inyectables"]
     Redaction["redactForTelemetry — W04"]
+    RemoteUiPolicy["RemoteUiState — identidad, resolución y cancelación W10"]
+    DiagnosticEmission["emitDiagnostic — allowlist y sink inyectable W10"]
     LookupLocation["LookupIncidentLocation — normalización/caché/fallback"]
     LocationValidation["selectIncidentLocation / evaluateIncidentLocation — validación única"]
     LocationPorts["LocationProvider / LocationCache / LocationLookupResult"]
@@ -213,3 +215,9 @@ flowchart TB
   RetryTests["W09 owner: policy / HTTP-sesión / disco-backend / fetch loopback"] --> Root
   LocationTests["Suites #61 + probe externo opt-in"] --> Root
   LocationEvaluation["course-evaluation.selectIncidentLocation — reexport"] --> LocationValidation
+
+  RemoteEvaluation["course-evaluation.reduceRemoteResponses — adaptador W10"] --> RemoteUiPolicy
+  DiagnosticEmission --> Redaction
+  W10BaselineTests["Suite #81 — contratos disponibles para #82 y #83"] --> RemoteUiPolicy
+  W10BaselineTests --> RemoteEvaluation
+  W10BaselineTests --> DiagnosticEmission

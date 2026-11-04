@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "week": 10,
+  "commitSha": "c6d2746fdf6db5732df24814f792712b2d02ca92",
+  "generatedAt": "2026-11-03T18:09:59-06:00",
+  "scope": "Baseline #81. El comportamiento de las pantallas, la correlación integrada y la evidencia final corresponden a otras issues.",
+  "node": "v22.22.0",
+  "npm": "10.9.4",
+  "checks": [
+    {
+      "id": "setup",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make setup",
+      "exitCode": 0,
+      "evidence": "npm ci instaló 975 paquetes desde el lockfile."
+    },
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "make feedback",
+      "exitCode": 0,
+      "evidence": "Tipos y lint terminaron con éxito. Pasaron 87 pruebas en 19 suites, arquitectura sin violaciones, escaneo y auditoría crítica. Expo exportó Android en dist/export."
+    },
+    {
+      "id": "verify",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-10",
+      "exitCode": 0,
+      "evidence": "Pasaron las 10 comprobaciones del evaluador, incluido smoke y self-test del backend."
+    },
+    {
+      "id": "public",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "make public-test-week-10",
+      "exitCode": 2,
+      "evidence": "Pasaron 89 pruebas en 20 suites, incluida la prueba pública W10. El único check fallido fue required_evidence: faltan los cinco entregables de cierre reservados a issues posteriores."
+    },
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-10:baseline",
+      "exitCode": 0,
+      "evidence": "Pasaron 14 pruebas en dos suites. La selección activa vence a la respuesta obsoleta, la cancelación cierra la espera y el sink sólo recibe campos técnicos aunque la entrada incluya datos sensibles anidados."
+    },
+    {
+      "id": "smoke",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:smoke",
+      "exitCode": 0,
+      "evidence": "Pasó la prueba smoke."
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "evidence": "Pasaron las tres pruebas de incidencias."
+    },
+    {
+      "id": "architecture-tests",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture",
+      "exitCode": 0,
+      "evidence": "Pasaron las dos pruebas del comprobador de arquitectura."
+    },
+    {
+      "id": "week06",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-06",
+      "exitCode": 0,
+      "evidence": "Pasaron 31 pruebas de sesión y autorización."
+    },
+    {
+      "id": "week06-readiness",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 0,
+      "evidence": "Pasaron las invariantes de readiness W06."
+    },
+    {
+      "id": "week08",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "exitCode": 0,
+      "evidence": "Pasaron 107 pruebas y el probe del proveedor, incluyendo migración, persistencia, sync e integración."
+    },
+    {
+      "id": "week09-baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:baseline",
+      "exitCode": 0,
+      "evidence": "Pasaron cuatro pruebas de los contratos W09."
+    },
+    {
+      "id": "week09-public",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-09:public",
+      "exitCode": 0,
+      "evidence": "Pasaron cuatro pruebas públicas W09."
+    },
+    {
+      "id": "week09-retry",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:retry",
+      "exitCode": 0,
+      "evidence": "Pasaron 81 pruebas y el probe loopback de respuesta perdida e idempotencia."
+    },
+    {
+      "id": "week09-location",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:location",
+      "exitCode": 0,
+      "evidence": "Pasaron 78 pruebas y el probe loopback de ubicación con timeout, 429 y alternativa manual."
+    }
+  ]
+}
