@@ -484,3 +484,26 @@ con hasta cuatro callbacks y rechaza un reloj regresivo o scheduler incoherente.
 La regresión reproduce el fallo previo y comprueba que no se envía antes de
 Retry-After; un scheduler siempre anticipado termina en error acotado.
 El probe nativo publica sólo etapa/clase/código sanitizados si falla.
+
+## Anexo W10 — contratos de estado y diagnóstico #81 (03-11-2026)
+
+La selección puede cambiar mientras la sesión sigue vigente. El control de
+generación W06 por sí solo no distingue dos consultas de la misma sesión.
+W09 ya filtra métricas de retry. W10 necesita además una señal técnica
+compartida para consulta y atención.
+
+Se consideró resolver la carrera con banderas locales de pantalla o confiar
+en que el aborto del transporte siempre detenga el trabajo. Las banderas
+duplicarían decisiones entre flujos y el aborto no garantiza que una
+promesa tardía deje de resolverse. Application publica una única política
+pura que sólo acepta eventos de la intención activa durante `loading`.
+Cancelación cierra la espera y el adaptador público reutiliza la política.
+El costo es asignar y conservar un ID nuevo en cada intención.
+
+Para diagnóstico, sanitizar un contexto completo conservaría texto bajo
+claves desconocidas. El emisor proyecta y valida campos técnicos, reutiliza
+el redactor W04 e invoca un sink sustituible. Esto reduce el contexto
+disponible a cambio de un límite verificable y mantiene los fallos del
+sink aislados. Las pruebas de #81 cubren ambos contratos y la firma pública.
+#82 conecta la política a las pantallas y #83 conecta el emisor a los flujos
+reales. La composición actual conserva las dependencias W06–W09.
