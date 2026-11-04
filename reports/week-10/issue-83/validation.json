@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "week": 10,
+  "commitSha": "f8d864507889663b774cabc5bd90255e2603a23e",
+  "generatedAt": "2026-11-03T18:43:33-06:00",
+  "scope": "Integración #83. Evidencia técnica para la suite de sanitización de #86 y la consolidación de #90.",
+  "toolchain": {
+    "node": "22.22.0",
+    "npm": "10.9.4"
+  },
+  "checks": [
+    {
+      "id": "feedback",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make feedback",
+      "exitCode": 0,
+      "evidence": "Tipos, lint, escaneo y auditoría con umbral critical completados. Pasaron 87 pruebas en 19 suites. Expo exportó el bundle Android en dist/export."
+    },
+    {
+      "id": "verify-week-10",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "make verify-week-10",
+      "exitCode": 0,
+      "evidence": "El evaluador registró 10 comprobaciones exitosas, incluidos smoke y self-test del backend."
+    },
+    {
+      "id": "public-gate",
+      "status": "fail",
+      "scenarioType": "boundary",
+      "command": "make public-test-week-10",
+      "exitCode": 2,
+      "evidence": "Pasaron 89 pruebas en 20 suites, incluida la prueba pública W10. El único check fallido fue required_evidence por los cinco entregables de cierre pendientes."
+    },
+    {
+      "id": "baseline",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-10:baseline",
+      "exitCode": 0,
+      "evidence": "Pasaron las 14 pruebas de los contratos #81 y la prueba pública W10 en dos suites."
+    },
+    {
+      "id": "nested-redaction",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx",
+      "exitCode": 0,
+      "prediction": "Las listas anidadas conservan la forma, la entrada sigue intacta y el sink no recibe contexto libre.",
+      "evidence": "Las dos suites pasaron, 12 pruebas en total. W04 devolvió una estructura nueva con claves sensibles anidadas redactadas. W10 entregó sólo los cinco campos de la allowlist del fixture."
+    },
+    {
+      "id": "recoverable-ui-error",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx",
+      "exitCode": 0,
+      "prediction": "El resultado HTTP y el error de presentación se correlacionan. Un reintento manual abre otra intención.",
+      "evidence": "El GET con cuerpo inválido registró 200 y error bajo un mismo ID sintético. La pantalla mostró el aviso recuperable. Al reintentar se observó 200 y success con otro ID."
+    },
+    {
+      "id": "sink-isolation-and-replay",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx",
+      "exitCode": 0,
+      "prediction": "Un sink que lanza, rechaza o no resuelve permite confirmar el replay tras una respuesta perdida.",
+      "evidence": "Los tres escenarios de sink produjeron el orden 200, timeout, 200, success, success bajo el ID de atención. La escritura se envió dos veces con el mismo cuerpo y cabeceras, el historial de prueba tuvo un efecto y la cola quedó vacía."
+    },
+    {
+      "id": "offline-and-conflict",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx",
+      "exitCode": 0,
+      "prediction": "La desconexión conserva un pendiente y un 409 posterior exige revisión sin reconocer la operación.",
+      "evidence": "La atención desconectada produjo offline y dos observaciones pending, de cola y UI. La sincronización manual usó otro ID y registró 200, 409 y conflict. La UI mostró el conflicto y SQLite conservó la misma operación."
+    },
+    {
+      "id": "architecture",
+      "status": "pass",
+      "scenarioType": "boundary",
+      "command": "npm run test:architecture && npm run check:architecture",
+      "exitCode": 0,
+      "evidence": "Pasaron 2 pruebas y el comprobador de imports devolvió cero violaciones."
+    },
+    {
+      "id": "incidents",
+      "status": "pass",
+      "scenarioType": "nominal",
+      "command": "npm run test:incidents",
+      "exitCode": 0,
+      "evidence": "Pasaron 3 pruebas de navegación, sustitución y estado inicial."
+    },
+    {
+      "id": "session",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run check:week-06-readiness",
+      "exitCode": 0,
+      "evidence": "Pasaron las 8 comprobaciones de readiness W06."
+    },
+    {
+      "id": "workspace",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-08",
+      "exitCode": 0,
+      "evidence": "Pasaron 108 pruebas acumuladas W08 y el probe del proveedor."
+    },
+    {
+      "id": "retry",
+      "status": "pass",
+      "scenarioType": "failure",
+      "command": "npm run test:week-09:retry",
+      "exitCode": 0,
+      "evidence": "Pasaron 82 pruebas W09 y el probe loopback de respuesta perdida y replay idempotente."
+    }
+  ],
+  "contribution": {
+    "commitShas": [
+      "f8d864507889663b774cabc5bd90255e2603a23e"
+    ],
+    "files": [
+      "src/application/telemetry/startDiagnosticRequest.ts",
+      "src/infrastructure/http/IncidentRetryExecutor.ts",
+      "src/application/sync/IncidentWorkspace.ts",
+      "src/ui/useRemoteRequest.ts",
+      "course-tests/week-10-diagnostics-integration.test.tsx"
+    ],
+    "tests": [
+      "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx"
+    ],
+    "assistance": "Codex propuso e implementó la integración, preparó pruebas y documentación y ejecutó las comprobaciones registradas.",
+    "humanValidation": "Pendiente de revisión en el PR. El registro individual consolidado corresponde al cierre del equipo."
+  }
+}
