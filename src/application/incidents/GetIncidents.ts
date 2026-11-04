@@ -5,9 +5,9 @@ import { ApplicationFailure } from '../errors/ApplicationFailure';
 export class GetIncidents {
   constructor(private readonly repository: IncidentRepository) {}
 
-  async execute(signal?: AbortSignal): Promise<readonly Incident[]> {
+  async execute(signal?: AbortSignal, correlationId?: string): Promise<readonly Incident[]> {
     try {
-      return await this.repository.findAll(signal);
+      return await this.repository.findAll(signal, correlationId);
     } catch (error: unknown) {
       if (error instanceof ApplicationFailure) throw error;
       throw new ApplicationFailure(

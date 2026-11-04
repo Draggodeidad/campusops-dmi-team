@@ -23,7 +23,7 @@ export type CreateIncidentInput = Readonly<{
 export class CreateIncident {
   constructor(private readonly repository: IncidentRepository) {}
 
-  async execute(input: CreateIncidentInput): Promise<Incident> {
+  async execute(input: CreateIncidentInput, correlationId?: string): Promise<Incident> {
     if (!input || typeof input !== 'object') {
       throw new ApplicationFailure(
         'INVALID_INCIDENT_INPUT',
@@ -68,6 +68,6 @@ export class CreateIncident {
       ...(trimmedKey ? { idempotencyKey: trimmedKey } : {}),
     };
 
-    return await this.repository.create(createPayload);
+    return await this.repository.create(createPayload, correlationId);
   }
 }

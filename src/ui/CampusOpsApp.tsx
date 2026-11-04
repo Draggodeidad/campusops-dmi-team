@@ -24,6 +24,8 @@ import { remoteUiActions } from '../application/ui-state/RemoteUiState';
 import type { RemoteUiOutcome } from '../application/ui-state/RemoteUiState';
 import { localAttentionOutcome } from '../application/ui-state/localAttentionOutcome';
 
+import type { DiagnosticSink } from '../application/telemetry/emitDiagnostic';
+import { startDiagnosticRequest } from '../application/telemetry/startDiagnosticRequest';
 import type { LookupIncidentLocation } from '../application/location/LookupIncidentLocation';
 
 type Props = Readonly<{
@@ -35,6 +37,7 @@ type Props = Readonly<{
   sessionController?: SessionController;
   performIncidentAction?: PerformIncidentAction;
   incidentSync?: IncidentWorkspace;
+  diagnosticSink?: DiagnosticSink | undefined;
 }>;
 
 type ActiveView = 'list' | 'detail' | 'create';
@@ -67,14 +70,13 @@ export function CampusOpsApp({
   sessionController,
   performIncidentAction,
   incidentSync,
+  diagnosticSink,
 }: Props) {
   const [backendStatus, setBackendStatus] = useState<BackendStatus | 'checking'>('checking');
-  const requestSequence = useRef(0);
-  const nextRequestId = useCallback(() => `w10-request-${++requestSequence.current}`, []);
   const { state: list, begin: beginList, resolve: resolveList, cancel: cancelList, clear: clearList } =
-    useRemoteRequest<readonly Incident[]>(nextRequestId);
-  const detail = useRemoteRequest<Incident>(nextRequestId);
-  const attention = useRemoteRequest<Incident>(nextRequestId);
+    useRemoteRequest<readonly Incident[]>(diagnosticSink);
+  const detail = useRemoteRequest<Incident>(diagnosticSink);
+  const attention = useRemoteRequest<Incident>(diagnosticSink);
   const { clear: clearDetail } = detail;
   const { clear: clearAttention } = attention;
   const [localViews, setLocalViews] = useState<readonly LocalIncidentView[] | null>(null);
@@ -131,7 +133,7 @@ export function CampusOpsApp({
   const refreshIncidents = useCallback(async () => {
     const { intent, signal } = beginList(null);
     try {
-      const items = await getIncidents.execute(signal);
+      const items = await getIncidents.execute(signal, intent.requestId);
       resolveList(intent, items.length ? { state: 'success', value: items } : { state: 'empty' });
     } catch (error: unknown) {
       if (signal.aborted) return;
@@ -156,7 +158,7 @@ export function CampusOpsApp({
     const { intent, signal } = detail.begin(id);
     setActiveView('detail');
     try {
-      const incident = await getIncidentById.execute(id, signal);
+      const incident = await getIncidentById.execute(id, signal, intent.requestId);
       detail.resolve(intent, incident ? { state: 'success', value: incident } : { state: 'empty' });
     } catch (error: unknown) {
       if (signal.aborted) return;
@@ -198,16 +200,21 @@ export function CampusOpsApp({
   const handleCreateSubmit = async (data: CreateIncidentInput) => {
     if (!createIncident) return;
     const generation = sessionController?.getSnapshot().generation;
+    const diagnostic = startDiagnosticRequest(diagnosticSink);
     setCreateLoading(true);
     setCreateError(null);
     try {
-      await createIncident.execute(data);
+      await createIncident.execute(data, diagnostic.correlationId);
       if (!isCurrent(generation)) return;
+      diagnostic.report('success');
       await refreshIncidents();
       if (!isCurrent(generation)) return;
       setActiveView('list');
     } catch (error: unknown) {
-      if (isCurrent(generation)) setCreateError(presentIncidentFailure(error, 'create'));
+      if (isCurrent(generation)) {
+        setCreateError(presentIncidentFailure(error, 'create'));
+        diagnostic.report('error');
+      }
     } finally {
       if (isCurrent(generation)) setCreateLoading(false);
     }
@@ -272,7 +279,7 @@ export function CampusOpsApp({
         baseVersion: incident.version,
         actorRole: session?.role ?? null,
         ...(diagnosis !== undefined ? { diagnosis } : {}),
-      });
+      }, intent.requestId);
     } catch (error: unknown) {
       failure = error;
     } finally {
@@ -398,6 +405,7 @@ export function CampusOpsApp({
         <OfflineWorkspacePanel
           key={session?.generation}
           workspace={incidentSync}
+          diagnosticSink={diagnosticSink}
           incident={incident}
           cacheIncident={remoteIncident}
           selection={currentDetail?.intent ?? null}
@@ -406,11 +414,11 @@ export function CampusOpsApp({
           writing={writing}
           onBusyChanged={setWorkspaceBusy}
           onSelect={selectLocal}
-          onRecovered={(recovered, state) => {
+          onRecovered={(recovered, state, correlationId) => {
             if (!isCurrent(session?.generation) || !currentDetail || currentDetail.intent.selectionId !== recovered.id
               || !detail.isCurrent(currentDetail.intent)) return;
             attention.clear();
-            detail.resolve(detail.begin(recovered.id).intent, { state, value: recovered });
+            detail.resolve(detail.begin(recovered.id, correlationId).intent, { state, value: recovered });
           }}
         />
       ) : null}

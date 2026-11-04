@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import type { DiagnosticSink } from '../application/telemetry/emitDiagnostic';
+import { startDiagnosticRequest } from '../application/telemetry/startDiagnosticRequest';
 import { settleRemoteRequest, startRemoteRequest } from '../application/ui-state/RemoteUiState';
 import type { RemoteRequestEvent, RemoteRequestIntent, RemoteUiOutcome, RemoteUiState } from '../application/ui-state/RemoteUiState';
 
-export function useRemoteRequest<T>(nextRequestId: () => string) {
+export function useRemoteRequest<T>(diagnosticSink?: DiagnosticSink) {
   const [state, setState] = useState<RemoteUiState<T> | null>(null);
   const current = useRef<RemoteUiState<T> | null>(null);
   const controller = useRef<AbortController | null>(null);
+  const diagnostic = useRef<ReturnType<typeof startDiagnosticRequest> | null>(null);
 
   const publish = useCallback((next: RemoteUiState<T> | null) => {
     current.current = next;
@@ -19,6 +22,7 @@ export function useRemoteRequest<T>(nextRequestId: () => string) {
     const next = settleRemoteRequest(previous, event);
     if (next === previous) return false;
     publish(next);
+    if (next.state !== 'loading') diagnostic.current?.report(next.state);
     return true;
   }, [publish]);
 
@@ -29,18 +33,20 @@ export function useRemoteRequest<T>(nextRequestId: () => string) {
 
   const clear = useCallback(() => {
     publish(null);
+    diagnostic.current = null;
     controller.current?.abort();
     controller.current = null;
   }, [publish]);
 
-  const begin = useCallback((selectionId: string | null) => {
-    const intent: RemoteRequestIntent = { requestId: nextRequestId(), selectionId };
+  const begin = useCallback((selectionId: string | null, correlationId?: string) => {
+    diagnostic.current = startDiagnosticRequest(diagnosticSink, selectionId ?? undefined, correlationId);
+    const intent: RemoteRequestIntent = { requestId: diagnostic.current.correlationId, selectionId };
     publish(startRemoteRequest(intent));
     controller.current?.abort();
     const request = new AbortController();
     controller.current = request;
     return { intent, signal: request.signal };
-  }, [nextRequestId, publish]);
+  }, [diagnosticSink, publish]);
 
   const resolve = useCallback((intent: RemoteRequestIntent, outcome: RemoteUiOutcome<T>) =>
     settle({ type: 'resolve', intent, outcome }), [settle]);
@@ -48,6 +54,7 @@ export function useRemoteRequest<T>(nextRequestId: () => string) {
 
   useEffect(() => () => {
     current.current = null;
+    diagnostic.current = null;
     controller.current?.abort();
   }, []);
 

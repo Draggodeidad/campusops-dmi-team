@@ -2,6 +2,9 @@ import { ApplicationFailure } from '../../application/errors/ApplicationFailure'
 import { decideRetry, DEFAULT_RETRY_CONFIGURATION, validRetryConfiguration } from '../../application/resilience/RetryPolicy';
 import type { RetryConfiguration } from '../../application/resilience/RetryPolicy';
 import type { ResilienceClock } from '../../application/resilience/ResilienceClock';
+import { emitDiagnostic } from '../../application/telemetry/emitDiagnostic';
+import type { DiagnosticSink } from '../../application/telemetry/emitDiagnostic';
+import { nextCorrelationId } from '../../application/telemetry/startDiagnosticRequest';
 import { redactForTelemetry } from '../../application/telemetry/redactForTelemetry';
 import type { IncidentTransport, TransportRequest, TransportResponse } from './IncidentTransport';
 import { parseRetryAfter } from './parseRetryAfter';
@@ -21,7 +24,7 @@ export class IncidentRetryExecutor {
   private sequence = 0;
   private readonly configuration: RetryConfiguration;
   constructor(private readonly clock: ResilienceClock, configuration: RetryConfiguration = DEFAULT_RETRY_CONFIGURATION,
-    private readonly observe: RetryObserver = () => {}) {
+    private readonly observe: RetryObserver = () => {}, private readonly diagnosticSink?: DiagnosticSink) {
     if (!validRetryConfiguration(configuration)) throw new ApplicationFailure('INVALID_RETRY_CONFIGURATION', 'Configuración de reintentos inválida.');
     this.configuration = { ...configuration };
   }
@@ -38,6 +41,9 @@ export class IncidentRetryExecutor {
     const incidentId = /\/(campus-inc-\d{3})(?:\/actions)?$/.exec(original.path)?.[1];
     const key = Object.entries(original.headers ?? {}).find(([name]) => name.toLowerCase() === 'idempotency-key')?.[1];
     const observe = this.observe;
+    const diagnosticSink = this.diagnosticSink;
+    const diagnosticId = original.correlationId ?? (diagnosticSink ? nextCorrelationId() : undefined);
+    const diagnosticIncidentId = /\/(campus-inc-\d{1,15})(?:\/actions)?$/.exec(original.path)?.[1];
     const startedAt = clock.now();
     let previousTime = startedAt;
     let attempt = 0;
@@ -82,6 +88,11 @@ export class IncidentRetryExecutor {
         const metric = redactForTelemetry({ correlationId, ...(incidentId ? { incidentId } : {}),
           method: original.method, status, attempt, durationMs }) as RetryAttemptMetric;
         try { observe(metric); } catch { /* Telemetry cannot change an operation's outcome. */ }
+        if (diagnosticSink && diagnosticId !== undefined) {
+          void emitDiagnostic({ correlationId: diagnosticId,
+            ...(diagnosticIncidentId ? { incidentId: diagnosticIncidentId } : {}),
+            status: original.signal?.aborted ? 'cancelled' : status, attempt, durationMs }, diagnosticSink);
+        }
         if (original.signal?.aborted) throw new Error('Request cancelled');
         const header = response && Object.entries(response.headers).find(([name]) => name.toLowerCase() === 'retry-after')?.[1];
         const retryAfterMs = header !== undefined ? parseRetryAfter(header, clock.now()) : response?.retryAfterMs;

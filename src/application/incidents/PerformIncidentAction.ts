@@ -20,10 +20,10 @@ const COORDINATOR_ACTIONS = new Set<AllowedIncidentAction>(['close', 'reopen']);
 export class PerformIncidentAction {
   constructor(
     private readonly repository: IncidentRepository,
-    private readonly localStart?: { start(incidentId: string, baseVersion: number, operationId?: string): Promise<Incident> },
+    private readonly localStart?: { start(incidentId: string, baseVersion: number, operationId?: string, correlationId?: string): Promise<Incident> },
   ) {}
 
-  async execute(input: PerformIncidentActionInput): Promise<Incident> {
+  async execute(input: PerformIncidentActionInput, correlationId?: string): Promise<Incident> {
     if (!input || typeof input !== 'object') {
       throw new ApplicationFailure(
         'INVALID_INCIDENT_INPUT',
@@ -85,8 +85,8 @@ export class PerformIncidentAction {
     };
 
     if (input.action === 'start' && this.localStart) {
-      return this.localStart.start(actionData.incidentId, actionData.baseVersion, actionData.idempotencyKey);
+      return this.localStart.start(actionData.incidentId, actionData.baseVersion, actionData.idempotencyKey, correlationId);
     }
-    return await this.repository.performAction(actionData);
+    return await this.repository.performAction(actionData, correlationId);
   }
 }

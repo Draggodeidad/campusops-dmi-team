@@ -127,5 +127,18 @@
       "result": "exit 0; 78 ubicación, 81 retry, 2 arquitectura y cero violaciones.",
       "evidence": "reports/week-09/integration-order/validation.json"
     }
+  },
+  "followUpIssue83": {
+    "week": 10,
+    "issue": 83,
+    "commitSha": "f8d864507889663b774cabc5bd90255e2603a23e",
+    "scope": "Seguimiento aditivo de correlación W10. La evidencia histórica W02 conserva su SHA.",
+    "requirement": "Relacionar el resultado HTTP y el desenlace de UI o sync usando sólo el contexto técnico permitido.",
+    "decision": "Application valida y proyecta la señal W10. UI, sync y retry comparten correlación mediante puertos existentes y App.tsx inyecta el sink.",
+    "verification": {
+      "command": "npm run test:architecture && npm run check:architecture",
+      "result": "Ambos comandos terminaron con código 0. Pasaron 2 pruebas y el comprobador de imports devolvió cero violaciones.",
+      "evidence": "reports/week-10/issue-83/validation.json"
+    }
   }
 }
