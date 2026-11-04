@@ -52,9 +52,8 @@ test('application use cases accept a substitute repository', async () => {
 test('shows a helpful placeholder when no incident is selected', async () => {
   const view = await render(
     <IncidentDetailScreen
-      error={null}
+      state={null}
       incident={null}
-      loading={false}
       onBack={jest.fn()}
     />,
   );

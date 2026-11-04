@@ -222,3 +222,16 @@ test('system wait stops a scheduler that repeatedly wakes before its deadline', 
     expect(jest.getTimerCount()).toBe(0);
   } finally { jest.restoreAllMocks(); jest.useRealTimers(); }
 });
+
+test('a cancelled read does not replay after the W09 backoff', async () => {
+  const controller = new AbortController();
+  const clock = createVirtualClock();
+  const sleep = clock.sleep;
+  clock.sleep = async ms => { controller.abort(); await sleep(ms); };
+  const send = jest.fn(async () => response(503));
+  const { transport } = setup({ send }, undefined, clock);
+
+  await expect(transport.send({ ...request, signal: controller.signal })).rejects.toThrow('Request cancelled');
+  expect(clock.delays).toEqual([250]);
+  expect(send).toHaveBeenCalledTimes(1);
+});

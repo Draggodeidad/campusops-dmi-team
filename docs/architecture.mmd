@@ -221,3 +221,11 @@ flowchart TB
   W10BaselineTests["Suite #81 — contratos disponibles para #82 y #83"] --> RemoteUiPolicy
   W10BaselineTests --> RemoteEvaluation
   W10BaselineTests --> DiagnosticEmission
+  CampusApp --> RemoteUiPolicy
+  ListScreen --> RemoteUiPolicy
+  DetailScreen --> RemoteUiPolicy
+  OfflinePanel --> RemoteUiPolicy
+  LocalAttention["localAttentionOutcome — estado de cola por incidencia"] --> SyncFlow
+  CampusApp --> LocalAttention
+  OfflinePanel --> LocalAttention
+  W10UiTests["Suite #82 — navegación, cancelación y recuperación"] --> CampusApp

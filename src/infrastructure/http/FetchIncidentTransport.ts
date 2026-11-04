@@ -18,6 +18,9 @@ export class FetchIncidentTransport implements IncidentTransport {
     }
 
     const controller = new AbortController();
+    const abort = () => controller.abort();
+    request.signal?.addEventListener('abort', abort);
+    if (request.signal?.aborted) abort();
     const timer = setTimeout(() => {
       controller.abort();
     }, Math.ceil(timeoutMs));
@@ -49,7 +52,7 @@ export class FetchIncidentTransport implements IncidentTransport {
         bodyText,
       };
     } catch (error: unknown) {
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (error instanceof Error && error.name === 'AbortError' && !request.signal?.aborted) {
         const timeoutError = new Error(`Request timed out after ${timeoutMs}ms`);
         timeoutError.name = 'TimeoutError';
         throw timeoutError;
@@ -57,6 +60,7 @@ export class FetchIncidentTransport implements IncidentTransport {
       throw error;
     } finally {
       clearTimeout(timer);
+      request.signal?.removeEventListener('abort', abort);
     }
   }
 }

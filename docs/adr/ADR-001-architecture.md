@@ -507,3 +507,40 @@ disponible a cambio de un límite verificable y mantiene los fallos del
 sink aislados. Las pruebas de #81 cubren ambos contratos y la firma pública.
 #82 conecta la política a las pantallas y #83 conecta el emisor a los flujos
 reales. La composición actual conserva las dependencias W06–W09.
+
+## Anexo W10 — integración de consulta y atención (#82)
+
+`CampusOpsApp` usa la misma transición de Application que el adaptador
+público `reduceRemoteResponses`. La lista, el detalle y la atención tienen
+intenciones independientes. Abrir otra incidencia, volver a lista o cambiar
+de sesión invalida la espera correspondiente. Una respuesta conserva la
+identidad de la intención que la originó, incluso al buscar una copia local
+tras un fallo de conexión. El panel sólo puede actualizar el detalle que
+originó su operación. Elegir una copia guardada es una intención nueva.
+
+| Flujo | Transiciones y recuperación |
+| --- | --- |
+| Lista y detalle | La respuesta activa lleva de `loading` a `success`, `empty`, `error` u `offline`. Un timeout o fallo de red permite buscar una copia autorizada. Sin copia se muestra el error. |
+| Cancelación de consultas | El evento pasa de `loading` a `cancelled` antes de abortar el GET. Volver descarta la intención del detalle. Actualizar o reintentar inicia otro ID, incluso para la misma incidencia. |
+| Atención | La confirmación activa produce `success` o `error`. Si la cola conserva la intención, `pending` indica sincronización pendiente y `conflict` exige revisión. Un conflicto tiene precedencia si coexiste con cambios pendientes. |
+| Cancelación de atención | La espera visible pasa a `cancelled` y el envío iniciado puede concluir. La UI ignora su resultado y mantiene bloqueadas las escrituras concurrentes hasta que termine. Consultar el estado abre un GET nuevo y recupera la cola existente. |
+| Recuperación local | La UI proyecta la cola durable por incidencia. Pendiente bloquea otra transición de atención y permite sincronizar la misma intención, además de agregar notas o referencias. Conflicto bloquea nuevas ediciones y ofrece inspección y resolución explícita. Las intenciones archivadas dejan de bloquear. |
+
+Un ID de solicitud protege la presentación y la generación de sesión
+protege la cuenta. La identidad durable de W08 identifica el cambio que
+puede confirmarse tras un reintento. El aborto se propaga a HTTP para GET.
+Si el transporte ya estaba en espera W09 o renovación W06, puede acabar esa
+espera y la solicitud cancelada queda excluida del siguiente envío.
+
+Se consideró coordinar sólo con la generación W06 o depender del aborto del
+transporte. Una sola generación permite seleccionar A y B y un adaptador
+sustituible puede resolver aunque reciba la señal. Mantener ambas
+identidades y el reducer añade coordinación en la UI y permite verificar
+la carrera con promesas controladas. La recuperación de una escritura
+incierta consulta el estado antes de permitir otra acción. La cola conserva
+su identidad y sus reglas de confirmación.
+
+`npm run test:week-10:baseline` verifica el reducer y el adaptador público.
+`npm run test:week-10:module -- course-tests/week-10-ui-integration.test.tsx course-tests/week-08-integration.test.tsx`
+ejercita navegación, cancelación, accesibilidad, reconexión y revisión de
+cambios guardados con la UI real.

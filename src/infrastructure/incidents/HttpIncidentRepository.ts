@@ -25,12 +25,13 @@ export class HttpIncidentRepository implements IncidentRepository {
     };
   }
 
-  async findAll(): Promise<readonly Incident[]> {
+  async findAll(signal?: AbortSignal): Promise<readonly Incident[]> {
     try {
       const response = await this.transport.send({
         method: 'GET',
         path: '/v1/incidents',
         headers: this.authHeaders,
+        ...(signal ? { signal } : {}),
       });
 
       if (response.status === 500) {
@@ -103,7 +104,7 @@ export class HttpIncidentRepository implements IncidentRepository {
     }
   }
 
-  async findById(id: string): Promise<Incident | null> {
+  async findById(id: string, signal?: AbortSignal): Promise<Incident | null> {
     if (typeof id !== 'string' || id.trim().length === 0) {
       throw new ApplicationFailure('INVALID_INCIDENT_ID', 'Identificador de incidencia inválido.');
     }
@@ -113,6 +114,7 @@ export class HttpIncidentRepository implements IncidentRepository {
         method: 'GET',
         path: `/v1/incidents/${encodeURIComponent(id)}`,
         headers: this.authHeaders,
+        ...(signal ? { signal } : {}),
       });
 
       if (response.status === 404) {

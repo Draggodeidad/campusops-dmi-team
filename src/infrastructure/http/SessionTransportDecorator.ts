@@ -14,6 +14,7 @@ export class SessionTransportDecorator implements IncidentTransport {
   async send(request: TransportRequest): Promise<TransportResponse> {
     request = { ...request, ...(request.headers ? { headers: { ...request.headers } } : {}),
       ...(request.session ? { session: { ...request.session } } : {}) };
+    if (request.signal?.aborted) throw new Error('Request cancelled');
     if (!this.matchesSession(request)) return sessionChanged();
     const generation = this.sessionContext.getGeneration();
     const authEndpoint = /^\/?v1\/session\/(login|refresh)(?:\?|$)/.test(request.path);
@@ -34,10 +35,11 @@ export class SessionTransportDecorator implements IncidentTransport {
     if (renewedBeforeSend) await this.sessionContext.refresh(generation);
     if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request)) return sessionChanged();
 
+    if (request.signal?.aborted) throw new Error('Request cancelled');
     const sentAuthorization = this.sessionContext.getAuthorizationHeader();
     const response = await transport.send(this.authorize(request, true));
     if (generation !== this.sessionContext.getGeneration()) return sessionChanged();
-    if (response.status !== 401 || !sentAuthorization) return response;
+    if (request.signal?.aborted || response.status !== 401 || !sentAuthorization) return response;
     if (renewedBeforeSend && sentAuthorization === this.sessionContext.getAuthorizationHeader()) {
       await this.sessionContext.invalidate(generation);
       return response;
@@ -54,9 +56,10 @@ export class SessionTransportDecorator implements IncidentTransport {
       return response;
     }
     if (generation !== this.sessionContext.getGeneration() || !this.matchesSession(request) || !this.sessionContext.getAuthorizationHeader()) return response;
+    if (request.signal?.aborted) return response;
     const retried = await transport.send(this.authorize(request, true));
     if (generation !== this.sessionContext.getGeneration()) return sessionChanged();
-    if (retried.status === 401) await this.sessionContext.invalidate(generation);
+    if (!request.signal?.aborted && retried.status === 401) await this.sessionContext.invalidate(generation);
     return retried;
   }
 

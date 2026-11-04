@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -8,17 +8,21 @@ import type { GetIncidentById } from '../application/incidents/GetIncidentById';
 import type { GetIncidents } from '../application/incidents/GetIncidents';
 import type {
   PerformIncidentAction,
-  PerformIncidentActionInput,
+  AllowedIncidentAction,
 } from '../application/incidents/PerformIncidentAction';
 import type { SessionController } from '../application/session/SessionController';
 import type { SessionSnapshot } from '../application/session/SessionSnapshot';
 import type { BackendStatus, GetBackendStatus } from '../application/system/GetBackendStatus';
 import type { Incident } from '../domain/incidents/Incident';
-import type { IncidentWorkspace } from '../application/sync/IncidentWorkspace';
+import type { IncidentWorkspace, LocalIncidentView } from '../application/sync/IncidentWorkspace';
 import { OfflineWorkspacePanel } from './incidents/OfflineWorkspacePanel';
 import { CreateIncidentScreen } from './incidents/CreateIncidentScreen';
 import { IncidentDetailScreen } from './incidents/IncidentDetailScreen';
 import { IncidentListScreen } from './incidents/IncidentListScreen';
+import { useRemoteRequest } from './useRemoteRequest';
+import { remoteUiActions } from '../application/ui-state/RemoteUiState';
+import type { RemoteUiOutcome } from '../application/ui-state/RemoteUiState';
+import { localAttentionOutcome } from '../application/ui-state/localAttentionOutcome';
 
 import type { LookupIncidentLocation } from '../application/location/LookupIncidentLocation';
 
@@ -49,6 +53,11 @@ function presentIncidentFailure(error: unknown, operation: 'list' | 'detail' | '
   return 'No fue posible registrar la incidencia.';
 }
 
+function isConnectionFailure(error: unknown): boolean {
+  return error instanceof ApplicationFailure &&
+    (error.code === 'REMOTE_COMMUNICATION_ERROR' || error.code === 'INCIDENT_TIMEOUT');
+}
+
 export function CampusOpsApp({
   lookupIncidentLocation,
   getBackendStatus,
@@ -60,12 +69,18 @@ export function CampusOpsApp({
   incidentSync,
 }: Props) {
   const [backendStatus, setBackendStatus] = useState<BackendStatus | 'checking'>('checking');
-  const [incidents, setIncidents] = useState<readonly Incident[]>([]);
-  const [listError, setListError] = useState<string | null>(null);
-  const [listLoading, setListLoading] = useState(true);
-  const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null);
-  const [detailError, setDetailError] = useState<string | null>(null);
-  const [detailLoading, setDetailLoading] = useState(false);
+  const requestSequence = useRef(0);
+  const nextRequestId = useCallback(() => `w10-request-${++requestSequence.current}`, []);
+  const { state: list, begin: beginList, resolve: resolveList, cancel: cancelList, clear: clearList } =
+    useRemoteRequest<readonly Incident[]>(nextRequestId);
+  const detail = useRemoteRequest<Incident>(nextRequestId);
+  const attention = useRemoteRequest<Incident>(nextRequestId);
+  const { clear: clearDetail } = detail;
+  const { clear: clearAttention } = attention;
+  const [localViews, setLocalViews] = useState<readonly LocalIncidentView[] | null>(null);
+  const [workspaceBusy, setWorkspaceBusy] = useState(false);
+  const [writing, setWriting] = useState(false);
+  const writeInFlight = useRef(false);
   const [activeView, setActiveView] = useState<ActiveView>('list');
   const [createLoading, setCreateLoading] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
@@ -77,9 +92,6 @@ export function CampusOpsApp({
   const [restoring, setRestoring] = useState(Boolean(sessionController));
   const sessionUsable = !sessionController || (session !== null && ['authenticated', 'expired', 'refreshing'].includes(session.state));
   const isCurrent = (generation: number | undefined) => !sessionController || generation === sessionController.getSnapshot().generation;
-  const [actionLoading, setActionLoading] = useState(false);
-  const [actionError, setActionError] = useState<string | null>(null);
-  const [hasLocalPending, setHasLocalPending] = useState(false);
 
   useEffect(() => {
     if (!sessionController) return;
@@ -89,18 +101,17 @@ export function CampusOpsApp({
       setSession(snapshot);
       if (snapshot.generation !== previousGeneration) {
         previousGeneration = snapshot.generation;
-        setSelectedIncident(null);
+        clearList();
+        clearDetail();
+        clearAttention();
         setActiveView('list');
-        setIncidents([]);
-        setListError(null);
-        setDetailError(null);
-        setActionError(null);
-        setActionLoading(false);
-        setHasLocalPending(false);
+        setLocalViews(null);
+        setWorkspaceBusy(false);
+        setWriting(false);
+        writeInFlight.current = false;
         setCreateLoading(false);
-        setListLoading(snapshot.state === 'authenticated');
+        setCreateError(null);
       }
-      if (snapshot.state === 'anonymous') setListLoading(false);
     });
     const timer = setInterval(() => sessionController.getSnapshot(), 1000);
     void sessionController.restore()
@@ -109,7 +120,7 @@ export function CampusOpsApp({
       })
       .finally(() => { if (active) setRestoring(false); });
     return () => { active = false; unsubscribe(); clearInterval(timer); };
-  }, [sessionController]);
+  }, [sessionController, clearList, clearDetail, clearAttention]);
 
   useEffect(() => {
     let active = true;
@@ -117,67 +128,60 @@ export function CampusOpsApp({
     return () => { active = false; };
   }, [getBackendStatus]);
 
-  useEffect(() => {
-    let active = true;
-    if (!sessionUsable) return;
-    void getIncidents.execute()
-      .then((items) => { if (active) setIncidents(items); })
-      .catch(async (error: unknown) => {
-        if (active) setListError(presentIncidentFailure(error, 'list'));
-        if (incidentSync && error instanceof ApplicationFailure && ['REMOTE_COMMUNICATION_ERROR', 'INCIDENT_TIMEOUT'].includes(error.code)) {
-          try {
-            const local = await incidentSync.recover();
-            if (active) setIncidents(local.map(item => item.incident));
-          } catch { /* The workspace panel exposes the controlled storage/session failure. */ }
-        }
-      })
-      .finally(() => { if (active) setListLoading(false); });
-    return () => { active = false; };
-  }, [getIncidents, incidentSync, session?.generation, sessionUsable]);
-
-  const refreshIncidents = async () => {
-    const generation = sessionController?.getSnapshot().generation;
-    setListLoading(true);
-    setListError(null);
+  const refreshIncidents = useCallback(async () => {
+    const { intent, signal } = beginList(null);
     try {
-      const items = await getIncidents.execute();
-      if (isCurrent(generation)) setIncidents(items);
+      const items = await getIncidents.execute(signal);
+      resolveList(intent, items.length ? { state: 'success', value: items } : { state: 'empty' });
     } catch (error: unknown) {
-      if (isCurrent(generation)) setListError(presentIncidentFailure(error, 'list'));
-    } finally {
-      if (isCurrent(generation)) setListLoading(false);
+      if (signal.aborted) return;
+      if (incidentSync && isConnectionFailure(error)) {
+        const local = await incidentSync.recover().catch(() => []);
+        if (local.length) {
+          resolveList(intent, { state: 'offline', value: local.map(item => item.incident) });
+          return;
+        }
+      }
+      resolveList(intent, { state: 'error', error: presentIncidentFailure(error, 'list') });
+    }
+  }, [beginList, resolveList, getIncidents, incidentSync]);
+
+  useEffect(() => {
+    if (sessionUsable) void refreshIncidents();
+    return clearList;
+  }, [session?.generation, sessionUsable, refreshIncidents, clearList]);
+
+  const openIncident = async (id: string) => {
+    attention.clear();
+    const { intent, signal } = detail.begin(id);
+    setActiveView('detail');
+    try {
+      const incident = await getIncidentById.execute(id, signal);
+      detail.resolve(intent, incident ? { state: 'success', value: incident } : { state: 'empty' });
+    } catch (error: unknown) {
+      if (signal.aborted) return;
+      if (incidentSync && isConnectionFailure(error)) {
+        const local = (await incidentSync.recover().catch(() => [])).find(item => item.incident.id === id);
+        if (local) {
+          detail.resolve(intent, { state: 'offline', value: local.incident });
+          return;
+        }
+      }
+      detail.resolve(intent, { state: 'error', error: presentIncidentFailure(error, 'detail') });
     }
   };
 
-  const openIncident = async (id: string) => {
-    const generation = sessionController?.getSnapshot().generation;
+  const selectLocal = (incident: Incident) => {
+    if (!isCurrent(session?.generation)) return;
+    attention.clear();
+    const { intent } = detail.begin(incident.id);
+    detail.resolve(intent, { state: 'offline', value: incident });
     setActiveView('detail');
-    setDetailLoading(true);
-    setDetailError(null);
-    setActionError(null);
-    try {
-      const incident = await getIncidentById.execute(id);
-      if (!isCurrent(generation)) return;
-      setSelectedIncident(incident);
-      if (incident === null) setDetailError('La incidencia solicitada no existe.');
-    } catch (error: unknown) {
-      if (isCurrent(generation)) setDetailError(presentIncidentFailure(error, 'detail'));
-      if (incidentSync && error instanceof ApplicationFailure && ['REMOTE_COMMUNICATION_ERROR', 'INCIDENT_TIMEOUT'].includes(error.code)) {
-        try {
-          const local = (await incidentSync.recover()).find(item => item.incident.id === id);
-          if (local && isCurrent(generation)) { setSelectedIncident(local.incident); setDetailError('Sin conexión: copia local de esta cuenta.'); }
-        } catch { /* The workspace panel exposes the controlled failure. */ }
-      }
-    } finally {
-      if (isCurrent(generation)) setDetailLoading(false);
-    }
   };
 
   const returnToList = () => {
-    setSelectedIncident(null);
-    setDetailError(null);
-    setDetailLoading(false);
-    setActionError(null);
+    detail.clear();
+    attention.clear();
     setActiveView('list');
   };
 
@@ -236,36 +240,60 @@ export function CampusOpsApp({
     }
   };
 
-  const handlePerformAction = async (
-    action: 'start' | 'resolve' | 'close' | 'reopen',
-    diagnosis?: string,
-  ) => {
-    if (!performIncidentAction || !selectedIncident) return;
+  const currentDetail = detail.state;
+  const detailIncident = currentDetail && 'value' in currentDetail ? currentDetail.value : null;
+  const currentAttention = attention.state;
+  const attentionIncident = currentAttention && 'value' in currentAttention ? currentAttention.value : null;
+  const remoteIncident = currentAttention?.state === 'success' ? currentAttention.value
+    : currentDetail?.state === 'success' && !attentionIncident ? currentDetail.value : null;
+  const incident = attentionIncident ?? detailIncident;
+  const local = localAttentionOutcome(localViews?.find(view => view.incident.id === incident?.id));
+  const recoveringWorkspace = Boolean(sessionController && incidentSync && !localViews);
+  const visibleAttention = local && currentDetail && currentAttention?.state !== 'loading'
+    ? { ...local, intent: currentAttention?.intent ?? currentDetail.intent }
+    : currentAttention;
+
+  const handlePerformAction = async (action: AllowedIncidentAction, diagnosis?: string) => {
+    if (!performIncidentAction || !incident || !currentDetail || !detail.isCurrent(currentDetail.intent)
+      || local || recoveringWorkspace || currentDetail.state === 'offline' || workspaceBusy || writeInFlight.current
+      || (currentAttention && remoteUiActions[currentAttention.state] !== 'continue')) return;
+
     const generation = sessionController?.getSnapshot().generation;
-    setActionLoading(true);
-    setActionError(null);
+    const { intent, signal } = attention.begin(incident.id);
+    writeInFlight.current = true;
+    setWriting(true);
+    let updated: Incident | undefined;
+    let failure: unknown;
     try {
-      if (selectedIncident.version === undefined) throw new ApplicationFailure('VERSION_CONFLICT', 'Actualiza la incidencia antes de ejecutar la acción.');
-      const actionPayload: PerformIncidentActionInput = {
-        incidentId: selectedIncident.id,
+      if (incident.version === undefined) throw new ApplicationFailure('VERSION_CONFLICT', 'Actualiza la incidencia antes de ejecutar la acción.');
+      updated = await performIncidentAction.execute({
+        incidentId: incident.id,
         action,
-        baseVersion: selectedIncident.version,
+        baseVersion: incident.version,
         actorRole: session?.role ?? null,
         ...(diagnosis !== undefined ? { diagnosis } : {}),
-      };
-      const updated = await performIncidentAction.execute(actionPayload);
-      if (!isCurrent(generation)) return;
-      setSelectedIncident(updated);
-      await refreshIncidents();
-    } catch (err: unknown) {
-      if (!isCurrent(generation)) return;
-      if (err instanceof ApplicationFailure) {
-        setActionError(err.message);
-      } else {
-        setActionError('No fue posible ejecutar la acción.');
-      }
+      });
+    } catch (error: unknown) {
+      failure = error;
     } finally {
-      if (isCurrent(generation)) setActionLoading(false);
+      if (isCurrent(generation) && !signal.aborted) {
+        const recovered = incidentSync ? await incidentSync.recover().catch(() => null) : null;
+        const saved = recovered?.find(view => view.incident.id === incident.id);
+        const outcome: RemoteUiOutcome<Incident> = localAttentionOutcome(saved)
+          ?? (updated && (!incidentSync || recovered) ? { state: 'success', value: updated }
+            : saved && isConnectionFailure(failure) ? { state: 'offline', value: saved.incident }
+            : { state: 'error', error: failure instanceof ApplicationFailure ? failure.message
+              : updated ? 'No fue posible comprobar los cambios guardados.'
+              : 'No fue posible ejecutar la acción.' });
+        if (attention.resolve(intent, outcome)) {
+          if (recovered) setLocalViews(recovered);
+          if (outcome.state === 'success') void refreshIncidents();
+        }
+      }
+      if (isCurrent(generation)) {
+        writeInFlight.current = false;
+        setWriting(false);
+      }
     }
   };
 
@@ -338,25 +366,29 @@ export function CampusOpsApp({
         />
       )}
 
-      {sessionUsable && activeView === 'detail' && (
+      {sessionUsable && activeView === 'detail' && currentDetail && (
         <IncidentDetailScreen
-          actionError={actionError}
-          actionLoading={actionLoading}
-          actionsBlocked={hasLocalPending}
+          state={currentDetail}
+          incident={visibleAttention && 'value' in visibleAttention ? visibleAttention.value : incident}
+          attention={visibleAttention}
+          writing={writing || workspaceBusy}
+          checkingWorkspace={recoveringWorkspace}
           currentRole={session?.role ?? null}
-          error={detailError}
-          incident={selectedIncident}
-          loading={detailLoading}
           onAction={performIncidentAction ? handlePerformAction : undefined}
           onBack={returnToList}
+          onCancel={detail.cancel}
+          onCancelAttention={attention.cancel}
+          onRetry={() => {
+            if (currentDetail.intent.selectionId) void openIncident(currentDetail.intent.selectionId);
+          }}
         />
       )}
 
-      {sessionUsable && activeView === 'list' && (
+      {sessionUsable && activeView === 'list' && list && (
         <IncidentListScreen
-          error={listError}
-          incidents={incidents}
-          loading={listLoading}
+          state={list}
+          onCancel={cancelList}
+          onRetry={refreshIncidents}
           onCreate={createIncident && (!sessionController || session?.role === 'reporter') ? handleOpenCreate : undefined}
           onSelect={openIncident}
         />
@@ -366,10 +398,19 @@ export function CampusOpsApp({
         <OfflineWorkspacePanel
           key={session?.generation}
           workspace={incidentSync}
-          incident={activeView === 'detail' ? selectedIncident : null}
-          onPendingChanged={setHasLocalPending}
-          onRecovered={(incident) => {
-            if (isCurrent(session?.generation)) { setSelectedIncident(incident); setDetailError(null); setActiveView('detail'); }
+          incident={incident}
+          cacheIncident={remoteIncident}
+          selection={currentDetail?.intent ?? null}
+          views={localViews ?? []}
+          onViewsChanged={setLocalViews}
+          writing={writing}
+          onBusyChanged={setWorkspaceBusy}
+          onSelect={selectLocal}
+          onRecovered={(recovered, state) => {
+            if (!isCurrent(session?.generation) || !currentDetail || currentDetail.intent.selectionId !== recovered.id
+              || !detail.isCurrent(currentDetail.intent)) return;
+            attention.clear();
+            detail.resolve(detail.begin(recovered.id).intent, { state, value: recovered });
           }}
         />
       ) : null}

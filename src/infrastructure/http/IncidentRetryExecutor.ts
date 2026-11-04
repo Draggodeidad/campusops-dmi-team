@@ -49,11 +49,13 @@ export class IncidentRetryExecutor {
     };
     return { async send(request) {
       for (;;) {
+        if (original.signal?.aborted) throw new Error('Request cancelled');
         const budget = remaining();
         if (attempt >= config.maxAttempts || budget <= 0) {
           throw new ApplicationFailure('RETRY_BUDGET_EXHAUSTED', 'Se alcanzó el límite de reintentos; conserva el cambio y reintenta manualmente.');
         }
         const prepared = await prepare(request);
+        if (original.signal?.aborted) throw new Error('Request cancelled');
         const afterPreparation = remaining();
         if (afterPreparation <= 0) throw new ApplicationFailure('RETRY_BUDGET_EXHAUSTED', 'Se agotó el tiempo antes del envío.');
         attempt++;
@@ -80,6 +82,7 @@ export class IncidentRetryExecutor {
         const metric = redactForTelemetry({ correlationId, ...(incidentId ? { incidentId } : {}),
           method: original.method, status, attempt, durationMs }) as RetryAttemptMetric;
         try { observe(metric); } catch { /* Telemetry cannot change an operation's outcome. */ }
+        if (original.signal?.aborted) throw new Error('Request cancelled');
         const header = response && Object.entries(response.headers).find(([name]) => name.toLowerCase() === 'retry-after')?.[1];
         const retryAfterMs = header !== undefined ? parseRetryAfter(header, clock.now()) : response?.retryAfterMs;
         const decision = status === 'offline' || status === 'terminal' ? undefined
