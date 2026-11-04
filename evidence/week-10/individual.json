@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "week": 10,
+  "teamId": "9B-E02",
+  "members": [
+    {
+      "studentId": "3523110651",
+      "githubLogin": "Draggodeidad",
+      "commitShas": [
+        "c6d2746fdf6db5732df24814f792712b2d02ca92",
+        "8c8527434d016520bf42748132590479f6038c8e",
+        "f8d864507889663b774cabc5bd90255e2603a23e",
+        "2493e25719a6d57e2eaf45654c3f0205076d607d"
+      ],
+      "files": [
+        "src/application/ui-state/RemoteUiState.ts",
+        "src/application/telemetry/emitDiagnostic.ts",
+        "src/ui/CampusOpsApp.tsx",
+        "src/ui/useRemoteRequest.ts",
+        "src/application/telemetry/startDiagnosticRequest.ts",
+        "src/infrastructure/http/IncidentRetryExecutor.ts",
+        "src/application/sync/IncidentWorkspace.ts",
+        "course-tests/week-10-baseline.test.ts",
+        "course-tests/week-10-ui-integration.test.tsx",
+        "course-tests/week-10-diagnostics-integration.test.tsx"
+      ],
+      "tests": [
+        "npm run test:week-10:baseline",
+        "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx"
+      ],
+      "reviews": [
+        "Draggodeidad confirmó en este chat la aprobación humana de la integración de #83 (PR #93)."
+      ],
+      "prediction": "Si llega una respuesta de otra selección, el detalle activo conservará su estado. Si el cuerpo de una respuesta HTTP 200 es inválido, el error recuperable compartirá su ID técnico. Si el sink falla durante el replay de una escritura, el backend conservará un solo efecto.",
+      "command": "npm run test:week-10:baseline && npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx",
+      "observedResult": "Pasaron 14 pruebas del baseline y la suite pública W10, y 12 pruebas integradas de UI y diagnóstico. El detalle activo descartó la respuesta tardía. El HTTP 200 inválido y el error de UI compartieron un ID, y el reintento manual usó otro. Los tres comportamientos del sink permitieron confirmar el replay con un efecto y la cola vacía. La sincronización con HTTP 409 conservó la operación pendiente y mostró el conflicto.",
+      "explanation": "El requestId identifica la intención activa y enlaza el intento HTTP con el desenlace visible. La allowlist deja sólo contexto técnico. La cola distingue la confirmación de un envío que debe reintentarse o revisarse. Esto permite diagnosticar una respuesta malformada o perdida sin exponer contenido de la incidencia.",
+      "verification": [
+        {
+          "command": "npm run test:week-10:baseline",
+          "evaluatedCommitSha": "b89efd0ef20e14a58559999d4f65eae31986c1c5",
+          "exitCode": 0,
+          "observedResult": "14 pruebas en 2 suites, incluida la prueba pública W10."
+        },
+        {
+          "command": "npm run test:week-10:module -- course-tests/week-10-diagnostics-integration.test.tsx course-tests/week-10-ui-integration.test.tsx",
+          "evaluatedCommitSha": "b89efd0ef20e14a58559999d4f65eae31986c1c5",
+          "exitCode": 0,
+          "observedResult": "12 pruebas en 2 suites, con UI, SQLite y backend didáctico en loopback."
+        }
+      ],
+      "sourceArtifacts": [
+        "docs/week-10-baseline.md",
+        "reports/week-10/issue-83/validation.json"
+      ],
+      "aiAssistance": "Codex asistió materialmente en el diseño e implementación de los contratos, la UI y el diagnóstico, las pruebas, la documentación y la preparación de este registro. Codex ejecutó los comandos citados y comprobó los commits y los resultados. La aprobación humana proviene de la declaración explícita del owner.",
+      "humanValidation": {
+        "status": "owner_declared_review_complete",
+        "reviewerGithubLogin": "Draggodeidad",
+        "source": "explicit_user_statement_in_this_Codex_chat",
+        "statement": "Ya di mi aprovacion humana y yo digo que todo bien",
+        "recordedAt": "2026-11-03T18:51:00-06:00",
+        "scope": "Integración de observabilidad W10 (#83, PR #93).",
+        "reviewedCommitSha": "2493e25719a6d57e2eaf45654c3f0205076d607d",
+        "pullRequest": "https://github.com/Draggodeidad/campusops-dmi-team/pull/93",
+        "limits": "Aprobación declarada en el chat. La ejecución automatizada se registra por separado."
+      },
+      "recordStatus": "own_contribution_and_human_review_declared_automated_validation_recorded"
+    },
+    {},
+    {}
+  ],
+  "status": "owner_record_complete_team_consolidation_pending",
+  "generatedAt": "2026-11-03T18:51:00-06:00",
+  "recordedFromCommit": "b89efd0ef20e14a58559999d4f65eae31986c1c5",
+  "identitySource": {
+    "path": "evidence/week-09/individual.json",
+    "sourceCommit": "f3cd884117f47c05f62f3eb86193bd553c80cb70",
+    "fieldsReused": [
+      "teamId",
+      "studentId",
+      "githubLogin"
+    ],
+    "corroboratedWith": [
+      "evidence/week-08/individual.json"
+    ],
+    "scope": "Identidad del owner ya registrada por el equipo. Se reutilizan únicamente los campos de identidad indicados."
+  },
+  "consolidation": {
+    "issue": "https://github.com/Draggodeidad/campusops-dmi-team/issues/90",
+    "requiredMemberCount": 3,
+    "recordedMemberCount": 1,
+    "pendingSlots": [
+      2,
+      3
+    ],
+    "status": "owner_only"
+  }
+}
